@@ -8,7 +8,6 @@
     $http_host = $_SERVER['HTTP_HOST'];
     $http_connection = $_SERVER['HTTP_CONNECTION'];
     $http_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-
   }
 echo nl2br("{
     IP=$ip_address
