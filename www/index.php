@@ -12,13 +12,13 @@
   }
 echo nl2br("{
     IP=$ip_address
-    Host_Name:=$host_name
-    Remote_Port=$remote_port
-    User Agent: $user_agent
-    City:
-    HTTP ACCEPT: $http_accept
-    HTTP HOST: $http_host
-    HTTP Connection: $http_connection
-    HTTP Language: $http_language
+    HOST_NAME:=$host_name
+    REMOTE_PORT=$remote_port
+    USER_AGENT=$user_agent
+    CITY=
+    HTTP_ACCEPT=$http_accept
+    HTTP_HOST=$http_host
+    HTTP_CONNECTION=$http_connection
+    HTTP_LANGUAGE=$http_language
 }");
 ?>
