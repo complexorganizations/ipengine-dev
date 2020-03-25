@@ -10,14 +10,14 @@
     $http_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
   }
 echo nl2br("{
-    IP='$ip_address',
-    HOST_NAME:='$host_name',
-    REMOTE_PORT='$remote_port',
-    USER_AGENT='$user_agent',
-    CITY='$user_city',
-    HTTP_ACCEPT='$http_accept',
-    HTTP_HOST='$http_host',
-    HTTP_CONNECTION='$http_connection',
-    HTTP_LANGUAGE='$http_language'
+    IP=$ip_address
+    HOST_NAME:=$host_name
+    REMOTE_PORT=$remote_port
+    USER_AGENT=$user_agent
+    CITY=$user_city
+    HTTP_ACCEPT=$http_accept
+    HTTP_HOST=$http_host
+    HTTP_CONNECTION=$http_connection
+    HTTP_LANGUAGE=$http_language
 }");
 ?>
