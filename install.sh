@@ -12,31 +12,35 @@ fi
 root-check
 
 function install-essentials() {
-    apt-get update
-    apt-get upgrade -y
-    apt-get dist-upgrade -y
-    apt-get install build-essential nginx php7.3-fpm -y
-    ## Auto Clean
-    apt-get autoremove -y
-    apt-get autoclean -y
+  apt-get update
+  apt-get upgrade -y
+  apt-get dist-upgrade -y
+  apt-get install build-essential nginx php7.3-fpm curl -y
+  ## Auto Clean
+  apt-get autoremove -y
+  apt-get autoclean -y
 }
 
 ## Install Essentials
 install-essentials
 
-function firewall() {
-    apt-get install iptables iptables-persistent ufw fail2ban -y
-    ufw allow "http"
-    ufw allow "https"
-    ufw allow "ssh"
-    ufw default deny incoming
-    ufw default allow outgoing
-    ufw enable
-    service fail2ban enable
+function install-firewall() {
+  apt-get install iptables iptables-persistent ufw fail2ban -y
+  ufw allow "http"
+  ufw allow "https"
+  ufw allow "ssh"
+  ufw default deny incoming
+  ufw default allow outgoing
+  ufw enable
+  service fail2ban enable
 }
+
+# Firewall Install
+install-firewall
 
 function nginx-conf() {
   sed -i "s|# server_tokens off;|server_tokens off;|" /etc/nginx/nginx.conf
+  sed -i "s|index index.html index.htm index.nginx-debian.html;|index index.php;"
   service nginx restart
   service php7.3-fpm restart
   chown www-data:www-data  -R *
@@ -44,16 +48,25 @@ function nginx-conf() {
   find /var/www/html -type f -exec chmod 644 {} \;
 }
 
-cd /var/www/html/
-wget https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/index.php
+# Nginx Config
+nginx-conf
+
+function website-config() {
+  rm /var/www/html/index.nginx-debian.html
+  curl https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/index.php -o /var/www/html/index.php
+}
+
+website-config
 
 function ssl-nginx() {
-  sudo apt-get update
-  sudo apt-get install software-properties-common
-  sudo add-apt-repository universe
-  sudo add-apt-repository ppa:certbot/certbot
-  sudo apt-get update
-  sudo apt-get install certbot python-certbot-nginx
-  sudo certbot --nginx
-  sudo certbot renew --dry-run
+  apt-get update
+  apt-get install software-properties-common
+  add-apt-repository universe
+  add-apt-repository ppa:certbot/certbot
+  apt-get update
+  apt-get install certbot python-certbot-nginx
+  certbot --nginx
+  certbot renew --dry-run
 }
+
+ssl-nginx
