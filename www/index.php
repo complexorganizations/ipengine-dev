@@ -11,7 +11,7 @@
   }
 echo nl2br("{
     IP=$ip_address
-    HOST_NAME:=$host_name
+    HOST_NAME=$host_name
     REMOTE_PORT=$remote_port
     USER_AGENT=$user_agent
     CITY=$user_city
