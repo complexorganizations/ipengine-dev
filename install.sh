@@ -40,7 +40,7 @@ install-firewall
 
 function nginx-conf() {
   sed -i "s|# server_tokens off;|server_tokens off;|" /etc/nginx/nginx.conf
-  sed -i "s|index index.html index.htm index.nginx-debian.html;|index index.php;"
+  sed -i "s|index index.html index.htm index.nginx-debian.html;|index index.php;|" /etc/nginx/nginx.conf
   service nginx restart
   service php7.3-fpm restart
   chown www-data:www-data  -R *
