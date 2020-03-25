@@ -15,8 +15,7 @@ function install-essentials() {
     apt-get update
     apt-get upgrade -y
     apt-get dist-upgrade -y
-    apt-get install build-essential -y
-    apt-get install nginx php7.3-fpm -y
+    apt-get install build-essential nginx php7.3-fpm -y
     ## Auto Clean
     apt-get autoremove -y
     apt-get autoclean -y
@@ -33,6 +32,7 @@ function firewall() {
     ufw default deny incoming
     ufw default allow outgoing
     ufw enable
+    service fail2ban enable
 }
 
 function nginx-conf() {
