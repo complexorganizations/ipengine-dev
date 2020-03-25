@@ -25,7 +25,6 @@ function install-essentials() {
 ## Install Essentials
 install-essentials
 
-
 function firewall() {
     apt-get install iptables iptables-persistent ufw fail2ban -y
     ufw allow "http"
