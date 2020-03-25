@@ -53,7 +53,9 @@ nginx-conf
 
 function website-config() {
   rm /var/www/html/index.nginx-debian.html
-  curl https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/index.php -o /var/www/html/index.php
+  curl https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/www/index.php -o /var/www/html/index.php
+  curl https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/www/robots.txt -o /var/www/html/robots.txt
+  curl https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/www/sitemap.xml -o /var/www/html/sitemap.xml
 }
 
 website-config
