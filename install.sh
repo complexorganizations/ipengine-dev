@@ -45,25 +45,8 @@ function nginx-conf() {
   find /var/www/html -type f -exec chmod 644 {} \;
 }
 
-echo "<?php
-//whether ip is from share internet
-if (!empty($_SERVER['HTTP_CLIENT_IP']))   
-  {
-    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
-  }
-//whether ip is from proxy
-elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
-  {
-    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  }
-//whether ip is from remote address
-else
-  {
-    $ip_address = $_SERVER['REMOTE_ADDR'];
-  }
-echo $ip_address;
-?>" >> /var/www/html/index.php
-
+cd /var/www/html/
+wget https://raw.githubusercontent.com/complexorganizations/ipengine-dev/master/index.php
 
 function ssl-nginx() {
   sudo apt-get update
