@@ -9,6 +9,11 @@ elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
   {
     $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
   }
+//whether ip is from cloudflare
+elseif (!empty($_SERVER['HTTP_CF_CONNECTING_IP']))  
+  {
+    $ip_address = $_SERVER['HTTP_CF_CONNECTING_IP'];
+  }
 //whether ip is from remote address
 else
   {
