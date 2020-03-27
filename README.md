@@ -12,3 +12,10 @@ git clone https://github.com/complexorganizations/ipengine-dev.git
 cd ipengine-dev
 gcloud app deploy
 ```
+
+
+### Usage
+```
+curl -4 https://ipengine.dev
+curl -6 https://ipengine.dev
+```
