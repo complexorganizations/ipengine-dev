@@ -1,49 +1,5 @@
 runtime: php73
 env: standard
-default_expiration: 31536000s
-handlers:
-  - url: /
-    secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
-    static_files: www/index.php
-    require_matching_file: false
-    upload: www/index.php
-  - url: '/(.*)'
-    secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
-    static_files: "www/\\1"
-    require_matching_file: false
-    upload: 'www/(.*)'
-  - url: "/(.*\\.(ico|png))$"
-    secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
-    static_files: "www/\\1"
-    require_matching_file: false
-    upload: "www/.*\\.(ico|png)$"
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
