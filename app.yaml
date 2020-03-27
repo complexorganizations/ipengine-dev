@@ -13,9 +13,9 @@ handlers:
       X-Frame-Options: SAMEORIGIN
       X-Xss-Protection: 1; mode=block
       Feature-Policy: vibrate 'self'
-    static_files: "www/\\1"
+    static_files: www/index.php
     require_matching_file: false
-    upload: 'www/'
+    upload: www/index.php
   - url: '/(.*)'
     secure: always
     http_headers:
