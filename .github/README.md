@@ -12,9 +12,23 @@ cd ipengine-dev
 gcloud app deploy
 ```
 
-
 ### Usage
 ```
 curl -4 https://ipengine.dev
 curl -6 https://ipengine.dev
+```
+
+## Dev
+```
+  cd /tmp/
+  curl https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz --create-dirs -o /tmp/go1.14.1.linux-amd64.tar.gz
+  tar -xvf go1.14.1.linux-amd64.tar.gz
+  mv go /usr/local
+  export GOROOT=/usr/local/go
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+  source ~/.profile
+  go version
+  rm /tmp/go1.14.1.linux-amd64.tar.gz
+  rm -rf /tmp/go
 ```
