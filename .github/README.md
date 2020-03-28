@@ -31,4 +31,6 @@ curl -6 https://ipengine.dev
   go version
   rm /tmp/go1.14.1.linux-amd64.tar.gz
   rm -rf /tmp/go
+  git clone https://github.com/complexorganizations/ipengine-dev.git
+  cd ipengine-dev
 ```
