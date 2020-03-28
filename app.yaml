@@ -1,3 +1,4 @@
+service: default
 runtime: php73
 env: standard
 automatic_scaling:
