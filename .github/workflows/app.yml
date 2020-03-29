@@ -2,9 +2,25 @@ name: 'Github actions'
 description: 'Github actions for this repo'
 author: 'PrajwalKoirala'
 on: [push, pull_request]
-steps:
-- uses: actions/checkout@master
-- uses: actions/setup-go@v1
-  with:
-    go-version: '1.14.1' # The Go version to download (if necessary) and use.
-- run: go run main.go
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+
+      - name: Check out source code
+        uses: actions/checkout@v1
+
+      - name: Build
+				env:
+					GOPROXY: "https://proxy.golang.org"
+        run: go build .
+
+      - name: Test
+				env:
+					GOPROXY: "https://proxy.golang.org"
+        run: go test -v .
