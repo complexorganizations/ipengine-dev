@@ -7,7 +7,7 @@ echo "deb http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /et
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install google-cloud-sdk git -y
 gcloud init
-gcloud components install app-engine-go
+apt-get install google-cloud-sdk-app-engine-go -y
 git clone https://github.com/complexorganizations/ipengine-dev.git
 cd ipengine-dev
 gcloud app deploy
