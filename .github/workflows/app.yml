@@ -1,9 +1,8 @@
+name: 'Github actions'
+description: 'Github actions for this repo'
+author: 'PrajwalKoirala'
 on: [push, pull_request]
-name: Go Actions
-jobs:
-  gocheck:
 steps:
-    runs-on: ubuntu-latest
 - uses: actions/checkout@master
 - uses: actions/setup-go@v1
   with:
