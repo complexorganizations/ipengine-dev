@@ -23,7 +23,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 // GetIP gets a requests IP address by reading off the forwarded-for
 // header (for proxies) and falls back to use the remote address.
 func GetIP(r *http.Request) string {
-	forwarded := r.Header.Get("X-FORWARDED-FOR")
+	forwarded := r.Header.Get("CF-CONNECTING-IP")
 	if forwarded != "" {
 		return forwarded
 	}
