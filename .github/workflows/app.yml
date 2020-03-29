@@ -1,9 +1,18 @@
 on: [push, pull_request]
-name: 
+name: Test
 jobs:
-  shellcheck:
-  runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        go-version: [1.13.x, 1.14.x]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
     steps:
-    - uses:
-    - name:
-      uses:
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Test
+      run: go test main.go
