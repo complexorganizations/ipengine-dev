@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         go: [ '1.14.1' ]
-    name: Go ${{ main.go }} sample
+    name: Go ${{ matrix.go }} sample	
     steps:
       - uses: actions/checkout@v2
       - name: Setup go
