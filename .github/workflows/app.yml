@@ -1,6 +1,4 @@
 name: 'Test Go'
-description: 'Github actions for this repo'
-author: 'PrajwalKoirala'
 on: [push, pull_request]
 jobs:
   build:
