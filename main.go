@@ -24,6 +24,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	resp := map[string]interface{}{
 		"ip":         GetIP(r),
 		"user_agent": r.Header.Get("User-Agent"),
+		"accept_language": r.Header.Get("Accept-Language"),
 	}
 	hostname, err := GetHostName(ip)
 	if err == nil {
