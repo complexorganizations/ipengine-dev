@@ -46,5 +46,5 @@ Get Network From Hostname
 ### Paid Plans
 ```
 Scan a (IP|Hostname) for open port
-Test if host is reachable
+Test if host is reachable on certain port
 ```
