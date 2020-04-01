@@ -27,6 +27,9 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"accept_language": r.Header.Get("Accept-Language"),
 		"accept_encoding": r.Header.Get("Accept-Encoding"),
 		"accept": r.Header.Get("Accept"),
+		"host": r.Header.Get("Host"),
+		"referer": r.Header.Get("Referer"),
+		"upgrade_insecure_requests": r.Header.Get("Upgrade-Insecure-Requests"),
 	}
 	hostname, err := GetHostName(ip)
 	if err == nil {
