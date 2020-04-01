@@ -25,8 +25,8 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"ip": GetIP(r),
 	}
 	hostname, err := GetHostName(ip)
-	if err != nil {
-		resp["hostname"] = hostname
+	if err == nil {
+		resp["hostname"] = hostname[0]
 	}
 
 	b, _ := json.Marshal(resp)
