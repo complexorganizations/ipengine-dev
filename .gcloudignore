@@ -14,5 +14,5 @@
 .gitignore
 .github
 
-# PHP Composer dependencies:
-# /vendor/
+# Ignore github folder
+/.github/
