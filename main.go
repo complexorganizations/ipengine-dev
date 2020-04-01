@@ -14,7 +14,7 @@ func main() {
 
 func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
-	resp, _ := json.Marshal(map[string]string{
+	resp, _ := json.MarshalIndent(map[string]string{
 		"accept":                    r.Header.Get("Accept"),
 		"accept_encoding":           r.Header.Get("Accept-Encoding"),
 		"accept_language":           r.Header.Get("Accept-Language"),
@@ -28,6 +28,6 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"sec_fetch_site":            r.Header.Get("Sec-Fetch-Site"),
 		"upgrade_insecure_requests": r.Header.Get("Upgrade-Insecure-Requests"),
 		"user_agent":                r.Header.Get("User-Agent"),
-	})
+	}, "", "  ")
 	w.Write(resp)
 }
