@@ -35,3 +35,11 @@ rm -rf /tmp/go
 git clone https://github.com/complexorganizations/ipengine-dev.git
 cd ipengine-dev
 ```
+
+
+### To Do List
+```
+Get Hostname From IP
+Get IP From Hostname
+Get Network From Hostname
+```
