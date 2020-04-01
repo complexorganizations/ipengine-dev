@@ -37,11 +37,15 @@ cd ipengine-dev
 ```
 
 
-Info Provided:
-
-`ipv4`
-
-`ipv6`
-
-`hostname`
-
+### Info Provided:
+```
+accept
+accept_encoding
+accept_language
+host
+hostname
+ip
+referer
+upgrade_insecure_requests
+user_agent
+```
