@@ -29,7 +29,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"accept": r.Header.Get("Accept"),
 		"referer": r.Header.Get("Referer"),
 		"upgrade_insecure_requests": r.Header.Get("Upgrade-Insecure-Requests"),
-		"access_control_request_headers": r.Header.Get("Access-Control-Request-Headers"),
+		"cache_control": r.Header.Get("Cache-Control"),
 	}
 	hostname, err := GetHostName(ip)
 	if err == nil {
