@@ -39,6 +39,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		resp["hostname"] = hostname[0]
 	}
 	resp["interface"] = GetInterfaces()
+	resp["reverse_ip"] = GetReverseIp(hostname[0])
 	b, _ := json.Marshal(resp)
 
 	_, _ = w.Write(b)
@@ -79,4 +80,11 @@ func GetInterfaces() []Interface {
 		ifaces = append(ifaces, iface)
 	}
 	return ifaces
+}
+func GetReverseIp(host string) interface{} {
+	addr, err := net.LookupIP(host)
+	if err == nil {
+		return addr
+	}
+	return ""
 }
