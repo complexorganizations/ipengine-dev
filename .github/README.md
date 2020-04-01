@@ -35,3 +35,13 @@ rm -rf /tmp/go
 git clone https://github.com/complexorganizations/ipengine-dev.git
 cd ipengine-dev
 ```
+
+
+Info Provided:
+
+`ipv4`
+
+`ipv6`
+
+`hostname`
+
