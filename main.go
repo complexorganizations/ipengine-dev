@@ -22,7 +22,8 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	ip := addrList[0]
 
 	resp := map[string]interface{}{
-		"ip": GetIP(r),
+		"ip":         GetIP(r),
+		"user_agent": r.Header.Get("User-Agent"),
 	}
 	hostname, err := GetHostName(ip)
 	if err == nil {
