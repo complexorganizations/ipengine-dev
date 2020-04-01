@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"net"
 	"net/http"
 )
 
@@ -14,10 +15,19 @@ func main() {
 
 func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
-	resp, _ := json.Marshal(map[string]string{
-		"ip": GetIP(r),
-	})
-	w.Write(resp)
+
+	resp := map[string]interface{}{
+		"ip":         GetIP(r),
+		"user_agent": r.Header.Get("User-Agent"),
+	}
+	hostname, err := getHostName()
+	if err != nil {
+		resp["hostname"] = hostname
+	}
+
+	b, _ := json.Marshal(resp)
+
+	w.Write(b)
 }
 
 // GetIP gets a requests IP address by reading off the forwarded-for
@@ -28,4 +38,9 @@ func GetIP(r *http.Request) string {
 		return forwarded
 	}
 	return r.RemoteAddr
+}
+
+func getHostName() ([]string, error) {
+	host, err := net.LookupAddr("127.0.0.1")
+	return host, err
 }
