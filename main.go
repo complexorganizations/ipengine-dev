@@ -22,15 +22,15 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	ip := addrList[0]
 
 	resp := map[string]interface{}{
-		"ip":         GetIP(r),
-		"user_agent": r.Header.Get("User-Agent"),
-		"accept_language": r.Header.Get("Accept-Language"),
-		"accept_encoding": r.Header.Get("Accept-Encoding"),
-		"accept": r.Header.Get("Accept"),
-		"referer": r.Header.Get("Referer"),
+		"ip":                        GetIP(r),
+		"user_agent":                r.Header.Get("User-Agent"),
+		"accept_language":           r.Header.Get("Accept-Language"),
+		"accept_encoding":           r.Header.Get("Accept-Encoding"),
+		"accept":                    r.Header.Get("Accept"),
+		"referer":                   r.Header.Get("Referer"),
 		"upgrade_insecure_requests": r.Header.Get("Upgrade-Insecure-Requests"),
-		"cache_control": r.Header.Get("Cache-Control"),
-		"sec_fetch_site": r.Header.Get("Sec-Fetch-Site"),
+		"cache_control":             r.Header.Get("Cache-Control"),
+		"sec_fetch_site":            r.Header.Get("Sec-Fetch-Site"),
 	}
 	hostname, err := GetHostName(ip)
 	if err == nil {
