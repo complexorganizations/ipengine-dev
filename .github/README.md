@@ -38,7 +38,6 @@ cd ipengine-dev
 
 ### To Do List
 ```
-Get Hostname From IP https://github.com/complexorganizations/ipengine-dev/issues/7
 Get IP From Hostname https://github.com/complexorganizations/ipengine-dev/issues/8
 Get Network From Hostname https://github.com/complexorganizations/ipengine-dev/issues/10
 ```
