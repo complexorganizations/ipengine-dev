@@ -15,6 +15,9 @@ func main() {
 
 func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+
+	hostname := GetHostName(r.Header.Get("CF-CONNECTING-IP"))
+
 	resp, _ := json.MarshalIndent(map[string]interface{}{
 		"accept":                    r.Header.Get("Accept"),
 		"accept_encoding":           r.Header.Get("Accept-Encoding"),
@@ -22,7 +25,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"cache_control":             r.Header.Get("Cache-Control"),
 		"dnt":                       r.Header.Get("DNT"),
 		"ip":                        r.Header.Get("CF-CONNECTING-IP"),
-		"hostname":                  GetHostName(r.Header.Get("CF-CONNECTING-IP")),
+		"hostname":                  hostname,
 		"referer":                   r.Header.Get("Referer"),
 		"sec_fetch_dest":            r.Header.Get("Sec-Fetch-Dest"),
 		"sec_fetch_mode":            r.Header.Get("Sec-Fetch-Mode"),
