@@ -27,7 +27,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"dnt":                       r.Header.Get("DNT"),
 		"ip":                        r.Header.Get("CF-CONNECTING-IP"),
 		"hostname":                  hostname,
-		"reverse_hostname_ip":       reverseIp,
+		"reversed_hostname":         reverseIp,
 		"referer":                   r.Header.Get("Referer"),
 		"sec_fetch_dest":            r.Header.Get("Sec-Fetch-Dest"),
 		"sec_fetch_mode":            r.Header.Get("Sec-Fetch-Mode"),
