@@ -13,6 +13,3 @@
 .git
 .gitignore
 .github
-
-# Ignore github folder
-/.github/
