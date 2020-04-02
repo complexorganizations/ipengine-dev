@@ -38,6 +38,7 @@ cd ipengine-dev
 
 ### To Do List
 ```
+Get null if no response found.
 Get Network From Hostname https://github.com/complexorganizations/ipengine-dev/issues/10
 ```
 
