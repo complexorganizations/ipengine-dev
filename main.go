@@ -48,10 +48,10 @@ func GetHostName(ip string) string {
 	return host[0]
 }
 
-func GetReverseIp(host string) interface{} {
+func GetReverseIp(host string) string {
 	addr, err := net.LookupIP(host)
 	if err == nil {
-		return addr
+		return addr[0].String()
 	}
 	return ""
 }
