@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"net"
 	"net/http"
 )
 
@@ -14,13 +15,14 @@ func main() {
 
 func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
-	resp, _ := json.MarshalIndent(map[string]string{
+	resp, _ := json.MarshalIndent(map[string]interface{}{
 		"accept":                    r.Header.Get("Accept"),
 		"accept_encoding":           r.Header.Get("Accept-Encoding"),
 		"accept_language":           r.Header.Get("Accept-Language"),
 		"cache_control":             r.Header.Get("Cache-Control"),
 		"dnt":                       r.Header.Get("DNT"),
 		"ip":                        r.Header.Get("CF-CONNECTING-IP"),
+		"hostname":                  GetHostName(r.Header.Get("CF-CONNECTING-IP")),
 		"referer":                   r.Header.Get("Referer"),
 		"sec_fetch_dest":            r.Header.Get("Sec-Fetch-Dest"),
 		"sec_fetch_mode":            r.Header.Get("Sec-Fetch-Mode"),
@@ -29,5 +31,11 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"upgrade_insecure_requests": r.Header.Get("Upgrade-Insecure-Requests"),
 		"user_agent":                r.Header.Get("User-Agent"),
 	}, "", "  ")
+
 	w.Write(resp)
+}
+
+func GetHostName(ip string) []string {
+	host, _ := net.LookupAddr(ip)
+	return host
 }
