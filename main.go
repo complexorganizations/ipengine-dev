@@ -17,6 +17,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 
 	hostname := GetHostName(r.Header.Get("CF-CONNECTING-IP"))
+	reverseIp := GetReverseIp(hostname)
 
 	resp, _ := json.MarshalIndent(map[string]interface{}{
 		"accept":                    r.Header.Get("Accept"),
@@ -26,6 +27,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"dnt":                       r.Header.Get("DNT"),
 		"ip":                        r.Header.Get("CF-CONNECTING-IP"),
 		"hostname":                  hostname,
+		"reverse_ip":                reverseIp,
 		"referer":                   r.Header.Get("Referer"),
 		"sec_fetch_dest":            r.Header.Get("Sec-Fetch-Dest"),
 		"sec_fetch_mode":            r.Header.Get("Sec-Fetch-Mode"),
@@ -44,4 +46,12 @@ func GetHostName(ip string) string {
 		return ""
 	}
 	return host[0]
+}
+
+func GetReverseIp(host string) interface{} {
+	addr, err := net.LookupIP(host)
+	if err == nil {
+		return addr
+	}
+	return ""
 }
