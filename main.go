@@ -35,7 +35,10 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
-func GetHostName(ip string) []string {
-	host, _ := net.LookupAddr(ip)
-	return host
+func GetHostName(ip string) string {
+	host, err := net.LookupAddr(ip)
+	if err != nil {
+		return ""
+	}
+	return host[0]
 }
