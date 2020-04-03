@@ -1,6 +1,6 @@
 ### List
-- Example Here
-- Example Here
+- [ ] Return Null If No Response
+- [x] Get Location Data For IP
 
 ### Final
 ```
