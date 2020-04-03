@@ -16,7 +16,7 @@ func main() {
 func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	niler := func(v string) interface{} {
 		if v == "" {
-			return nil
+			return "null"
 		}
 		return v
 	}
