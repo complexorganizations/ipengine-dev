@@ -35,15 +35,3 @@ rm -rf /tmp/go
 git clone https://github.com/complexorganizations/ipengine-dev.git
 cd ipengine-dev
 ```
-
-### To Do List
-```
-Get null if no response found.
-Get Network From Hostname https://github.com/complexorganizations/ipengine-dev/issues/10
-```
-
-### Paid Plans
-```
-Scan a (IP|Hostname) for open port
-Test if host is reachable on certain port
-```
