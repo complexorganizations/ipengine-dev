@@ -1,6 +1,8 @@
 ### List
-- [ ] Return Null If No Response
-- [x] Get Location Data For IP
+- [x] Return Null If No Response
+- [ ] Get Location Data For IP
+- [ ] Get Arrin Data For IP
+- [ ] Use FireHol Ip Data For analysis
 
 ### Final
 ```
