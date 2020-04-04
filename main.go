@@ -30,7 +30,6 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"accept_encoding":           niler(r.Header.Get("Accept-Encoding")),
 		"accept_language":           niler(r.Header.Get("Accept-Language")),
 		"cache_control":             niler(r.Header.Get("Cache-Control")),
-		"connection":                niler(r.Header.Get("Connection")),
 		"dnt":                       niler(r.Header.Get("DNT")),
 		"ip":                        niler(r.Header.Get("CF-CONNECTING-IP")),
 		"hostname":                  niler(hostname),
