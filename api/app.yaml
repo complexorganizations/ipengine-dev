@@ -1,4 +1,4 @@
-service: default
+service: api
 runtime: go112
 env: standard
 automatic_scaling:
