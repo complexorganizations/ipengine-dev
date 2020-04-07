@@ -22,7 +22,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "application/json")
 
-	hostname := GetHostName(r.Header.Get("CF-CONNECTING-IP"))
+	hostname := GetHostName(r.Header.Get("X-Forwarded-For"))
 	reverseIp := GetReverseIp(hostname)
 
 	resp, _ := json.MarshalIndent(map[string]interface{}{
@@ -31,7 +31,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"accept_language":           niler(r.Header.Get("Accept-Language")),
 		"cache_control":             niler(r.Header.Get("Cache-Control")),
 		"dnt":                       niler(r.Header.Get("DNT")),
-		"ip":                        niler(r.Header.Get("CF-CONNECTING-IP")),
+		"ip":                        niler(r.Header.Get("X-Forwarded-For")),
 		"hostname":                  niler(hostname),
 		"reverse_hostname":          niler(reverseIp),
 		"referer":                   niler(r.Header.Get("Referer")),
