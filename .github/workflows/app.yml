@@ -5,10 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-go@v1
-      name: 'Go Setup'
-    working-directory: ./AppEngine/api
+    - name: 'Go Setup'
       with:
         go-version: 1.12
     - uses: actions/checkout@v2
+    - name: 'run main.go'
+      working-directory: ./AppEngine/api
     - run: go build main.go
     - run: ./main.go &
