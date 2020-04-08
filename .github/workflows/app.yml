@@ -8,5 +8,5 @@ jobs:
       with:
         go-version: 1.12
     - uses: actions/checkout@v2
-    - run: go build main.go
-    - run: ./main &
+    - run: go build /AppEngine/api/main.go
+    - run: ./AppEngine/api/main.go &
