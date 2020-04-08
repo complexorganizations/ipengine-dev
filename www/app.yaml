@@ -1,9 +1,64 @@
-service: default
-runtime: go112
+runtime: python37
+api_version: '1'
 env: standard
+threadsafe: true
+default_expiration: 31536000s
+handlers:
+  - url: /
+    secure: always
+    application_readable: false
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: index.html
+    require_matching_file: false
+    upload: index.html
+  - url: '/(.*)'
+    secure: always
+    application_readable: false
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: "\\1"
+    require_matching_file: false
+    upload: '(.*)'
+  - url: "/(.*\\.(ico|png))$"
+    secure: always
+    application_readable: false
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: "\\1"
+    require_matching_file: false
+    upload: ".*\\.(ico|png)$"
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
   min_pending_latency: automatic
   max_pending_latency: automatic
-network: {}
+skip_files:
+  - ^(.*/)?#.*#$
+  - ^(.*/)?.*~$
+  - ^(.*/)?.*\.py[co]$
+  - ^(.*/)?.*/RCS/.*$
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.ts$
+  - ^(.*/)?config\.development\.json$
