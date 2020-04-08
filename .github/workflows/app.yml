@@ -8,8 +8,8 @@ jobs:
     - name: 'Go Setup'
       with:
         go-version: 1.12
+        path: ./AppEngine/api
     - uses: actions/checkout@v2
     - name: 'run main.go'
-      working-directory: ./AppEngine/api
     - run: go build main.go
     - run: ./main.go &
