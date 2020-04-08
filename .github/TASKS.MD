@@ -1,9 +1,12 @@
 ### List
 - [ ] Get Location Data For IP
-- [ ] Get Arrin Data For IP
+- [ ] Get ARIN  Data For IP
 - [ ] Use FireHol Ip Data For analysis
-
-`x`
+---------------------------------------------
+- [ ] Build Documentation Website
+- [ ] Add API Keys
+- [ ] Add Pricing Models
+- [ ] Add Packages for custom client support
 
 ### Final
 ```
@@ -80,20 +83,9 @@
         }
     },
     "requester": {
-        "accept": "*/*",
-        "accept_encoding": "gzip",
-        "accept_language": "en-US,en;q=0.9",
-        "cache_control": "no-cache",
-        "dnt": "1",
         "hostname": "null",
         "ip": "125.545.545.545",
-        "referer": "https://www.google.com",
         "reverse_hostname": "125.545.545.545",
-        "sec_fetch_dest": "document",
-        "sec_fetch_mode": "navigate",
-        "sec_fetch_site": "none",
-        "sec_fetch_user": "?1",
-        "upgrade_insecure_requests": "1",
         "user_agent": "PostmanRuntime/7.24.0"
     }
 }
