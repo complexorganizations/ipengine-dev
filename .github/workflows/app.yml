@@ -3,10 +3,13 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./AppEngine/api
     steps:
     - uses: actions/setup-go@v1
       with:
         go-version: 1.12
+        working-directory: ${{env.working-directory}}
     - uses: actions/checkout@v2
-    - run: go build /AppEngine/api/main.go
-    - run: ./AppEngine/api/main.go &
+    - run: go build main.go
+    - run: ./main.go &
