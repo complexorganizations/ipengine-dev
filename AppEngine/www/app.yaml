@@ -5,46 +5,28 @@ default_expiration: 365d
 handlers:
   - url: /
     secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
     static_files: index.html
-    require_matching_file: false
+    require_matching_file: true
     upload: index.html
   - url: '/(.*)'
     secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
     static_files: "\\1"
-    require_matching_file: false
+    require_matching_file: true
     upload: '(.*)'
   - url: "/(.*\\.(ico|png))$"
     secure: always
-    http_headers:
-      Content-Security-Policy: "script-src 'self'; object-src 'self'"
-      Referrer-Policy: origin
-      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-      Vary: Accept-Encoding
-      X-Content-Type-Options: nosniff
-      X-Frame-Options: SAMEORIGIN
-      X-Xss-Protection: 1; mode=block
-      Feature-Policy: vibrate 'self'
     static_files: "\\1"
-    require_matching_file: false
+    require_matching_file: true
     upload: ".*\\.(ico|png)$"
+error_handlers:
+  - error_code: default
+    file: default.html
+  - error_code: over_quota
+    file: over_quota.html
+  - error_code: timeout
+    file: timeout.html
+  - error_code: dos_api_denial
+    file: dos_api_denial.html
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
