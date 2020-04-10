@@ -1,6 +1,6 @@
 ### List
 - [ ] Get Location Data For IP
-- [ ] Get ARIN  Data For IP
+- [x] Get ARIN  Data For IP
 - [ ] Use FireHol Ip Data For analysis
 ---------------------------------------------
 - [ ] Build Documentation Website
