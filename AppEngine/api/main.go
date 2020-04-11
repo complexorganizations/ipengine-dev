@@ -12,21 +12,9 @@ import (
 )
 
 type ArinRdapData struct {
-	RdapConformance []string `json:"rdapConformance"`
-	Notices         []struct {
-		Title       string   `json:"title"`
-		Description []string `json:"description"`
-		Links       []struct {
-			Value string `json:"value"`
-			Rel   string `json:"rel"`
-			Type  string `json:"type"`
-			Href  string `json:"href"`
-		} `json:"links,omitempty"`
-	} `json:"notices"`
 	Handle       string `json:"handle"`
 	StartAddress string `json:"startAddress"`
 	EndAddress   string `json:"endAddress"`
-	IPVersion    string `json:"ipVersion"`
 	Name         string `json:"name"`
 	Type         string `json:"type"`
 	ParentHandle string `json:"parentHandle"`
@@ -34,63 +22,27 @@ type ArinRdapData struct {
 		EventAction string `json:"eventAction"`
 		EventDate   string `json:"eventDate"`
 	} `json:"events"`
-	Links []struct {
-		Value string `json:"value"`
-		Rel   string `json:"rel"`
-		Type  string `json:"type"`
-		Href  string `json:"href"`
-	} `json:"links"`
 	Entities []struct {
 		Handle     string        `json:"handle"`
 		VcardArray []interface{} `json:"vcardArray"`
-		Roles      []string      `json:"roles"`
-		Remarks    []struct {
-			Title       string   `json:"title"`
-			Description []string `json:"description"`
-		} `json:"remarks"`
-		Links []struct {
-			Value string `json:"value"`
-			Rel   string `json:"rel"`
-			Type  string `json:"type"`
-			Href  string `json:"href"`
-		} `json:"links"`
-		Events []struct {
+		Events     []struct {
 			EventAction string `json:"eventAction"`
 			EventDate   string `json:"eventDate"`
 		} `json:"events"`
 		Entities []struct {
 			Handle     string        `json:"handle"`
 			VcardArray []interface{} `json:"vcardArray"`
-			Roles      []string      `json:"roles"`
-			Remarks    []struct {
-				Title       string   `json:"title"`
-				Description []string `json:"description"`
-			} `json:"remarks,omitempty"`
-			Links []struct {
-				Value string `json:"value"`
-				Rel   string `json:"rel"`
-				Type  string `json:"type"`
-				Href  string `json:"href"`
-			} `json:"links"`
-			Events []struct {
+			Events     []struct {
 				EventAction string `json:"eventAction"`
 				EventDate   string `json:"eventDate"`
 			} `json:"events"`
-			Port43          string   `json:"port43"`
-			ObjectClassName string   `json:"objectClassName"`
-			Status          []string `json:"status,omitempty"`
 		} `json:"entities"`
-		Port43          string `json:"port43"`
 		ObjectClassName string `json:"objectClassName"`
 	} `json:"entities"`
-	Port43          string   `json:"port43"`
-	Status          []string `json:"status"`
-	ObjectClassName string   `json:"objectClassName"`
-	Cidr0Cidrs      []struct {
+	Cidr0Cidrs []struct {
 		V4Prefix string `json:"v4prefix"`
 		Length   int    `json:"length"`
 	} `json:"cidr0_cidrs"`
-	ArinOriginas0Originautnums []interface{} `json:"arin_originas0_originautnums"`
 }
 
 func main() {
