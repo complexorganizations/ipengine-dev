@@ -1,3 +1,3 @@
-# Welcome to GitDocs
+### Welcome to IpEngine Docs
 
-This is a basic documentation site to get you started using GitDocs! We hope you enjoy it.
+This is a basic docs to get u across our new API
