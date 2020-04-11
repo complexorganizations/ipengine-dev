@@ -106,7 +106,17 @@ C
 
 ### Ruby
 ```
-Ruby
+require 'uri'
+require 'net/http'
+
+url = URI("https://api.ipengine.dev")
+
+http = Net::HTTP.new(url.host, url.port)
+
+request = Net::HTTP::Get.new(url)
+
+response = http.request(request)
+puts response.read_body
 ```
 
 ---
