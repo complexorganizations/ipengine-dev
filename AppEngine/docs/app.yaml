@@ -1,4 +1,4 @@
-service: default
+service: docs
 runtime: python37
 env: standard
 default_expiration: 365d
