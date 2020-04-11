@@ -3,18 +3,94 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
-	"net"
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
-type Info struct {
-	Ip              string `json:"ip"`
-	Hostname        string `json:"hostname"`
-	ReverseIp       string `json:"reverse_ip"`
-	ReverseHostname string `json:"reverse_hostname"`
+type ArinRdapData struct {
+	RdapConformance []string `json:"rdapConformance"`
+	Notices         []struct {
+		Title       string   `json:"title"`
+		Description []string `json:"description"`
+		Links       []struct {
+			Value string `json:"value"`
+			Rel   string `json:"rel"`
+			Type  string `json:"type"`
+			Href  string `json:"href"`
+		} `json:"links,omitempty"`
+	} `json:"notices"`
+	Handle       string `json:"handle"`
+	StartAddress string `json:"startAddress"`
+	EndAddress   string `json:"endAddress"`
+	IPVersion    string `json:"ipVersion"`
+	Name         string `json:"name"`
+	Type         string `json:"type"`
+	ParentHandle string `json:"parentHandle"`
+	Events       []struct {
+		EventAction string `json:"eventAction"`
+		EventDate   string `json:"eventDate"`
+	} `json:"events"`
+	Links []struct {
+		Value string `json:"value"`
+		Rel   string `json:"rel"`
+		Type  string `json:"type"`
+		Href  string `json:"href"`
+	} `json:"links"`
+	Entities []struct {
+		Handle     string        `json:"handle"`
+		VcardArray []interface{} `json:"vcardArray"`
+		Roles      []string      `json:"roles"`
+		Remarks    []struct {
+			Title       string   `json:"title"`
+			Description []string `json:"description"`
+		} `json:"remarks"`
+		Links []struct {
+			Value string `json:"value"`
+			Rel   string `json:"rel"`
+			Type  string `json:"type"`
+			Href  string `json:"href"`
+		} `json:"links"`
+		Events []struct {
+			EventAction string `json:"eventAction"`
+			EventDate   string `json:"eventDate"`
+		} `json:"events"`
+		Entities []struct {
+			Handle     string        `json:"handle"`
+			VcardArray []interface{} `json:"vcardArray"`
+			Roles      []string      `json:"roles"`
+			Remarks    []struct {
+				Title       string   `json:"title"`
+				Description []string `json:"description"`
+			} `json:"remarks,omitempty"`
+			Links []struct {
+				Value string `json:"value"`
+				Rel   string `json:"rel"`
+				Type  string `json:"type"`
+				Href  string `json:"href"`
+			} `json:"links"`
+			Events []struct {
+				EventAction string `json:"eventAction"`
+				EventDate   string `json:"eventDate"`
+			} `json:"events"`
+			Port43          string   `json:"port43"`
+			ObjectClassName string   `json:"objectClassName"`
+			Status          []string `json:"status,omitempty"`
+		} `json:"entities"`
+		Port43          string `json:"port43"`
+		ObjectClassName string `json:"objectClassName"`
+	} `json:"entities"`
+	Port43          string   `json:"port43"`
+	Status          []string `json:"status"`
+	ObjectClassName string   `json:"objectClassName"`
+	Cidr0Cidrs      []struct {
+		V4Prefix string `json:"v4prefix"`
+		Length   int    `json:"length"`
+	} `json:"cidr0_cidrs"`
+	ArinOriginas0Originautnums []interface{} `json:"arin_originas0_originautnums"`
 }
 
 func main() {
@@ -26,6 +102,7 @@ func main() {
 	//router
 	r := http.NewServeMux()
 	//routes
+	r.HandleFunc("/", reverseIpHandler)
 	r.HandleFunc("/ip/", ipHandler)
 	//http server
 	log.Println("api started...")
@@ -46,27 +123,49 @@ func initLogger() error {
 	return nil
 }
 
+func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
+	//reverse ip
+	rip := getReverseIp(r)
+	returnWhoisData(rip, w)
+}
+
 func ipHandler(w http.ResponseWriter, r *http.Request) {
-	//ip parameter
+	//ip
 	ip, err := getIpParam(r)
 	if err != nil {
 		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
-	//info
-	i, err := getInfo(ip, r)
+	returnWhoisData(ip, w)
+}
+
+func returnWhoisData(ip string, w http.ResponseWriter) {
+	//whois data
+	c := http.Client{
+		Timeout: time.Duration(time.Second * 30),
+	}
+	url := fmt.Sprintf("https://rdap.arin.net/registry/ip/%s.json", ip)
+	r, err := c.Get(url)
 	if err != nil {
-		log.Printf("error: %s\n", err.Error())
+		log.Printf("debug: %s\n", err.Error())
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+	var wd ArinRdapData
+	err = json.NewDecoder(r.Body).Decode(&wd)
+	if err != nil {
+		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
 	//response
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	err = json.NewEncoder(w).Encode(i)
+	err = json.NewEncoder(w).Encode(&wd)
 	if err != nil {
 		log.Printf("debug: %s\n", err.Error())
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
 	}
 }
 
@@ -79,39 +178,6 @@ func getIpParam(r *http.Request) (string, error) {
 	} else {
 		return "", errors.New("getting ip parameter failed!")
 	}
-}
-
-func getInfo(ip string, r *http.Request) (*Info, error) {
-	//hostname
-	h, err := getHostname(ip)
-	if err != nil {
-		return nil, err
-	}
-	//reverse ip
-	rip := getReverseIp(r)
-	//reverse hostname
-	rh, err := getHostname(rip)
-	if err != nil {
-		return nil, err
-	}
-	//who is
-	//...
-	i := Info{
-		Ip:              ip,
-		Hostname:        h,
-		ReverseIp:       rip,
-		ReverseHostname: rh,
-	}
-	return &i, nil
-}
-
-func getHostname(ip string) (string, error) {
-	h, err := net.LookupAddr(ip)
-	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
-		return "", errors.New("getting hostname failed!")
-	}
-	return h[0], nil
 }
 
 func getReverseIp(r *http.Request) string {
