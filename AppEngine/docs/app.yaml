@@ -1,7 +1,50 @@
-service: docs
+service: default
 runtime: python37
 env: standard
 default_expiration: 365d
+handlers:
+  - url: /
+    secure: always
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: .gitdocs_build/index.html
+    require_matching_file: false
+    upload: .gitdocs_build/index.html
+  - url: '/(.*)'
+    secure: always
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: ".gitdocs_build/\\1"
+    require_matching_file: false
+    upload: '.gitdocs_build/(.*)'
+  - url: "/(.*\\.(ico|png))$"
+    secure: always
+    http_headers:
+      Content-Security-Policy: "script-src 'self'; object-src 'self'"
+      Referrer-Policy: origin
+      Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Frame-Options: SAMEORIGIN
+      X-Xss-Protection: 1; mode=block
+      Feature-Policy: vibrate 'self'
+    static_files: ".gitdocs_build/\\1"
+    require_matching_file: false
+    upload: ".gitdocs_build/.*\\.(ico|png)$"
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
