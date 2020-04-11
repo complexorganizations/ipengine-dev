@@ -1,12 +1,12 @@
 ### Shell
-```
+```sh
 curl 'https://api.ipengine.dev'
 ```
 
 ---
 
 ### Ruby
-```
+```rb
 require 'net/http'
 puts Net::HTTP.get(URI('https://api.ipengine.dev'))
 ```
@@ -14,7 +14,7 @@ puts Net::HTTP.get(URI('https://api.ipengine.dev'))
 ---
 
 ### Python
-```
+```py
 from requests import get
 print get('https://api.ipengine.dev').text
 ```
@@ -22,14 +22,14 @@ print get('https://api.ipengine.dev').text
 ---
 
 ### Php
-```
+```php
 echo file_get_contents('https://api.ipengine.dev')
 ```
 
 ---
 
 ### Node.js
-```
+```js
 var https = require('https');
 
 https.get('https://api.ipengine.dev', function(resp){
@@ -47,7 +47,7 @@ https.get('https://api.ipengine.dev', function(resp){
 ---
 
 ### jQuery
-```
+```js
 $.get('https://api.ipengine.dev', function(data){
   console.log(data)
 })
@@ -56,56 +56,42 @@ $.get('https://api.ipengine.dev', function(data){
 ---
 
 ### Go
-```
+```go
 Go
 ```
 
 ---
 
-### Python
-```
-Python
-```
-
----
-
 ### Java
-```
+```java
 Java
 ```
 
 ---
 
 ### C#
-```
+```cs
 C#
 ```
 
 ---
 
-### PHP
-```
-PHP
-```
-
----
-
 ### C++
-```
+```cpp
 C++
 ```
 
 ---
 
 ### C
-```
+```c
 C
 ```
 
 ---
 
 ### Ruby
-```
+```rb
 require 'uri'
 require 'net/http'
 
@@ -122,7 +108,7 @@ puts response.read_body
 ---
 
 ### Swift
-```
+```swift
 Swift
 ```
 
@@ -136,7 +122,7 @@ Scala
 ---
 
 ### Rust
-```
+```rs
 Rust
 ```
 
@@ -150,28 +136,28 @@ Kotlin
 ---
 
 ### Dart
-```
+```dart
 Dart
 ```
 
 ---
 
 ### Objective-C
-```
+```m
 Objective-C
 ```
 
 ---
 
 ### Perl
-```
+```pl
 Perl
 ```
 
 ---
 
 ### PowerShell
-```
+```ps1
 PowerShell
 ```
 
@@ -192,7 +178,7 @@ Haskell
 ---
 
 ### JavaScript
-```
+```js
 var request = new XMLHttpRequest();
 
 request.open('GET', 'https://api.ipengine.dev');
