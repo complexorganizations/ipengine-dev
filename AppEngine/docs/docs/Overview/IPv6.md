@@ -1,10 +1,11 @@
 ### Getting IPv6
 ---
-```sh
+
+```
 $ curl -6 https://api.ipengine.dev
 ```
 
-```sh
+```
 {
 	"network": {
 		"ip": "2604:2000:1500:8fc8:f0e8:755d:767b:ef7f",
