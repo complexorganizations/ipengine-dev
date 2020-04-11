@@ -2,11 +2,11 @@
 ---
 
 
-```
+```sh
 $ curl -6 https://api.ipengine.dev
 ```
 
-```
+```sh
 {
 	"network": {
 		"ip": "2604:2000:1500:8fc8:1192:688d:f125:4ff2",
