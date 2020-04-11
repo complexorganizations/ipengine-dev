@@ -1,4 +1,7 @@
 | Syntax      | Description |
 | ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
+| Network     | Title       |
+| IP          | Title       |
+| Hostname    | Text        |
+| Reverse     | Text        |
+| Reverse     | Text        |
