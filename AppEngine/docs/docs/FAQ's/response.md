@@ -1,11 +1,65 @@
 ### Response
 
-| Field                     | Description                                                       |
-|---------------------------|-------------------------------------------------------------------|
-| Network                   |                                                                   |
-| IP	                      |                                                                   |
-| Hostname                  |                                                                   |
-| Reverse                   |                                                                   |
-| Location                  |                                                                   |
-| Country                   |                                                                   |
-| Province                  |                                                                   |
+| Syntax            | Description       |
+|-------------------|-------------------|
+| Network           |                   |
+| IP                |                   |
+| Hostname          |                   |
+| Reverse           |                   |
+| Location          |                   |
+| Country           |                   |
+| Province          |                   |
+| City              |                   |
+| Postal            |                   |
+| Coordinates       |                   |
+| Timezone          |                   |
+| Language          |                   |
+| Currency          |                   |
+| Analysis          |                   |
+| Anonymizers       |                   |
+| Abuse             |                   |
+| Malware           |                   |
+| Organizations     |                   |
+| Spam              |                   |
+| Unroutable        |                   |
+| Arin              |                   |
+| Name              |                   |
+| Handle            |                   |
+| Parent            |                   |
+| Type              |                   |
+| Range             |                   |
+| Cidr              |                   |
+| Registration      |                   |
+| Updated           |                   |
+| Organization      |                   |
+| Kind              |                   |
+| Name              |                   |
+| Handle            |                   |
+| Email             |                   |
+| Telephone         |                   |
+| Organization      |                   |
+| Address           |                   |
+| Roles             |                   |
+| Contact           |                   |
+| Kind              |                   |
+| Name              |                   |
+| Handle            |                   |
+| Email             |                   |
+| Telephone         |                   |
+| Organization      |                   |
+| Address           |                   |
+| Roles             |                   |
+| Abuse             |                   |
+| Kind              |                   |
+| Name              |                   |
+| Handle            |                   |
+| Email             |                   |
+| Telephone         |                   |
+| Organization      |                   |
+| Address           |                   |
+| Roles             |                   |
+| Requester         |                   |
+| Hostname          |                   |
+| Ip                |                   |
+| Reverse           |                   |
+| User Agent        |                   |
