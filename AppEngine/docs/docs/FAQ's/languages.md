@@ -15,7 +15,7 @@ puts Net::HTTP.get(URI('https://api.ipengine.dev'))
 
 ### Python
 ```
-from requests import get   
+from requests import get
 print get('https://api.ipengine.dev').text
 ```
 
@@ -104,5 +104,59 @@ $.get('https://api.ipengine.dev', function(data){
 ---
 
 ### Swift
+```
+```
+
+---
+
+### Scala
+```
+```
+
+---
+
+### Rust
+```
+```
+
+---
+
+### Kotlin
+```
+```
+
+---
+
+### Dart
+```
+```
+
+---
+
+### Objective-C
+```
+```
+
+---
+
+### Perl
+```
+```
+
+---
+
+### PowerShell
+```
+```
+
+---
+
+### .net
+```
+```
+
+---
+
+### Haskell
 ```
 ```
