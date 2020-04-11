@@ -160,3 +160,22 @@ $.get('https://api.ipengine.dev', function(data){
 ### Haskell
 ```
 ```
+
+---
+
+### JavaScript
+```
+var request = new XMLHttpRequest();
+
+request.open('GET', 'https://api.ipengine.dev');
+
+request.setRequestHeader('Accept', 'application/json');
+
+request.onreadystatechange = function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+};
+
+request.send();
+```
