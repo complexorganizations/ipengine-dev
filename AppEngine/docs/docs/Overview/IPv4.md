@@ -1,10 +1,11 @@
 ### Getting IPv4
 ---
-```sh
+
+```
 $ curl -4 https://api.ipengine.dev
 ```
 
-```sh
+```
 {
 	"network": {
 		"ip": "66.87.125.72",
