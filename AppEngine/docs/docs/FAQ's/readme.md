@@ -11,6 +11,7 @@ The free usage of our API is limited to 100,000 API requests per month. If you e
 
 ---
 ### Do you offer a trial plan ?
+Yes, we offer a free plan with 100,000 API request.
 
 ----
 ### Is my payment information secure ?
