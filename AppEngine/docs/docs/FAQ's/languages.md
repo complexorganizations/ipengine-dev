@@ -57,84 +57,98 @@ $.get('https://api.ipengine.dev', function(data){
 
 ### Go
 ```
+Go
 ```
 
 ---
 
 ### Python
 ```
+Python
 ```
 
 ---
 
 ### Java
 ```
+Java
 ```
 
 ---
 
 ### C#
 ```
+C#
 ```
 
 ---
 
 ### PHP
 ```
+PHP
 ```
 
 ---
 
 ### C++
 ```
+C++
 ```
 
 ---
 
 ### C
 ```
+C
 ```
 
 ---
 
 ### Ruby
 ```
+Ruby
 ```
 
 ---
 
 ### Swift
 ```
+Swift
 ```
 
 ---
 
 ### Scala
 ```
+Scala
 ```
 
 ---
 
 ### Rust
 ```
+Rust
 ```
 
 ---
 
 ### Kotlin
 ```
+Kotlin
 ```
 
 ---
 
 ### Dart
 ```
+Dart
 ```
 
 ---
 
 ### Objective-C
 ```
+Objective-C
 ```
 
 ---
@@ -147,18 +161,21 @@ $.get('https://api.ipengine.dev', function(data){
 
 ### PowerShell
 ```
+PowerShell
 ```
 
 ---
 
 ### .net
 ```
+.net
 ```
 
 ---
 
 ### Haskell
 ```
+Haskell
 ```
 
 ---
