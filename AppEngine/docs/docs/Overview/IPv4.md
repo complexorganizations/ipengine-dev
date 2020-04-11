@@ -11,13 +11,12 @@ $ curl -4 https://api.ipengine.dev
 		"ip": "66.87.125.72",
 		"hostname": "ip-66-87-125-72.spfdma.spcsdns.net",
 		"reverse": "66.87.125.72",
-		"user_agent": "PostmanRuntime/7.24.1",
 		"location": {
 			"country": "United States of America",
 			"province": "New York",
 			"city": "Flushing",
 			"postal": "01105",
-			"location": "42.0999,-72.5783",
+			"coordinates": "42.0999,-72.5783",
 			"timezone": "America/New_York",
 			"language": "English",
 			"currency": "United States Dollar"
@@ -41,42 +40,34 @@ $ curl -4 https://api.ipengine.dev
 		"registration": "2004-03-26",
 		"updated": "2006-06-06",
 		"organization": {
-			"name": "Charter Communications Inc",
+			"Kind": "Group",
+			"name": "Google LLC",
 			"handle": "cc-3517",
-			"street": "6399 S. Fiddler's Green Circle",
-			"city": "Greenwood Village",
-			"province": "CO",
-			"postal": "80111",
-			"country": "United States of America",
-			"registration": "2004-03-26",
-			"updated": "2006-06-06"
+			"email": "network-abuse@google.com",
+			"telephone": "+1-650-253-0000",
+			"organization": "Google LLC",
+			"Address": "6399 S. Fiddler's Green Circle, Greenwood Village, CO, 80111, United States of America",
+			"Roles": "Abuse"
 		},
 		"contact": {
-			"name": "Company Name",
-			"handle": "IPADD1-ARIN",
-			"company": "Charter Communications",
-			"street": "6399 S. Fiddler's Green Circle",
-			"city": "Greenwood Village",
-			"province": "CO",
-			"postal": "80111",
-			"country": "United States of America",
-			"registration": "2004-03-26",
-			"updated": "2006-06-06",
-			"phone": "212-121-2121",
-			"email": "test@example.com"
+			"Kind": "Group",
+			"name": "Google LLC",
+			"handle": "cc-3517",
+			"email": "network-abuse@google.com",
+			"telephone": "+1-650-253-0000",
+			"organization": "Google LLC",
+			"Address": "6399 S. Fiddler's Green Circle, Greenwood Village, CO, 80111, United States of America",
+			"Roles": "Abuse"
 		},
 		"abuse": {
-			"name": "Abuse",
-			"handle": "ABUSE10-ARIN",
-			"street": "6399 S. Fiddler's Green Circle",
-			"city": "Greenwood Village",
-			"province": "CO",
-			"postal": "80111",
-			"country": "United States of America",
-			"registration": "2004-03-26",
-			"updated": "2006-06-06",
-			"phone": "212-121-2121",
-			"email": "test@example.com"
+			"Kind": "Group",
+			"name": "Google LLC",
+			"handle": "cc-3517",
+			"email": "network-abuse@google.com",
+			"telephone": "+1-650-253-0000",
+			"organization": "Google LLC",
+			"Address": "6399 S. Fiddler's Green Circle, Greenwood Village, CO, 80111, United States of America",
+			"Roles": "Abuse"
 		}
 	}
 }
