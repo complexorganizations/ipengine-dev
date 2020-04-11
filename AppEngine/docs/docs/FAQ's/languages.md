@@ -115,7 +115,7 @@ Swift
 ---
 
 ### Scala
-```
+```scala
 Scala
 ```
 
@@ -129,7 +129,7 @@ Rust
 ---
 
 ### Kotlin
-```
+```kt
 Kotlin
 ```
 
@@ -164,14 +164,14 @@ PowerShell
 ---
 
 ### .net
-```
+```vb
 .net
 ```
 
 ---
 
 ### Haskell
-```
+```hs
 Haskell
 ```
 
