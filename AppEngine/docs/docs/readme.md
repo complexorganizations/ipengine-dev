@@ -4,12 +4,12 @@ This is a basic docs to get u across our new API
 
 ---
 items:
-  - path: foo.md
-  - path: bar.md
-  - path: baz.md
+  - path: /Overview/readme.md
+  - path: /Overview/IPv4.md
+  - path: /Overview/IPv6.md
 
 items:
-  - foo.md
-  - bar.md
-  - baz.md
+  - Overview
+  - IPv4.md
+  - IPv6.md
 ---
