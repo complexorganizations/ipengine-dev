@@ -1,4 +1,4 @@
-### Getting IPv6
+Getting IPv6
 ---
 
 
