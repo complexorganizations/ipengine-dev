@@ -1,4 +1,4 @@
-### Getting IPv4
+Getting IPv4
 ---
 
 ```sh
