@@ -1,13 +1,9 @@
 {
-  "name": "IpEngine Docs",
-  "root": "docs/"
-},
-{
-  "header_links": [
-    {
-      "title": "GitHub",
-      "href": "https://github.com/timberio/gitdocs",
-      "target": "_blank"
-    }
-  ]
+	"name": "IpEngine Docs",
+	"root": "docs/",
+	"header_links": [{
+		"title": "GitHub",
+		"href": "https://github.com/timberio/gitdocs",
+		"target": "_blank"
+	}]
 }
