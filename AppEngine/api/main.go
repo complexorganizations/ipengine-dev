@@ -22,7 +22,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "application/json")
 
-	hostname := GetHostName(r.Header.Get("X-Forwarded-For"))
+	hostname := GetHostName(r.Header.Get("CF-Connecting-IP"))
 	reverseIp := GetReverseIp(hostname)
 
 	resp, _ := json.MarshalIndent(map[string]interface{}{
