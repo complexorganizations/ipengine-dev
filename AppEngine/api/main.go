@@ -26,7 +26,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	reverseIp := GetReverseIp(hostname)
 
 	resp, _ := json.MarshalIndent(map[string]interface{}{
-		"ip":                        niler(r.Header.Get("X-Forwarded-For")),
+		"ip":                        niler(r.Header.Get("CF-Connecting-IP")),
 		"hostname":                  niler(hostname),
 		"reverse_hostname":          niler(reverseIp),
 		"user_agent":                niler(r.Header.Get("User-Agent")),
