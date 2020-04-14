@@ -1,10 +1,10 @@
 | Syntax            | Description       |
 |-------------------|-------------------|
-| Network           | String            |
+| Network           | Object            |
 | IP                | Value             |
 | Hostname          | Value             |
 | Reverse           | Value             |
-| Location          | String            |
+| Location          | Object            |
 | Country           | Value             |
 | Province          | Value             |
 | City              | Value             |
@@ -13,14 +13,14 @@
 | Timezone          | Value             |
 | Language          | Value             |
 | Currency          | Value             |
-| Analysis          | String            |
+| Analysis          | Object            |
 | Anonymizers       | Value             |
 | Abuse             | Value             |
 | Malware           | Value             |
 | Organizations     | Value             |
 | Spam              | Value             |
 | Unroutable        | Value             |
-| Arin              | String            |
+| Arin              | Object            |
 | Name              | Value             |
 | Handle            | Value             |
 | Parent            | Value             |
@@ -29,7 +29,7 @@
 | Cidr              | Value             |
 | Registration      | Value             |
 | Updated           | Value             |
-| Organization      | String            |
+| Organization      | Object            |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |
@@ -38,7 +38,7 @@
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Contact           | String            |
+| Contact           | Object            |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |
@@ -47,7 +47,7 @@
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Abuse             | String            |
+| Abuse             | Object            |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |
@@ -56,7 +56,7 @@
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Requester         | String            |
+| Requester         | Object            |
 | Hostname          | Value             |
 | Ip                | Value             |
 | Reverse           | Value             |
