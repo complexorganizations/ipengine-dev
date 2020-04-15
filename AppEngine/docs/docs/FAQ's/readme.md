@@ -7,11 +7,11 @@ The rate limit without API key is 50,000 request per month
 
 ---
 ### What are my rate limits when i have a free plan API key?
-The free usage of our API is limited to 100,000 API requests per month. If you exceed that limit we'll return a 429 HTTP status code to you.
+The free usage of our API is limited to 250,000 API requests per month. If you exceed that limit we'll return a 429 HTTP status code to you.
 
 ---
 ### Do you offer a trial plan ?
-Yes, we offer a free plan with 100,000 API request.
+Yes, we offer a free plan with 250,000 API request.
 
 ----
 ### Is my payment information secure ?
