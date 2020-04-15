@@ -23,6 +23,15 @@ puts response.read_body
 
 ---
 
+### HTTP
+```http
+GET / HTTP/1.1
+Host: api.ipengine.dev
+```
+
+---
+
+
 ### Python
 ```py
 import requests
