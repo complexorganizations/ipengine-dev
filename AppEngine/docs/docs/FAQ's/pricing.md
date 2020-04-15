@@ -15,7 +15,6 @@ Pricing:
 | maxmind.com       | 750,000           | Value             | Value             |
 | ip2location.com   | 750,000           | Value             | Value             |
 | ipapi.co          | 750,000           | 30,000            | 720,000 / $99.00  |
-| ipgeolocation.co  | 750,000           | Value             | Value             |
 | ipgeolocation.com | 750,000           | Value             | Value             |
 | ipstack.com       | 750,000           | Value             | Value             |
 
