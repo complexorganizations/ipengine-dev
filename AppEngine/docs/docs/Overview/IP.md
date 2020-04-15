@@ -17,27 +17,20 @@ $ https://api.ipengine.dev
 			"province": "New York",
 			"city": "Flushing",
 			"postal": "01105",
-			"coordinates": "42.0999,-72.5783",
-		},
-		"language": {
-			"name": "English"
-		},
-		"currency": {
-			"currency": "United States Dollar",
-			"symbol": "$"
-		},
-		"timezone": {
 			"timezone": "Eastern Daylight Time",
-			"date": "09-21-2001",
-			"time": "15:34:11"
+			"coordinates": "42.0999,-72.5783",
+			"language": "English",
+			"currency": "United States Dollar"
 		},
 		"analysis": {
 			"anonymizers": "true",
 			"abuse": "false",
+			"attacks" "true",
 			"malware": "true",
 			"organizations": "true",
 			"spam": "true",
-			"unroutable": "true"
+			"unroutable": "true",
+			"reputation": "true"
 		}
 	},
 	"arin": {
