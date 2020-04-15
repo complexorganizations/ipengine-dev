@@ -4,6 +4,23 @@ curl --silent --location --request GET 'https://api.ipengine.dev'
 ```
 
 ---
+### OCaml
+```ocaml
+open Lwt
+open Cohttp
+open Cohttp_lwt_unix
+
+let reqBody = 
+  let uri = Uri.of_string "https://api.ipengine.dev" in
+  Client.call `GET uri >>= fun (resp, body) ->
+  body |> Cohttp_lwt.Body.to_string >|= fun body -> body
+
+let () =
+  let respBody = Lwt_main.run reqBody in
+  print_endline (respBody)
+```
+
+---
 
 ### Ruby
 ```rb
