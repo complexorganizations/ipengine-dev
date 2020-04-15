@@ -1,4 +1,5 @@
-$0.001 Per Request
+`$0.0001` Per Billable Request
+
 Make a `slider`
 
 Pricing:
