@@ -1,10 +1,10 @@
 | Syntax            | Description       |
 |-------------------|-------------------|
-| Network           | Object            |
+| Network           | Objective         |
 | IP                | Value             |
 | Hostname          | Value             |
 | Reverse           | Value             |
-| Location          | Object            |
+| Location          | Objective         |
 | Country           | Value             |
 | Province          | Value             |
 | City              | Value             |
@@ -13,14 +13,14 @@
 | Timezone          | Value             |
 | Language          | Value             |
 | Currency          | Value             |
-| Analysis          | Object            |
+| Analysis          | Objective         |
 | Anonymizers       | Value             |
 | Abuse             | Value             |
 | Malware           | Value             |
 | Organizations     | Value             |
 | Spam              | Value             |
 | Unroutable        | Value             |
-| Arin              | Object            |
+| Arin              | Objective         |
 | Name              | Value             |
 | Handle            | Value             |
 | Parent            | Value             |
@@ -29,7 +29,7 @@
 | Cidr              | Value             |
 | Registration      | Value             |
 | Updated           | Value             |
-| Organization      | Object            |
+| Organization      | Objective         |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |
@@ -38,7 +38,7 @@
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Contact           | Object            |
+| Contact           | Objective         |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |
@@ -47,7 +47,7 @@
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Abuse             | Object            |
+| Abuse             | Objective         |
 | Kind              | Value             |
 | Name              | Value             |
 | Handle            | Value             |

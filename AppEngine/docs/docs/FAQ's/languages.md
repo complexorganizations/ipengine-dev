@@ -3,14 +3,13 @@
 curl --silent --location --request GET 'https://api.ipengine.dev'
 ```
 
----
 ### OCaml
 ```ocaml
 open Lwt
 open Cohttp
 open Cohttp_lwt_unix
 
-let reqBody = 
+let reqBody =
   let uri = Uri.of_string "https://api.ipengine.dev" in
   Client.call `GET uri >>= fun (resp, body) ->
   body |> Cohttp_lwt.Body.to_string >|= fun body -> body
@@ -19,8 +18,6 @@ let () =
   let respBody = Lwt_main.run reqBody in
   print_endline (respBody)
 ```
-
----
 
 ### Ruby
 ```rb
@@ -38,15 +35,11 @@ response = https.request(request)
 puts response.read_body
 ```
 
----
-
 ### HTTP
 ```http
 GET / HTTP/1.1
 Host: api.ipengine.dev
 ```
-
----
 
 
 ### Python
@@ -62,8 +55,6 @@ response = requests.request("GET", url, headers=headers, data = payload)
 
 print(response.text.encode('utf8'))
 ```
-
----
 
 ### Php
 ```php
@@ -87,8 +78,6 @@ $response = curl_exec($curl);
 curl_close($curl);
 echo $response;
 ```
-
----
 
 ### Node.js
 ```js
@@ -124,8 +113,6 @@ var req = https.request(options, function (res) {
 req.end();
 ```
 
----
-
 ### jQuery
 ```js
 var settings = {
@@ -138,8 +125,6 @@ $.ajax(settings).done(function (response) {
   console.log(response);
 });
 ```
-
----
 
 ### Go
 ```go
@@ -171,8 +156,6 @@ func main() {
 }
 ```
 
----
-
 ### Java
 ```java
 OkHttpClient client = new OkHttpClient().newBuilder()
@@ -184,8 +167,6 @@ Request request = new Request.Builder()
 Response response = client.newCall(request).execute();
 ```
 
----
-
 ### C#
 ```cs
 var client = new RestClient("https://api.ipengine.dev");
@@ -194,8 +175,6 @@ var request = new RestRequest(Method.GET);
 IRestResponse response = client.Execute(request);
 Console.WriteLine(response.Content);
 ```
-
----
 
 ### C
 ```c
@@ -214,8 +193,6 @@ if(curl) {
 curl_easy_cleanup(curl);
 ```
 
----
-
 ### Ruby
 ```rb
 require 'uri'
@@ -231,8 +208,6 @@ response = http.request(request)
 puts response.read_body
 ```
 
----
-
 ### Swift
 ```swift
 import Foundation
@@ -242,7 +217,7 @@ var semaphore = DispatchSemaphore (value: 0)
 var request = URLRequest(url: URL(string: "https://api.ipengine.dev")!,timeoutInterval: Double.infinity)
 request.httpMethod = "GET"
 
-let task = URLSession.shared.dataTask(with: request) { data, response, error in 
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
   guard let data = data else {
     print(String(describing: error))
     return
@@ -254,8 +229,6 @@ let task = URLSession.shared.dataTask(with: request) { data, response, error in
 task.resume()
 semaphore.wait()
 ```
-
----
 
 ### Objective-C
 ```m
@@ -286,15 +259,11 @@ completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
 ```
 
----
-
 ### PowerShell
 ```ps1
 $response = Invoke-RestMethod 'https://api.ipengine.dev' -Method 'GET' -Headers $headers -Body $body
 $response | ConvertTo-Json
 ```
-
----
 
 ### JavaScript
 ```js
@@ -308,5 +277,3 @@ fetch("https://api.ipengine.dev", requestOptions)
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 ```
-
----

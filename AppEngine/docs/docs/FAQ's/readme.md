@@ -15,6 +15,6 @@ Yes, we offer a free plan with 250,000 API request.
 
 ----
 ### Is my payment information secure ?
-We use a secure, PCI compliant payment provider to handle credit & debit card transactions. We never view or store any customer’s full credit or debit card details on our platform. Our primary payment processor is Stripe. It has been audited by an independent PCI QSA and is certified as a PCI Level 1 Service Provider. This is the most stringent level of certification available in the payments industry.
+We use a secure, PCI compliant payment provider to handle credit & debit card transactions. We never view or store any customer's full credit or debit card details on our platform. Our primary payment processor is Stripe. It has been audited by an independent PCI QSA and is certified as a PCI Level 1 Service Provider. This is the most stringent level of certification available in the payments industry.
 
 ---

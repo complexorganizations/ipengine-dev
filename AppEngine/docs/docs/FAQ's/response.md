@@ -2,11 +2,11 @@
 
 | Syntax            | Description                                                   |
 |-------------------|---------------------------------------------------------------|
-| Network           | String                                                        |
-| IP                | The IP address that was looked up.                            |
-| Hostname          | The Hostname of the IP that was looked up.                    |
-| Reverse           | Getting the IP from the hostname.                             |
-| Location          | String                                                        |
+| Network           | Objective                                                     |
+| IP                | The IP address which was obtained.                            |
+| Hostname          | The IP hostname which was being looked up.                    |
+| Reverse           | Having the Hostname IP.                                       |
+| Location          | Objective                                                     |
 | Country           | The name of the country where the IP Address is located.      |
 | Province          |                                                               |
 | City              | The name of the city from where the IP Address is located.    |
@@ -15,14 +15,14 @@
 | Timezone          | The name of the Timezone.                                     |
 | Language          | The Native name of the language.                              |
 | Currency          | The name of the currency.                                     |
-| Analysis          | String                                                        |
+| Analysis          | Objective                                                     |
 | Anonymizers       |                                                               |
 | Abuse             |                                                               |
 | Malware           |                                                               |
 | Organizations     |                                                               |
 | Spam              |                                                               |
 | Unroutable        |                                                               |
-| Arin              | String                                                        |
+| Arin              | Objective                                                     |
 | Name              |                                                               |
 | Handle            |                                                               |
 | Parent            |                                                               |
@@ -31,7 +31,7 @@
 | Cidr              |                                                               |
 | Registration      |                                                               |
 | Updated           |                                                               |
-| Organization      | String                                                        |
+| Organization      | Objective                                                     |
 | Kind              |                                                               |
 | Name              |                                                               |
 | Handle            |                                                               |
@@ -40,7 +40,7 @@
 | Organization      |                                                               |
 | Address           |                                                               |
 | Roles             |                                                               |
-| Contact           | String                                                        |
+| Contact           | Objective                                                     |
 | Kind              |                                                               |
 | Name              |                                                               |
 | Handle            |                                                               |
@@ -49,7 +49,7 @@
 | Organization      |                                                               |
 | Address           |                                                               |
 | Roles             |                                                               |
-| Abuse             | String                                                        |
+| Abuse             | Objective                                                     |
 | Kind              |                                                               |
 | Name              |                                                               |
 | Handle            |                                                               |
@@ -58,8 +58,3 @@
 | Organization      |                                                               |
 | Address           |                                                               |
 | Roles             |                                                               |
-| Requester         | String                                                        |
-| Hostname          |                                                               |
-| Ip                |                                                               |
-| Reverse           |                                                               |
-| User Agent        |                                                               |
