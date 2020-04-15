@@ -1,4 +1,4 @@
-$0.0001 Per Request
+$0.001 Per Request
 Make a `slider`
 
 Pricing:
