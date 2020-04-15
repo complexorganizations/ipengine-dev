@@ -14,7 +14,3 @@ _book
 *.epub
 *.mobi
 *.pdf
-
-# Ignore Build Folder
-.gitdocs_build/
-gitdocs_build/
