@@ -2,7 +2,7 @@ Getting IP
 ---
 
 ```sh
-$ curl -4 https://api.ipengine.dev
+$ curl --silent --location --request GET 'https://api.ipengine.dev'
 ```
 
 ```sh
