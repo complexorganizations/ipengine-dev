@@ -19,61 +19,61 @@ Pricing:
 | ipstack.com       | 750,000           | Value             | Value             |
 
 Comparison:
-| Features          | IP Engine         |
-|-------------------|-------------------|
-| Network           | Object            |
-| IP                | Value             |
-| Hostname          | Value             |
-| Reverse           | Value             |
-| Location          | Object            |
-| Country           | Value             |
-| Province          | Value             |
-| City              | Value             |
-| Postal            | Value             |
-| Coordinates       | Value             |
-| Timezone          | Value             |
-| Language          | Value             |
-| Currency          | Value             |
-| Analysis          | Object            |
-| Anonymizers       | Value             |
-| Abuse             | Value             |
-| Malware           | Value             |
-| Organizations     | Value             |
-| Spam              | Value             |
-| Unroutable        | Value             |
-| Arin              | Object            |
-| Name              | Value             |
-| Handle            | Value             |
-| Parent            | Value             |
-| Type              | Value             |
-| Range             | Value             |
-| Cidr              | Value             |
-| Registration      | Value             |
-| Updated           | Value             |
-| Organization      | Object            |
-| Kind              | Value             |
-| Name              | Value             |
-| Handle            | Value             |
-| Email             | Value             |
-| Telephone         | Value             |
-| Organization      | Value             |
-| Address           | Value             |
-| Roles             | Value             |
-| Contact           | Object            |
-| Kind              | Value             |
-| Name              | Value             |
-| Handle            | Value             |
-| Email             | Value             |
-| Telephone         | Value             |
-| Organization      | Value             |
-| Address           | Value             |
-| Roles             | Value             |
-| Abuse             | Object            |
-| Kind              | Value             |
-| Name              | Value             |
-| Handle            | Value             |
-| Email             | Value             |
-| Telephone         | Value             |
-| Organization      | Value             |
-| Address           | Value             |
-| Roles             | Value             |
+| Features          | ipengine.dev      | ipinfo.io         | ipdata.co         | db-ip.com         | maxmind.com       | ip2location.com   | ipstack.com       |
+|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
+| Network           | Object            |                   |                   |                   |                   |                   |                   |
+| IP                |:white_check_mark: |:white_check_mark: |:white_check_mark: |:white_check_mark: |:white_check_mark: |:white_check_mark: |:white_check_mark: |
+| Hostname          |:white_check_mark: |:white_check_mark: |:x:                |:white_check_mark: |:x:                |:x:                |:x:               |
+| Reverse           |:white_check_mark: |:x:                |:x:                |:x:                |:x:                |:x:                |:x:               |
+| Location          | Object            |                   |                   |                   |                   |                   |                   |
+| Country           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Province          |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| City              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Postal            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Coordinates       |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Timezone          |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Language          |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Currency          |:white_check_mark: |:x:                |                   |                   |                   |                   |                   |
+| Analysis          | Object            |:white_check_mark: |                   |                   |                   |                   |                   |
+| Anonymizers       |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Abuse             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Malware           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Organizations     |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Spam              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Unroutable        |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Arin              | Object            |                   |                   |                   |                   |                   |                   |
+| Name              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Handle            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Parent            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Type              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Range             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Cidr              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Registration      |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Updated           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Organization      | Object            |                   |                   |                   |                   |                   |                   |
+| Kind              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Name              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Handle            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Email             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Telephone         |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Organization      |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Address           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Roles             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Contact           | Object            |                   |                   |                   |                   |                   |                   |
+| Kind              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Name              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Handle            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Email             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Telephone         |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Organization      |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Address           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Roles             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Abuse             | Object            |                   |                   |                   |                   |                   |                   |
+| Kind              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Name              |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Handle            |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Email             |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Telephone         |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Organization      |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Address           |:white_check_mark: |                   |                   |                   |                   |                   |                   |
+| Roles             |:white_check_mark: |                   |                   |                   |                   |                   |                   |

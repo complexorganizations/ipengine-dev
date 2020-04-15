@@ -13,13 +13,23 @@ $ https://api.ipengine.dev
 		"reverse": "66.87.125.72",
 		"location": {
 			"country": "United States of America",
+			"capital": "Washington D.C.",
 			"province": "New York",
 			"city": "Flushing",
 			"postal": "01105",
 			"coordinates": "42.0999,-72.5783",
-			"timezone": "America/New_York",
-			"language": "English",
-			"currency": "United States Dollar"
+		},
+		"language": {
+			"name": "English"
+		},
+		"currency": {
+			"currency": "United States Dollar",
+			"symbol": "$"
+		},
+		"timezone": {
+			"timezone": "Eastern Daylight Time",
+			"date": "09-21-2001",
+			"time": "15:34:11"
 		},
 		"analysis": {
 			"anonymizers": "true",
