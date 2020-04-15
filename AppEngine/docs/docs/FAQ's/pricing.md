@@ -8,16 +8,16 @@ Example: 750,000 Request - 250,000 Free Request = 500,000 PAID Request (24.99)
 Pricing:
 | Plans             | Request           | Free              | Billing           |
 |-------------------|-------------------|-------------------|-------------------|
-| ipengine.dev      | 750,000           | 250,000           | 750,000 - 250,000 = 500,000 (24.99)
-| ipinfo.io         | 750,000           | Value             |
-| ipdata.co         | 750,000           | Value             |
-| db-ip.com         | 750,000           | Value             |
-| maxmind.com       | 750,000           | Value             |
-| ip2location.com   | 750,000           | Value             |
-| ipapi.co          | 750,000           | Value             |
-| ipgeolocation.co  | 750,000           | Value             |
-| ipgeolocation.com | 750,000           | Value             |
-| ipstack.com       | 750,000           | Value             |
+| ipengine.dev      | 750,000           | 250,000           | 500,000 / $24.99  |
+| ipinfo.io         | 750,000           | 50,000            | 700,000 / $249.99 |
+| ipdata.co         | 750,000           | 30,000            | 720,000 / $50.00  |
+| db-ip.com         | 750,000           | 30,000            | 720,000 / $190.90 |
+| maxmind.com       | 750,000           | Value             | Value             |
+| ip2location.com   | 750,000           | Value             | Value             |
+| ipapi.co          | 750,000           | 30,000            | 720,000 / $99.00  |
+| ipgeolocation.co  | 750,000           | Value             | Value             |
+| ipgeolocation.com | 750,000           | Value             | Value             |
+| ipstack.com       | 750,000           | Value             | Value             |
 
 Comparison:
 | Features          | IP Engine         |
