@@ -77,8 +77,3 @@ Comparison:
 | Organization      | Value             |
 | Address           | Value             |
 | Roles             | Value             |
-| Requester         | Object            |
-| Hostname          | Value             |
-| Ip                | Value             |
-| Reverse           | Value             |
-| User Agent        | Value             |
