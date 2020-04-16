@@ -17,4 +17,13 @@ Yes, we offer a free plan with 250,000 API request.
 ### Is my payment information secure ?
 We use a secure payment provider which is compatible with PCI to manage credit & debit card transactions. We will never view or store the full credit or debit card information of any client on our website. Stripe is our main payment system. It was audited by an independent PCI QSA and is accredited as a service provider for PCI Level 1 services.
 
----
+----
+### How often is the data updated?
+We search daily and aggregate changes weekly for changes in IP Address allocations. Our analysis are updated every 30 minutes.
+
+----
+### Can you treat my case for use in high volume?
+Ipengine was designed to be highly scalable, we can scale to trillions of calls a day.
+
+----
+### Where am I able to see my use?
