@@ -1,4 +1,4 @@
-`$0.0001` Per Billable Request
+`$0.001` Per Billable Request
 
 Make a `slider`
 
