@@ -25,12 +25,12 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	hostname := GetHostName(r.Header.Get("CF-Connecting-IP"))
 	reverseIp := GetReverseIp(hostname)
 
-	resp, _ := json.MarshalIndent(map[string]interface{}{
+	resp, _ := json.Marshal(map[string]interface{}{
 		"ip":                        niler(r.Header.Get("CF-Connecting-IP")),
 		"hostname":                  niler(hostname),
 		"reverse":                   niler(reverseIp),
 		"useragent":                 niler(r.Header.Get("User-Agent")),
-	}, "", "  ")
+	})
 
 	w.Write(resp)
 }
