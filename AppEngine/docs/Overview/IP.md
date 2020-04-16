@@ -11,7 +11,10 @@ $ https://api.ipengine.dev
 		"ip": "66.87.125.72",
 		"hostname": "ip-66-87-125-72.spfdma.spcsdns.net",
 		"reverse": "66.87.125.72",
+		"asn": "AS15169",
+		"useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
 		"location": {
+			"continent": "North America",
 			"country": "United States of America",
 			"capital": "Washington D.C.",
 			"province": "New York",
@@ -20,7 +23,8 @@ $ https://api.ipengine.dev
 			"timezone": "Eastern Daylight Time",
 			"coordinates": "42.0999,-72.5783",
 			"language": "English",
-			"currency": "United States Dollar"
+			"currency": "United States Dollar",
+			"callingcode": "+1"
 		},
 		"analysis": {
 			"anonymizers": "true",
@@ -30,7 +34,8 @@ $ https://api.ipengine.dev
 			"organizations": "true",
 			"spam": "true",
 			"unroutable": "true",
-			"reputation": "true"
+			"reputation": "true",
+			"bogon": "true"
 		}
 	},
 	"arin": {
