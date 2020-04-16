@@ -35,6 +35,7 @@ $ https://api.ipengine.dev
 			"spam": "true",
 			"unroutable": "true",
 			"reputation": "true",
+			"cloud": "true",
 			"bogon": "true"
 		}
 	},
