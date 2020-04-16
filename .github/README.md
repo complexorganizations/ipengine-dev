@@ -2,7 +2,7 @@
 
 ### api
 ```
-curl --silent --location --request GET 'https://api.ipengine.dev'
+https://api.ipengine.dev
 ```
 
 ### docs
