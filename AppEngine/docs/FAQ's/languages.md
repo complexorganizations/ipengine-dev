@@ -3,7 +3,7 @@
 curl --silent --location --request GET 'https://api.ipengine.dev'
 ```
 
-### OCaml
+### Ocml
 ```ocaml
 open Lwt
 open Cohttp
@@ -56,7 +56,7 @@ response = requests.request("GET", url, headers=headers, data = payload)
 print(response.text.encode('utf8'))
 ```
 
-### Php
+### PHP
 ```php
 <?php
 
