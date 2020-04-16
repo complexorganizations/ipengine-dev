@@ -27,7 +27,6 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
         w.Header().Add("Feature-Policy", "vibrate 'self'")
         w.Header().Add("X-Frame-Options", "SAMEORIGIN")
         w.Header().Add("X-Content-Type-Options", "nosniff")
-        w.Header().Add("Allow", "GET")
 
 	hostname := GetHostName(r.Header.Get("CF-Connecting-IP"))
 	reverseIp := GetReverseIp(hostname)
