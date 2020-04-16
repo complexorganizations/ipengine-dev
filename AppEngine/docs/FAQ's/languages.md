@@ -90,7 +90,7 @@ var options = {
   'path': '/',
   'headers': {
   },
-  'maxRedirects': 20
+  'maxRedirects': 1
 };
 
 var req = https.request(options, function (res) {
