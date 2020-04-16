@@ -22,7 +22,7 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Add("Content-Type", "application/json")
         w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
-        w.Header().Add("Referrer-Policy", "origin")
+        w.Header().Add("Referrer-Policy", "strict-origin")
         w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
         w.Header().Add("Feature-Policy", "vibrate 'self'")
         w.Header().Add("X-Frame-Options", "SAMEORIGIN")
