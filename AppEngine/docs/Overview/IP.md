@@ -1,4 +1,4 @@
-Getting IP
+Getting Started
 ---
 
 ```sh
