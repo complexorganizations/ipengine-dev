@@ -5,5 +5,3 @@ dispatch:
     service: default
   - url: "api.ipengine.dev/*"
     service: api
-  - url: "docs.ipengine.dev/*"
-    service: docs
