@@ -21,22 +21,22 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		return v
 	}
 	w.Header().Add("Content-Type", "application/json")
-        w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
-        w.Header().Add("Referrer-Policy", "strict-origin")
-        w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
-        w.Header().Add("Feature-Policy", "vibrate 'self'")
-        w.Header().Add("X-Frame-Options", "SAMEORIGIN")
-        w.Header().Add("X-Content-Type-Options", "nosniff")
+	w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
+	w.Header().Add("Referrer-Policy", "strict-origin")
+	w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
+	w.Header().Add("Feature-Policy", "vibrate 'self'")
+	w.Header().Add("X-Frame-Options", "SAMEORIGIN")
+	w.Header().Add("X-Content-Type-Options", "nosniff")
 
 	hostname := GetHostName(r.Header.Get("CF-Connecting-IP"))
 	reverseIp := GetReverseIp(hostname)
 
 	resp, _ := json.Marshal(map[string]interface{}{
-		"success":					 niler("true"),
-		"ip":                        niler(r.Header.Get("CF-Connecting-IP")),
-		"hostname":                  niler(hostname),
-		"reverse":                   niler(reverseIp),
-		"useragent":                 niler(r.Header.Get("User-Agent")),
+		"success":   niler("true"),
+		"ip":        niler(r.Header.Get("CF-Connecting-IP")),
+		"hostname":  niler(hostname),
+		"reverse":   niler(reverseIp),
+		"useragent": niler(r.Header.Get("User-Agent")),
 	})
 
 	w.Write(resp)
