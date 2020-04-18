@@ -51,7 +51,7 @@ func XmlHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		return v
 	}
-	w.Header().Add("Content-Type", "application/json")
+	w.Header().Add("Content-Type", "application/xml")
 	w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
 	w.Header().Add("Referrer-Policy", "strict-origin")
 	w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
@@ -62,7 +62,7 @@ func XmlHandler(w http.ResponseWriter, r *http.Request) {
 	hostname := GetHostName(r.Header.Get("CF-Connecting-IP"))
 	reverseIp := GetReverseIp(hostname)
 
-	resp, _ := json.Marshal(map[string]interface{}{
+	resp, _ := xml.Marshal(map[string]interface{}{
 		"success":   niler("true"),
 		"ip":        niler(r.Header.Get("CF-Connecting-IP")),
 		"hostname":  niler(hostname),
