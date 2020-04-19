@@ -26,4 +26,4 @@ We search daily and aggregate changes weekly for changes in IP Address allocatio
 Ipengine was designed to be highly scalable, we can scale to trillions of calls a day.
 
 ----
-### Where am I able to see my use?
+### Where am I able to see my usage?
