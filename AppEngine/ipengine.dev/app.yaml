@@ -1,34 +1,13 @@
 service: default
-runtime: nodejs12
+runtime: go112
 env: standard
-default_expiration: 365d
 handlers:
-  - url: /
-    secure: always
-    static_files: index.html
-    require_matching_file: true
-    upload: index.html
-  - url: '/(.*)'
-    secure: always
-    static_files: "\\1"
-    require_matching_file: true
-    upload: '(.*)'
-  - url: "/(.*\\.(ico|png))$"
-    secure: always
-    static_files: "\\1"
-    require_matching_file: true
-    upload: ".*\\.(ico|png)$"
-error_handlers:
-  - error_code: default
-    file: public_html/default.html
-  - error_code: over_quota
-    file: public_html/over_quota.html
-  - error_code: timeout
-    file: public_html/timeout.html
-  - error_code: dos_api_denial
-    file: public_html/dos_api_denial.html
+- url: .*
+  script: auto
+  secure: always
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
   min_pending_latency: automatic
   max_pending_latency: automatic
+network: {}
