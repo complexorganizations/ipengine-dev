@@ -1,6 +1,4 @@
 dispatch:
-  - url: "www.ipengine.dev/*"
-    service: default
   - url: "ipengine.dev/*"
     service: default
   - url: "api.ipengine.dev/*"
