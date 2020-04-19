@@ -1,0 +1,25 @@
+{
+  "name": "ipengine.dev",
+  "version": "1.0.0",
+  "description": "IPengine.dev official website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
+  },
+  "keywords": [
+    "IPengine",
+    "IP",
+    "ipv4",
+    "ipv6"
+  ],
+  "author": "Prajwal Koirala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/complexorganizations/ipengine-dev/issues"
+  },
+  "homepage": "https://github.com/complexorganizations/ipengine-dev#readme"
+}
