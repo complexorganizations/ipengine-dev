@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", ExampleHandler)
+	http.HandleFunc("/", JsonHandler)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
 }
 
-func ExampleHandler(w http.ResponseWriter, r *http.Request) {
+func JsonHandler(w http.ResponseWriter, r *http.Request) {
 	niler := func(v string) interface{} {
 		if v == "" {
 			return "null"
