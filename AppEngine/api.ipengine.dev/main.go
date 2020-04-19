@@ -37,7 +37,6 @@ func ExampleHandler(w http.ResponseWriter, r *http.Request) {
 		"hostname":  niler(hostname),
 		"reverse":   niler(reverseIp),
 		"useragent": niler(r.Header.Get("User-Agent")),
-		"error":     niler("You didn't supply an API key. You must indicate your API key in the Authorization header"),
 	})
 
 	w.Write(resp)
