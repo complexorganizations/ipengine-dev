@@ -1,0 +1,14 @@
+{
+  "name": "ipengine",
+  "version": "1.0.0",
+  "description": "Website for ipengine.dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}

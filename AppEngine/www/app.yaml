@@ -1,5 +1,5 @@
 service: default
-runtime: python37
+runtime: nodejs12
 env: standard
 default_expiration: 365d
 handlers:
@@ -20,13 +20,13 @@ handlers:
     upload: ".*\\.(ico|png)$"
 error_handlers:
   - error_code: default
-    file: default.html
+    file: public_html/default.html
   - error_code: over_quota
-    file: over_quota.html
+    file: public_html/over_quota.html
   - error_code: timeout
-    file: timeout.html
+    file: public_html/timeout.html
   - error_code: dos_api_denial
-    file: dos_api_denial.html
+    file: public_html/dos_api_denial.html
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
