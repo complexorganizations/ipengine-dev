@@ -1,11 +1,11 @@
 ### ipengine-dev
 
 ### api.ipengine.dev
-```
-https://api.ipengine.dev
+```sh
+api.ipengine.dev
 ```
 
 ### ipengine.dev
-```
-https://ipengine.dev
+```sh
+ipengine.dev
 ```
