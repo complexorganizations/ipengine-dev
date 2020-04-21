@@ -4,7 +4,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
       - uses: actions/setup-node@master
         with:
           node-version: 12
+      - uses: actions/checkout@master
+    - run: npm install ./AppEngine/ipengine.dev/
+    - run: npm run ./AppEngine/ipengine.dev/
