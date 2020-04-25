@@ -12,5 +12,4 @@
 # below:
 .git
 .gitignore
-.github/
 .vscode/
