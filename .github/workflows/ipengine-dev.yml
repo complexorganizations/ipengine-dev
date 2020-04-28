@@ -13,4 +13,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install ./AppEngine/ipengine.dev
-    - run: npm run ./AppEngine/ipengine.dev
+    - run: npm run ./AppEngine/ipengine.dev &
