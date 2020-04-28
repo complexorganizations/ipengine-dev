@@ -1,26 +1,49 @@
 {
-  "name": "ipengine.dev",
-  "version": "1.0.0",
-  "private": true,
-  "description": "The main website for ipengine",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/complexorganizations/ipengine-dev.git"
-  },
-  "keywords": [
-    "ipengine",
-    "ip",
-    "ipv4",
-    "ipv6"
-  ],
-  "author": "Prajwal Koirala",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/complexorganizations/ipengine-dev/issues"
-  },
-  "homepage": "https://ipengine.dev"
+	"name": "ipengine.dev",
+	"description": "the main website for ipengine.dev",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"version": "1.0.0",
+	"keywords": [
+		"Main",
+		"Test",
+		"Test2",
+		"Test3",
+		"Test4"
+	],
+	"author": [{
+		"name": "Prajwal Koirala",
+		"email": "prajwalkoirala23@protonmail.com",
+		"web": "https://www.prajwalkoirala.com"
+	}],
+	"contributors": [{
+		"name": "Prajwal Koirala",
+		"email": "prajwalkoirala23@protonmail.com",
+		"web": "https://www.prajwalkoirala.com"
+	}],
+	"maintainers": [{
+		"name": "Prajwal Koirala",
+		"email": "prajwalkoirala23@protonmail.com",
+		"web": "https://www.prajwalkoirala.com"
+	}],
+	"demos": [
+		""
+	],
+	"dependencies": {
+		"": ""
+	},
+	"bugs": {
+		"web": "https://github.com/complexorganizations/ipengine-dev"
+	},
+	"repositories": [{
+		"type": "git",
+		"url": "https://github.com/complexorganizations/ipengine-dev.git"
+	}],
+	"licenses": [{
+		"name": "https://github.com/complexorganizations/ipengine-dev/blob/master/.github/LICENSE",
+		"url": "MIT"
+	}],
+	"homepage": "https://ipengine.dev"
 }
