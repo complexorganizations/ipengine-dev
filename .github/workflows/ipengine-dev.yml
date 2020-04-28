@@ -8,5 +8,5 @@ jobs:
         with:
           node-version: 12
       - uses: actions/checkout@master
-    - run: npm install ./AppEngine/ipengine.dev/app.js
-    - run: npm run ./AppEngine/ipengine.dev/app.js
+    - run: npm install ./AppEngine/ipengine.dev
+    - run: npm start ./AppEngine/ipengine.dev
