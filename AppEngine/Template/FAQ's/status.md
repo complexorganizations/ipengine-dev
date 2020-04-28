@@ -11,7 +11,7 @@ ipengine uses conventional HTTP response codes to indicate whether an API reques
 | 4xx (client error)        | The question includes poor syntax or is not compliant             |
 | 5xx (server error)        | The server failed to fulfill a seemingly legitimate request       |
 | 200 (OK)                  | Standard response for successful HTTP requests                    |
-| 302 (Moved)	              | Any future requests should be addressed to the URI provided       |
+| 302 (Moved)	            | Any future requests should be addressed to the URI provided       |
 | 400 (Bad Request)         | The server can not process the request, or will not process it    |
 | 401 (Unauthorized)        | No valid API key provided.                                        |
 | 402 (Request Failed)      | The parameters were valid but the request failed.                 |
