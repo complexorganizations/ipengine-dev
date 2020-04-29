@@ -13,3 +13,6 @@
 .git
 .gitignore
 .vscode/
+
+# ignore node_modules/
+node_modules/
