@@ -10,11 +10,12 @@
 </head>
 <body>
   <div id="app"></div>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1GB8EQSE0"></script>
   <script>
-    window.$docsify = {
-      name: 'ipengine.dev',
-      repo: 'https://github.com/complexorganizations/ipengine-dev'
-    }
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V1GB8EQSE0');
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 </body>
