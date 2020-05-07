@@ -35,7 +35,6 @@ func JsonHandler(w http.ResponseWriter, r *http.Request) {
 		"ip":        niler(r.Header.Get("CF-Connecting-IP")),
 		"hostname":  niler(hostname),
 		"reverse":   niler(reverseIp),
-		"useragent": niler(r.Header.Get("User-Agent")),
 	})
 
 	w.Write(resp)
