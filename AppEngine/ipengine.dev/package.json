@@ -1,0 +1,24 @@
+{
+  "name": "ipengine.dev",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Main website for ipengine.dev",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
+  },
+  "keywords": [
+    "ipengine.dev",
+    "api.ipengine.dev"
+  ],
+  "author": "Prajwal Koirala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/complexorganizations/ipengine-dev/issues"
+  },
+  "homepage": "https://github.com/complexorganizations/ipengine-dev#readme"
+}
