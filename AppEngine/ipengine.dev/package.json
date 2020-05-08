@@ -1,25 +1,32 @@
 {
-  "name": "ipengine.dev",
-  "version": "0.0.1",
-  "private": true,
-  "description": "Main website for ipengine.dev",
-  "main": "index.js",
-  "scripts": {
-    "start": "npm i docsify-cli -g",
-    "start": "docsify serve docs"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
-  },
-  "keywords": [
-    "ipengine.dev",
-    "api.ipengine.dev"
-  ],
-  "author": "Prajwal Koirala",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/complexorganizations/ipengine-dev/issues"
-  },
-  "homepage": "https://ipengine.dev"
+    "name": "ipengine.dev",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Main website for ipengine.dev",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
+    },
+    "keywords": [
+        "ipengine.dev",
+        "api.ipengine.dev"
+    ],
+    "author": {
+        "name": "Prajwal Koirala",
+        "website": "https://www.prajwalkoirala.com",
+        "github": "https://github.com/prajwal-koirala",
+        "linkedin": "https://www.linkedin.com/in/prajwal-koirala",
+        "twitter": "https://twitter.com/Prajwal_K23",
+        "reddit": "https://www.reddit.com/user/prajwalkoirala23",
+        "twitch": "https://www.twitch.tv/prajwalkoirala23"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/complexorganizations/ipengine-dev/issues"
+    },
+    "homepage": "https://ipengine.dev"
 }
