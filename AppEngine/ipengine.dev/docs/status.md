@@ -1,7 +1,7 @@
 ### Status Codes
 A list of status codes and their meanings as returned by the API.
 
-ipengine uses conventional HTTP response codes to indicate whether an API request is successful or not. In general: Codes indicate success in the 2xx range. Codes in the 4xx range indicate an error that failed given the information provided (e.g. omitting a required parameter, failing a charge, etc.). Codes in the 5xx range indicate an error (these are rare) with servers.
+ipengine uses conventional HTTP response codes to indicate whether an API request is successful or not.
 
 | Status Code               | Description                                                       |
 |---------------------------|-------------------------------------------------------------------|

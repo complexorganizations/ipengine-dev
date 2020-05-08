@@ -3,15 +3,18 @@
 - Getting started
 
   - [Quick start](README.md)
-  - [Quick start](README.md)
+  - [IP](IP.md)
 
 - Customization
 
-  - [Content Type](content-type.md)
   - [Languages](languages.md)
+  - [Content Type](content-type.md)
 
-- Guide
+- Usage
 
-  - [Deploy](deploy.md)
+  - [Status Codes](status.md)
+  - [Response](response.md)
 
+- [omparison](comparison.md)
 - [Changelog](changelog.md)
+- [Security](security.md)

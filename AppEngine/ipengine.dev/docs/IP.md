@@ -5,6 +5,8 @@ Getting Started
 $ https://api.ipengine.dev
 ```
 
+!> HTTPS is mandatory
+
 ```sh
 {
 	"network": {
@@ -12,7 +14,6 @@ $ https://api.ipengine.dev
 		"hostname": "ip-66-87-125-72.spfdma.spcsdns.net",
 		"reverse": "66.87.125.72",
 		"asn": "AS15169",
-		"useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
 		"location": {
 			"continent": "North America",
 			"country": "United States of America",
