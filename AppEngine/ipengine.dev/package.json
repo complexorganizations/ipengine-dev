@@ -2,6 +2,7 @@
     "name": "ipengine.dev",
     "version": "0.0.1",
     "private": true,
+    "homepage": "https://ipengine.dev",
     "description": "Main website for ipengine.dev",
     "main": "index.js",
     "scripts": {
@@ -9,7 +10,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
+        "url": "git+https://github.com/complexorganizations/ipengine-dev.git",
+        "bugs": "https://github.com/complexorganizations/ipengine-dev/issues",
+        "license": "MIT"
     },
     "keywords": [
         "ipengine.dev",
@@ -23,10 +26,5 @@
         "twitter": "https://twitter.com/Prajwal_K23",
         "reddit": "https://www.reddit.com/user/prajwalkoirala23",
         "twitch": "https://www.twitch.tv/prajwalkoirala23"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/complexorganizations/ipengine-dev/issues"
-    },
-    "homepage": "https://ipengine.dev"
+    }
 }
