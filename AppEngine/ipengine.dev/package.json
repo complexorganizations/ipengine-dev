@@ -5,7 +5,6 @@
   "description": "Main website for ipengine.dev",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
     "start": "docsify start docs"
   },
   "repository": {
