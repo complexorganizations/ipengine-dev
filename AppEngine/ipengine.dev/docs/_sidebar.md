@@ -15,6 +15,6 @@
   - [Status Codes](status.md)
   - [Response](response.md)
 
-- [omparison](comparison.md)
+- [Comparison](comparison.md)
 - [Changelog](changelog.md)
 - [Security](security.md)
