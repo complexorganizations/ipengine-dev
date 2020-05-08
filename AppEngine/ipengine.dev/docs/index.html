@@ -20,6 +20,11 @@
       }
     }
   </script>
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V1GB8EQSE0"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -27,6 +32,7 @@
     gtag('js', new Date());
     gtag('config', 'G-V1GB8EQSE0');
   </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 </body>
 
