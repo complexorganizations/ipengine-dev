@@ -1,6 +1,16 @@
 service: default
 runtime: nodejs12
 env: standard
+handlers:
+- url: /.*
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
+- url: /docs
+  secure: always
+  redirect_http_response_code: 301
+  script: auto
+  static_dir: docs
 automatic_scaling:
   min_idle_instances: automatic
   max_idle_instances: automatic
