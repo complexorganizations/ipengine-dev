@@ -17,12 +17,12 @@
 | Language          | The Native name of the language.                              |
 | Currency          | The name of the currency.                                     |
 | Analysis          | Objective                                                     |
-| Anonymizers       |                                                               |
-| Abuse             |                                                               |
-| Malware           |                                                               |
+| Anonymizers       | Tool which helps to make Internet activity untraceable.       |
+| Abuse             | The wrong or improper use of something.                       |
+| Malware           | Designed to harm a computer network or device.                |
 | Organizations     |                                                               |
 | Spam              |                                                               |
-| Unroutable        |                                                               |
+| Unroutable        | These are fake IP addresses for a computer network.           |
 | Arin              | Objective                                                     |
 | Name              |                                                               |
 | Handle            |                                                               |
