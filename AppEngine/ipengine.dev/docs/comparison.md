@@ -1,7 +1,3 @@
-?> `$0.0001` Per Billable Request
-
-Make a `slider`
-
 Pricing:
 
 | Plans             | Request           | Free              | Billing           |
