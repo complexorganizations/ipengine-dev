@@ -4,9 +4,9 @@
     "private": true,
     "homepage": "https://ipengine.dev",
     "description": "Main website for ipengine.dev",
-    "main": "index.js",
+    "main": "app.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node app.js"
     },
     "repository": {
         "type": "git",
@@ -26,5 +26,8 @@
         "twitter": "https://twitter.com/Prajwal_K23",
         "reddit": "https://www.reddit.com/user/prajwalkoirala23",
         "twitch": "https://www.twitch.tv/prajwalkoirala23"
+    },
+    "dependencies": {
+        "node-static": "^0.7.11"
     }
 }
