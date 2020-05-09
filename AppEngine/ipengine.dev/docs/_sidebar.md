@@ -5,7 +5,7 @@
   - [Quick start](README.md)
   - [IP](IP.md)
 
-- Customization
+- Features
 
   - [Languages](languages.md)
   - [Content Type](content-type.md)
