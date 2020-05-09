@@ -7,7 +7,7 @@ $ https://api.ipengine.dev
 
 !> HTTPS is mandatory
 
-```sh
+```json
 {
 	"network": {
 		"ip": "66.87.125.72",
@@ -30,7 +30,7 @@ $ https://api.ipengine.dev
 		"analysis": {
 			"anonymizers": "true",
 			"abuse": "false",
-			"attacks" "true",
+			"attacks": "true",
 			"malware": "true",
 			"organizations": "true",
 			"spam": "true",
