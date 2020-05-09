@@ -2,7 +2,7 @@ Getting Started
 ---
 
 ```sh
-$ https://api.ipengine.dev
+https://api.ipengine.dev
 ```
 
 !> HTTPS is mandatory
