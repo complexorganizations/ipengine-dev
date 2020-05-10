@@ -1,10 +1,12 @@
 ### Shell
-```sh
+
+``` sh
 curl --silent --location --request GET 'https://api.ipengine.dev'
 ```
 
 ### Ocml
-```ocaml
+
+``` ocaml
 open Lwt
 open Cohttp
 open Cohttp_lwt_unix
@@ -20,7 +22,8 @@ let () =
 ```
 
 ### Ruby
-```rb
+
+``` rb
 require "uri"
 require "net/http"
 
@@ -36,13 +39,15 @@ puts response.read_body
 ```
 
 ### HTTP
-```http
+
+``` http
 GET / HTTP/1.1
 Host: api.ipengine.dev
 ```
 
 ### Python
-```py
+
+``` py
 import requests
 
 url = "https://api.ipengine.dev"
@@ -56,7 +61,8 @@ print(response.text.encode('utf8'))
 ```
 
 ### PHP
-```php
+
+``` php
 <?php
 
 $curl = curl_init();
@@ -79,54 +85,56 @@ echo $response;
 ```
 
 ### Node.js
-```js
+
+``` js
 var https = require('follow-redirects').https;
 var fs = require('fs');
 
 var options = {
-  'method': 'GET',
-  'hostname': 'api.ipengine.dev',
-  'path': '/',
-  'headers': {
-  },
-  'maxRedirects': 1
+    'method': 'GET',
+    'hostname': 'api.ipengine.dev',
+    'path': '/',
+    'headers': {},
+    'maxRedirects': 1
 };
 
-var req = https.request(options, function (res) {
-  var chunks = [];
+var req = https.request(options, function(res) {
+    var chunks = [];
 
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
+    res.on("data", function(chunk) {
+        chunks.push(chunk);
+    });
 
-  res.on("end", function (chunk) {
-    var body = Buffer.concat(chunks);
-    console.log(body.toString());
-  });
+    res.on("end", function(chunk) {
+        var body = Buffer.concat(chunks);
+        console.log(body.toString());
+    });
 
-  res.on("error", function (error) {
-    console.error(error);
-  });
+    res.on("error", function(error) {
+        console.error(error);
+    });
 });
 
 req.end();
 ```
 
 ### jQuery
-```js
+
+``` js
 var settings = {
-  "url": "https://api.ipengine.dev",
-  "method": "GET",
-  "timeout": 0,
+    "url": "https://api.ipengine.dev",
+    "method": "GET",
+    "timeout": 0,
 };
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
+$.ajax(settings).done(function(response) {
+    console.log(response);
 });
 ```
 
 ### Go
-```go
+
+``` go
 package main
 
 import (
@@ -156,7 +164,8 @@ func main() {
 ```
 
 ### Java
-```java
+
+``` java
 OkHttpClient client = new OkHttpClient().newBuilder()
   .build();
 Request request = new Request.Builder()
@@ -167,7 +176,8 @@ Response response = client.newCall(request).execute();
 ```
 
 ### C#
-```cs
+
+``` cs
 var client = new RestClient("https://api.ipengine.dev");
 client.Timeout = -1;
 var request = new RestRequest(Method.GET);
@@ -176,7 +186,8 @@ Console.WriteLine(response.Content);
 ```
 
 ### C
-```c
+
+``` c
 CURL *curl;
 CURLcode res;
 curl = curl_easy_init();
@@ -193,7 +204,8 @@ curl_easy_cleanup(curl);
 ```
 
 ### Swift
-```swift
+
+``` swift
 import Foundation
 
 var semaphore = DispatchSemaphore (value: 0)
@@ -215,7 +227,8 @@ semaphore.wait()
 ```
 
 ### Objective-C
-```m
+
+``` m
 #import <Foundation/Foundation.h>
 
 dispatch_semaphore_t sema = dispatch_semaphore_create(0);
@@ -244,20 +257,22 @@ dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
 ```
 
 ### PowerShell
-```ps1
+
+``` ps1
 $response = Invoke-RestMethod 'https://api.ipengine.dev' -Method 'GET' -Headers $headers -Body $body
 $response | ConvertTo-Json
 ```
 
 ### JavaScript
-```js
+
+``` js
 var requestOptions = {
-  method: 'GET',
-  redirect: 'follow'
+    method: 'GET',
+    redirect: 'follow'
 };
 
 fetch("https://api.ipengine.dev", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 ```

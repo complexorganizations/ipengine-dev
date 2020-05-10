@@ -1,13 +1,13 @@
 Getting Started
 ---
 
-```sh
+``` sh
 https://api.ipengine.dev
 ```
 
 !> HTTPS is mandatory
 
-```json
+``` json
 {
 	"network": {
 		"ip": "66.87.125.72",
