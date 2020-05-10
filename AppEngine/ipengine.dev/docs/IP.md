@@ -5,7 +5,7 @@ Getting Started
 https://api.ipengine.dev
 ```
 
-!> HTTPS is mandatory
+!> There will be no requests over unsecured HTTP.
 
 ``` json
 {
