@@ -1,6 +1,6 @@
 # Everything Security releated here.
 
-!> HTTPS is mandatory
+!> There will be no requests over unsecured HTTP.
 
 `https` is required, no response will be found on `http` 
 
