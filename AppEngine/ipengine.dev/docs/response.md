@@ -6,7 +6,6 @@
 | IP                | The IP address which was obtained.                            |
 | Hostname          | The IP hostname which was being looked up.                    |
 | Reverse           | Having the Hostname IP.                                       |
-| User Agent        | User Agent the person who asked for the details.              |
 | Location          | Objective                                                     |
 | Country           | The name of the country where the IP Address is located       |
 | Province          | A division of administration within a country or state        |
