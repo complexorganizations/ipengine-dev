@@ -45,3 +45,13 @@ We use a secure payment provider that is compatible with PCI to manage credit & 
 We search daily and aggregate changes weekly for changes in IP Address allocations. Our analysis is updated every 30 minutes.
 
 ### Where am I able to see my usage?
+
+../
+
+### What operating system and browser should I use?
+
+You are free to use whichever operating system you wish.  The website should work with the latest versions of most modern browsers; please let us know if you encounter any issues.
+
+### What development environments can I use?
+
+You can use any text editor or development environment, but be advised that if you use an online integrated development environment (IDE)
