@@ -18,15 +18,15 @@ An API is an application programming interface - in short, it's a set of rules t
 
 ### How to check a custom IP?
 
-You can check a custom IP using this format `https://api.ipengine.dev/ip/{ip}` 
+You can check a custom IP using this format `https://api.ipengine.dev/ip/{ip}`
 
 ### What is my IP address?
 
-If you want to determine your public (external) IP address programmatically, you can use the following website `https://api.ipengine.dev` 
+If you want to determine your public (external) IP address programmatically, you can use the following website `https://api.ipengine.dev`
 
 ### What are my rate limits when I don't have an API key?
 
-The rate limit without API key is 50, 000 request to your own ip `https://api.ipengine.dev` 
+The rate limit without API key is 50, 000 request to your own ip `https://api.ipengine.dev`
 
 ### What are my rate limits when I have a free plan API key?
 
