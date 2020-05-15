@@ -1,3 +1,7 @@
+---
+title: Comparison
+---
+
 Pricing:
 
 | Plans             | Request            | Free               | Billing            |

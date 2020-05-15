@@ -1,3 +1,7 @@
+---
+title: Status Codes
+---
+
 ### Status Codes
 A list of status codes and their meanings as returned by the API.
 
