@@ -5,23 +5,21 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "vuepress dev"
+    "start": "npm install && vuepress dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/complexorganizations/ipengine-dev.git"
+    "url": "git+https://github.com/complexorganizations/ipengine-dev.git",
+    "homepage": "https://ipengine.dev",
+    "author": "Prajwal Koirala",
+    "license": "MIT",
+    "bugs": "https://github.com/complexorganizations/ipengine-dev/issues"
   },
   "keywords": [
     "word1",
     "word2",
     "word3"
   ],
-  "author": "Prajwal Koirala",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/complexorganizations/ipengine-dev/issues"
-  },
-  "homepage": "https://ipengine.dev",
   "Dependencies": {
     "vuepress": "^1.5.0"
   }
