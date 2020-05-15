@@ -262,7 +262,7 @@ dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
 
 ### PowerShell
 
-``` ps1
+``` ps
 $response = Invoke-RestMethod 'https://api.ipengine.dev' -Method 'GET' -Headers $headers -Body $body
 $response | ConvertTo-Json
 ```
