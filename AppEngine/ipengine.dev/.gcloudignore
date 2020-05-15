@@ -16,3 +16,8 @@ vendor/
 
 # Gitignore
 .gitignore
+
+# Ignore VueJs
+/blog/
+/docs/
+*.md
