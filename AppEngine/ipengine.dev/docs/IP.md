@@ -1,5 +1,5 @@
 ---
-title: ip
+title: IP
 ---
 
 ``` sh

@@ -1,3 +1,7 @@
+---
+title: Security
+---
+
 # Everything Security releated here.
 
 ::: warning

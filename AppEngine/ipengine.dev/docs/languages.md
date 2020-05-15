@@ -1,5 +1,5 @@
 ---
-title: languages
+title: Languages
 ---
 
 ### Shell

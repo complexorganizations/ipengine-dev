@@ -1,8 +1,8 @@
 ---
 home: true
-heroImage: /hero.png
-heroText: Hero Title
-tagline: Identify and track Website users by IP address
+heroImage: /media/logo_transparent.svg
+heroText: IPengine
+tagline: Identify and convert anonymous visitors into leads
 actionText: Get Started →
 actionLink: /docs/
 sidebar: false
