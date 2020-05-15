@@ -1,3 +1,7 @@
+---
+title: Content Type
+---
+
 | Content Type       | Description        | URL                |
 |--------------------|--------------------|--------------------|
 | application/json   | JSON               | /json              |

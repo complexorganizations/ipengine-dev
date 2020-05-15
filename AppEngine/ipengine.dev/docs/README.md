@@ -1,6 +1,12 @@
-?> Completely free during the beta
+---
+title: Home
+---
 
-## Getting started
+::: tip
+Open for beta-testing
+:::
+
+### Getting started
 
 IpEngine's API exposes the entire IpEngine infrastructure via a standardized programmatic interface. Using IpEngine's API, you can do just about anything you can do on ipengine.com via the customer dashboard.
 

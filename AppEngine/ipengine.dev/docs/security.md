@@ -1,6 +1,8 @@
 # Everything Security releated here.
 
-!> There will be no requests over unsecured HTTP.
+::: warning
+There will be no requests over unsecured HTTP.
+:::
 
 `apikey` is required, no response will be found without an `apikey`
 
