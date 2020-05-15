@@ -1,0 +1,29 @@
+{
+  "name": "ipengine.dev",
+  "version": "0.0.1",
+  "description": "ipengine.dev offical",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build",
+    "serve": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/chrome.git"
+  },
+  "keywords": [
+    "word1",
+    "word2",
+    "word3"
+  ],
+  "author": "Prajwal Koirala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/google/chrome/issues"
+  },
+  "homepage": "https://github.com/google/chrome#readme",
+  "dependencies": {
+    "vuepress": "^1.5.0"
+  }
+}
