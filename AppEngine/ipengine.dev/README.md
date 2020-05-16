@@ -15,3 +15,7 @@ features:
   details: know your visitors and customize their experience based on nation , state, language, currency or speed of communication.
 footer: Copyright (c) 2010-2020 ComplexOrganizations, Inc.
 ---
+
+::: danger
+There will be no requests over unsecured HTTP.
+:::
