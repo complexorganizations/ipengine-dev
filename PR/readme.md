@@ -1,1 +1,0 @@
-Public relations is the practice of deliberately managing the spread of information between an individual or an organization and the public. Public relations may include an organization or individual gaining exposure to their audiences using topics of public interest and news items that do not require direct payment.

@@ -1,0 +1,8 @@
+# Ignore vscode
+.vscode/
+# Ignore logs
+*.logs
+# Ignore atom
+.atom/
+# Ignore ds_store
+.DS_Store

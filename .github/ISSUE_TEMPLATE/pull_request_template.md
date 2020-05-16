@@ -7,13 +7,9 @@ assignees: ''
 
 ---
 
-**Describe the PR**
+**Describe the PR** A clear and concise description of what the pull request is.
 
-A clear and concise description of what the pull request is.
-
-**Which issue(s) this PR fixes**:
-
-Fixes #
+**Which issue(s) this PR fixes**: Fixes #
 
 **Special notes for your reviewer**:
 
@@ -21,6 +17,4 @@ Fixes #
 
 **Additional documentation e.g., KEPs (Kubernetes Enhancement Proposals), usage docs, etc.**:
 
-**Additional context**
-
-Add any other context about the pull request here.
+**Additional context** Add any other context about the pull request here.
