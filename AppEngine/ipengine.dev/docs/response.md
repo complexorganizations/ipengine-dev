@@ -27,7 +27,7 @@ title: Response
 | Spam              |                                                               |
 | Unroutable        | These are fake IP addresses for a computer network.           |
 | Arin              | Objective                                                     |
-| Name              |                                                               |
+| Name              | The name of the isp.                                          |
 | Handle            |                                                               |
 | Parent            |                                                               |
 | Type              |                                                               |

@@ -43,6 +43,11 @@ There will be no requests over unsecured HTTP.
 		"cloud": "true",
 		"bogon": "true"
 	},
+	"carrier": {
+		"name": "Verizon",
+		"mcc": "310",
+		"mnc": "004"
+	},
 	"arin": {
 		"name": "rrny",
 		"handle": "NET-69-200-0-0-1",
