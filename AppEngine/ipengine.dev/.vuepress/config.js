@@ -6,7 +6,8 @@ module.exports = {
             { text: 'Home', link: '/' },
             { text: 'Docs', link: '/docs/' },
             { text: 'Pricing', link: '/pricing' },
-            { text: 'Blog', link: '/blog/' }
+            { text: 'Blog', link: '/blog/' },
+            { text: 'Login', link: '/login' }
         ],
         sidebar: [
             {

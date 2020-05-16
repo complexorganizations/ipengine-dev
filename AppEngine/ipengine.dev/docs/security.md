@@ -8,6 +8,6 @@ title: Security
 There will be no requests over unsecured HTTP.
 :::
 
-`apikey` is required, no response will be found without an `apikey`
-
-`key=API_KEY`
+::: tip
+You can customize all response with module
+:::

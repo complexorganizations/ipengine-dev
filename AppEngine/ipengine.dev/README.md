@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo_transparent.svg
 heroText: IPengine
-tagline: Identify and convert anonymous visitors into leads
+tagline: Identify and convert visitors into leads
 actionText: Get Started →
 actionLink: /docs/
 sidebar: false
