@@ -16,3 +16,9 @@ vendor/
 
 # Google Cloud Ignore
 .gcloudignore
+
+# Ignore Build Files
+.vuepress\dist
+
+# macOS Files
+.DS_Store
