@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Languages | IPengine</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="the best ip source">
+    <link rel="preload" href="/assets/css/0.styles.0466186e.css" as="style"><link rel="preload" href="/assets/js/app.a17201aa.js" as="script"><link rel="preload" href="/assets/js/2.f781ed07.js" as="script"><link rel="preload" href="/assets/js/9.eb97ac79.js" as="script"><link rel="prefetch" href="/assets/js/10.3d167928.js"><link rel="prefetch" href="/assets/js/11.2d9433b9.js"><link rel="prefetch" href="/assets/js/12.644c93ae.js"><link rel="prefetch" href="/assets/js/13.34b0d1d4.js"><link rel="prefetch" href="/assets/js/14.eb58fdf1.js"><link rel="prefetch" href="/assets/js/15.d0f00389.js"><link rel="prefetch" href="/assets/js/16.ec6b6e7f.js"><link rel="prefetch" href="/assets/js/17.4ff82b09.js"><link rel="prefetch" href="/assets/js/3.ad418db4.js"><link rel="prefetch" href="/assets/js/4.452887f5.js"><link rel="prefetch" href="/assets/js/5.93cf3ceb.js"><link rel="prefetch" href="/assets/js/6.44f95f82.js"><link rel="prefetch" href="/assets/js/7.2c1de1b0.js"><link rel="prefetch" href="/assets/js/8.ca43848e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0466186e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">IPengine</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Docs
+</a></div><div class="nav-item"><a href="/pricing.html" class="nav-link">
+  Pricing
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link">
+  Blog
+</a></div><div class="nav-item"><a href="/login.html" class="nav-link">
+  Login
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Docs
+</a></div><div class="nav-item"><a href="/pricing.html" class="nav-link">
+  Pricing
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link">
+  Blog
+</a></div><div class="nav-item"><a href="/login.html" class="nav-link">
+  Login
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Getting started</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Features</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/languages.html" class="active sidebar-link">Languages</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/content-type.html" class="sidebar-link">Content Type</a></li><li><a href="/docs/module.html" class="sidebar-link">Module</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Usage</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="shell"><a href="#shell" class="header-anchor">#</a> Shell</h3> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token function">curl</span> --silent --location --request GET <span class="token string">'https://api.ipengine.dev'</span>
+</code></pre></div><h3 id="ocml"><a href="#ocml" class="header-anchor">#</a> Ocml</h3> <div class="language-ocaml extra-class"><pre class="language-ocaml"><code><span class="token keyword">open</span> <span class="token module variable">Lwt</span>
+<span class="token keyword">open</span> <span class="token module variable">Cohttp</span>
+<span class="token keyword">open</span> <span class="token module variable">Cohttp_lwt_unix</span>
+
+<span class="token keyword">let</span> reqBody <span class="token operator">=</span>
+  <span class="token keyword">let</span> uri <span class="token operator">=</span> <span class="token module variable">Uri</span><span class="token punctuation">.</span>of<span class="token punctuation">_</span>string <span class="token string">&quot;https://api.ipengine.dev&quot;</span> <span class="token keyword">in</span>
+  <span class="token module variable">Client</span><span class="token punctuation">.</span>call <span class="token variant variable">`GET</span> uri <span class="token operator">&gt;&gt;=</span> <span class="token keyword">fun</span> <span class="token punctuation">(</span>resp<span class="token punctuation">,</span> body<span class="token punctuation">)</span> <span class="token operator">-&gt;</span>
+  body <span class="token operator">|&gt;</span> <span class="token module variable">Cohttp_lwt</span><span class="token punctuation">.</span><span class="token module variable">Body</span><span class="token punctuation">.</span>to<span class="token punctuation">_</span>string <span class="token operator">&gt;|=</span> <span class="token keyword">fun</span> body <span class="token operator">-&gt;</span> body
+
+<span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span>
+  <span class="token keyword">let</span> respBody <span class="token operator">=</span> <span class="token module variable">Lwt_main</span><span class="token punctuation">.</span>run reqBody <span class="token keyword">in</span>
+  print<span class="token punctuation">_</span>endline <span class="token punctuation">(</span>respBody<span class="token punctuation">)</span>
+</code></pre></div><h3 id="ruby"><a href="#ruby" class="header-anchor">#</a> Ruby</h3> <div class="language-rb extra-class"><pre class="language-rb"><code><span class="token keyword">require</span> <span class="token string">&quot;uri&quot;</span>
+<span class="token keyword">require</span> <span class="token string">&quot;net/http&quot;</span>
+
+url <span class="token operator">=</span> <span class="token constant">URI</span><span class="token punctuation">(</span><span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">)</span>
+
+https <span class="token operator">=</span> <span class="token constant">Net</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">HTTP</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>host<span class="token punctuation">,</span> url<span class="token punctuation">.</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+https<span class="token punctuation">.</span>use_ssl <span class="token operator">=</span> <span class="token boolean">true</span>
+
+request <span class="token operator">=</span> <span class="token constant">Net</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">HTTP</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Get</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+
+response <span class="token operator">=</span> https<span class="token punctuation">.</span>request<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+puts response<span class="token punctuation">.</span>read_body
+</code></pre></div><h3 id="http"><a href="#http" class="header-anchor">#</a> HTTP</h3> <div class="language-http extra-class"><pre class="language-http"><code>GET / HTTP/1.1
+<span class="token header-name keyword">Host:</span> api.ipengine.dev
+</code></pre></div><h3 id="python"><a href="#python" class="header-anchor">#</a> Python</h3> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">import</span> requests
+
+url <span class="token operator">=</span> <span class="token string">&quot;https://api.ipengine.dev&quot;</span>
+
+payload <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+headers<span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>request<span class="token punctuation">(</span><span class="token string">&quot;GET&quot;</span><span class="token punctuation">,</span> url<span class="token punctuation">,</span> headers<span class="token operator">=</span>headers<span class="token punctuation">,</span> data <span class="token operator">=</span> payload<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">'utf8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="php"><a href="#php" class="header-anchor">#</a> PHP</h3> <div class="language-php extra-class"><pre class="language-php"><code><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token variable">$curl</span> <span class="token operator">=</span> <span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">curl_setopt_array</span><span class="token punctuation">(</span><span class="token variable">$curl</span><span class="token punctuation">,</span> <span class="token keyword">array</span><span class="token punctuation">(</span>
+  <span class="token constant">CURLOPT_URL</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token double-quoted-string string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_RETURNTRANSFER</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean constant">true</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_ENCODING</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token double-quoted-string string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_MAXREDIRS</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_TIMEOUT</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_FOLLOWLOCATION</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean constant">true</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_HTTP_VERSION</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token constant">CURL_HTTP_VERSION_1_1</span><span class="token punctuation">,</span>
+  <span class="token constant">CURLOPT_CUSTOMREQUEST</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token double-quoted-string string">&quot;GET&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$response</span> <span class="token operator">=</span> <span class="token function">curl_exec</span><span class="token punctuation">(</span><span class="token variable">$curl</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">curl_close</span><span class="token punctuation">(</span><span class="token variable">$curl</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token variable">$response</span><span class="token punctuation">;</span>
+</span></code></pre></div><h3 id="node-js"><a href="#node-js" class="header-anchor">#</a> Node.js</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> https <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'follow-redirects'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>https<span class="token punctuation">;</span>
+<span class="token keyword">var</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">'method'</span><span class="token operator">:</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
+    <span class="token string">'hostname'</span><span class="token operator">:</span> <span class="token string">'api.ipengine.dev'</span><span class="token punctuation">,</span>
+    <span class="token string">'path'</span><span class="token operator">:</span> <span class="token string">'/'</span><span class="token punctuation">,</span>
+    <span class="token string">'headers'</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">'maxRedirects'</span><span class="token operator">:</span> <span class="token number">1</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> req <span class="token operator">=</span> https<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> chunks <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&quot;data&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        chunks<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>chunk<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&quot;end&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">chunk</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> body <span class="token operator">=</span> Buffer<span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span>chunks<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>body<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    res<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&quot;error&quot;</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+req<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="jquery"><a href="#jquery" class="header-anchor">#</a> jQuery</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> settings <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;method&quot;</span><span class="token operator">:</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;timeout&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span>settings<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="go"><a href="#go" class="header-anchor">#</a> Go</h3> <div class="language-go extra-class"><pre class="language-go"><code><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+  <span class="token string">&quot;fmt&quot;</span>
+  <span class="token string">&quot;net/http&quot;</span>
+  <span class="token string">&quot;io/ioutil&quot;</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+  url <span class="token operator">:=</span> <span class="token string">&quot;https://api.ipengine.dev&quot;</span>
+  method <span class="token operator">:=</span> <span class="token string">&quot;GET&quot;</span>
+
+  client <span class="token operator">:=</span> <span class="token operator">&amp;</span>http<span class="token punctuation">.</span>Client <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+  req<span class="token punctuation">,</span> err <span class="token operator">:=</span> http<span class="token punctuation">.</span><span class="token function">NewRequest</span><span class="token punctuation">(</span>method<span class="token punctuation">,</span> url<span class="token punctuation">,</span> <span class="token boolean">nil</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">if</span> err <span class="token operator">!=</span> <span class="token boolean">nil</span> <span class="token punctuation">{</span>
+    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  res<span class="token punctuation">,</span> err <span class="token operator">:=</span> client<span class="token punctuation">.</span><span class="token function">Do</span><span class="token punctuation">(</span>req<span class="token punctuation">)</span>
+  <span class="token keyword">defer</span> res<span class="token punctuation">.</span>Body<span class="token punctuation">.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  body<span class="token punctuation">,</span> err <span class="token operator">:=</span> ioutil<span class="token punctuation">.</span><span class="token function">ReadAll</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>Body<span class="token punctuation">)</span>
+
+  fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">string</span><span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="java"><a href="#java" class="header-anchor">#</a> Java</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">OkHttpClient</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OkHttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">newBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Request</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Request</span><span class="token punctuation">.</span><span class="token class-name">Builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">method</span><span class="token punctuation">(</span><span class="token string">&quot;GET&quot;</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Response</span> response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">newCall</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="c"><a href="#c" class="header-anchor">#</a> C#</h3> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token class-name"><span class="token keyword">var</span></span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">RestClient</span><span class="token punctuation">(</span><span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+client<span class="token punctuation">.</span>Timeout <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token class-name"><span class="token keyword">var</span></span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">RestRequest</span><span class="token punctuation">(</span>Method<span class="token punctuation">.</span>GET<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">IRestResponse</span> response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">Execute</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>Content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="c-2"><a href="#c-2" class="header-anchor">#</a> C</h3> <div class="language-c extra-class"><pre class="language-c"><code>CURL <span class="token operator">*</span>curl<span class="token punctuation">;</span>
+CURLcode res<span class="token punctuation">;</span>
+curl <span class="token operator">=</span> <span class="token function">curl_easy_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>curl<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">curl_easy_setopt</span><span class="token punctuation">(</span>curl<span class="token punctuation">,</span> CURLOPT_CUSTOMREQUEST<span class="token punctuation">,</span> <span class="token string">&quot;GET&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">curl_easy_setopt</span><span class="token punctuation">(</span>curl<span class="token punctuation">,</span> CURLOPT_URL<span class="token punctuation">,</span> <span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">curl_easy_setopt</span><span class="token punctuation">(</span>curl<span class="token punctuation">,</span> CURLOPT_FOLLOWLOCATION<span class="token punctuation">,</span> <span class="token number">1L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">curl_easy_setopt</span><span class="token punctuation">(</span>curl<span class="token punctuation">,</span> CURLOPT_DEFAULT_PROTOCOL<span class="token punctuation">,</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> <span class="token class-name">curl_slist</span> <span class="token operator">*</span>headers <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  <span class="token function">curl_easy_setopt</span><span class="token punctuation">(</span>curl<span class="token punctuation">,</span> CURLOPT_HTTPHEADER<span class="token punctuation">,</span> headers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  res <span class="token operator">=</span> <span class="token function">curl_easy_perform</span><span class="token punctuation">(</span>curl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">curl_easy_cleanup</span><span class="token punctuation">(</span>curl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="swift"><a href="#swift" class="header-anchor">#</a> Swift</h3> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">import</span> <span class="token builtin">Foundation</span>
+
+<span class="token keyword">var</span> semaphore <span class="token operator">=</span> <span class="token builtin">DispatchSemaphore</span> <span class="token punctuation">(</span>value<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> request <span class="token operator">=</span> <span class="token function">URLRequest</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token function">URL</span><span class="token punctuation">(</span>string<span class="token punctuation">:</span> <span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">,</span>timeoutInterval<span class="token punctuation">:</span> <span class="token builtin">Double</span><span class="token punctuation">.</span>infinity<span class="token punctuation">)</span>
+request<span class="token punctuation">.</span>httpMethod <span class="token operator">=</span> <span class="token string">&quot;GET&quot;</span>
+
+<span class="token keyword">let</span> task <span class="token operator">=</span> <span class="token builtin">URLSession</span><span class="token punctuation">.</span>shared<span class="token punctuation">.</span><span class="token function">dataTask</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> request<span class="token punctuation">)</span> <span class="token punctuation">{</span> data<span class="token punctuation">,</span> response<span class="token punctuation">,</span> error <span class="token keyword">in</span>
+  <span class="token keyword">guard</span> <span class="token keyword">let</span> data <span class="token operator">=</span> data <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span>describing<span class="token punctuation">:</span> error<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span>
+  <span class="token punctuation">}</span>
+  <span class="token function">print</span><span class="token punctuation">(</span><span class="token function">String</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">,</span> encoding<span class="token punctuation">:</span> <span class="token punctuation">.</span>utf8<span class="token punctuation">)</span><span class="token operator">!</span><span class="token punctuation">)</span>
+  semaphore<span class="token punctuation">.</span><span class="token function">signal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+task<span class="token punctuation">.</span><span class="token function">resume</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+semaphore<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="objective-c"><a href="#objective-c" class="header-anchor">#</a> Objective-C</h3> <div class="language-m extra-class"><pre class="language-text"><code>#import &lt;Foundation/Foundation.h&gt;
+
+dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@&quot;https://api.ipengine.dev&quot;]
+  cachePolicy:NSURLRequestUseProtocolCachePolicy
+  timeoutInterval:10.0];
+
+[request setHTTPMethod:@&quot;GET&quot;];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+  if (error) {
+    NSLog(@&quot;%@&quot;, error);
+  } else {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+    NSError *parseError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&amp;parseError];
+    NSLog(@&quot;%@&quot;,responseDictionary);
+    dispatch_semaphore_signal(sema);
+  }
+}];
+[dataTask resume];
+dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+</code></pre></div><h3 id="powershell"><a href="#powershell" class="header-anchor">#</a> PowerShell</h3> <div class="language-ps extra-class"><pre class="language-text"><code>$response = Invoke-RestMethod 'https://api.ipengine.dev' -Method 'GET' -Headers $headers -Body $body
+$response | ConvertTo-Json
+</code></pre></div><h3 id="javascript"><a href="#javascript" class="header-anchor">#</a> JavaScript</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> requestOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
+    method<span class="token operator">:</span> <span class="token string">'GET'</span><span class="token punctuation">,</span>
+    redirect<span class="token operator">:</span> <span class="token string">'follow'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">&quot;https://api.ipengine.dev&quot;</span><span class="token punctuation">,</span> requestOptions<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">response</span> <span class="token operator">=&gt;</span> response<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">result</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token parameter">error</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> error<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/ip.html" class="prev">
+        IP
+      </a></span> <span class="next"><a href="/docs/content-type.html">
+        Content Type
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.a17201aa.js" defer></script><script src="/assets/js/2.f781ed07.js" defer></script><script src="/assets/js/9.eb97ac79.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Status Codes | IPengine</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="the best ip source">
+    <link rel="preload" href="/assets/css/0.styles.0466186e.css" as="style"><link rel="preload" href="/assets/js/app.a17201aa.js" as="script"><link rel="preload" href="/assets/js/2.f781ed07.js" as="script"><link rel="preload" href="/assets/js/14.eb58fdf1.js" as="script"><link rel="prefetch" href="/assets/js/10.3d167928.js"><link rel="prefetch" href="/assets/js/11.2d9433b9.js"><link rel="prefetch" href="/assets/js/12.644c93ae.js"><link rel="prefetch" href="/assets/js/13.34b0d1d4.js"><link rel="prefetch" href="/assets/js/15.d0f00389.js"><link rel="prefetch" href="/assets/js/16.ec6b6e7f.js"><link rel="prefetch" href="/assets/js/17.4ff82b09.js"><link rel="prefetch" href="/assets/js/3.ad418db4.js"><link rel="prefetch" href="/assets/js/4.452887f5.js"><link rel="prefetch" href="/assets/js/5.93cf3ceb.js"><link rel="prefetch" href="/assets/js/6.44f95f82.js"><link rel="prefetch" href="/assets/js/7.2c1de1b0.js"><link rel="prefetch" href="/assets/js/8.ca43848e.js"><link rel="prefetch" href="/assets/js/9.eb97ac79.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0466186e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">IPengine</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Docs
+</a></div><div class="nav-item"><a href="/pricing.html" class="nav-link">
+  Pricing
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link">
+  Blog
+</a></div><div class="nav-item"><a href="/login.html" class="nav-link">
+  Login
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/docs/" class="nav-link router-link-active">
+  Docs
+</a></div><div class="nav-item"><a href="/pricing.html" class="nav-link">
+  Pricing
+</a></div><div class="nav-item"><a href="/blog/" class="nav-link">
+  Blog
+</a></div><div class="nav-item"><a href="/login.html" class="nav-link">
+  Login
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Getting started</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Features</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Usage</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/docs/status.html" class="active sidebar-link">Status Codes</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/docs/response.html" class="sidebar-link">Response</a></li><li><a href="/docs/security.html" class="sidebar-link">Security</a></li><li><a href="/docs/changelog.html" class="sidebar-link">Changelog</a></li><li><a href="/docs/comparison.html" class="sidebar-link">Comparison</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="status-codes"><a href="#status-codes" class="header-anchor">#</a> Status Codes</h3> <p>A list of status codes and their meanings as returned by the API.</p> <p>ipengine uses conventional HTTP response codes to indicate whether an API request is successful or not.</p> <table><thead><tr><th>Status Code</th> <th>Description</th></tr></thead> <tbody><tr><td>1xx (informational)</td> <td>The request was received, and procedure proceeded</td></tr> <tr><td>2xx (successful)</td> <td>The application was received successfully, and approved</td></tr> <tr><td>3xx (redirection)</td> <td>Further action is required to complete the request</td></tr> <tr><td>4xx (client error)</td> <td>The question includes poor syntax or is not compliant</td></tr> <tr><td>5xx (server error)</td> <td>The server failed to fulfill a seemingly legitimate request</td></tr> <tr><td>200 (OK)</td> <td>Standard response for successful HTTP requests</td></tr> <tr><td>302 (Moved)</td> <td>Any future requests should be addressed to the URI provided</td></tr> <tr><td>400 (Bad Request)</td> <td>The server can not process the request, or will not process it</td></tr> <tr><td>401 (Unauthorized)</td> <td>No valid API key provided.</td></tr> <tr><td>402 (Request Failed)</td> <td>The parameters were valid but the request failed.</td></tr> <tr><td>403 (Forbidden)</td> <td>The request contained valid data, which the server understood</td></tr> <tr><td>404 (Not Found)</td> <td>Unable to locate the required tool</td></tr> <tr><td>404 (Requests Limit)</td> <td>Excessively many requests hit the API too fast</td></tr> <tr><td>500 (Server Error)</td> <td>The server is unable to process the request</td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/docs/module.html" class="prev">
+        Module
+      </a></span> <span class="next"><a href="/docs/response.html">
+        Response
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.a17201aa.js" defer></script><script src="/assets/js/2.f781ed07.js" defer></script><script src="/assets/js/14.eb58fdf1.js" defer></script>
+  </body>
+</html>
