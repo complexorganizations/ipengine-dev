@@ -23,11 +23,3 @@ vendor/
 
 # Ignore Git
 .git
-
-# Build
-windows/
-aot/
-app/
-kotlin/
-flutter_assets/
-.last_build_id
