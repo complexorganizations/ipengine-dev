@@ -16,3 +16,6 @@ vendor/
 
 # Git Ignore
 .gitignore
+
+# Ignore Source
+*.md
