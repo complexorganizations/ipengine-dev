@@ -29,7 +29,14 @@
 .packages
 .pub-cache/
 .pub/
-/build/
+# Build Added
+/build/web
+/build/windows
+/build/aot
+/build/app
+/build/kotlin
+/build/flutter_assets
+/build/.last_build_id
 
 # Web related
 lib/generated_plugin_registrant.dart
