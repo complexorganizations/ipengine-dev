@@ -5,9 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "vuepress dev",
-    "build": "vuepress build",
-    "start": "npm run dev"
+    "start": "vuepress dev"
   },
   "repository": {
     "type": "git",
