@@ -4,10 +4,15 @@ module.exports = {
     themeConfig: {
         nav: [
             { text: 'Home', link: '/' },
-            { text: 'Docs', link: '/docs/' },
-            { text: 'Pricing', link: '/pricing' },
-            { text: 'Blog', link: '/blog/' },
-            { text: 'Login', link: '/login' }
+            {
+                text: 'Documentation', ariaLabel: 'Documentation Menu',
+                items: [
+                    { text: 'Docs', link: '/docs/' },
+                    { text: 'Pricing', link: '/pricing' },
+                    { text: 'Login', link: '/login' },
+                    { text: 'Blog', link: '/blog/' }
+                ]
+            },
         ],
         sidebar: [
             {
