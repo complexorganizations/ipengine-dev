@@ -10,30 +10,25 @@ module.exports = {
         ],
         sidebar: [
             {
-                title: 'Getting started',   // required
-                path: '/docs/',      // optional, link of the title, which should be an absolute path and must exist
-                collapsable: true, // optional, defaults to true
-                sidebarDepth: 3,    // optional, defaults to 1
+                title: 'Getting started',
+                collapsable: true,
                 children: [
                     '/docs/',
                     '/docs/ip'
                 ]
             },
             {
-                title: 'Features',   // required
-                path: '/docs/',      // optional, link of the title, which should be an absolute path and must exist
-                collapsable: true, // optional, defaults to true
-                sidebarDepth: 3,    // optional, defaults to 1
+                title: 'Features',
+                collapsable: true,
                 children: [
                     '/docs/languages',
-                    '/docs/content-type'
+                    '/docs/content-type',
+                    '/docs/module'
                 ]
             },
             {
-                title: 'Usage',   // required
-                path: '/docs/',      // optional, link of the title, which should be an absolute path and must exist
-                collapsable: true, // optional, defaults to true
-                sidebarDepth: 3,    // optional, defaults to 1
+                title: 'Usage',
+                collapsable: true,
                 children: [
                     '/docs/status',
                     '/docs/response',
@@ -41,7 +36,7 @@ module.exports = {
                     '/docs/changelog',
                     '/docs/comparison'
                 ]
-            },
+            }
         ]
     }
 }

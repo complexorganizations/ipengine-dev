@@ -7,11 +7,11 @@ actionText: Get Started →
 actionLink: /docs/
 sidebar: false
 features:
-- title: Developers First
-  details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Vue-Powered
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Performant
-  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+- title: Geolocation
+  details: Locate granularity of city and postal code for your website users by IP Address.
+- title: Analysis
+  details: Defend your infrastructure from cyber attacks, identify risky situations and account for country of origin, proxy or usage of Tor in your scoring process.
+- title: Arin
+  details: know your visitors and customize their experience based on nation , state, language, currency or speed of communication.
 footer: Copyright (c) 2010-2020 ComplexOrganizations, Inc.
 ---
