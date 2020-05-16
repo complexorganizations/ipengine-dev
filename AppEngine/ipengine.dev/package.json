@@ -10,15 +10,18 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/complexorganizations/ipengine-dev.git",
-    "homepage": "https://ipengine.dev",
-    "author": "Prajwal Koirala",
+    "bugs": "https://github.com/complexorganizations/ipengine-dev/issues",
     "license": "MIT",
-    "bugs": "https://github.com/complexorganizations/ipengine-dev/issues"
+    "homepage": "https://ipengine.dev",
+    "author": "Prajwal Koirala"
   },
   "keywords": [
-    "word1",
-    "word2",
-    "word3"
+    "ipengine.dev",
+    "api.ipengine.dev",
+    "ipengine",
+    "geolocation",
+    "analysis",
+    "arin"
   ],
   "dependencies": {
     "vuepress": "^1.5.0"
