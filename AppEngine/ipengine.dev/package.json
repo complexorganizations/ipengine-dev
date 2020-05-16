@@ -5,7 +5,9 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "vuepress dev"
+    "dev": "vuepress dev",
+    "build": "vuepress build",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
     "analysis",
     "arin"
   ],
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "vuepress": "^1.5.0"
   }
 }
