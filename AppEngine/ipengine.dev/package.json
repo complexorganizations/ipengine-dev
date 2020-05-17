@@ -2,7 +2,6 @@
     "name": "ipengine.dev",
     "version": "0.0.1",
     "description": "ipengine.dev offical",
-    "main": "index.js",
     "private": true,
     "engines": {
         "node": "12.x.x"
