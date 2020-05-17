@@ -1,18 +1,14 @@
-// [START app]
-'use strict';
+const http = require('http');
 
-const express = require('express');
-const uuid = require('uuid');
-const app = express();
+const hostname = '127.0.0.1';
+const port = 8080;
 
-app.get('/', (req, res) => {
-  res.status(200).send(`Hello, ${uuid()}!`);
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World');
 });
 
-// Start the server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
 });
-// [END app]
