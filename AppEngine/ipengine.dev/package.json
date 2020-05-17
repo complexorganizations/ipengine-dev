@@ -4,6 +4,9 @@
     "description": "ipengine.dev offical",
     "main": "index.js",
     "private": true,
+    "engines": {
+        "node": "12.x.x"
+    },
     "scripts": {
         "start": "vuepress dev docs"
     },
