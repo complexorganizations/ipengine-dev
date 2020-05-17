@@ -1,0 +1,115 @@
+//
+// buttons.scss
+// Extended from Bootstrap
+//
+
+.btn > img {
+  max-height: 1em;
+  width: auto;
+}
+
+.btn:not([class*="btn-outline"]) {
+  border-color: transparent !important;
+}
+
+
+// Custom colors
+
+.btn-white {
+  background-color: $white;
+  color: $primary;
+
+  @include hover-focus {
+    background-color: $white;
+    color: darken($primary, 5%);
+  }
+
+  &.active {
+    background-color: darken($white, 5%);
+    color: darken($primary, 5%);
+  }
+}
+
+.btn-group .btn-white {
+  border-color: $gray-300 !important;
+  color: $text-muted;
+
+  &.active {
+    background-color: darken($white, 5%);
+    color: darken($text-muted, 5%);
+    box-shadow: none;
+  }
+}
+
+.btn-gray-400 {
+  background-color: $gray-400;
+  color: $white;
+
+  @include hover-focus {
+    background-color: darken($gray-400, 5%);
+    color: darken($white, 5%);
+  }
+
+  &.active {
+    background-color: darken($gray-400, 5%);
+    color: darken($white, 5%);
+  }
+}
+
+.btn-outline-gray-300 {
+  border-color: $gray-300;
+  color: $primary;
+
+  @include hover-focus {
+    background-color: $primary;
+    border-color: $primary;
+    color: $white;
+  }
+
+  &.active {
+    background-color: $primary;
+    border-color: $primary;
+    color: $white;
+  }
+}
+
+
+// Soft variants
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color}-soft {
+    @include btn-variant-soft(rgba($value, $btn-soft-bg-opacity), $value);
+  }
+}
+
+
+// Pill
+
+.btn-pill {
+  border-radius: $rounded-pill;
+}
+
+
+// Rounded circle
+
+.btn-rounded-circle {
+  padding-left: $btn-padding-y;
+  padding-right: $btn-padding-y;
+  border-radius: $rounded-pill;
+
+  > * {
+    display: block;
+    line-height: 1;
+    width: 1em;
+  }
+}
+
+.btn-rounded-circle.btn-lg {
+  padding-left: $btn-padding-y-lg;
+  padding-right: $btn-padding-y-lg;
+}
+
+.btn-rounded-circle.btn-sm {
+  padding-left: $btn-padding-y-sm;
+  padding-right: $btn-padding-y-sm;
+}

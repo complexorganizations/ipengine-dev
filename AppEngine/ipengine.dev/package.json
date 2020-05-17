@@ -1,0 +1,45 @@
+{
+  "name": "ipengine.dev",
+  "version": "0.0.1",
+  "description": "ipengine.dev offical",
+  "private": true,
+  "main": "gulpfile.js",
+  "engines": {
+    "node": "12.x.x"
+  },
+  "scripts": {
+    "start": "gulp"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-include": "^2.1.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-if": "^3.0.0",
+    "gulp-npm-dist": "^1.0.3",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-useref": "^4.0.1"
+  },
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
+    "aos": "^3.0.0-beta.6",
+    "bootstrap": "^4.4.1",
+    "countup.js": "^1.9.3",
+    "flickity": "^2.2.1",
+    "flickity-fade": "^1.0.0",
+    "gulp-cli": "^2.2.0",
+    "highlightjs": "^9.16.2",
+    "imagesloaded": "^4.1.4",
+    "isotope-layout": "^3.0.6",
+    "jarallax": "^1.12.0",
+    "jquery": "^3.4.1",
+    "smooth-scroll": "^16.1.3",
+    "typed.js": "^2.0.11"
+  }
+}
