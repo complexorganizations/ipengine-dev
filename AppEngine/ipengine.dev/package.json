@@ -3,12 +3,11 @@
     "version": "0.0.1",
     "description": "ipengine.dev offical",
     "private": true,
-    "main": "server.js",
     "engines": {
         "node": "12.x.x"
     },
     "scripts": {
-        "start": "node server.js"
+        "start": "vuepress dev docs"
     },
     "repository": {
         "type": "git",
@@ -27,7 +26,7 @@
         "arin"
     ],
     "dependencies": {
-        "express": "^4.17.1"
+        "vuepress": "^1.5.0"
     },
     "devDependencies": {}
 }
