@@ -1,14 +1,20 @@
-const http = require('http');
+'use strict';
 
-const hostname = '127.0.0.1';
-const port = 8080;
+// [START gae_node_request_example]
+const express = require('express');
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.status(200).send('Hello, world!').end();
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+// Start the server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+  console.log('Press Ctrl+C to quit.');
 });
+// [END gae_node_request_example]
+
+module.exports = app;
