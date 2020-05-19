@@ -45,7 +45,7 @@
     "@fancyapps/fancybox": "^3.5.7",
     "aos": "^3.0.0-beta.6",
     "bootstrap": "^4.5.0",
-    "countup.js": "^1.9.3",
+    "countup.js": "^2.0.5",
     "flickity": "^2.2.1",
     "flickity-fade": "^1.0.0",
     "highlightjs": "^9.16.2",
