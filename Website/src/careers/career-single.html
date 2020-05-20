@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  @@include("partials/head.html", {
+  @@include("../partials/head.html", {
   "pageTitle": "Landkit"
   })
 </head>
@@ -10,10 +10,10 @@
 <body class="bg-light">
   <!-- MODALS
          ================================================== -->
-  @@include("partials/modals.html")
+  @@include("../partials/modals.html")
   <!-- NAVBAR
          ================================================== -->
-  @@include("partials/navbar.html", {
+  @@include("../partials/navbar.html", {
   "classList": "navbar-light bg-white border-bottom",
   "type": "fluid"
   })
@@ -314,17 +314,17 @@
          ================================================== -->
   <div class="position-relative">
     <div class="shape shape-bottom shape-fluid-x svg-shim text-gray-200">
-      @@include("assets/img/shapes/curves/curve-1.svg")
+      @@include("../assets/img/shapes/curves/curve-1.svg")
     </div>
   </div>
   <!-- FOOTER
          ================================================== -->
-  @@include("partials/footer.html", {
+  @@include("../partials/footer.html", {
   "classList": "bg-gray-200"
   })
   <!-- JAVASCRIPT
          ================================================== -->
-  @@include("partials/scripts.html")
+  @@include("../partials/scripts.html")
 </body>
 
 </html>

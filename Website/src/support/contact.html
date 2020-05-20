@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  @@include("partials/head.html", {
+  @@include("../partials/head.html", {
   "pageTitle": "Landkit"
   })
 </head>
@@ -10,17 +10,17 @@
 <body>
   <!-- MODALS
          ================================================== -->
-  @@include("partials/modals.html")
+  @@include("../partials/modals.html")
   <!-- NAVBAR
          ================================================== -->
-  @@include("partials/navbar.html", {
+  @@include("../partials/navbar.html", {
   "classList": "navbar-light bg-white border-bottom",
   "type": "fluid"
   })
   <!-- WELCOME
          ================================================== -->
   <section class="py-10 py-md-14 overlay overlay-black overlay-60 bg-cover"
-    style="background-image: url(assets/img/covers/cover-5.jpg);">
+    style="background-image: url(../assets/img/covers/cover-5.jpg);">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-10 col-lg-8 text-center">
@@ -42,7 +42,7 @@
          ================================================== -->
   <div class="position-relative">
     <div class="shape shape-bottom shape-fluid-x svg-shim text-light">
-      @@include("assets/img/shapes/curves/curve-1.svg")
+      @@include("../assets/img/shapes/curves/curve-1.svg")
     </div>
   </div>
   <!-- INFO
@@ -175,17 +175,17 @@
          ================================================== -->
   <div class="position-relative">
     <div class="shape shape-bottom shape-fluid-x svg-shim text-gray-200">
-      @@include("assets/img/shapes/curves/curve-1.svg")
+      @@include("../assets/img/shapes/curves/curve-1.svg")
     </div>
   </div>
   <!-- FOOTER
          ================================================== -->
-  @@include("partials/footer.html", {
+  @@include("../partials/footer.html", {
   "classList": "bg-gray-200"
   })
   <!-- JAVASCRIPT
          ================================================== -->
-  @@include("partials/scripts.html")
+  @@include("../partials/scripts.html")
 </body>
 
 </html>
