@@ -1,4 +1,0 @@
-//
-// theme.js
-// Theme JavaScript
-//
