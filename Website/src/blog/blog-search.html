@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en">
+
    <head>
-      @@include("../partials/head.html", {
+      @@include("@@webRoot/partials/head.html", {
       "pageTitle": "Landkit"
       })
    </head>
+
    <body class="bg-light">
       <!-- MODALS
          ================================================== -->
-      @@include("../partials/modals.html")
+      @@include("@@webRoot/partials/modals.html")
       <!-- NAVBAR
          ================================================== -->
-      @@include("../partials/navbar.html", {
+      @@include("@@webRoot/partials/navbar.html", {
       "classList": "navbar-light bg-white border-bottom",
       "type": "fluid"
       })
@@ -25,7 +27,7 @@
                   <ol class="breadcrumb breadcrumb-scroll">
                      <li class="breadcrumb-item">
                         <a href="blog.html" class="text-gray-700">
-                        Blog
+                           Blog
                         </a>
                      </li>
                      <li class="breadcrumb-item active" aria-current="page">
@@ -50,7 +52,7 @@
                         <!-- Prepend -->
                         <div class="input-group-prepend">
                            <span class="input-group-text border-0 pr-1">
-                           <i class="fe fe-search"></i>
+                              <i class="fe fe-search"></i>
                            </span>
                         </div>
                         <!-- Input -->
@@ -61,11 +63,11 @@
                            <span class="input-group-text border-0 py-0 pl-1 pr-3">
                               <!-- Text -->
                               <span class="h6 text-uppercase text-muted d-none d-md-block mb-0 mr-5">
-                              123 results
+                                 123 results
                               </span>
                               <!-- Button -->
                               <button type="submit" class="btn btn-sm btn-primary">
-                              Search
+                                 Search
                               </button>
                            </span>
                         </div>
@@ -358,7 +360,7 @@
                <div class="col-12 col-md-9 col-lg-8 col-xl-7">
                   <!-- Button -->
                   <a href="#!" class="btn btn-block btn-outline-gray-300 d-flex align-items-center">
-                  <span class="mx-auto">Load more</span> <i class="fe fe-arrow-right"></i>
+                     <span class="mx-auto">Load more</span> <i class="fe fe-arrow-right"></i>
                   </a>
                </div>
             </div>
@@ -399,7 +401,7 @@
                         <div class="col-auto ml-n5">
                            <!-- Button -->
                            <button class="btn btn-primary" type="submit">
-                           Subscribe
+                              Subscribe
                            </button>
                         </div>
                      </div>
@@ -420,11 +422,12 @@
       </div>
       <!-- FOOTER
          ================================================== -->
-      @@include("../partials/footer.html", {
+      @@include("@@webRoot/partials/footer.html", {
       "classList": "bg-gray-200"
       })
       <!-- JAVASCRIPT
          ================================================== -->
-      @@include("../partials/scripts.html")
+      @@include("@@webRoot/partials/scripts.html")
    </body>
+
 </html>

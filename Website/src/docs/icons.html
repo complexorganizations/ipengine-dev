@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -85,7 +89,7 @@
             <!-- Card -->
             <div class="card">
               <div class="card-body d-flex flex-wrap">
-                
+
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Clothes/Brassiere.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Clothes/Briefcase.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Clothes/Cap.svg")</span>
@@ -152,8 +156,10 @@
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Chat-error.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Chat-locked.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Chat-smile.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Clipboard-check.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Clipboard-list.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Clipboard-check.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Clipboard-list.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Contact#1.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Delete-user.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Dial-numbers.svg")</span>
@@ -166,12 +172,14 @@
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Incoming-mail.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-@.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-attachment.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-attachment.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-box.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-error.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-heart.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-locked.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-notification.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-notification.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-opened.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Mail-unocked.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Missed-call.svg")</span>
@@ -188,7 +196,8 @@
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Sending mail.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Sending.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Share.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Shield-thunder.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Shield-thunder.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Shield-user.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Snoozed-mail.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Communication/Spam.svg")</span>
@@ -566,15 +575,19 @@
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Media/Volume-up.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Media/Vynil.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Media/Youtube.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-down.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-left.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-right.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-down.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-left.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-right.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-double-up.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-down.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-left.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Angle-right.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-down.svg")</span>
-                <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-from-bottom.svg")</span>
+                <span
+                  class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-from-bottom.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-from-left.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-from-right.svg")</span>
                 <span class="mr-4">@@include("../assets/img/icons/duotone-icons/Navigation/Arrow-from-top.svg")</span>
@@ -749,7 +762,7 @@
             <!-- Card -->
             <div class="card">
               <div class="card-body d-flex flex-wrap">
-                
+
                 <div class="icon text-primary mr-2">
                   @@include("../assets/img/icons/duotone-icons/Communication/Chat#5.svg")
                 </div>
@@ -778,7 +791,8 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              Using Bootstrap’s typical naming structure, you can create a standard icon, or scale it up to different sizes based on what’s needed.
+              Using Bootstrap’s typical naming structure, you can create a standard icon, or scale it up to different
+              sizes based on what’s needed.
             </p>
 
             <!-- Divider -->
@@ -791,7 +805,7 @@
                 <div class="icon icon-xl text-primary mr-2">
                   @@include("../assets/img/icons/duotone-icons/Communication/Chat#5.svg")
                 </div>
-                
+
                 <div class="icon icon-lg text-primary mr-2">
                   @@include("../assets/img/icons/duotone-icons/Communication/Chat#5.svg")
                 </div>
@@ -1130,7 +1144,7 @@
             <!-- Card -->
             <div class="card">
               <div class="card-body">
-                
+
                 <div class="icon-circle bg-primary text-white">
                   <i class="fe fe-arrow-down"></i>
                 </div>
@@ -1142,7 +1156,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -1167,7 +1181,7 @@
                   <a class="list-link" href="#circle" data-toggle="smooth-scroll">Circle</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -1176,7 +1190,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

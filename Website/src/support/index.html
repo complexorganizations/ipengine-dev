@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en">
+
    <head>
-      @@include("../partials/head.html", {
+      @@include("@@webRoot/partials/head.html", {
       "pageTitle": "Landkit"
       })
    </head>
+
    <body class="bg-light">
       <!-- MODALS
          ================================================== -->
-      @@include("../partials/modals.html")
+      @@include("@@webRoot/partials/modals.html")
       <!-- NAVBAR
          ================================================== -->
-      @@include("../partials/navbar.html", {
+      @@include("@@webRoot/partials/navbar.html", {
       "classList": "navbar-light bg-white border-bottom",
       "type": "fluid"
       })
@@ -56,7 +58,7 @@
                         <!-- Prepend -->
                         <div class="input-group-prepend">
                            <span class="input-group-text border-0 pr-1">
-                           <i class="fe fe-search"></i>
+                              <i class="fe fe-search"></i>
                            </span>
                         </div>
                         <!-- Input -->
@@ -65,9 +67,9 @@
                         <!-- Append -->
                         <div class="input-group-append">
                            <span class="input-group-text border-0 py-0 pl-1 pr-3">
-                           <button type="submit" class="btn btn-sm btn-primary">
-                           Search
-                           </button>
+                              <button type="submit" class="btn btn-sm btn-primary">
+                                 Search
+                              </button>
                            </span>
                         </div>
                      </div>
@@ -110,9 +112,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        21 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              21 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -135,9 +137,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        9 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              9 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -160,9 +162,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        14 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              14 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -185,9 +187,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        17 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              17 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -210,9 +212,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        7 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              7 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -235,9 +237,9 @@
                         </p>
                         <!-- Badge -->
                         <span class="badge badge-pill badge-dark-soft">
-                        <span class="h6 text-uppercase">
-                        14 entries
-                        </span>
+                           <span class="h6 text-uppercase">
+                              14 entries
+                           </span>
                         </span>
                      </div>
                   </div>
@@ -258,7 +260,8 @@
                   </h2>
                   <!-- Text -->
                   <p class="font-size-lg text-muted mb-7 mb-md-9">
-                     Contact us and we'll get back to you as soon as possible with a solution to whatever issues you're having
+                     Contact us and we'll get back to you as soon as possible with a solution to whatever issues you're
+                     having
                      with Landkit.
                   </p>
                </div>
@@ -273,7 +276,7 @@
                   <!-- Link -->
                   <div class="mb-5 mb-md-0">
                      <a href="#!" class="h4 text-primary">
-                     Start a chat!
+                        Start a chat!
                      </a>
                   </div>
                </div>
@@ -285,7 +288,7 @@
                   <!-- Link -->
                   <div class="mb-5 mb-md-0">
                      <a href="#!" class="h4">
-                     (555) 123-4567
+                        (555) 123-4567
                      </a>
                   </div>
                </div>
@@ -296,7 +299,7 @@
                   </h6>
                   <!-- Link -->
                   <a href="#!" class="h4">
-                  support@goodthemes.co
+                     support@goodthemes.co
                   </a>
                </div>
             </div>
@@ -310,7 +313,7 @@
                            <div class="form-group mb-5">
                               <!-- Label -->
                               <label for="contactName">
-                              Full name
+                                 Full name
                               </label>
                               <!-- Input -->
                               <input type="text" class="form-control" id="contactName" placeholder="Full name">
@@ -320,7 +323,7 @@
                            <div class="form-group mb-5">
                               <!-- Label -->
                               <label for="contactEmail">
-                              Email
+                                 Email
                               </label>
                               <!-- Input -->
                               <input type="email" class="form-control" id="contactEmail" placeholder="hello@domain.com">
@@ -333,7 +336,7 @@
                            <div class="form-group mb-7 mb-md-9">
                               <!-- Label -->
                               <label for="contactMessage">
-                              What can we help you with?
+                                 What can we help you with?
                               </label>
                               <!-- Input -->
                               <textarea class="form-control" id="contactMessage" rows="5"
@@ -346,7 +349,7 @@
                         <div class="col-auto">
                            <!-- Submit -->
                            <button type="submit" class="btn btn-primary lift">
-                           Submit request
+                              Submit request
                            </button>
                         </div>
                      </div>
@@ -367,11 +370,12 @@
       </div>
       <!-- FOOTER
          ================================================== -->
-      @@include("../partials/footer.html", {
+      @@include("@@webRoot/partials/footer.html", {
       "classList": "bg-gray-200"
       })
       <!-- JAVASCRIPT
          ================================================== -->
-      @@include("../partials/scripts.html")
+      @@include("@@webRoot/partials/scripts.html")
    </body>
+
 </html>

@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -76,7 +80,9 @@
 
             <!-- Text -->
             <p class="font-size-lg text-gray-700">
-              Easily wrap your screenshots in iPhone X or Macbook device frames or create combos of both. iPhone X screenshot should be 720 x 450px or of the same ratio. Macbook screenshot should be 500 x 1080px or of the same ratio.
+              Easily wrap your screenshots in iPhone X or Macbook device frames or create combos of both. iPhone X
+              screenshot should be 720 x 450px or of the same ratio. Macbook screenshot should be 500 x 1080px or of the
+              same ratio.
             </p>
 
             <!-- Divider -->
@@ -102,7 +108,7 @@
                       <img src="../assets/img/screenshots/desktop/jobs.jpg" class="device-screen" alt="...">
                       <img src="../assets/img/devices/macbook.svg" class="img-fluid" alt="...">
                     </div>
-                  
+
                   </div>
                 </div>
               </div>
@@ -129,7 +135,7 @@
               <div class="card-body">
                 <div class="row align-items-center">
                   <div class="col-12 col-md-4">
-                    
+
                     <!-- Macbook + iPhone -->
                     <div class="device-combo device-combo-macbook-iphonex">
 
@@ -149,7 +155,7 @@
 
                   </div>
                   <div class="col-12 col-md-4">
-                    
+
                     <!-- iPhone + iPhone -->
                     <div class="device-combo device-combo-iphonex-iphonex">
 
@@ -169,7 +175,7 @@
 
                   </div>
                   <div class="col-12 col-md-4">
-                    
+
                     <!-- iPhone + Macbook -->
                     <div class="device-combo device-combo-iphonex-macbook">
 
@@ -196,7 +202,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -212,7 +218,7 @@
                   <a class="list-link" href="#combo" data-toggle="smooth-scroll">Combo</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -221,7 +227,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

@@ -1,19 +1,21 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
+    @@include("@@webRoot/partials/head.html", {
     "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
 
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
+    @@include("@@webRoot/partials/navbar.html", {
     "classList": "navbar-light fixed-top bg-white border-bottom",
     "type": "fluid"
     })
@@ -44,7 +46,8 @@
 
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
 
-            @@include("../partials/sidenav.html")
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -98,16 +102,20 @@
 
                     <!-- Nav -->
                     <nav class="nav justify-content-center">
-                      <a class="badge badge-pill badge-secondary-soft active mr-1 mb-1" href="#" data-toggle="pill" data-filter="*" data-target="#portfolio">
+                      <a class="badge badge-pill badge-secondary-soft active mr-1 mb-1" href="#" data-toggle="pill"
+                        data-filter="*" data-target="#portfolio">
                         <span class="h6 text-uppercase">Primary</span>
                       </a>
-                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill" data-filter=".product" data-target="#portfolio">
+                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill"
+                        data-filter=".product" data-target="#portfolio">
                         <span class="h6 text-uppercase">Product</span>
                       </a>
-                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill" data-filter=".ux" data-target="#portfolio">
+                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill"
+                        data-filter=".ux" data-target="#portfolio">
                         <span class="h6 text-uppercase">UX</span>
                       </a>
-                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill" data-filter=".resources" data-target="#portfolio">
+                      <a class="badge badge-pill badge-secondary-soft mr-1 mb-1" href="#" data-toggle="pill"
+                        data-filter=".resources" data-target="#portfolio">
                         <span class="h6 text-uppercase">Resources</span>
                       </a>
                     </nav>
@@ -162,7 +170,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
+    @@include("@@webRoot/partials/scripts.html")
 
   </body>
+
 </html>

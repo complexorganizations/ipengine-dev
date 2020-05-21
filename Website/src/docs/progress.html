@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -71,7 +75,8 @@
 
             <!-- Bootstrap/Plugin Link -->
             <p>
-              <a class="text-decoration-none" href="http://getbootstrap.com/docs/4.1/components/progress/" target="_blank">
+              <a class="text-decoration-none" href="http://getbootstrap.com/docs/4.1/components/progress/"
+                target="_blank">
                 <i class="fe fe-external-link pr-1"></i>
                 Bootstrap documentation
               </a>
@@ -85,9 +90,10 @@
               <div class="card-body">
 
                 <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="width: 32%" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" style="width: 32%" aria-valuenow="32" aria-valuemin="0"
+                    aria-valuemax="100"></div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -107,9 +113,10 @@
               <div class="card-body">
 
                 <div class="progress">
-                  <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
+                  <div class="progress-bar" role="progressbar" style="width: 45%;" aria-valuenow="45" aria-valuemin="0"
+                    aria-valuemax="100">45%</div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -129,18 +136,22 @@
               <div class="card-body">
 
                 <div class="progress mb-3">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress mb-3">
-                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50"
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress mb-3">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75"
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="progress">
-                  <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100"
+                    aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -152,7 +163,8 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              We only set a <code>height</code> value on the <code>.progress</code>, so if you change that value the inner <code>.progress-bar</code> will automatically resize accordingly.
+              We only set a <code>height</code> value on the <code>.progress</code>, so if you change that value the
+              inner <code>.progress-bar</code> will automatically resize accordingly.
             </p>
 
             <!-- Card -->
@@ -160,16 +172,17 @@
               <div class="card-body">
 
                 <div class="progress" style="height: 5px;">
-                  <div class="progress-bar" role="progressbar" style="width: 32%" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+                  <div class="progress-bar" role="progressbar" style="width: 32%" aria-valuenow="32" aria-valuemin="0"
+                    aria-valuemax="100"></div>
                 </div>
-                
+
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
-            
+
               <!-- Heading -->
               <h6 class="text-uppercase font-weight-bold">
                 Jump to
@@ -187,7 +200,7 @@
                   <a class="list-link" href="#height" data-toggle="smooth-scroll">Height</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -196,7 +209,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

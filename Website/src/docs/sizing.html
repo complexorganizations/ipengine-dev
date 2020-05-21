@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -85,10 +89,12 @@
             <!-- List -->
             <ul class="mb-5">
               <li>
-                <code>.mw-25(50, 75, 100, 110, 120, 130, 140, 150)</code> - controls the <code>max-width</code> of an element in <code>%</code>.
+                <code>.mw-25(50, 75, 100, 110, 120, 130, 140, 150)</code> - controls the <code>max-width</code> of an
+                element in <code>%</code>.
               </li>
               <li>
-                <code>.vw-25(50, 75, 100, 110, 120, 130, 140, 150)</code> - controls the width of an element in <code>vw</code>.
+                <code>.vw-25(50, 75, 100, 110, 120, 130, 140, 150)</code> - controls the width of an element in
+                <code>vw</code>.
               </li>
             </ul>
 
@@ -120,7 +126,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -136,7 +142,7 @@
                   <a class="list-link" href="#responsive" data-toggle="smooth-scroll">Responsive</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -145,7 +151,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

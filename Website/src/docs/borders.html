@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -76,7 +80,8 @@
 
             <!-- Text -->
             <p class="font-size-lg text-gray-700">
-              Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.
+              Use border utilities to quickly style the border and border-radius of an element. Great for images,
+              buttons, or any other element.
             </p>
 
             <!-- Divider -->
@@ -87,13 +92,14 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              Additonal border color utilities. Additonal modifier at the end of the utility name means the opacity level.
+              Additonal border color utilities. Additonal modifier at the end of the utility name means the opacity
+              level.
             </p>
 
             <!-- Card -->
             <div class="card">
               <div class="card-body d-flex flex-wrap">
-                
+
                 <div class="mr-3 mb-3 border border-white-20" style="width: 5rem; height: 5rem;"></div>
                 <div class="mr-3 mb-3 border border-gray-300" style="width: 5rem; height: 5rem;"></div>
                 <div class="mr-3 mb-3 border border-gray-800" style="width: 5rem; height: 5rem;"></div>
@@ -126,7 +132,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -145,7 +151,7 @@
                   <a class="list-link" href="#responsive" data-toggle="smooth-scroll">Responsive</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -154,7 +160,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -73,12 +77,14 @@
 
             <!-- Text -->
             <p class="font-size-lg text-gray-700">
-              Dashkit supports all of Bootstrap's default form styling in addition to a handful of new input types and features.
+              Dashkit supports all of Bootstrap's default form styling in addition to a handful of new input types and
+              features.
             </p>
 
             <!-- Bootstrap/Plugin Link -->
             <p>
-              <a class="text-decoration-none" href="https://getbootstrap.com/docs/4.0/components/forms/" target="_blank">
+              <a class="text-decoration-none" href="https://getbootstrap.com/docs/4.0/components/forms/"
+                target="_blank">
                 <i class="fe fe-external-link pr-1"></i>
                 Bootstrap documentation
               </a>
@@ -102,7 +108,7 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-                
+
               </div>
             </div>
 
@@ -132,7 +138,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control form-control-sm" placeholder=".form-control-sm">
                 </div>
-                
+
               </div>
             </div>
 
@@ -144,7 +150,8 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs, custom selects, and custom file inputs.
+              Easily extend form controls by adding text, buttons, or button groups on either side of textual inputs,
+              custom selects, and custom file inputs.
             </p>
 
             <!-- Card -->
@@ -155,16 +162,18 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                    aria-describedby="basic-addon1">
                 </div>
 
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  <input type="text" class="form-control" placeholder="Recipient's username"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
                   <div class="input-group-append">
                     <span class="input-group-text" id="basic-addon2">@example.com</span>
                   </div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -176,7 +185,8 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              Provide valuable, actionable feedback to your users with HTML5 form validation–available in all our supported browsers.
+              Provide valuable, actionable feedback to your users with HTML5 form validation–available in all our
+              supported browsers.
             </p>
 
             <!-- Card -->
@@ -190,7 +200,7 @@
                 <div class="form-group">
                   <input type="text" class="form-control is-invalid" value="Invalid input">
                 </div>
-                
+
               </div>
             </div>
 
@@ -207,13 +217,14 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-5">
-              Remove borders and horizontal paddings from a form control with a <code>.form-control-flush</code> modifier.
+              Remove borders and horizontal paddings from a form control with a <code>.form-control-flush</code>
+              modifier.
             </p>
 
             <!-- Card -->
             <div class="card">
               <div class="card-body">
-                
+
                 <input type="text" class="form-control form-control-flush" placeholder="Form control flush">
 
               </div>
@@ -230,9 +241,9 @@
             <!-- Heading -->
             <div class="d-flex align-items-center">
               <h3 class="font-weight-bold mr-3" id="floatingLabels">Floating labels</h1>
-              <span class="badge badge-pill badge-primary-soft mb-2">
-                <span class="h6 text-uppercase font-weight-bold">Landkit only</span>
-              </span>
+                <span class="badge badge-pill badge-primary-soft mb-2">
+                  <span class="h6 text-uppercase font-weight-bold">Landkit only</span>
+                </span>
             </div>
 
             <!-- Text -->
@@ -243,7 +254,7 @@
             <!-- Card -->
             <div class="card">
               <div class="card-body">
-                
+
                 <form>
                   <div class="form-label-group">
                     <input type="text" class="form-control form-control-flush" id="cardName" placeholder="Name">
@@ -254,7 +265,8 @@
                     <label for="cardEmail">Email</label>
                   </div>
                   <div class="form-label-group">
-                    <input type="password" class="form-control form-control-flush" id="cardPassword" placeholder="Password">
+                    <input type="password" class="form-control form-control-flush" id="cardPassword"
+                      placeholder="Password">
                     <label for="cardPassword">Password</label>
                   </div>
                   <div class="mt-6">
@@ -271,7 +283,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -302,7 +314,7 @@
                   <a class="list-link" href="#floatingLabels" data-toggle="smooth-scroll">Floating labels</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -311,7 +323,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

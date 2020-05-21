@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -84,9 +88,11 @@
 
             <div class="row mb-5">
               <div class="col-12 col-xl-4 d-flex">
-                
+
                 <!-- Card -->
-                <div class="card lift lift-lg mb-6 mb-xl-0 pt-14 overlay overlay-black overlay-30 bg-cover shadow-light-lg" style="background-image: url(../assets/img/photos/photo-8.jpg);">
+                <div
+                  class="card lift lift-lg mb-6 mb-xl-0 pt-14 overlay overlay-black overlay-30 bg-cover shadow-light-lg"
+                  style="background-image: url(../assets/img/photos/photo-8.jpg);">
 
                   <!-- Body -->
                   <a class="card-body mt-auto" href="#!">
@@ -113,24 +119,24 @@
                     <div class="avatar avatar-sm mr-2">
                       <img src="../assets/img/avatars/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
                     </div>
-                    
+
                     <!-- Author -->
                     <h6 class="text-uppercase text-white-80 mr-2 mb-0">
                       Ab Hadley
                     </h6>
-                    
+
                     <!-- Date -->
                     <p class="h6 text-uppercase text-white-80 mb-0 ml-auto">
                       <time datetime="2019-05-02">May 02</time>
                     </p>
 
                   </a>
-                  
+
                 </div>
 
               </div>
               <div class="col-12 col-xl-4 d-flex">
-                
+
                 <!-- Card -->
                 <div class="card lift lift-lg mb-6 mb-xl-0 shadow-light-lg">
 
@@ -159,7 +165,7 @@
                     </p>
 
                   </a>
-                    
+
                   <!-- Meta -->
                   <a class="card-meta" href="#!">
 
@@ -170,12 +176,12 @@
                     <div class="avatar avatar-sm mr-2">
                       <img src="../assets/img/avatars/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
                     </div>
-                    
+
                     <!-- Author -->
                     <h6 class="text-uppercase text-muted mr-2 mb-0">
                       Adolfo Hess
                     </h6>
-                    
+
                     <!-- Date -->
                     <p class="h6 text-uppercase text-muted mb-0 ml-auto">
                       <time datetime="2019-05-02">May 02</time>
@@ -187,7 +193,7 @@
 
               </div>
               <div class="col-12 col-xl-4 d-flex">
-                
+
                 <!-- Card -->
                 <div class="card lift lift-lg shadow-light-lg">
 
@@ -201,7 +207,9 @@
 
                     <!-- Text -->
                     <p class="mb-0 text-muted">
-                      Notice how this card stays the same height as its siblings and this text is vertically centered (at desktop sizes). This keeps layouts looking consistent no matter what type of content occupies each sibling card.
+                      Notice how this card stays the same height as its siblings and this text is vertically centered
+                      (at desktop sizes). This keeps layouts looking consistent no matter what type of content occupies
+                      each sibling card.
                     </p>
 
                   </a>
@@ -216,12 +224,12 @@
                     <div class="avatar avatar-sm mr-2">
                       <img src="../assets/img/avatars/avatar-1.jpg" alt="..." class="avatar-img rounded-circle">
                     </div>
-                    
+
                     <!-- Author -->
                     <h6 class="text-uppercase text-muted mr-2 mb-0">
                       Ab Hadley
                     </h6>
-                    
+
                     <!-- Date -->
                     <p class="h6 text-uppercase text-muted mb-0 ml-auto">
                       <time datetime="2019-05-02">May 02</time>
@@ -247,7 +255,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right"></div>
         </div> <!-- / .row -->
@@ -256,7 +264,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

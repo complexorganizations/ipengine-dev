@@ -1,17 +1,19 @@
 <!doctype html>
 <html lang="en">
+
    <head>
-      @@include("../partials/head.html", {
+      @@include("@@webRoot/partials/head.html", {
       "pageTitle": "Landkit"
       })
    </head>
+
    <body>
       <!-- MODALS
          ================================================== -->
-      @@include("../partials/modals.html")
+      @@include("@@webRoot/partials/modals.html")
       <!-- NAVBAR
          ================================================== -->
-      @@include("../partials/navbar.html", {
+      @@include("@@webRoot/partials/navbar.html", {
       "classList": "navbar-light bg-white border-bottom",
       "type": "fluid"
       })
@@ -50,8 +52,9 @@
             <div class="row">
                <div class="col-12 text-center">
                   <!-- Button -->
-                  <a href="#info" class="btn btn-white btn-rounded-circle shadow mt-n11 mt-md-n13" data-toggle="smooth-scroll">
-                  <i class="fe fe-arrow-down"></i>
+                  <a href="#info" class="btn btn-white btn-rounded-circle shadow mt-n11 mt-md-n13"
+                     data-toggle="smooth-scroll">
+                     <i class="fe fe-arrow-down"></i>
                   </a>
                </div>
             </div>
@@ -65,7 +68,7 @@
                   <!-- Link -->
                   <div class="mb-5 mb-md-0">
                      <a href="#!" class="h4 text-primary">
-                     Start a chat!
+                        Start a chat!
                      </a>
                   </div>
                </div>
@@ -77,7 +80,7 @@
                   <!-- Link -->
                   <div class="mb-5 mb-md-0">
                      <a href="#!" class="h4">
-                     (555) 123-4567
+                        (555) 123-4567
                      </a>
                   </div>
                </div>
@@ -88,7 +91,7 @@
                   </h6>
                   <!-- Link -->
                   <a href="#!" class="h4">
-                  support@goodthemes.co
+                     support@goodthemes.co
                   </a>
                </div>
             </div>
@@ -121,7 +124,7 @@
                            <div class="form-group mb-5">
                               <!-- Label -->
                               <label for="contactName">
-                              Full name
+                                 Full name
                               </label>
                               <!-- Input -->
                               <input type="text" class="form-control" id="contactName" placeholder="Full name">
@@ -131,7 +134,7 @@
                            <div class="form-group mb-5">
                               <!-- Label -->
                               <label for="contactEmail">
-                              Email
+                                 Email
                               </label>
                               <!-- Input -->
                               <input type="email" class="form-control" id="contactEmail" placeholder="hello@domain.com">
@@ -144,7 +147,7 @@
                            <div class="form-group mb-7 mb-md-9">
                               <!-- Label -->
                               <label for="contactMessage">
-                              What can we help you with?
+                                 What can we help you with?
                               </label>
                               <!-- Input -->
                               <textarea class="form-control" id="contactMessage" rows="5"
@@ -157,7 +160,7 @@
                         <div class="col-auto">
                            <!-- Submit -->
                            <button type="submit" class="btn btn-primary lift">
-                           Send message
+                              Send message
                            </button>
                         </div>
                      </div>
@@ -178,11 +181,12 @@
       </div>
       <!-- FOOTER
          ================================================== -->
-      @@include("../partials/footer.html", {
+      @@include("@@webRoot/partials/footer.html", {
       "classList": "bg-gray-200"
       })
       <!-- JAVASCRIPT
          ================================================== -->
-      @@include("../partials/scripts.html")
+      @@include("@@webRoot/partials/scripts.html")
    </body>
+
 </html>

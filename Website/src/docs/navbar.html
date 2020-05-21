@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-9 col-xl-10 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -71,12 +75,14 @@
 
             <!-- Text -->
             <p class="font-size-lg text-gray-700">
-              Powerful and responsive navigation header, the navbar. Includes support for branding, navigation, and more, including support for the collapse plugin.
+              Powerful and responsive navigation header, the navbar. Includes support for branding, navigation, and
+              more, including support for the collapse plugin.
             </p>
 
             <!-- Bootstrap/Plugin Link -->
             <p>
-              <a class="text-decoration-none" href="http://getbootstrap.com/docs/4.1/components/navbar/" target="_blank">
+              <a class="text-decoration-none" href="http://getbootstrap.com/docs/4.1/components/navbar/"
+                target="_blank">
                 <i class="fe fe-external-link pr-1"></i>
                 Bootstrap documentation
               </a>
@@ -97,23 +103,26 @@
                   </a>
 
                   <!-- Toggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  
+
                   <!-- Collapse -->
                   <div class="collapse navbar-collapse">
-                    
+
                     <!-- Navigation -->
                     <ul class="navbar-nav ml-auto">
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Landings
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                           <div class="row no-gutters">
                             <div class="col-12 col-lg-6">
-                              <div class="dropdown-img-left" style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
+                              <div class="dropdown-img-left"
+                                style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
 
                                 <!-- Heading -->
                                 <h4 class="font-weight-bold text-white mb-0">
@@ -126,10 +135,11 @@
                                 </p>
 
                                 <!-- Button -->
-                                <a href="@@webRoot/overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                <a href="@@webRoot/overview.html"
+                                  class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
                                   View all pages
                                 </a>
-                                
+
                               </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -168,10 +178,10 @@
 
                                   </div>
                                   <div class="col-6">
-                                    
+
                                     <!-- Heading -->
                                     <h6 class="dropdown-header">
-                                      Web 
+                                      Web
                                     </h6>
 
                                     <!-- List -->
@@ -196,13 +206,14 @@
                         </div>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Pages
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
                           <div class="row no-gutters">
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Career
@@ -230,11 +241,11 @@
                               </a>
                               <a class="dropdown-item mb-5 mb-lg-0" href="@@webRoot/terms-of-service.html">
                                 Terms
-                              </a>             
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Help center
@@ -259,11 +270,11 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/contact-alt.html">
                                 Cover
-                              </a>          
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Blog
@@ -281,14 +292,15 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/blog-search.html">
                                 Search
-                              </a>            
+                              </a>
 
                             </div>
                           </div>
                         </div> <!-- / .row -->
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAccount">
@@ -371,18 +383,19 @@
                         </ul>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Documentation
                         </a>
                         <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDocumentation">
                           <div class="list-group list-group-flush">
                             <a class="list-group-item" href="@@webRoot/docs/index.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/General/Clipboard.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
 
@@ -400,15 +413,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/alerts.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Layout/Layout-4-blocks.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Components
@@ -423,15 +436,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/changelog.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Files/File.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Changelog
@@ -443,7 +456,7 @@
                                 </p>
 
                               </div>
-                                
+
                               <!-- Badge -->
                               <span class="badge badge-pill badge-primary-soft ml-auto">
                                 1.0
@@ -461,7 +474,7 @@
                     </a>
 
                   </div>
-                  
+
                 </nav>
 
                 <nav class="navbar navbar-light navbar-expand-lg border-bottom mb-3" style="z-index: 3;">
@@ -472,10 +485,11 @@
                   </a>
 
                   <!-- Toggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  
+
                   <!-- Collapse -->
                   <div class="collapse navbar-collapse">
 
@@ -490,7 +504,7 @@
                     </a>
 
                   </div>
-                  
+
                 </nav>
 
                 <nav class="navbar navbar-light navbar-expand-lg border-bottom mb-3" style="z-index: 2;">
@@ -501,23 +515,26 @@
                   </a>
 
                   <!-- Toggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  
+
                   <!-- Collapse -->
                   <div class="collapse navbar-collapse">
 
                     <!-- Navigation -->
                     <ul class="navbar-nav ml-auto">
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Landings
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                           <div class="row no-gutters">
                             <div class="col-12 col-lg-6">
-                              <div class="dropdown-img-left" style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
+                              <div class="dropdown-img-left"
+                                style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
 
                                 <!-- Heading -->
                                 <h4 class="font-weight-bold text-white mb-0">
@@ -530,10 +547,11 @@
                                 </p>
 
                                 <!-- Button -->
-                                <a href="@@webRoot/overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                <a href="@@webRoot/overview.html"
+                                  class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
                                   View all pages
                                 </a>
-                                
+
                               </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -572,10 +590,10 @@
 
                                   </div>
                                   <div class="col-6">
-                                    
+
                                     <!-- Heading -->
                                     <h6 class="dropdown-header">
-                                      Web 
+                                      Web
                                     </h6>
 
                                     <!-- List -->
@@ -600,13 +618,14 @@
                         </div>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Pages
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
                           <div class="row no-gutters">
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Career
@@ -634,11 +653,11 @@
                               </a>
                               <a class="dropdown-item mb-5 mb-lg-0" href="@@webRoot/terms-of-service.html">
                                 Terms
-                              </a>             
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Help center
@@ -663,11 +682,11 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/contact-alt.html">
                                 Cover
-                              </a>          
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Blog
@@ -685,14 +704,15 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/blog-search.html">
                                 Search
-                              </a>            
+                              </a>
 
                             </div>
                           </div>
                         </div> <!-- / .row -->
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAccount">
@@ -775,18 +795,19 @@
                         </ul>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Documentation
                         </a>
                         <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDocumentation">
                           <div class="list-group list-group-flush">
                             <a class="list-group-item" href="@@webRoot/docs/index.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/General/Clipboard.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
 
@@ -804,15 +825,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/alerts.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Layout/Layout-4-blocks.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Components
@@ -827,15 +848,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/changelog.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Files/File.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Changelog
@@ -847,7 +868,7 @@
                                 </p>
 
                               </div>
-                                
+
                               <!-- Badge -->
                               <span class="badge badge-pill badge-primary-soft ml-auto">
                                 1.0
@@ -860,7 +881,7 @@
                     </ul>
 
                   </div>
-                  
+
                 </nav>
 
                 <nav class="navbar navbar-light navbar-expand-lg mb-3" style="z-index: 1;">
@@ -871,23 +892,26 @@
                   </a>
 
                   <!-- Toggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  
+
                   <!-- Collapse -->
                   <div class="collapse navbar-collapse">
 
                     <!-- Navigation -->
                     <ul class="navbar-nav ml-auto">
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Landings
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                           <div class="row no-gutters">
                             <div class="col-12 col-lg-6">
-                              <div class="dropdown-img-left" style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
+                              <div class="dropdown-img-left"
+                                style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
 
                                 <!-- Heading -->
                                 <h4 class="font-weight-bold text-white mb-0">
@@ -900,10 +924,11 @@
                                 </p>
 
                                 <!-- Button -->
-                                <a href="@@webRoot/overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                <a href="@@webRoot/overview.html"
+                                  class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
                                   View all pages
                                 </a>
-                                
+
                               </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -942,10 +967,10 @@
 
                                   </div>
                                   <div class="col-6">
-                                    
+
                                     <!-- Heading -->
                                     <h6 class="dropdown-header">
-                                      Web 
+                                      Web
                                     </h6>
 
                                     <!-- List -->
@@ -970,13 +995,14 @@
                         </div>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Pages
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
                           <div class="row no-gutters">
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Career
@@ -1004,11 +1030,11 @@
                               </a>
                               <a class="dropdown-item mb-5 mb-lg-0" href="@@webRoot/terms-of-service.html">
                                 Terms
-                              </a>             
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Help center
@@ -1033,11 +1059,11 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/contact-alt.html">
                                 Cover
-                              </a>          
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Blog
@@ -1055,14 +1081,15 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/blog-search.html">
                                 Search
-                              </a>            
+                              </a>
 
                             </div>
                           </div>
                         </div> <!-- / .row -->
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAccount">
@@ -1145,18 +1172,19 @@
                         </ul>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Documentation
                         </a>
                         <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDocumentation">
                           <div class="list-group list-group-flush">
                             <a class="list-group-item" href="@@webRoot/docs/index.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/General/Clipboard.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
 
@@ -1174,15 +1202,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/alerts.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Layout/Layout-4-blocks.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Components
@@ -1197,15 +1225,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/changelog.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Files/File.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Changelog
@@ -1217,7 +1245,7 @@
                                 </p>
 
                               </div>
-                                
+
                               <!-- Badge -->
                               <span class="badge badge-pill badge-primary-soft ml-auto">
                                 1.0
@@ -1230,7 +1258,7 @@
                     </ul>
 
                   </div>
-                  
+
                 </nav>
 
                 <nav class="navbar navbar-dark bg-dark navbar-expand-lg" style="z-index: 0;">
@@ -1241,23 +1269,26 @@
                   </a>
 
                   <!-- Toggler -->
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-                  
+
                   <!-- Collapse -->
                   <div class="collapse navbar-collapse">
 
                     <!-- Navigation -->
                     <ul class="navbar-nav ml-auto">
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarLandings" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Landings
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl p-0" aria-labelledby="navbarLandings">
                           <div class="row no-gutters">
                             <div class="col-12 col-lg-6">
-                              <div class="dropdown-img-left" style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
+                              <div class="dropdown-img-left"
+                                style="background-image: url(@@webRoot/assets/img/photos/photo-3.jpg);">
 
                                 <!-- Heading -->
                                 <h4 class="font-weight-bold text-white mb-0">
@@ -1270,10 +1301,11 @@
                                 </p>
 
                                 <!-- Button -->
-                                <a href="@@webRoot/overview.html" class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
+                                <a href="@@webRoot/overview.html"
+                                  class="btn btn-sm btn-white shadow-dark fonFt-size-sm">
                                   View all pages
                                 </a>
-                                
+
                               </div>
                             </div>
                             <div class="col-12 col-lg-6">
@@ -1312,10 +1344,10 @@
 
                                   </div>
                                   <div class="col-6">
-                                    
+
                                     <!-- Heading -->
                                     <h6 class="dropdown-header">
-                                      Web 
+                                      Web
                                     </h6>
 
                                     <!-- List -->
@@ -1340,13 +1372,14 @@
                         </div>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarPages" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Pages
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="navbarPages">
                           <div class="row no-gutters">
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Career
@@ -1374,11 +1407,11 @@
                               </a>
                               <a class="dropdown-item mb-5 mb-lg-0" href="@@webRoot/terms-of-service.html">
                                 Terms
-                              </a>             
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Help center
@@ -1403,11 +1436,11 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/contact-alt.html">
                                 Cover
-                              </a>          
+                              </a>
 
                             </div>
                             <div class="col-6 col-lg-4">
-                              
+
                               <!-- Heading -->
                               <h6 class="dropdown-header">
                                 Blog
@@ -1425,14 +1458,15 @@
                               </a>
                               <a class="dropdown-item" href="@@webRoot/blog-search.html">
                                 Search
-                              </a>            
+                              </a>
 
                             </div>
                           </div>
                         </div> <!-- / .row -->
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarAccount" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Account
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarAccount">
@@ -1515,18 +1549,19 @@
                         </ul>
                       </li>
                       <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="navbarDocumentation" data-toggle="dropdown" href="#"
+                          aria-haspopup="true" aria-expanded="false">
                           Documentation
                         </a>
                         <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDocumentation">
                           <div class="list-group list-group-flush">
                             <a class="list-group-item" href="@@webRoot/docs/index.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/General/Clipboard.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
 
@@ -1544,15 +1579,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/alerts.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Layout/Layout-4-blocks.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Components
@@ -1567,15 +1602,15 @@
 
                             </a>
                             <a class="list-group-item" href="@@webRoot/docs/changelog.html">
-                              
+
                               <!-- Icon -->
                               <div class="icon icon-sm text-primary">
                                 @@include("../assets/img/icons/duotone-icons/Files/File.svg")
                               </div>
-                              
+
                               <!-- Content -->
                               <div class="ml-4">
-                                
+
                                 <!-- Heading -->
                                 <h6 class="font-weight-bold text-uppercase text-primary mb-0">
                                   Changelog
@@ -1587,7 +1622,7 @@
                                 </p>
 
                               </div>
-                                
+
                               <!-- Badge -->
                               <span class="badge badge-pill badge-primary-soft ml-auto">
                                 1.0
@@ -1605,12 +1640,12 @@
                     </a>
 
                   </div>
-                  
+
                 </nav>
 
               </div>
             </div>
-            
+
           </div>
         </div> <!-- / .row -->
       </div>
@@ -1618,7 +1653,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

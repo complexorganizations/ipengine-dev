@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -90,7 +94,9 @@
 
             <!-- Text -->
             <p class="text-gray-700">
-              While Figma is a relatively new design tool, it has taken the top spot in our design toolkit. Having been a Sketch user since it's inception, it was a big decision to switch...but we so glad we did. Here are the biggest benefits we've found with Figma:
+              While Figma is a relatively new design tool, it has taken the top spot in our design toolkit. Having been
+              a Sketch user since it's inception, it was a big decision to switch...but we so glad we did. Here are the
+              biggest benefits we've found with Figma:
             </p>
 
             <!-- List -->
@@ -104,7 +110,9 @@
 
             <!-- Text -->
             <p class="text-gray-700 mb-7">
-              The only downsides we've seen are that it takes a while to get used to different shortcut keys, and pasting assets into files doesn't work as well. The transition is hard in the beginning, but well worth it. 
+              The only downsides we've seen are that it takes a while to get used to different shortcut keys, and
+              pasting assets into files doesn't work as well. The transition is hard in the beginning, but well worth
+              it.
             </p>
 
             <!-- Heading -->
@@ -112,24 +120,30 @@
 
             <!-- Text -->
             <p class="text-gray-700">
-              Since we work pretty fluidly between Figma and actual code, we've decided it's a better investment of time to continue improving Landkit over babysitting our design file. That said, we realize it can be super useful to have a design resource to rough out new pages or spin up component variations. To that end, we provide an "unofficial" Landkit Figma file for you to play with.
+              Since we work pretty fluidly between Figma and actual code, we've decided it's a better investment of time
+              to continue improving Landkit over babysitting our design file. That said, we realize it can be super
+              useful to have a design resource to rough out new pages or spin up component variations. To that end, we
+              provide an "unofficial" Landkit Figma file for you to play with.
             </p>
 
             <!-- Text -->
             <p class="text-gray-700">
-              The file is far from perfect, and is relatively disorganized, but the type and colors systems are well utilized and the overall layouts are quite close to the live product. To play with design:
+              The file is far from perfect, and is relatively disorganized, but the type and colors systems are well
+              utilized and the overall layouts are quite close to the live product. To play with design:
             </p>
 
             <!-- List -->
             <ol class="text-gray-700 mb-7">
               <li><a href="https://www.figma.com" target="_blank">Download Figma</a></li>
               <li>Open the Figma link from the <code>README.md</code></li>
-              <li>The file is "read-only", so you'll have to duplicate it! Go to your grid of documents in Figma, click the ellipsis icon on <code>Landkit (Distributed)</code>, and then "Duplicate" to create an editable version.</li>
+              <li>The file is "read-only", so you'll have to duplicate it! Go to your grid of documents in Figma, click
+                the ellipsis icon on <code>Landkit (Distributed)</code>, and then "Duplicate" to create an editable
+                version.</li>
             </ol>
 
             <!-- Screenshot -->
             <img class="img-fluid screenshot" src="../assets/img/screenshots/landkit/figma.jpg">
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -148,7 +162,7 @@
                   <a class="list-link" href="#unofficialFile" data-toggle="smooth-scroll">Unofficial File</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -157,7 +171,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>

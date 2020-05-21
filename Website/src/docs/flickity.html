@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="en">
+
   <head>
-    @@include("../partials/head.html", {
-      "pageTitle": "Landkit"
+    @@include("@@webRoot/partials/head.html", {
+    "pageTitle": "Landkit"
     })
   </head>
+
   <body class="bg-light" style="padding-top: 84px;">
-    
+
     <!-- MODALS
     ================================================== -->
-    @@include("../partials/modals.html")
+    @@include("@@webRoot/partials/modals.html")
 
     <!-- NAVBAR
     ================================================== -->
-    @@include("../partials/navbar.html", {
-      "classList": "navbar-light fixed-top bg-white border-bottom",
-      "type": "fluid"
+    @@include("@@webRoot/partials/navbar.html", {
+    "classList": "navbar-light fixed-top bg-white border-bottom",
+    "type": "fluid"
     })
 
     <!-- BREADCRUMB
@@ -24,7 +26,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col">
-            
+
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
@@ -41,10 +43,11 @@
 
           </div>
           <div class="col-auto">
-            
+
             <!-- Toggler -->
             <div class="navbar-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse" aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenavCollapse"
+                aria-controls="sidenavCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
             </div>
@@ -59,9 +62,10 @@
     <section>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
-            
-            @@include("../partials/sidenav.html")
+          <div
+            class="col-12 col-lg-3 col-xl-2 px-lg-0 border-bottom border-bottom-lg-0 border-right-lg border-gray-300 sidenav sidenav-left">
+
+            @@include("@@webRoot/partials/sidenav.html")
 
           </div>
           <div class="col-12 col-lg-6 col-xl-8 offset-lg-3 offset-xl-2 py-7 py-lg-9 px-lg-7">
@@ -93,7 +97,7 @@
             <!-- Card -->
             <div class="card">
               <div class="card-body">
-                
+
                 <!-- Flickity -->
                 <div data-flickity='{"pageDots": false,"cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
                   <div class="col-12 col-md-4 px-1">
@@ -134,7 +138,8 @@
               <div class="card-body">
 
                 <!-- Flickity -->
-                <div class="flickity-button-white" data-flickity='{"pageDots": false,"cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
+                <div class="flickity-button-white"
+                  data-flickity='{"pageDots": false,"cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
                   <div class="col-12 col-md-4 px-1">
                     <img src="../assets/img/covers/cover-5.jpg" class="img-fluid" alt="...">
                   </div>
@@ -173,7 +178,8 @@
               <div class="card-body">
 
                 <!-- Flickity -->
-                <div class="flickity-button-inset" data-flickity='{"pageDots": false,"cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
+                <div class="flickity-button-inset"
+                  data-flickity='{"pageDots": false,"cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'>
                   <div class="col-12 col-md-4 px-1">
                     <img src="../assets/img/covers/cover-5.jpg" class="img-fluid" alt="...">
                   </div>
@@ -208,9 +214,10 @@
             </p>
 
             <!-- Flickity -->
-            <div class="flickity-viewport-visible pt-2 pb-9" data-flickity='{"cellAlign": "left", "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "contain": true}'>
+            <div class="flickity-viewport-visible pt-2 pb-9"
+              data-flickity='{"cellAlign": "left", "imagesLoaded": true, "pageDots": false, "prevNextButtons": false, "contain": true}'>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #FF5A5F;">
                   <div class="card-body text-center">
@@ -222,18 +229,18 @@
 
                     <!-- Text -->
                     <p class="text-gray-700 mb-5">
-                      Uses Landkit to keep their remote teams from around the world in sync. 
+                      Uses Landkit to keep their remote teams from around the world in sync.
                     </p>
 
                     <!-- Link -->
                     <a href="#!" style="color: #FF5A5F;">Read more</a>
-                    
+
                   </div>
                 </div>
 
               </div>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #B81D24;">
                   <div class="card-body text-center">
@@ -250,13 +257,13 @@
 
                     <!-- Link -->
                     <a href="#!" style="color: #B81D24;">Read more</a>
-                    
+
                   </div>
                 </div>
 
               </div>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #0081C9;">
                   <div class="card-body text-center">
@@ -274,13 +281,13 @@
 
                     <!-- Link -->
                     <a href="#!" style="color: #0081C9;">Read more</a>
-                    
+
                   </div>
                 </div>
 
               </div>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #6772E5;">
                   <div class="card-body text-center">
@@ -298,13 +305,13 @@
 
                     <!-- Link -->
                     <a href="#!" style="color: #6772E5;">Read more</a>
-                    
+
                   </div>
                 </div>
 
               </div>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #CB2027;">
                   <div class="card-body text-center">
@@ -322,13 +329,13 @@
 
                     <!-- Link -->
                     <a href="#!" style="color: #CB2027;">Read more</a>
-                    
+
                   </div>
                 </div>
 
               </div>
               <div class="col-12 col-md-5 col-lg-4">
-                
+
                 <!-- Card -->
                 <div class="card card-border shadow-light-lg lift lift-lg" style="border-top-color: #DA5988;">
                   <div class="card-body text-center">
@@ -345,7 +352,7 @@
 
                     <!-- Link -->
                     <a href="#!" style="color: #DA5988;">Read more</a>
-                    
+
                   </div>
                 </div>
 
@@ -360,7 +367,7 @@
                 </code>
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 col-lg-3 col-xl-2 d-none d-lg-block px-lg-0 sidenav sidenav-right">
             <div class="my-7 my-lg-9 px-lg-7 border-left-lg border-gray-300">
@@ -376,13 +383,14 @@
                   <a class="list-link" href="#navigationColor" data-toggle="smooth-scroll">Navigation color</a>
                 </li>
                 <li class="list-item">
-                  <a class="list-link" href="#navigationPositioning" data-toggle="smooth-scroll">Navigation positioning</a>
+                  <a class="list-link" href="#navigationPositioning" data-toggle="smooth-scroll">Navigation
+                    positioning</a>
                 </li>
                 <li class="list-item">
                   <a class="list-link" href="#visibleOverflow" data-toggle="smooth-scroll">Visible overflow</a>
                 </li>
               </ul>
-            
+
             </div>
           </div>
         </div> <!-- / .row -->
@@ -391,7 +399,8 @@
 
     <!-- JAVASCRIPT
     ================================================== -->
-    @@include("../partials/scripts.html")
-      
+    @@include("@@webRoot/partials/scripts.html")
+
   </body>
+
 </html>
