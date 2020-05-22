@@ -1,4 +1,4 @@
-name: 'ipengine.dev'
+name: 'api.ipengine.dev'
 on: [push, pull_request]
 jobs:
   build:
