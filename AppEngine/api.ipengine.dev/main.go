@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", JsonHandler)
+	http.HandleFunc("/ip/", JsonHandler)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}
