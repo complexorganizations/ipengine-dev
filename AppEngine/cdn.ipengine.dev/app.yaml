@@ -1,4 +1,4 @@
-service: default
+service: cdn
 runtime: go113
 env: standard
 automatic_scaling:
