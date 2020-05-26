@@ -1,0 +1,17 @@
+//
+// reboot.scss
+// Extended from Bootstrap
+//
+
+html {
+  height: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  overflow-y: hidden;
+}

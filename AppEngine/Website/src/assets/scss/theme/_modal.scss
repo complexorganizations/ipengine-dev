@@ -1,0 +1,21 @@
+//
+// modals.scss
+// Extended from Bootstrap
+//
+
+.modal-open {
+  padding-right: 0 !important; // additional padding is not required as we have overflow-x: hidden on the root element
+}
+
+.modal-open .navbar {
+  padding-right: $navbar-padding-x !important;
+}
+
+
+// Close
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  z-index: $zindex-dropdown;
+}
