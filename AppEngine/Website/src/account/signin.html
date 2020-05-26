@@ -1,85 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    @@include("@@webRoot/partials/head.html", { "pageTitle": "Landkit" })
+  </head>
 
-   <head>
-      @@include("@@webRoot/partials/head.html", {
-      "pageTitle": "Landkit"
-      })
-   </head>
-
-   <body>
-      <!-- MODALS
+  <body>
+    <!-- MODALS
          ================================================== -->
-      @@include("@@webRoot/partials/modals.html")
-      <!-- NAVBAR
+    @@include("@@webRoot/partials/modals.html")
+    <!-- NAVBAR
          ================================================== -->
-      @@include("@@webRoot/partials/navbar.html", {
-      "classList": "navbar-light bg-white border-bottom",
-      "type": "fluid"
-      })
-      <!-- CONTENT
+    @@include("@@webRoot/partials/navbar.html", { "classList": "navbar-light
+    bg-white border-bottom", "type": "fluid" })
+    <!-- CONTENT
          ================================================== -->
-      <section class="section-border border-primary">
-         <div class="container d-flex flex-column">
-            <div class="row align-items-center justify-content-center no-gutters min-vh-100">
-               <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
-                  <!-- Heading -->
-                  <h1 class="mb-0 font-weight-bold text-center">
-                     Sign in
-                  </h1>
-                  <!-- Text -->
-                  <p class="mb-6 text-center text-muted">
-                     Simplify your workflow in minutes.
-                  </p>
-                  <!-- Form -->
-                  <form class="mb-6">
-                     <!-- Email -->
-                     <div class="form-group">
-                        <label for="email">
-                           Email Address
-                        </label>
-                        <input type="email" class="form-control" id="email" placeholder="name@address.com">
-                     </div>
-                     <!-- Password -->
-                     <div class="form-group mb-5">
-                        <label for="password">
-                           Password
-                        </label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
-                     </div>
-                     <p class="font-size-sm text-right text-muted">
-                        <a href="password-reset.html">Forgot password?</a>
-                     </p>
-                     <!-- Submit -->
-                     <button class="btn btn-block btn-primary" type="submit">
-                        Sign in
-                     </button>
-                  </form>
-                  <!-- Text -->
-                  <p class="mb-0 font-size-sm text-center text-muted">
-                     Don't have an account yet <a href="signup.html">Sign up</a>.
-                  </p>
-               </div>
-            </div>
-            <!-- / .row -->
-         </div>
-         <!-- / .container -->
-      </section>
-      <!-- SHAPE
-         ================================================== -->
-      <div class="position-relative">
-         <div class="shape shape-bottom shape-fluid-x svg-shim text-gray-200">
-            @@include("@@webRoot/assets/img/shapes/curves/curve-1.svg")
-         </div>
+    <section class="section-border border-primary">
+      <div class="container d-flex flex-column">
+        <div
+          class="row align-items-center justify-content-center no-gutters min-vh-100"
+        >
+          <div class="col-12 col-md-5 col-lg-4 py-8 py-md-11">
+            <!-- Heading -->
+            <h1 class="mb-0 font-weight-bold text-center">
+              Sign in
+            </h1>
+            <!-- Text -->
+            <p class="mb-6 text-center text-muted">
+              Simplify your workflow in minutes.
+            </p>
+            <!-- Form -->
+            <form class="mb-6">
+              <!-- Email -->
+              <div class="form-group">
+                <label for="email">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="name@address.com"
+                />
+              </div>
+              <!-- Password -->
+              <div class="form-group mb-5">
+                <label for="password">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <p class="font-size-sm text-right text-muted">
+                <a href="password-reset.html">Forgot password?</a>
+              </p>
+              <!-- Submit -->
+              <button class="btn btn-block btn-primary" type="submit">
+                Sign in
+              </button>
+            </form>
+            <!-- Text -->
+            <p class="mb-0 font-size-sm text-center text-muted">
+              Don't have an account yet <a href="signup.html">Sign up</a>.
+            </p>
+          </div>
+        </div>
+        <!-- / .row -->
       </div>
-      <!-- FOOTER
+      <!-- / .container -->
+    </section>
+    <!-- SHAPE
          ================================================== -->
-      @@include("@@webRoot/partials/footer.html", {
-      "classList": "bg-gray-200"
-      })
-      <!-- JAVASCRIPT
+    <div class="position-relative">
+      <div class="shape shape-bottom shape-fluid-x svg-shim text-gray-200">
+        @@include("@@webRoot/assets/img/shapes/curves/curve-1.svg")
+      </div>
+    </div>
+    <!-- FOOTER
          ================================================== -->
-      @@include("@@webRoot/partials/scripts.html")
-   </body>
-
+    @@include("@@webRoot/partials/footer.html", { "classList": "bg-gray-200" })
+    <!-- JAVASCRIPT
+         ================================================== -->
+    @@include("@@webRoot/partials/scripts.html")
+  </body>
 </html>
