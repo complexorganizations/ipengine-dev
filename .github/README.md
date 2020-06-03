@@ -9,13 +9,3 @@ api.ipengine.dev
 ```sh
 ipengine.dev
 ```
-
-### cdn.ipengine.dev
-```sh
-cdn.ipengine.dev
-```
-
-### dns.ipengine.dev
-```sh
-dns.ipengine.dev
-```
