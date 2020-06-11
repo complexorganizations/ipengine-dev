@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"strconv"
@@ -40,6 +41,12 @@ type ArinRdapData struct {
 		V4Prefix string `json:"v4prefix"`
 		Length   int    `json:"length"`
 	} `json:"cidr0_cidrs"`
+}
+
+type NetworkInfo struct {
+	Ip       string `json:"ip"`
+	Hostname string `json:"hostname"`
+	Reverse  string `json:"reverse"`
 }
 
 //ArinInfo data
@@ -88,6 +95,7 @@ type Response struct {
 	Arin        ArinInfo        `json:"arin"`
 	Orgnization OrgnizationInfo `json:"orgnization"`
 	Contact     ContactInfo     `json:"contact"`
+	Network     NetworkInfo     `json:"network"`
 }
 
 func main() {
@@ -170,7 +178,12 @@ func getVCardForContact(entities []Entities, contact *ContactInfo) {
 									contact.Country = arr[4]
 								}
 							}
-
+							if data == "email" {
+								contact.Email, _ = rt[i+3].(string)
+							}
+							if data == "tel" {
+								contact.Phone, _ = rt[i+3].(string)
+							}
 						}
 					}
 
@@ -258,7 +271,7 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 		Handle:       wd.Handle,
 		Parent:       wd.ParentHandle,
 		Type:         wd.Type,
-		Range:        "",
+		Range:        wd.StartAddress + "-" + wd.EndAddress,
 		Cidr:         wd.Cidr0Cidrs[0].V4Prefix + "/" + strconv.Itoa(wd.Cidr0Cidrs[0].Length),
 		Registration: registration,
 		Updated:      updated,
@@ -266,51 +279,20 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	org := OrgnizationInfo{}
 	contact := ContactInfo{}
 
+	host, _ := net.LookupAddr(ip)
+	network := NetworkInfo{
+		Hostname: host[0],
+		Ip:       ip,
+		Reverse:  ip,
+	}
+
 	getVCard(wd, &org, &contact)
-	// for _, entity := range wd.Entities {
-	// 	org.Handle = entity.Handle
-	// 	for _, event := range entity.Events {
-	// 		if event.EventAction == "registration" {
-	// 			org.Registration = event.EventDate
-	// 		}
-	// 		if event.EventAction == "last changed" {
-	// 			org.Updated = event.EventDate
-	// 		}
-	// 	}
-	// 	for _, d := range entity.VcardArray {
-	// 		rt, ok := d.([]interface{})
-	// 		if ok {
-	// 			for _, da := range rt {
-	// 				rt, ok = da.([]interface{})
-	// 				if ok {
-	// 					for i, data := range rt {
-	// 						if data == "fn" {
-	// 							org.Name, _ = rt[i+3].(string)
-	// 						}
-	// 						if data == "adr" {
-	// 							comp, ok := rt[i+1].(map[string]interface{})
-	// 							if ok {
-	// 								// fmt.Println(comp["label"].(string))
-	// 								arr := strings.Split(comp["label"].(string), "\n")
-	// 								org.Street = arr[0]
-	// 								org.City = arr[1]
-	// 								org.Province = arr[2]
-	// 								org.Postal = arr[3]
-	// 								org.Country = arr[4]
-	// 							}
-	// 						}
-	// 					}
-	// 				}
 
-	// 			}
-	// 		}
-	// 	}
-
-	// }
 	resp := Response{
 		Arin:        arin,
 		Orgnization: org,
 		Contact:     contact,
+		Network:     network,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -335,7 +317,7 @@ func getIpParam(r *http.Request) (string, error) {
 }
 
 func getReverseIp(r *http.Request) string {
-	ff := r.Header.Get("CF-Connecting-IP")
+	ff := r.Header.Get("X-FORWARDED-FOR")
 	if ff != "" {
 		return ff
 	}
