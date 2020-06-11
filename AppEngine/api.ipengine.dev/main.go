@@ -191,6 +191,7 @@ func getVCardForContact(entities []Entities, contact *ContactInfo) {
 		}
 	}
 }
+
 func getVCard(wd ArinRdapData, org *OrgnizationInfo, contact *ContactInfo) {
 	for _, entity := range wd.Entities {
 		getVCardForContact(entity.Entities, contact)
