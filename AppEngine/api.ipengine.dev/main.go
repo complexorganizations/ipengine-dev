@@ -4,10 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net"
 	"net/http"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -99,33 +97,13 @@ type Response struct {
 }
 
 func main() {
-	//logger
-	err := initLogger()
-	if err != nil {
-		log.Fatal(err.Error())
-	}
 	//router
 	r := http.NewServeMux()
 	//routes
 	r.HandleFunc("/", reverseIpHandler)
 	r.HandleFunc("/ip/", ipHandler)
 	//http server
-	log.Println("Api begins")
-	err = http.ListenAndServe(":8080", r)
-	log.Fatal(err.Error())
-}
-
-func initLogger() error {
-	//output (fileMode: -rw-r--r--)
-	lf, err := os.OpenFile("logs.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
-		return errors.New("Failed to initialise the logger!")
-	}
-	log.SetOutput(lf)
-	//flags
-	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	return nil
+	http.ListenAndServe(":8080", r)
 }
 
 func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
@@ -138,7 +116,6 @@ func ipHandler(w http.ResponseWriter, r *http.Request) {
 	//ip
 	ip, err := getIpParam(r)
 	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
@@ -243,7 +220,6 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	url := fmt.Sprintf("https://rdap.arin.net/registry/ip/%s", ip)
 	r, err := c.Get(url)
 	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
@@ -251,7 +227,6 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	var wd ArinRdapData
 	err = json.NewDecoder(r.Body).Decode(&wd)
 	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
@@ -311,7 +286,6 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	//response
 	err = json.NewEncoder(w).Encode(&resp)
 	if err != nil {
-		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
