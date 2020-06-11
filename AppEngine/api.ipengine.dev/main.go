@@ -208,7 +208,6 @@ func getVCard(wd ArinRdapData, org *OrgnizationInfo, contact *ContactInfo) {
 				}
 			}
 		}
-
 	}
 }
 
