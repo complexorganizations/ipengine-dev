@@ -186,7 +186,6 @@ func getVCardForContact(entities []Entities, contact *ContactInfo) {
 							}
 						}
 					}
-
 				}
 			}
 		}
@@ -228,7 +227,6 @@ func getVCard(wd ArinRdapData, org *OrgnizationInfo, contact *ContactInfo) {
 							}
 						}
 					}
-
 				}
 			}
 		}
