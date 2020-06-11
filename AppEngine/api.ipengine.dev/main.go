@@ -241,7 +241,7 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	c := http.Client{
 		Timeout: time.Duration(time.Second * 30),
 	}
-	url := fmt.Sprintf("https://rdap.arin.net/registry/ip/%s.json", ip)
+	url := fmt.Sprintf("https://rdap.arin.net/registry/ip/%s", ip)
 	r, err := c.Get(url)
 	if err != nil {
 		log.Printf("debug: %s\n", err.Error())
@@ -254,6 +254,10 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	if err != nil {
 		log.Printf("debug: %s\n", err.Error())
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
+	}
+	if wd.Handle == "" || wd.EndAddress == "" || wd.StartAddress == "" {
+		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 	updated := ""
