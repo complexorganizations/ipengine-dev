@@ -280,10 +280,13 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	contact := ContactInfo{}
 
 	host, _ := net.LookupAddr(ip)
+	revIP, _ := net.LookupIP(host[0])
+	revIPStr := revIP[0].String()
+	fmt.Println(revIPStr)
 	network := NetworkInfo{
 		Hostname: host[0],
 		Ip:       ip,
-		Reverse:  ip,
+		Reverse:  revIPStr,
 	}
 
 	getVCard(wd, &org, &contact)
@@ -295,13 +298,7 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 		Network:     network,
 	}
 
-	w.Header().Add("Content-Type", "application/json")
-	w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
-	w.Header().Add("Referrer-Policy", "strict-origin")
-	w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
-	w.Header().Add("Feature-Policy", "vibrate 'self'")
-	w.Header().Add("X-Frame-Options", "SAMEORIGIN")
-	w.Header().Add("X-Content-Type-Options", "nosniff")
+	w.Header().Set("Content-Type", "application/json")
 	//response
 	err = json.NewEncoder(w).Encode(&resp)
 	if err != nil {
@@ -323,7 +320,7 @@ func getIpParam(r *http.Request) (string, error) {
 }
 
 func getReverseIp(r *http.Request) string {
-	ff := r.Header.Get("CF-Connecting-IP")
+	ff := r.Header.Get("X-FORWARDED-FOR")
 	if ff != "" {
 		return ff
 	}
