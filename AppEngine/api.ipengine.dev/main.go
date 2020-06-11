@@ -302,7 +302,13 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 		Network:     network,
 	}
 
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Add("Content-Type", "application/json")
+	w.Header().Add("Content-Security-Policy", "script-src 'self'; object-src 'self'")
+	w.Header().Add("Referrer-Policy", "strict-origin")
+	w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
+	w.Header().Add("Feature-Policy", "vibrate 'self'")
+	w.Header().Add("X-Frame-Options", "SAMEORIGIN")
+	w.Header().Add("X-Content-Type-Options", "nosniff")
 	//response
 	err = json.NewEncoder(w).Encode(&resp)
 	if err != nil {
