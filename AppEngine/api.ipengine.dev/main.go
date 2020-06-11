@@ -90,10 +90,10 @@ type ContactInfo struct {
 
 //Response data
 type Response struct {
+	Network     NetworkInfo     `json:"network"`
 	Arin        ArinInfo        `json:"arin"`
 	Orgnization OrgnizationInfo `json:"orgnization"`
 	Contact     ContactInfo     `json:"contact"`
-	Network     NetworkInfo     `json:"network"`
 }
 
 func main() {
