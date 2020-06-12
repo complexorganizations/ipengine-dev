@@ -19,6 +19,7 @@ type Entities struct {
 		EventDate   string `json:"eventDate"`
 	} `json:"events"`
 	Entities        []Entities `json:"entities"`
+	Roles           []string   `json:"roles"`
 	ObjectClassName string     `json:"objectClassName"`
 }
 
@@ -35,6 +36,7 @@ type ArinRdapData struct {
 		EventDate   string `json:"eventDate"`
 	} `json:"events"`
 	Entities   []Entities `json:"entities"`
+	Status     []string   `json:"status"`
 	Cidr0Cidrs []struct {
 		V4Prefix string `json:"v4prefix"`
 		Length   int    `json:"length"`
@@ -49,14 +51,15 @@ type NetworkInfo struct {
 
 //ArinInfo data
 type ArinInfo struct {
-	Name         string `json:"name"`
-	Handle       string `json:"handle"`
-	Parent       string `json:"parent"`
-	Type         string `json:"type"`
-	Range        string `json:"range"`
-	Cidr         string `json:"cidr"`
-	Registration string `json:"registration"`
-	Updated      string `json:"updated"`
+	Name         string   `json:"name"`
+	Handle       string   `json:"handle"`
+	Parent       string   `json:"parent"`
+	Type         string   `json:"type"`
+	Range        string   `json:"range"`
+	Cidr         string   `json:"cidr"`
+	Status       []string `json:"status"`
+	Registration string   `json:"registration"`
+	Updated      string   `json:"updated"`
 }
 
 //OrgnizationInfo data
@@ -88,12 +91,27 @@ type ContactInfo struct {
 	Email        string `json:"email"`
 }
 
+type AbuseInfo struct {
+	Name         string `json:"name"`
+	Handle       string `json:"handle"`
+	Street       string `json:"street"`
+	City         string `json:"city"`
+	Province     string `json:"province"`
+	Postal       string `json:"postal"`
+	Country      string `json:"country"`
+	Registration string `json:"registration"`
+	Updated      string `json:"updated"`
+	Phone        string `json:"phone"`
+	Email        string `json:"email"`
+}
+
 //Response data
 type Response struct {
 	Network     NetworkInfo     `json:"network"`
 	Arin        ArinInfo        `json:"arin"`
 	Orgnization OrgnizationInfo `json:"orgnization"`
 	Contact     ContactInfo     `json:"contact"`
+	Abuse       AbuseInfo       `json:"abuse"`
 }
 
 func main() {
@@ -123,7 +141,11 @@ func ipHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getVCardForContact(entities []Entities, contact *ContactInfo) {
+
 	for _, entity := range entities {
+		// if !contains(entity.Roles, "technical") {
+		// 	break
+		// }
 		contact.Handle = entity.Handle
 		for _, event := range entity.Events {
 			if event.EventAction == "registration" {
@@ -168,10 +190,71 @@ func getVCardForContact(entities []Entities, contact *ContactInfo) {
 		}
 	}
 }
+func contains(s []string, e string) bool {
+	for _, a := range s {
+		if a == e {
+			return true
+		}
+	}
+	return false
+}
+func getVCardForAbuse(entities []Entities, abuse *AbuseInfo) {
+	for _, entity := range entities {
+		if contains(entity.Roles, "technical") {
+			break
+		}
+		if !contains(entity.Roles, "abuse") {
+			break
+		}
+		abuse.Handle = entity.Handle
+		for _, event := range entity.Events {
+			if event.EventAction == "registration" {
+				abuse.Registration = event.EventDate
+			}
+			if event.EventAction == "last changed" {
+				abuse.Updated = event.EventDate
+			}
+		}
+		for _, d := range entity.VcardArray {
+			rt, ok := d.([]interface{})
+			if ok {
+				for _, da := range rt {
+					rt, ok = da.([]interface{})
+					if ok {
+						for i, data := range rt {
+							if data == "fn" {
+								abuse.Name, _ = rt[i+3].(string)
+							}
+							if data == "adr" {
+								comp, ok := rt[i+1].(map[string]interface{})
+								if ok {
+									// fmt.Println(comp["label"].(string))
+									arr := strings.Split(comp["label"].(string), "\n")
+									abuse.Street = arr[0]
+									abuse.City = arr[1]
+									abuse.Province = arr[2]
+									abuse.Postal = arr[3]
+									abuse.Country = arr[4]
+								}
+							}
+							if data == "email" {
+								abuse.Email, _ = rt[i+3].(string)
+							}
+							if data == "tel" {
+								abuse.Phone, _ = rt[i+3].(string)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
-func getVCard(wd ArinRdapData, org *OrgnizationInfo, contact *ContactInfo) {
+func getVCard(wd ArinRdapData, org *OrgnizationInfo, contact *ContactInfo, abuse *AbuseInfo) {
 	for _, entity := range wd.Entities {
 		getVCardForContact(entity.Entities, contact)
+		getVCardForAbuse(entity.Entities, abuse)
 		org.Handle = entity.Handle
 		for _, event := range entity.Events {
 			if event.EventAction == "registration" {
@@ -250,29 +333,40 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 		Type:         wd.Type,
 		Range:        wd.StartAddress + "-" + wd.EndAddress,
 		Cidr:         wd.Cidr0Cidrs[0].V4Prefix + "/" + strconv.Itoa(wd.Cidr0Cidrs[0].Length),
+		Status:       wd.Status,
 		Registration: registration,
 		Updated:      updated,
 	}
 	org := OrgnizationInfo{}
 	contact := ContactInfo{}
+	abuse := AbuseInfo{}
+	host := []string{""}
+	revIPStr := ""
 
-	host, _ := net.LookupAddr(ip)
-	revIP, _ := net.LookupIP(host[0])
-	revIPStr := revIP[0].String()
-	fmt.Println(revIPStr)
+	host, err = net.LookupAddr(ip)
+	if err == nil {
+		revIP, err := net.LookupIP(host[0])
+		if err == nil {
+			revIPStr = revIP[0].String()
+			fmt.Println(revIPStr)
+		}
+	} else {
+		host = []string{""}
+	}
 	network := NetworkInfo{
 		Hostname: host[0],
 		Ip:       ip,
 		Reverse:  revIPStr,
 	}
 
-	getVCard(wd, &org, &contact)
+	getVCard(wd, &org, &contact, &abuse)
 
 	resp := Response{
 		Arin:        arin,
 		Orgnization: org,
 		Contact:     contact,
 		Network:     network,
+		Abuse:       abuse,
 	}
 
 	w.Header().Add("Content-Type", "application/json")
