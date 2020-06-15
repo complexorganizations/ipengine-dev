@@ -396,7 +396,7 @@ func getIpParam(r *http.Request) (string, error) {
 }
 
 func getReverseIp(r *http.Request) string {
-	ff := r.Header.Get("CF-Connecting-IP")
+	ff := r.Header.Get("X-FORWARDED-FOR")
 	if ff != "" {
 		return ff
 	}
