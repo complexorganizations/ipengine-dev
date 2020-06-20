@@ -1,2 +1,0 @@
-name: 'Github actions'
-on: [push, pull_request]
