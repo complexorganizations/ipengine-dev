@@ -190,6 +190,7 @@ func getVCardForContact(entities []Entities, contact *ContactInfo) {
 		}
 	}
 }
+
 func contains(s []string, e string) bool {
 	for _, a := range s {
 		if a == e {
@@ -198,6 +199,7 @@ func contains(s []string, e string) bool {
 	}
 	return false
 }
+
 func getVCardForAbuse(entities []Entities, abuse *AbuseInfo) {
 	for _, entity := range entities {
 		if contains(entity.Roles, "technical") {
