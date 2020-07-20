@@ -2,17 +2,17 @@
 
 ## 1. Purpose
 
-This repository's primary goal is to be inclusive to the most significant number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof).
+A primary goal of this repository is to be inclusive to the most significant number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof).
 
 This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
 
-We invite all those who participate in this repository to help us create safe and positive experiences.
+We invite all those who participate in this repository to help us create safe and positive experiences for everyone.
 
 ## 2. Open [Source/Culture/Tech] Citizenship
 
 A supplemental goal of this Code of Conduct is to increase open [source/culture/tech] citizenship by encouraging participants to recognize and strengthen the relationships between our actions and their effects on our community.
 
-Communities mirror the societies in which they exist, and affirmative action is essential to counteract the many forms of inequality and abuses of power in society.
+Communities mirror the societies in which they exist, and affirmative action is essential to counteract the many forms of inequality and abuses of power that exist in society.
 
 If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
 
@@ -45,7 +45,7 @@ The following behaviors are considered harassment and are unacceptable within ou
 
 ## 5. Weapons Policy
 
-No weapons will be allowed at these repository events, community spaces, or in other areas covered by the scope of this Code of Conduct. Weapons include but are not limited to guns, explosives (including fireworks), and large knives such as those used for hunting or display and any other item used to cause injury or harm to others. Anyone seen in possession of one of these items will be asked to leave immediately, and will only be allowed to return without the weapon. Community members are further expected to comply with all state and local laws on this matter.
+No weapons will be allowed at this repository events, community spaces, or in other areas covered by the scope of this Code of Conduct. Weapons include but are not limited to guns, explosives (including fireworks), and large knives such as those used for hunting or display, as well as any other item used to cause injury or harm to others. Anyone seen in possession of one of these items will be asked to leave immediately, and will only be allowed to return without the weapon. Community members are further expected to comply with all state and local laws on this matter.
 
 ## 6. Consequences of Unacceptable Behavior
 
@@ -53,7 +53,7 @@ Unacceptable behavior from any community member, including sponsors and those wi
 
 Anyone asked to stop unacceptable behavior is expected to comply immediately.
 
-If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, including a temporary ban or permanent expulsion from the community without warning (and without a refund in the case of a paid event).
+If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, up to and including a temporary ban or permanent expulsion from the community without warning (and without refund in the case of a paid event).
 
 ## 7. Reporting Guidelines
 
@@ -63,13 +63,13 @@ Additionally, community organizers are available to help community members engag
 
 ## 8. Addressing Grievances
 
-If you feel you have been falsely or unfairly accused of violating this Code of Conduct, you should notify complexorganizations with a concise description of your grievance. Your grievance will be handled following our existing governing policies. 
+If you feel you have been falsely or unfairly accused of violating this Code of Conduct, you should notify complexorganizations with a concise description of your grievance. Your grievance will be handled in accordance with our existing governing policies. 
 
 ## 9. Scope
 
 We expect all community participants (contributors, paid or otherwise; sponsors; and other guests) to abide by this Code of Conduct in all community venues--online and in-person--as well as in all one-on-one communications about community business.
 
-This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such action can adversely affect the safety and well-being of community members.
+This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such action has the potential to affect the safety and well-being of community members adversely.
 
 ## 10. Contact info
 
