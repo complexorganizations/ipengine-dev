@@ -12,9 +12,25 @@ function check-system-requirements() {
 # Run the function and check for requirements
 check-system-requirements
 
+# Detect Operating System
+function dist-check() {
+    # shellcheck disable=SC1090
+    if [ -e /etc/os-release ]; then
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        DISTRO=$ID
+    fi
+}
+
+# Check Operating System
+dist-check
+
 function update-blocklist-ipsets() {
-    git clone https://github.com/firehol/blocklist-ipsets.git
-    rm -f blocklist-ipsets/*.md && rm -f blocklist-ipsets/*.sh && rm -f blocklist-ipsets/.gitignore && rm -rf blocklist-ipsets/* && cp ipengine.dev blocklist-ipsets/ipengine.dev && ./blocklist-ipsets/ipengine.dev && mv blocklist-ipsets/output.json AppEngine/api.ipengine.dev/output.json && rm -rf blocklist-ipsets
+    # Update begins here
+    if [ "$DISTRO" == "ubuntu" ]; then
+        git clone https://github.com/firehol/blocklist-ipsets.git
+        rm -f blocklist-ipsets/*.md && rm -f blocklist-ipsets/*.sh && rm -f blocklist-ipsets/.gitignore && rm -rf blocklist-ipsets/* && cp ipengine.dev blocklist-ipsets/ipengine.dev && ./blocklist-ipsets/ipengine.dev && mv blocklist-ipsets/output.json AppEngine/api.ipengine.dev/output.json && rm -rf blocklist-ipsets
+    fi
 }
 
 # Run the function
