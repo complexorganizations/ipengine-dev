@@ -4,12 +4,24 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
+	"log"
 	"net"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
+
+const IPSET_FILE = "output.json"
+
+var blockips BlockIP
+
+// var blockips = NewBlockIP(IPSET_INTVAL)
+type AnaylsisResult map[string]bool
+
+type BlockIP map[string][]string
 
 type Entities struct {
 	Handle     string        `json:"handle"`
@@ -112,9 +124,23 @@ type Response struct {
 	Orgnization OrgnizationInfo `json:"orgnization"`
 	Contact     ContactInfo     `json:"contact"`
 	Abuse       AbuseInfo       `json:"abuse"`
+	Anaylsis    AnaylsisResult  `json:"anaylsis"`
+}
+
+func init() {
+	log.SetFlags(log.Lshortfile)
+	// init blockip datasource
+	// open blockip file
+	f, e := os.OpenFile(IPSET_FILE, os.O_RDONLY, 0666)
+	if e != nil {
+		log.Println(e)
+		return
+	}
+	blockips = NewBlockIP(f)
 }
 
 func main() {
+
 	//router
 	r := http.NewServeMux()
 	//routes
@@ -122,6 +148,80 @@ func main() {
 	r.HandleFunc("/ip/", ipHandler)
 	//http server
 	http.ListenAndServe(":8080", r)
+}
+
+func NewBlockIP(f io.Reader) (bip BlockIP) {
+	bip = make(BlockIP)
+	bip.load(f)
+	return
+}
+
+func (bip *BlockIP) load(f io.Reader) {
+	dc := json.NewDecoder(f)
+	e := dc.Decode(bip)
+	if e != nil {
+		log.Println(e)
+		return
+	}
+}
+
+func (bip BlockIP) Anaylsis(ip string) (rs AnaylsisResult) {
+	rs = make(AnaylsisResult)
+	for k, v := range bip {
+		// detect if ip in v
+		rs[k] = false
+		for _, va := range v {
+			if va == ip {
+				rs[k] = true
+				break
+			}
+			// if v contains "/" in the last 3 pst
+			if strings.Contains(va, "/") {
+				if ipinet(ip, va) {
+					rs[k] = true
+					break
+				}
+				va = va[:len(va)-3]
+			}
+
+			// compare the ip value
+			// when va greate than ip then break
+			ipi, e := IPString2Long(ip)
+			if e != nil {
+				log.Println(ip, e)
+			}
+			ipv, e := IPString2Long(va)
+			if e != nil {
+				log.Println(va, e)
+			}
+			// log.Println(ipi, ipv, va)
+			if ipv > ipi {
+				break
+			}
+		}
+	}
+	return
+}
+
+func ipinet(ip string, cidr string) (r bool) {
+	ipx, subnet, _ := net.ParseCIDR(cidr)
+	ipa := net.ParseIP(ip)
+	// if netip eq ip then check ip existing
+	if subnet.IP.Equal(ipx) {
+		r = subnet.Contains(ipa)
+		return
+	}
+	r = ipa.Equal(ipx)
+	return
+}
+
+func IPString2Long(ip string) (uint, error) {
+	b := net.ParseIP(ip).To4()
+	if b == nil {
+		return 0, errors.New("invalid ipv4 format")
+	}
+
+	return uint(b[3]) | uint(b[2])<<8 | uint(b[1])<<16 | uint(b[0])<<24, nil
 }
 
 func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
@@ -134,9 +234,11 @@ func ipHandler(w http.ResponseWriter, r *http.Request) {
 	//ip
 	ip, err := getIpParam(r)
 	if err != nil {
+		log.Println(err)
 		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
+	log.Println(ip)
 	returnWhoisData(ip, w)
 }
 
@@ -301,9 +403,29 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 	c := http.Client{
 		Timeout: time.Duration(time.Second * 30),
 	}
+
+	// create request
 	url := fmt.Sprintf("https://rdap.arin.net/registry/ip/%s", ip)
-	r, err := c.Get(url)
+	req, e := http.NewRequest("GET", url, nil)
+	if e != nil {
+		log.Println(e)
+		return
+	}
+	req.Header.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+	req.Header.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36")
+	req.Header.Add("Sec-Fetch-Dest", "document")
+	req.Header.Add("Cache-Control", "no-cache")
+	req.Header.Add("Accept-Encoding", "gzip, deflate, br")
+	req.Header.Add("Connection", "keep-alive")
+	req.Header.Add("Host", "rdap.arin.net")
+	req.Header.Add("Sec-Fetch-Mode", "navigate")
+	req.Header.Add("Sec-Fetch-Site", "cross-site")
+	req.Header.Add("Sec-Fetch-User", "?1")
+	req.Header.Add("Upgrade-Insecure-Requests", "1")
+
+	r, err := c.Do(req)
 	if err != nil {
+		log.Println(err)
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
@@ -363,12 +485,16 @@ func returnWhoisData(ip string, w http.ResponseWriter) {
 
 	getVCard(wd, &org, &contact, &abuse)
 
+	// get block info
+	an := blockips.Anaylsis(ip)
+
 	resp := Response{
 		Arin:        arin,
 		Orgnization: org,
 		Contact:     contact,
 		Network:     network,
 		Abuse:       abuse,
+		Anaylsis:    an,
 	}
 
 	w.Header().Add("Content-Type", "application/json")
