@@ -23,7 +23,7 @@ func main() {
 		fmt.Println(fName)
 		res1 := strings.Index(fName, ".")
 		fmt.Println(res1)
-		if res1 != -1 && fName[res1:] == ".ipset" {
+		if res1 != -1 && (fName[res1:] == ".ipset" || fName[res1:] == ".netstat") {
 			file, err := os.Open(fName)
 			if err != nil {
 				log.Fatal(err)
