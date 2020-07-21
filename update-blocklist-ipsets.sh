@@ -34,7 +34,7 @@ function update-blocklist-ipsets() {
     # Update begins here
     if [ "$DISTRO" == "ubuntu" ]; then
         git clone https://github.com/firehol/blocklist-ipsets.git
-        go build main.go && mv main blocklist-ipsets && rm -rf blocklist-ipsets && cp ipengine.dev blocklist-ipsets/ipengine.dev && ./blocklist-ipsets/ipengine.dev && mv blocklist-ipsets/output.json AppEngine/api.ipengine.dev/output.json && rm -rf blocklist-ipsets
+        cp main.go blocklist-ipsets/main.go && go run blocklist-ipsets/main.go && mv blocklist-ipsets/output.json AppEngine/api.ipengine.dev/output.json && rm -rf blocklist-ipsets
     fi
 }
 
