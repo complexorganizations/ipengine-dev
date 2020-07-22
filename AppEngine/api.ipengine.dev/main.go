@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -139,7 +140,7 @@ func (rsp *Response) Parse(ip string) {
 		log.Println(e)
 		return
 	}
-	// fmt.Println(raw)
+	fmt.Println(raw)
 	// parse raw
 	rd := bufio.NewReader(strings.NewReader(string(raw)))
 	// process document line by line
@@ -156,37 +157,39 @@ func (rsp *Response) Parse(ip string) {
 		}
 
 		switch {
-		case strings.HasPrefix(l, "NetRange"):
+		case strings.HasPrefix(l, "NetRange") || strings.HasPrefix(l, "inetnum:"):
 			p = "arin"
-		case strings.HasPrefix(l, "OrgName"):
+		case strings.HasPrefix(l, "OrgName") || strings.HasPrefix(l, "org-name:"):
 			p = "org"
-		case strings.HasPrefix(l, "OrgTechHandle"):
+		case strings.HasPrefix(l, "OrgTechHandle") || strings.HasPrefix(l, "irt:"):
 			p = "contact"
-		case strings.HasPrefix(l, "OrgAbuse"):
+		case strings.HasPrefix(l, "OrgAbuse") || strings.HasPrefix(l, "role:           ABUSE APNICRANDNETAU"):
 			p = "abuse"
 		}
-		log.Println(p, l)
+		// log.Println(p, l)
 		switch p {
 		case "arin":
 			if &rsp.Arin == nil {
 				rsp.Arin = ArinInfo{}
 			}
 			switch {
-			case strings.HasPrefix(l, "NetRange:"):
+			case strings.HasPrefix(l, "NetRange:") || strings.HasPrefix(l, "inetnum:"):
 				rsp.Arin.Range = getContent(l)
 			case strings.HasPrefix(l, "CIDR:"):
 				rsp.Arin.Cidr = getContent(l)
-			case strings.HasPrefix(l, "NetName:"):
+			case strings.HasPrefix(l, "NetName:") || strings.HasPrefix(l, "netname:"):
 				rsp.Arin.Name = getContent(l)
 			case strings.HasPrefix(l, "NetHandle:"):
 				rsp.Arin.Handle = getContent(l)
 			case strings.HasPrefix(l, "Parent:"):
 				rsp.Arin.Parent = getContent(l)
+			case strings.HasPrefix(l, "status:"):
+				rsp.Arin.Status = append(rsp.Arin.Status, getContent(l))
 			case strings.HasPrefix(l, "NetType:"):
 				rsp.Arin.Type = getContent(l)
 			case strings.HasPrefix(l, "RegDate:"):
 				rsp.Arin.Registration = getContent(l)
-			case strings.HasPrefix(l, "Updated:"):
+			case strings.HasPrefix(l, "Updated:") || strings.HasPrefix(l, "last-modified:"):
 				rsp.Arin.Updated = getContent(l)
 				// case strings.HasPrefix(l, "# end"):
 				// 	onProcess = false
@@ -197,11 +200,11 @@ func (rsp *Response) Parse(ip string) {
 				rsp.Orgnization = OrgnizationInfo{}
 			}
 			switch {
-			case strings.HasPrefix(l, "OrgName"):
+			case strings.HasPrefix(l, "OrgName") || strings.HasPrefix(l, "org-name:"):
 				rsp.Orgnization.Name = getContent(l)
 			// case strings.HasPrefix(l, "OrgId"):
 			// 	rsp.Orgnization.
-			case strings.HasPrefix(l, "Address"):
+			case strings.HasPrefix(l, "Address") || strings.HasPrefix(l, "address"):
 				rsp.Orgnization.Street = rsp.Orgnization.Street + getContent(l)
 			case strings.HasPrefix(l, "City"):
 				rsp.Orgnization.City = getContent(l)
@@ -209,11 +212,11 @@ func (rsp *Response) Parse(ip string) {
 				rsp.Orgnization.Province = getContent(l)
 			case strings.HasPrefix(l, "PostalCode"):
 				rsp.Orgnization.Postal = getContent(l)
-			case strings.HasPrefix(l, "Country"):
+			case strings.HasPrefix(l, "Country") || strings.HasPrefix(l, "country"):
 				rsp.Orgnization.Country = getContent(l)
 			case strings.HasPrefix(l, "RegDate"):
 				rsp.Orgnization.Registration = getContent(l)
-			case strings.HasPrefix(l, "Updated"):
+			case strings.HasPrefix(l, "Updated") || strings.HasPrefix(l, "last-modified:"):
 				rsp.Orgnization.Updated = getContent(l)
 				// case strings.HasPrefix(l, "# end"):
 				// 	onProcess = false
@@ -228,9 +231,9 @@ func (rsp *Response) Parse(ip string) {
 				rsp.Abuse.Handle = getContent(l)
 			case strings.HasPrefix(l, "OrgAbuseName"):
 				rsp.Abuse.Name = getContent(l)
-			case strings.HasPrefix(l, "OrgAbusePhone"):
+			case strings.HasPrefix(l, "OrgAbusePhone") || strings.HasPrefix(l, "phone:"):
 				rsp.Abuse.Phone = getContent(l)
-			case strings.HasPrefix(l, "OrgAbuseEmail"):
+			case strings.HasPrefix(l, "OrgAbuseEmail") || strings.HasPrefix(l, "abuse-mailbox:"):
 				rsp.Abuse.Email = getContent(l)
 				// case strings.HasPrefix(l, "# end"):
 				// 	onProcess = false
@@ -250,7 +253,6 @@ func (rsp *Response) Parse(ip string) {
 				// case strings.HasPrefix(l, "# end"):
 				// 	onProcess = false
 				// 	return
-
 			}
 		}
 
