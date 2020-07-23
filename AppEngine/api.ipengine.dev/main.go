@@ -13,7 +13,7 @@ import (
 	"github.com/openrdap/rdap"
 )
 
-const IPSET_FILE = "sample.ipset"
+const IPSET_FILE = "output.json"
 
 var blockips BlockIP
 
