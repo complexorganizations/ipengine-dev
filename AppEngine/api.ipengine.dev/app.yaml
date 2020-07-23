@@ -1,5 +1,5 @@
 service: api
-runtime: go113
+runtime: go112
 env: standard
 automatic_scaling:
   min_idle_instances: automatic
