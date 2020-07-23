@@ -97,7 +97,7 @@ func main() {
 	//router
 	r := http.NewServeMux()
 	//routes
-	// r.HandleFunc("/", reverseIpHandler)
+	r.HandleFunc("/", reverseIpHandler)
 	r.HandleFunc("/ip/", ipHandler)
 	//http server
 	http.ListenAndServe(":8080", r)
