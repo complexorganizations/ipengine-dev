@@ -32,7 +32,7 @@ dist-check
 
 function update-blocklist-ipsets() {
     # Update begins here
-    if [ "$DISTRO" == "ubuntu" ]; then
+    if ([ "$DISTRO" == "ubuntu" ] || [ "$DISTRO" == "debian" ]); then
         git clone https://github.com/firehol/blocklist-ipsets.git
         cp main.go blocklist-ipsets/main.go
         mv blocklist-ipsets/geolite2_country/* blocklist-ipsets/ && mv blocklist-ipsets/ip2location_country/* blocklist-ipsets/ && mv blocklist-ipsets/ipdeny_country/* blocklist-ipsets/ && mv blocklist-ipsets/ipip_country/* blocklist-ipsets/
