@@ -250,7 +250,7 @@ func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func getReverseIp(r *http.Request) string {
-	ff := r.Header.Get("X-FORWARDED-FOR")
+	ff := r.Header.Get("CF-Connecting-IP")
 	if ff != "" {
 		return ff
 	}
