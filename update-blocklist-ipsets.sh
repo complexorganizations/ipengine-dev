@@ -37,7 +37,8 @@ function update-blocklist-ipsets() {
         mv blocklist-ipsets/geolite2_country/* blocklist-ipsets/ && mv blocklist-ipsets/ip2location_country/* blocklist-ipsets/ && mv blocklist-ipsets/ipdeny_country/* blocklist-ipsets/ && mv blocklist-ipsets/ipip_country/* blocklist-ipsets/
         rm -rf blocklist-ipsets/geolite2_country && rm -rf blocklist-ipsets/ip2location_country && rm -rf blocklist-ipsets/ipdeny_country && rm -rf blocklist-ipsets/ipip_country
         cp main.go blocklist-ipsets/main.go && cd blocklist-ipsets && go run main.go && cd ../
-        mv blocklist-ipsets/output.json AppEngine/api.ipengine.dev/output.json
+        rm -f AppEngine/api.ipengine.dev/blockips.json
+        mv blocklist-ipsets/blockips.json AppEngine/api.ipengine.dev/blockips.json
         rm -rf blocklist-ipsets
     fi
 }
