@@ -58,6 +58,6 @@ func main() {
 		}
 	}
 	d1, _ := json.Marshal(mainJSON)
-	ioutil.WriteFile("output.json", d1, 0644)
+	ioutil.WriteFile("blockips.json", d1, 0644)
 	// fmt.Println(json.Marshal(mainJSON))
 }
