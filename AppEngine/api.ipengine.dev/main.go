@@ -239,6 +239,7 @@ func getContent(ct string) (r string) {
 }
 
 func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	//reverse ip
 	rip := getReverseIp(r)
 	rsp := NewResponse(rip)
@@ -265,6 +266,7 @@ func getIp(remoteAddress string) string {
 }
 
 func ipHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	//ip
 	ip, err := getIpParam(r)
 	if err != nil {
