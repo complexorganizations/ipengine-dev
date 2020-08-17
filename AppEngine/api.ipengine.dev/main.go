@@ -74,10 +74,10 @@ type ContactInfo struct {
 type Response struct {
 	Network     NetworkInfo     `json:"network,omitempty"`
 	Arin        ArinInfo        `json:"arin,omitempty"`
-	Orgnization OrgnizationInfo `json:"orgnization,omitempty"`
+	Orgnization OrgnizationInfo `json:"organization,omitempty"`
 	Contact     ContactInfo     `json:"contact,omitempty"`
 	Abuse       ContactInfo     `json:"abuse,omitempty"`
-	Anaylsis    AnaylsisResult  `json:"anaylsis,omitempty"`
+	Anaylsis    AnaylsisResult  `json:"analysis,omitempty"`
 }
 
 func init() {
