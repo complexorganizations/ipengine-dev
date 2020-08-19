@@ -13,6 +13,14 @@ import (
 	"github.com/openrdap/rdap"
 )
 
+/*
+- 1. Make a new object named location
+- 2. under location add Country/City info
+- 3. under network add ASN info 
+- 4. make sure we have all the info
+- 5. turn REST into GRPC
+*/
+
 const IPSET_FILE = "blockips.json"
 
 var blockips BlockIP
