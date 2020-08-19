@@ -13,7 +13,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/complexorganizations/ipengine-dev/AppEngine/api.ipengine.dev/api"
+	"api.ipengine.dev/api"
 	"github.com/openrdap/rdap"
 	"github.com/oschwald/geoip2-golang"
 	"google.golang.org/grpc"
