@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option go_package = ".;api";
+
+service IPEngineService {
+  rpc ReverseIP (ReverseIPRequest) returns (Response) {}
+  rpc IP (IPRequest) returns (Response) {}
+}
+
+message ReverseIPRequest {
+  string ip = 1;
+}
+
+message IPRequest {
+  string ip = 1;
+}
+
+message Response {
+  NetworkInfo network = 1;
+  Location location = 2;
+  ArinInfo arin = 3;
+  OrganizationInfo organization = 4;
+  ContactInfo contact = 5;
+  ContactInfo abuse = 6;
+  map<string, bool> analysis = 7;
+}
+
+message NetworkInfo {
+  string ip = 1;
+  string hostname = 2;
+  string reverse = 3;
+  string asn = 4;
+}
+
+message Location {
+  string city = 1;
+  string country = 2;
+}
+
+message ArinInfo {
+  string name = 1;
+  string handle = 2;
+  string parent = 3;
+  string type = 4;
+  string range = 5;
+  string cidr = 6;
+  repeated string status = 7;
+  string registration = 8;
+  string updated = 9;
+}
+
+message OrganizationInfo {
+  string name = 1;
+  string handle = 2;
+  string street = 3;
+  string city = 4;
+  string province = 5;
+  string postal = 6;
+  string country = 7;
+  string registration = 8;
+  string updated = 9;
+}
+
+message ContactInfo {
+  string name = 1;
+  string handle = 2;
+  string company = 3;
+  string street = 4;
+  string city = 5;
+  string province = 6;
+  string postal = 7;
+  string country = 8;
+  string registration = 9;
+  string updated = 10;
+  string phone = 11;
+  string email = 12;
+}
