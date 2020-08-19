@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -10,9 +11,13 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
+	"test/grpc_server/api"
 
 	"github.com/openrdap/rdap"
 	"github.com/oschwald/geoip2-golang"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/peer"
 )
 
 /*
@@ -25,7 +30,8 @@ import (
 */
 
 const (
-	Port      = ":8080"
+	HTTPPort  = ":8080"
+	gRPCPort  = ":8081"
 	IPSetFile = "blockips.json"
 )
 
@@ -61,37 +67,62 @@ func main() {
 
 	blockIPs = LoadBlockIPs(IPSetFile)
 
-	server := NewServer()
-	_ = server.Run(Port)
+	service := NewService()
+	httpServer := NewHttpServer(service)
+	grpcServer := NewGrpcServer(service)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+		err := httpServer.Run(HTTPPort)
+		if err != nil {
+			log.Println(err)
+		}
+		wg.Done()
+	}()
+	go func() {
+		err := grpcServer.Run(gRPCPort)
+		if err != nil {
+			log.Println(err)
+		}
+		wg.Done()
+	}()
+
+	wg.Wait()
 }
 
-type Server struct {
+type HttpServer struct {
 	router *http.ServeMux
+	srv    Service
 }
 
-func NewServer() *Server {
+func NewHttpServer(srv Service) *HttpServer {
 	r := http.NewServeMux()
-	return &Server{
+	return &HttpServer{
 		router: r,
+		srv:    srv,
 	}
 }
 
-func (s Server) Run(port string) error {
-	s.router.HandleFunc("/", s.ReverseIPHandler())
-	s.router.HandleFunc("/ip/", s.IPHandler())
+func (s HttpServer) Run(port string) error {
+	log.Println("Starting HTTP server in port:", port)
+
+	s.router.HandleFunc("/", s.ReverseIPHandler(s.srv))
+	s.router.HandleFunc("/ip/", s.IPHandler(s.srv))
 
 	return http.ListenAndServe(port, s.router)
 }
 
-func (s *Server) Write(writer http.ResponseWriter, data interface{}) error {
+func (s *HttpServer) Write(writer http.ResponseWriter, data interface{}) error {
 	return json.NewEncoder(writer).Encode(data)
 }
 
-func (s *Server) WriteError(writer http.ResponseWriter, status int) {
+func (s *HttpServer) WriteError(writer http.ResponseWriter, status int) {
 	http.Error(writer, http.StatusText(status), status)
 }
 
-func (s *Server) ReverseIPHandler() http.HandlerFunc {
+func (s *HttpServer) ReverseIPHandler(srv Service) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
@@ -101,14 +132,16 @@ func (s *Server) ReverseIPHandler() http.HandlerFunc {
 			return
 		}
 
-		err := s.Write(writer, NewResponse(ip))
+		resp, _ := srv.ReverseIP(ip)
+
+		err := s.Write(writer, resp)
 		if err != nil {
 			log.Println(err)
 		}
 	}
 }
 
-func (s *Server) IPHandler() http.HandlerFunc {
+func (s *HttpServer) IPHandler(srv Service) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
@@ -119,14 +152,84 @@ func (s *Server) IPHandler() http.HandlerFunc {
 			return
 		}
 
-		rsp := NewResponse(ip)
-		rsp.Analysis = blockIPs.Analyse(ip.String())
+		resp, _ := srv.IP(ip)
 
-		err = s.Write(writer, rsp)
+		err = s.Write(writer, resp)
 		if err != nil {
 			log.Println(err)
 		}
 	}
+}
+
+type GrpcServer struct {
+	server *grpc.Server
+	srv    Service
+}
+
+func NewGrpcServer(srv Service) *GrpcServer {
+	server := grpc.NewServer()
+
+	serverHandler := &GrpcServer{
+		server: server,
+		srv:    srv,
+	}
+
+	api.RegisterIPEngineServiceServer(server, serverHandler)
+
+	return serverHandler
+}
+
+func (s GrpcServer) Run(port string) error {
+	log.Println("Starting gRPC server in port:", port)
+
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		return err
+	}
+
+	return s.server.Serve(lis)
+}
+
+func (s GrpcServer) ReverseIP(ctx context.Context, in *api.ReverseIPRequest) (*api.Response, error) {
+	p, ok := peer.FromContext(ctx)
+	if !ok {
+		return nil, errors.New("no peer available")
+	}
+
+	ip := GetIP(p.Addr.String())
+	resp, err := s.srv.ReverseIP(ip)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Proto(), nil
+}
+
+func (s GrpcServer) IP(ctx context.Context, in *api.IPRequest) (*api.Response, error) {
+	ip := net.ParseIP(in.GetIp())
+
+	resp, err := s.srv.IP(ip)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.Proto(), nil
+}
+
+type Service struct{}
+
+func NewService() Service {
+	return Service{}
+}
+
+func (s Service) ReverseIP(ip net.IP) (*Response, error) {
+	return NewResponse(ip), nil
+}
+
+func (s Service) IP(ip net.IP) (*Response, error) {
+	rsp := NewResponse(ip)
+	rsp.Analysis = blockIPs.Analyse(ip.String())
+	return rsp, nil
 }
 
 func GetReverseIP(r *http.Request) net.IP {
@@ -171,7 +274,6 @@ func NewResponse(ip net.IP) *Response {
 	c := &rdap.Client{}
 	network, err := c.QueryIP(ip.String())
 	if err != nil {
-		log.Println(err)
 		return response
 	}
 
@@ -183,6 +285,18 @@ func NewResponse(ip net.IP) *Response {
 	response.Abuse = abuse
 
 	return response
+}
+
+func (r *Response) Proto() *api.Response {
+	return &api.Response{
+		Network:      r.Network.Proto(),
+		Location:     r.Location.Proto(),
+		Arin:         r.Arin.Proto(),
+		Organization: r.Organization.Proto(),
+		Contact:      r.Contact.Proto(),
+		Abuse:        r.Abuse.Proto(),
+		Analysis:     r.Analysis.Proto(),
+	}
 }
 
 type NetworkInfo struct {
@@ -198,7 +312,6 @@ func ParseNetWork(ip net.IP) NetworkInfo {
 
 	host, err := net.LookupAddr(ip.String())
 	if err != nil || len(host) == 0 {
-		log.Println(err, ip)
 		return network
 	}
 
@@ -212,12 +325,24 @@ func ParseNetWork(ip net.IP) NetworkInfo {
 
 	asn, err := asnDB.ASN(ip)
 	if err != nil || len(host) == 0 {
-		log.Println(err, ip)
 		return network
 	}
 
 	network.Asn = fmt.Sprint(asn.AutonomousSystemNumber)
 	return network
+}
+
+func (r *NetworkInfo) Proto() *api.NetworkInfo {
+	if r == nil {
+		return nil
+	}
+
+	return &api.NetworkInfo{
+		Ip:       r.Ip,
+		Hostname: r.Hostname,
+		Reverse:  r.Reverse,
+		Asn:      r.Asn,
+	}
 }
 
 type Location struct {
@@ -239,6 +364,17 @@ func ParseLocation(ip net.IP) Location {
 	}
 
 	return loc
+}
+
+func (r *Location) Proto() *api.Location {
+	if r == nil {
+		return nil
+	}
+
+	return &api.Location{
+		City:    r.City,
+		Country: r.Country,
+	}
 }
 
 type ArinInfo struct {
@@ -273,6 +409,24 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	}
 
 	return arin
+}
+
+func (r *ArinInfo) Proto() *api.ArinInfo {
+	if r == nil {
+		return nil
+	}
+
+	return &api.ArinInfo{
+		Name:         r.Name,
+		Handle:       r.Handle,
+		Parent:       r.Parent,
+		Type:         r.Type,
+		Range:        r.Range,
+		Cidr:         r.Cidr,
+		Status:       r.Status,
+		Registration: r.Registration,
+		Updated:      r.Updated,
+	}
 }
 
 type OrganizationInfo struct {
@@ -374,6 +528,45 @@ func ParseEntities(network *rdap.IPNetwork) (OrganizationInfo, ContactInfo, Cont
 	return org, contact, abuse
 }
 
+func (r *OrganizationInfo) Proto() *api.OrganizationInfo {
+	if r == nil {
+		return nil
+	}
+
+	return &api.OrganizationInfo{
+		Name:         r.Name,
+		Handle:       r.Handle,
+		Street:       r.Street,
+		City:         r.City,
+		Province:     r.Province,
+		Postal:       r.Postal,
+		Country:      r.Country,
+		Registration: r.Registration,
+		Updated:      r.Updated,
+	}
+}
+
+func (r *ContactInfo) Proto() *api.ContactInfo {
+	if r == nil {
+		return nil
+	}
+
+	return &api.ContactInfo{
+		Name:         r.Name,
+		Handle:       r.Handle,
+		Company:      r.Company,
+		Street:       r.Street,
+		City:         r.City,
+		Province:     r.Province,
+		Postal:       r.Postal,
+		Country:      r.Country,
+		Registration: r.Registration,
+		Updated:      r.Updated,
+		Phone:        r.Phone,
+		Email:        r.Email,
+	}
+}
+
 func HasRole(src []string, item string) bool {
 	for _, v := range src {
 		if v == item {
@@ -392,7 +585,6 @@ func LoadBlockIPs(fileName string) BlockIP {
 
 	file, err := os.Open(fileName)
 	if err != nil {
-		log.Println(err)
 		return blockIps
 	}
 
@@ -402,7 +594,6 @@ func LoadBlockIPs(fileName string) BlockIP {
 
 func (bip *BlockIP) Load(file io.Reader) {
 	if err := json.NewDecoder(file).Decode(bip); err != nil {
-		log.Println(err)
 		return
 	}
 }
@@ -426,14 +617,8 @@ func (bip BlockIP) Analyse(ip string) AnalysisResult {
 				va = va[:len(va)-3]
 			}
 
-			ipi, err := IPString2Long(ip)
-			if err != nil {
-				log.Println(ip, err)
-			}
-			ipv, err := IPString2Long(va)
-			if err != nil {
-				log.Println(va, err)
-			}
+			ipi, _ := IPString2Long(ip)
+			ipv, _ := IPString2Long(va)
 
 			if ipv > ipi {
 				break
@@ -442,6 +627,10 @@ func (bip BlockIP) Analyse(ip string) AnalysisResult {
 	}
 
 	return rs
+}
+
+func (r AnalysisResult) Proto() map[string]bool {
+	return r
 }
 
 func IPInet(ip string, cidr string) (r bool) {
