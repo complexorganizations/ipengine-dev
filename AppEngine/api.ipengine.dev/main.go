@@ -19,6 +19,7 @@ import (
 - 3. under network add ASN info 
 - 4. make sure we have all the info
 - 5. turn REST into GRPC
+- 6. Once done; please go here (https://github.com/complexorganizations/disposable-services) and look at the main.go and the next tasks are there.
 */
 
 const IPSET_FILE = "blockips.json"
