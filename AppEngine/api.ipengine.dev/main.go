@@ -279,10 +279,10 @@ func NewResponse(ip net.IP) *Response {
 
 	response.Arin = ParseArin(network)
 
-	org, cont, abuse := ParseEntities(network)
-	response.Organization = org
-	response.Contact = cont
-	response.Abuse = abuse
+	org, cont, abuse := ParseEntities(network.Entities)
+	MergeOrganization(&response.Organization, org)
+	MergeContacts(&response.Contact, cont)
+	MergeContacts(&response.Abuse, abuse)
 
 	return response
 }
@@ -398,6 +398,7 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	arin.Parent = network.ParentHandle
 	arin.Range = network.StartAddress + "-" + network.EndAddress
 	arin.Type = network.Type
+	arin.Status = network.Status
 
 	for _, v := range network.Events {
 		switch v.Action {
@@ -456,76 +457,196 @@ type ContactInfo struct {
 	Email        string `json:"email,omitempty"`
 }
 
-func ParseEntities(network *rdap.IPNetwork) (OrganizationInfo, ContactInfo, ContactInfo) {
-	org := OrganizationInfo{}
-	contact := ContactInfo{}
-	abuse := ContactInfo{}
+func ParseEntities(entities []rdap.Entity) (*OrganizationInfo, *ContactInfo, *ContactInfo) {
+	var org *OrganizationInfo
+	var contact *ContactInfo
+	var abuse *ContactInfo
 
-	for _, ent := range network.Entities {
+	for _, ent := range entities {
 		if ent.VCard == nil {
 			continue
 		}
 
 		switch {
 		case HasRole(ent.Roles, "registrant"):
-			org.Country = ent.VCard.Country()
-			org.City = ent.VCard.ExtendedAddress()
-			org.Handle = ent.Handle
-			org.Name = ent.VCard.Name()
-			org.Postal = ent.VCard.PostalCode()
-			org.Province = ent.VCard.Region()
-			for _, v := range ent.Events {
-				switch v.Action {
-				case "registration":
-					org.Registration = v.Date
-				case "last changed":
-					org.Updated = v.Date
-				}
+			org = GetOrganization(ent)
+			_, c, a := ParseEntities(ent.Entities)
+			if contact == nil {
+				contact = c
 			}
-			org.Street = ent.VCard.StreetAddress()
-		// abuse information
+			if abuse == nil {
+				abuse = a
+			}
+			MergeContacts(contact, c)
+			MergeContacts(abuse, a)
 		case HasRole(ent.Roles, "abuse"):
-			abuse.Country = ent.VCard.Country()
-			abuse.City = ent.VCard.ExtendedAddress()
-			abuse.Email = ent.VCard.Email()
-			abuse.Handle = ent.Handle
-			abuse.Name = ent.VCard.Name()
-			abuse.Phone = ent.VCard.Tel()
-			abuse.Postal = ent.VCard.PostalCode()
-			abuse.Province = ent.VCard.Region()
-			for _, v := range ent.Events {
-				switch v.Action {
-				case "registration":
-					abuse.Registration = v.Date
-				case "last changed":
-					abuse.Updated = v.Date
-				}
+			abuse = GetContact(ent)
+			o, c, _ := ParseEntities(ent.Entities)
+			if org == nil {
+				org = o
 			}
-			abuse.Street = ent.VCard.StreetAddress()
-			fallthrough
-
+			if contact == nil {
+				contact = c
+			}
+			MergeOrganization(org, o)
+			MergeContacts(contact, c)
 		case HasRole(ent.Roles, "administrative"):
-			contact.City = ent.VCard.ExtendedAddress()
-			contact.Country = ent.VCard.Country()
-			contact.Email = ent.VCard.Email()
-			contact.Handle = ent.Handle
-			contact.Name = ent.VCard.Name()
-			contact.Phone = ent.VCard.Tel()
-			contact.Postal = ent.VCard.PostalCode()
-			contact.Province = ent.VCard.Region()
-			for _, v := range ent.Events {
-				switch v.Action {
-				case "registration":
-					contact.Registration = v.Date
-				case "last changed":
-					contact.Updated = v.Date
-				}
+			contact = GetContact(ent)
+			o, _, a := ParseEntities(ent.Entities)
+			if org == nil {
+				org = o
 			}
-			contact.Street = ent.VCard.StreetAddress()
+			if abuse == nil {
+				abuse = a
+			}
+			MergeOrganization(org, o)
+			MergeContacts(abuse, a)
 		}
 	}
 
 	return org, contact, abuse
+}
+
+func MergeOrganization(o1, o2 *OrganizationInfo) {
+	if o2 == nil {
+		return
+	}
+
+	if o1.Name == "" {
+		o1.Name = o2.Name
+	}
+
+	if o1.Handle == "" {
+		o1.Handle = o2.Handle
+	}
+
+	if o1.Street == "" {
+		o1.Street = o2.Street
+	}
+
+	if o1.City == "" {
+		o1.City = o2.City
+	}
+
+	if o1.Province == "" {
+		o1.Province = o2.Province
+	}
+
+	if o1.Postal == "" {
+		o1.Postal = o2.Postal
+	}
+
+	if o1.Country == "" {
+		o1.Country = o2.Country
+	}
+
+	if o1.Registration == "" {
+		o1.Registration = o2.Registration
+	}
+
+	if o1.Updated == "" {
+		o1.Updated = o2.Updated
+	}
+}
+
+func MergeContacts(c1, c2 *ContactInfo) {
+	if c2 == nil {
+		return
+	}
+
+	if c1.Name == "" {
+		c1.Name = c2.Name
+	}
+
+	if c1.Handle == "" {
+		c1.Handle = c2.Handle
+	}
+
+	if c1.Company == "" {
+		c1.Company = c2.Company
+	}
+
+	if c1.Street == "" {
+		c1.Street = c2.Street
+	}
+
+	if c1.City == "" {
+		c1.City = c2.City
+	}
+
+	if c1.Province == "" {
+		c1.Province = c2.Province
+	}
+
+	if c1.Postal == "" {
+		c1.Postal = c2.Postal
+	}
+
+	if c1.Country == "" {
+		c1.Country = c2.Country
+	}
+
+	if c1.Registration == "" {
+		c1.Registration = c2.Registration
+	}
+
+	if c1.Updated == "" {
+		c1.Updated = c2.Updated
+	}
+
+	if c1.Phone == "" {
+		c1.Phone = c2.Phone
+	}
+
+	if c1.Email == "" {
+		c1.Email = c2.Email
+	}
+}
+
+func GetOrganization(ent rdap.Entity) *OrganizationInfo {
+	org := OrganizationInfo{}
+
+	org.Country = ent.VCard.Country()
+	org.City = ent.VCard.ExtendedAddress()
+	org.Handle = ent.Handle
+	org.Name = ent.VCard.Name()
+	org.Postal = ent.VCard.PostalCode()
+	org.Province = ent.VCard.Region()
+	for _, v := range ent.Events {
+		switch v.Action {
+		case "registration":
+			org.Registration = v.Date
+		case "last changed":
+			org.Updated = v.Date
+		}
+	}
+	org.Street = ent.VCard.StreetAddress()
+
+	return &org
+}
+
+func GetContact(ent rdap.Entity) *ContactInfo {
+	contact := ContactInfo{}
+
+	contact.City = ent.VCard.ExtendedAddress()
+	contact.Country = ent.VCard.Country()
+	contact.Email = ent.VCard.Email()
+	contact.Handle = ent.Handle
+	contact.Name = ent.VCard.Name()
+	contact.Phone = ent.VCard.Tel()
+	contact.Postal = ent.VCard.PostalCode()
+	contact.Province = ent.VCard.Region()
+	for _, v := range ent.Events {
+		switch v.Action {
+		case "registration":
+			contact.Registration = v.Date
+		case "last changed":
+			contact.Updated = v.Date
+		}
+	}
+	contact.Street = ent.VCard.StreetAddress()
+
+	return &contact
 }
 
 func (r *OrganizationInfo) Proto() *api.OrganizationInfo {
