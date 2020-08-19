@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"net"
@@ -11,33 +12,235 @@ import (
 	"strings"
 
 	"github.com/openrdap/rdap"
+	"github.com/oschwald/geoip2-golang"
 )
 
 /*
 - 1. Make a new object named location
 - 2. under location add Country/City info
-- 3. under network add ASN info 
+- 3. under network add ASN info
 - 4. make sure we have all the info
 - 5. turn REST into GRPC
 - 6. Once done; please go here (https://github.com/complexorganizations/disposable-services) and look at the main.go and the next tasks are there.
 */
 
-const IPSET_FILE = "blockips.json"
+const (
+	Port      = ":8080"
+	IPSetFile = "blockips.json"
+)
 
-var blockips BlockIP
+var (
+	asnDB     *geoip2.Reader
+	cityDB    *geoip2.Reader
+	countryDB *geoip2.Reader
+	blockIPs  BlockIP
+)
 
-// var blockips = NewBlockIP(IPSET_INTVAL)
-type AnaylsisResult map[string]bool
+func main() {
+	asn, err := geoip2.Open("GeoLite2-ASN.mmdb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() { _ = asn.Close() }()
 
-type BlockIP map[string][]string
+	city, err := geoip2.Open("GeoLite2-City.mmdb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() { _ = city.Close() }()
+
+	country, err := geoip2.Open("GeoLite2-Country.mmdb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() { _ = country.Close() }()
+
+	asnDB = asn
+	cityDB = city
+	countryDB = country
+
+	blockIPs = LoadBlockIPs(IPSetFile)
+
+	server := NewServer()
+	_ = server.Run(Port)
+}
+
+type Server struct {
+	router *http.ServeMux
+}
+
+func NewServer() *Server {
+	r := http.NewServeMux()
+	return &Server{
+		router: r,
+	}
+}
+
+func (s Server) Run(port string) error {
+	s.router.HandleFunc("/", s.ReverseIPHandler())
+	s.router.HandleFunc("/ip/", s.IPHandler())
+
+	return http.ListenAndServe(port, s.router)
+}
+
+func (s *Server) Write(writer http.ResponseWriter, data interface{}) error {
+	return json.NewEncoder(writer).Encode(data)
+}
+
+func (s *Server) WriteError(writer http.ResponseWriter, status int) {
+	http.Error(writer, http.StatusText(status), status)
+}
+
+func (s *Server) ReverseIPHandler() http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "application/json")
+
+		ip := GetReverseIP(request)
+		if ip == nil {
+			s.WriteError(writer, http.StatusNotFound)
+			return
+		}
+
+		err := s.Write(writer, NewResponse(ip))
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func (s *Server) IPHandler() http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "application/json")
+
+		ip, err := GetIPFromParameter(request)
+		if err != nil || ip == nil {
+			log.Println(err)
+			s.WriteError(writer, http.StatusNotFound)
+			return
+		}
+
+		rsp := NewResponse(ip)
+		rsp.Analysis = blockIPs.Analyse(ip.String())
+
+		err = s.Write(writer, rsp)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func GetReverseIP(r *http.Request) net.IP {
+	ff := r.Header.Get("CF-Connecting-IP")
+	if ff == "" {
+		return GetIP(r.RemoteAddr)
+	}
+
+	return net.ParseIP(ff)
+}
+
+func GetIP(remoteAddress string) net.IP {
+	return net.ParseIP(remoteAddress[0:strings.Index(remoteAddress, ":")])
+}
+
+func GetIPFromParameter(r *http.Request) (net.IP, error) {
+	ip := r.URL.Path[4:]
+
+	if strings.Index(ip, "/") != -1 {
+		return nil, errors.New("failed to get ip parameter")
+	}
+
+	return net.ParseIP(ip), nil
+}
+
+type Response struct {
+	Network      NetworkInfo      `json:"network,omitempty"`
+	Location     Location         `json:"location,omitempty"`
+	Arin         ArinInfo         `json:"arin,omitempty"`
+	Organization OrganizationInfo `json:"organization,omitempty"`
+	Contact      ContactInfo      `json:"contact,omitempty"`
+	Abuse        ContactInfo      `json:"abuse,omitempty"`
+	Analysis     AnalysisResult   `json:"analysis,omitempty"`
+}
+
+func NewResponse(ip net.IP) *Response {
+	response := &Response{
+		Network:  ParseNetWork(ip),
+		Location: ParseLocation(ip),
+	}
+
+	c := &rdap.Client{}
+	network, err := c.QueryIP(ip.String())
+	if err != nil {
+		log.Println(err)
+		return response
+	}
+
+	response.Arin = ParseArin(network)
+
+	org, cont, abuse := ParseEntities(network)
+	response.Organization = org
+	response.Contact = cont
+	response.Abuse = abuse
+
+	return response
+}
 
 type NetworkInfo struct {
 	Ip       string `json:"ip"`
 	Hostname string `json:"hostname"`
 	Reverse  string `json:"reverse"`
+	Asn      string `json:"asn,omitempty"`
 }
 
-//ArinInfo data
+func ParseNetWork(ip net.IP) NetworkInfo {
+	network := NetworkInfo{}
+	network.Ip = ip.String()
+
+	host, err := net.LookupAddr(ip.String())
+	if err != nil || len(host) == 0 {
+		log.Println(err, ip)
+		return network
+	}
+
+	revIP, err := net.LookupIP(host[0])
+	if err != nil || len(revIP) == 0 {
+		return network
+	}
+
+	network.Hostname = host[0]
+	network.Reverse = revIP[0].String()
+
+	asn, err := asnDB.ASN(ip)
+	if err != nil || len(host) == 0 {
+		log.Println(err, ip)
+		return network
+	}
+
+	network.Asn = fmt.Sprint(asn.AutonomousSystemNumber)
+	return network
+}
+
+type Location struct {
+	City    string `json:"city,omitempty"`
+	Country string `json:"country,omitempty"`
+}
+
+func ParseLocation(ip net.IP) Location {
+	loc := Location{}
+
+	city, err := cityDB.City(ip)
+	if err == nil {
+		loc.City = city.City.Names["en"]
+	}
+
+	country, err := countryDB.Country(ip)
+	if err == nil {
+		loc.Country = country.Country.Names["en"]
+	}
+
+	return loc
+}
+
 type ArinInfo struct {
 	Name         string   `json:"name,omitempty"`
 	Handle       string   `json:"handle,omitempty"`
@@ -50,8 +253,29 @@ type ArinInfo struct {
 	Updated      string   `json:"updated,omitempty"`
 }
 
-//OrgnizationInfo data
-type OrgnizationInfo struct {
+func ParseArin(network *rdap.IPNetwork) ArinInfo {
+	arin := ArinInfo{}
+
+	arin.Name = network.Name
+	arin.Cidr = network.Handle
+	arin.Handle = network.Handle
+	arin.Parent = network.ParentHandle
+	arin.Range = network.StartAddress + "-" + network.EndAddress
+	arin.Type = network.Type
+
+	for _, v := range network.Events {
+		switch v.Action {
+		case "registration":
+			arin.Registration = v.Date
+		case "last changed":
+			arin.Updated = v.Date
+		}
+	}
+
+	return arin
+}
+
+type OrganizationInfo struct {
 	Name         string `json:"name,omitempty"`
 	Handle       string `json:"handle,omitempty"`
 	Street       string `json:"street,omitempty"`
@@ -63,7 +287,6 @@ type OrgnizationInfo struct {
 	Updated      string `json:"updated,omitempty"`
 }
 
-//ContactInfo data
 type ContactInfo struct {
 	Name         string `json:"name,omitempty"`
 	Handle       string `json:"handle,omitempty"`
@@ -79,288 +302,152 @@ type ContactInfo struct {
 	Email        string `json:"email,omitempty"`
 }
 
-//Response data
-type Response struct {
-	Network     NetworkInfo     `json:"network,omitempty"`
-	Arin        ArinInfo        `json:"arin,omitempty"`
-	Orgnization OrgnizationInfo `json:"organization,omitempty"`
-	Contact     ContactInfo     `json:"contact,omitempty"`
-	Abuse       ContactInfo     `json:"abuse,omitempty"`
-	Anaylsis    AnaylsisResult  `json:"analysis,omitempty"`
-}
+func ParseEntities(network *rdap.IPNetwork) (OrganizationInfo, ContactInfo, ContactInfo) {
+	org := OrganizationInfo{}
+	contact := ContactInfo{}
+	abuse := ContactInfo{}
 
-func init() {
-	log.SetFlags(log.Lshortfile)
-	// init blockip datasource
-	// open blockip file
-	f, e := os.OpenFile(IPSET_FILE, os.O_RDONLY, 0666)
-	if e != nil {
-		log.Println(e)
-		return
-	}
-	blockips = NewBlockIP(f)
-
-}
-
-func main() {
-	//router
-	r := http.NewServeMux()
-	//routes
-	r.HandleFunc("/", reverseIpHandler)
-	r.HandleFunc("/ip/", ipHandler)
-	//http server
-	http.ListenAndServe(":8080", r)
-}
-
-func NewResponse(ip string) (rsp *Response) {
-	rsp = new(Response)
-	// process
-	rsp.parseNetWork(ip)
-	rsp.Parse(ip)
-	return
-}
-
-func (rsp *Response) parseNetWork(ip string) {
-	// set default value
-	rsp.Network = NetworkInfo{}
-	rsp.Network.Ip = ip
-
-	host, err := net.LookupAddr(ip)
-	if err != nil || len(host) == 0 {
-		log.Println(err, ip)
-		return
-	}
-
-	revIP, err := net.LookupIP(host[0])
-	if err != nil || len(revIP) == 0 {
-		return
-	}
-	// update network value
-	rsp.Network.Hostname = host[0]
-	rsp.Network.Reverse = revIP[0].String()
-}
-
-func (rsp *Response) Parse(ip string) {
-	// read whois information
-	c := &rdap.Client{}
-	rs, e := c.QueryIP(ip)
-	if e != nil {
-		log.Println(e)
-		return
-	}
-	// arinfo
-	rsp.Arin.Name = rs.Name
-	rsp.Arin.Cidr = rs.Handle
-	rsp.Arin.Handle = rs.Handle
-	rsp.Arin.Parent = rs.ParentHandle
-	rsp.Arin.Range = rs.StartAddress + "-" + rs.EndAddress
-	rsp.Arin.Type = rs.Type
-	// update registration and updated
-	for _, v := range rs.Events {
-		switch v.Action {
-		case "registration":
-			rsp.Arin.Registration = v.Date
-		case "last changed":
-			rsp.Arin.Updated = v.Date
-		}
-	}
-
-	for _, ett := range rs.Entities {
-		if ett.VCard == nil {
+	for _, ent := range network.Entities {
+		if ent.VCard == nil {
 			continue
 		}
+
 		switch {
-		// orgnization infomation
-		case isExists(ett.Roles, "registrant"):
-			rsp.Orgnization.Country = ett.VCard.Country()
-			rsp.Orgnization.City = ett.VCard.ExtendedAddress()
-			rsp.Orgnization.Handle = ett.Handle
-			rsp.Orgnization.Name = ett.VCard.Name()
-			rsp.Orgnization.Postal = ett.VCard.PostalCode()
-			rsp.Orgnization.Province = ett.VCard.Region()
-			for _, v := range ett.Events {
+		case HasRole(ent.Roles, "registrant"):
+			org.Country = ent.VCard.Country()
+			org.City = ent.VCard.ExtendedAddress()
+			org.Handle = ent.Handle
+			org.Name = ent.VCard.Name()
+			org.Postal = ent.VCard.PostalCode()
+			org.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
 				switch v.Action {
 				case "registration":
-					rsp.Orgnization.Registration = v.Date
+					org.Registration = v.Date
 				case "last changed":
-					rsp.Orgnization.Updated = v.Date
+					org.Updated = v.Date
 				}
 			}
-			rsp.Orgnization.Street = ett.VCard.StreetAddress()
+			org.Street = ent.VCard.StreetAddress()
 		// abuse information
-		case isExists(ett.Roles, "abuse"):
-			rsp.Abuse.Country = ett.VCard.Country()
-			rsp.Abuse.City = ett.VCard.ExtendedAddress()
-			rsp.Abuse.Email = ett.VCard.Email()
-			rsp.Abuse.Handle = ett.Handle
-			rsp.Abuse.Name = ett.VCard.Name()
-			rsp.Abuse.Phone = ett.VCard.Tel()
-			rsp.Abuse.Postal = ett.VCard.PostalCode()
-			rsp.Abuse.Province = ett.VCard.Region()
-			for _, v := range ett.Events {
+		case HasRole(ent.Roles, "abuse"):
+			abuse.Country = ent.VCard.Country()
+			abuse.City = ent.VCard.ExtendedAddress()
+			abuse.Email = ent.VCard.Email()
+			abuse.Handle = ent.Handle
+			abuse.Name = ent.VCard.Name()
+			abuse.Phone = ent.VCard.Tel()
+			abuse.Postal = ent.VCard.PostalCode()
+			abuse.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
 				switch v.Action {
 				case "registration":
-					rsp.Abuse.Registration = v.Date
+					abuse.Registration = v.Date
 				case "last changed":
-					rsp.Abuse.Updated = v.Date
+					abuse.Updated = v.Date
 				}
 			}
-			rsp.Abuse.Street = ett.VCard.StreetAddress()
+			abuse.Street = ent.VCard.StreetAddress()
 			fallthrough
-		// contact
-		case isExists(ett.Roles, "administrative"):
-			rsp.Contact.City = ett.VCard.ExtendedAddress()
-			rsp.Contact.Country = ett.VCard.Country()
-			rsp.Contact.Email = ett.VCard.Email()
-			rsp.Contact.Handle = ett.Handle
-			rsp.Contact.Name = ett.VCard.Name()
-			rsp.Contact.Phone = ett.VCard.Tel()
-			rsp.Contact.Postal = ett.VCard.PostalCode()
-			rsp.Contact.Province = ett.VCard.Region()
-			for _, v := range ett.Events {
+
+		case HasRole(ent.Roles, "administrative"):
+			contact.City = ent.VCard.ExtendedAddress()
+			contact.Country = ent.VCard.Country()
+			contact.Email = ent.VCard.Email()
+			contact.Handle = ent.Handle
+			contact.Name = ent.VCard.Name()
+			contact.Phone = ent.VCard.Tel()
+			contact.Postal = ent.VCard.PostalCode()
+			contact.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
 				switch v.Action {
 				case "registration":
-					rsp.Contact.Registration = v.Date
+					contact.Registration = v.Date
 				case "last changed":
-					rsp.Contact.Updated = v.Date
+					contact.Updated = v.Date
 				}
 			}
-			rsp.Contact.Street = ett.VCard.StreetAddress()
+			contact.Street = ent.VCard.StreetAddress()
 		}
 	}
+
+	return org, contact, abuse
 }
 
-func isExists(src []string, item string) (r bool) {
+func HasRole(src []string, item string) bool {
 	for _, v := range src {
 		if v == item {
-			r = true
-			break
+			return true
 		}
 	}
-	return
+	return false
 }
 
-func getContent(ct string) (r string) {
-	idx := strings.Index(ct, ":")
-	r = strings.Trim(ct[idx+1:], " ")
-	r = strings.Trim(r, "\n")
-	return
-}
+type BlockIP map[string][]string
 
-func reverseIpHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	//reverse ip
-	rip := getReverseIp(r)
-	rsp := NewResponse(rip)
-	e := json.NewEncoder(w).Encode(rsp)
-	if e != nil {
-		log.Println(e)
-	}
+type AnalysisResult map[string]bool
 
-}
+func LoadBlockIPs(fileName string) BlockIP {
+	blockIps := BlockIP{}
 
-func getReverseIp(r *http.Request) string {
-	ff := r.Header.Get("CF-Connecting-IP")
-	if ff != "" {
-		return ff
-	}
-	//fall back to request's remote address
-	ip := getIp(r.RemoteAddr)
-	return ip
-}
-
-func getIp(remoteAddress string) string {
-	i := strings.Index(remoteAddress, ":")
-	return remoteAddress[0:i]
-}
-
-func ipHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	//ip
-	ip, err := getIpParam(r)
+	file, err := os.Open(fileName)
 	if err != nil {
 		log.Println(err)
-		http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
-		return
+		return blockIps
 	}
-	rsp := NewResponse(ip)
-	// anaylsis
-	rsp.Anaylsis = blockips.Anaylsis(ip)
 
-	e := json.NewEncoder(w).Encode(rsp)
-	if e != nil {
-		log.Println(e)
-	}
+	blockIps.Load(file)
+	return blockIps
 }
 
-func getIpParam(r *http.Request) (string, error) {
-	//url path: /ip/:ip
-	ip := r.URL.Path[4:]
-	i := strings.Index(ip, "/")
-	if i == -1 {
-		return ip, nil
-	} else {
-		return "", errors.New("Failed to get ip parameter!")
-	}
-}
-
-func NewBlockIP(f io.Reader) (bip BlockIP) {
-	bip = make(BlockIP)
-	bip.load(f)
-	return
-}
-
-func (bip *BlockIP) load(f io.Reader) {
-	dc := json.NewDecoder(f)
-	e := dc.Decode(bip)
-	if e != nil {
-		log.Println(e)
+func (bip *BlockIP) Load(file io.Reader) {
+	if err := json.NewDecoder(file).Decode(bip); err != nil {
+		log.Println(err)
 		return
 	}
 }
 
-func (bip BlockIP) Anaylsis(ip string) (rs AnaylsisResult) {
-	rs = make(AnaylsisResult)
+func (bip BlockIP) Analyse(ip string) AnalysisResult {
+	rs := AnalysisResult{}
+
 	for k, v := range bip {
-		// detect if ip in v
 		rs[k] = false
 		for _, va := range v {
 			if va == ip {
 				rs[k] = true
 				break
 			}
-			// if v contains "/" in the last 3 pst
+
 			if strings.Contains(va, "/") {
-				if ipinet(ip, va) {
+				if IPInet(ip, va) {
 					rs[k] = true
 					break
 				}
 				va = va[:len(va)-3]
 			}
 
-			// compare the ip value
-			// when va greate than ip then break
-			ipi, e := IPString2Long(ip)
-			if e != nil {
-				log.Println(ip, e)
+			ipi, err := IPString2Long(ip)
+			if err != nil {
+				log.Println(ip, err)
 			}
-			ipv, e := IPString2Long(va)
-			if e != nil {
-				log.Println(va, e)
+			ipv, err := IPString2Long(va)
+			if err != nil {
+				log.Println(va, err)
 			}
-			// log.Println(ipi, ipv, va)
+
 			if ipv > ipi {
 				break
 			}
 		}
 	}
-	return
+
+	return rs
 }
 
-func ipinet(ip string, cidr string) (r bool) {
+func IPInet(ip string, cidr string) (r bool) {
 	ipx, subnet, _ := net.ParseCIDR(cidr)
 	ipa := net.ParseIP(ip)
-	// if netip eq ip then check ip existing
+
 	if subnet.IP.Equal(ipx) {
 		r = subnet.Contains(ipa)
 		return
