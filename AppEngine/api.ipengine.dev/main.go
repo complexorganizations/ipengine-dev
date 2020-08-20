@@ -20,15 +20,6 @@ import (
 	"google.golang.org/grpc/peer"
 )
 
-/*
-- 1. Make a new object named location
-- 2. under location add Country/City info
-- 3. under network add ASN info
-- 4. make sure we have all the info
-- 5. turn REST into GRPC
-- 6. Once done; please go here (https://github.com/complexorganizations/disposable-services) and look at the main.go and the next tasks are there.
-*/
-
 const (
 	HTTPPort  = ":8080"
 	gRPCPort  = ":8081"
