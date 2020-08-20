@@ -20,6 +20,13 @@ import (
 	"google.golang.org/grpc/peer"
 )
 
+/*
+- Remove GRPC
+- Remove Protocol Buffer
+- Add a newtwork scanner
+- Add security things
+*/
+
 const (
 	HTTPPort  = ":8080"
 	gRPCPort  = ":8081"
