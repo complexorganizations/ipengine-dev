@@ -26,6 +26,7 @@ import (
 - Add a newtwork scanner
 - Alive check (ping)
 - Traceroute
+- Put all the data from json to firestore 
 */
 
 const (
