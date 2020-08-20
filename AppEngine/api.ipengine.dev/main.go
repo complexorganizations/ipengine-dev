@@ -24,7 +24,8 @@ import (
 - Remove GRPC
 - Remove Protocol Buffer
 - Add a newtwork scanner
-- Add security things
+- Alive check (ping)
+- Traceroute
 */
 
 const (
