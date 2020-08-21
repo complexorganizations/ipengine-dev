@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,27 +10,13 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"sync"
 
-	"api.ipengine.dev/api"
 	"github.com/openrdap/rdap"
 	"github.com/oschwald/geoip2-golang"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/peer"
 )
 
-/*
-- Remove GRPC
-- Remove Protocol Buffer
-- Add a newtwork scanner
-- Alive check (ping)
-- Traceroute
-- Adding other things; please send me a msg before adding.
-*/
-
 const (
-	HTTPPort  = ":8080"
-	gRPCPort  = ":8081"
+	Port      = ":8080"
 	IPSetFile = "blockips.json"
 )
 
@@ -67,62 +52,37 @@ func main() {
 
 	blockIPs = LoadBlockIPs(IPSetFile)
 
-	service := NewService()
-	httpServer := NewHttpServer(service)
-	grpcServer := NewGrpcServer(service)
-
-	var wg sync.WaitGroup
-	wg.Add(2)
-
-	go func() {
-		err := httpServer.Run(HTTPPort)
-		if err != nil {
-			log.Println(err)
-		}
-		wg.Done()
-	}()
-	go func() {
-		err := grpcServer.Run(gRPCPort)
-		if err != nil {
-			log.Println(err)
-		}
-		wg.Done()
-	}()
-
-	wg.Wait()
+	server := NewServer()
+	_ = server.Run(Port)
 }
 
-type HttpServer struct {
+type Server struct {
 	router *http.ServeMux
-	srv    Service
 }
 
-func NewHttpServer(srv Service) *HttpServer {
+func NewServer() *Server {
 	r := http.NewServeMux()
-	return &HttpServer{
+	return &Server{
 		router: r,
-		srv:    srv,
 	}
 }
 
-func (s HttpServer) Run(port string) error {
-	log.Println("Starting HTTP server in port:", port)
-
-	s.router.HandleFunc("/", s.ReverseIPHandler(s.srv))
-	s.router.HandleFunc("/ip/", s.IPHandler(s.srv))
+func (s Server) Run(port string) error {
+	s.router.HandleFunc("/", s.ReverseIPHandler())
+	s.router.HandleFunc("/ip/", s.IPHandler())
 
 	return http.ListenAndServe(port, s.router)
 }
 
-func (s *HttpServer) Write(writer http.ResponseWriter, data interface{}) error {
+func (s *Server) Write(writer http.ResponseWriter, data interface{}) error {
 	return json.NewEncoder(writer).Encode(data)
 }
 
-func (s *HttpServer) WriteError(writer http.ResponseWriter, status int) {
+func (s *Server) WriteError(writer http.ResponseWriter, status int) {
 	http.Error(writer, http.StatusText(status), status)
 }
 
-func (s *HttpServer) ReverseIPHandler(srv Service) http.HandlerFunc {
+func (s *Server) ReverseIPHandler() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
@@ -132,16 +92,14 @@ func (s *HttpServer) ReverseIPHandler(srv Service) http.HandlerFunc {
 			return
 		}
 
-		resp, _ := srv.ReverseIP(ip)
-
-		err := s.Write(writer, resp)
+		err := s.Write(writer, NewResponse(ip))
 		if err != nil {
 			log.Println(err)
 		}
 	}
 }
 
-func (s *HttpServer) IPHandler(srv Service) http.HandlerFunc {
+func (s *Server) IPHandler() http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 
@@ -152,84 +110,14 @@ func (s *HttpServer) IPHandler(srv Service) http.HandlerFunc {
 			return
 		}
 
-		resp, _ := srv.IP(ip)
+		rsp := NewResponse(ip)
+		rsp.Analysis = blockIPs.Analyse(ip.String())
 
-		err = s.Write(writer, resp)
+		err = s.Write(writer, rsp)
 		if err != nil {
 			log.Println(err)
 		}
 	}
-}
-
-type GrpcServer struct {
-	server *grpc.Server
-	srv    Service
-}
-
-func NewGrpcServer(srv Service) *GrpcServer {
-	server := grpc.NewServer()
-
-	serverHandler := &GrpcServer{
-		server: server,
-		srv:    srv,
-	}
-
-	api.RegisterIPEngineServiceServer(server, serverHandler)
-
-	return serverHandler
-}
-
-func (s GrpcServer) Run(port string) error {
-	log.Println("Starting gRPC server in port:", port)
-
-	lis, err := net.Listen("tcp", port)
-	if err != nil {
-		return err
-	}
-
-	return s.server.Serve(lis)
-}
-
-func (s GrpcServer) ReverseIP(ctx context.Context, in *api.ReverseIPRequest) (*api.Response, error) {
-	p, ok := peer.FromContext(ctx)
-	if !ok {
-		return nil, errors.New("no peer available")
-	}
-
-	ip := GetIP(p.Addr.String())
-	resp, err := s.srv.ReverseIP(ip)
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Proto(), nil
-}
-
-func (s GrpcServer) IP(ctx context.Context, in *api.IPRequest) (*api.Response, error) {
-	ip := net.ParseIP(in.GetIp())
-
-	resp, err := s.srv.IP(ip)
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.Proto(), nil
-}
-
-type Service struct{}
-
-func NewService() Service {
-	return Service{}
-}
-
-func (s Service) ReverseIP(ip net.IP) (*Response, error) {
-	return NewResponse(ip), nil
-}
-
-func (s Service) IP(ip net.IP) (*Response, error) {
-	rsp := NewResponse(ip)
-	rsp.Analysis = blockIPs.Analyse(ip.String())
-	return rsp, nil
 }
 
 func GetReverseIP(r *http.Request) net.IP {
@@ -274,29 +162,18 @@ func NewResponse(ip net.IP) *Response {
 	c := &rdap.Client{}
 	network, err := c.QueryIP(ip.String())
 	if err != nil {
+		log.Println(err)
 		return response
 	}
 
 	response.Arin = ParseArin(network)
 
-	org, cont, abuse := ParseEntities(network.Entities)
-	MergeOrganization(&response.Organization, org)
-	MergeContacts(&response.Contact, cont)
-	MergeContacts(&response.Abuse, abuse)
+	org, cont, abuse := ParseEntities(network)
+	response.Organization = org
+	response.Contact = cont
+	response.Abuse = abuse
 
 	return response
-}
-
-func (r *Response) Proto() *api.Response {
-	return &api.Response{
-		Network:      r.Network.Proto(),
-		Location:     r.Location.Proto(),
-		Arin:         r.Arin.Proto(),
-		Organization: r.Organization.Proto(),
-		Contact:      r.Contact.Proto(),
-		Abuse:        r.Abuse.Proto(),
-		Analysis:     r.Analysis.Proto(),
-	}
 }
 
 type NetworkInfo struct {
@@ -312,6 +189,7 @@ func ParseNetWork(ip net.IP) NetworkInfo {
 
 	host, err := net.LookupAddr(ip.String())
 	if err != nil || len(host) == 0 {
+		log.Println(err, ip)
 		return network
 	}
 
@@ -325,24 +203,12 @@ func ParseNetWork(ip net.IP) NetworkInfo {
 
 	asn, err := asnDB.ASN(ip)
 	if err != nil || len(host) == 0 {
+		log.Println(err, ip)
 		return network
 	}
 
 	network.Asn = fmt.Sprint(asn.AutonomousSystemNumber)
 	return network
-}
-
-func (r *NetworkInfo) Proto() *api.NetworkInfo {
-	if r == nil {
-		return nil
-	}
-
-	return &api.NetworkInfo{
-		Ip:       r.Ip,
-		Hostname: r.Hostname,
-		Reverse:  r.Reverse,
-		Asn:      r.Asn,
-	}
 }
 
 type Location struct {
@@ -366,17 +232,6 @@ func ParseLocation(ip net.IP) Location {
 	return loc
 }
 
-func (r *Location) Proto() *api.Location {
-	if r == nil {
-		return nil
-	}
-
-	return &api.Location{
-		City:    r.City,
-		Country: r.Country,
-	}
-}
-
 type ArinInfo struct {
 	Name         string   `json:"name,omitempty"`
 	Handle       string   `json:"handle,omitempty"`
@@ -398,7 +253,6 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	arin.Parent = network.ParentHandle
 	arin.Range = network.StartAddress + "-" + network.EndAddress
 	arin.Type = network.Type
-	arin.Status = network.Status
 
 	for _, v := range network.Events {
 		switch v.Action {
@@ -410,24 +264,6 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	}
 
 	return arin
-}
-
-func (r *ArinInfo) Proto() *api.ArinInfo {
-	if r == nil {
-		return nil
-	}
-
-	return &api.ArinInfo{
-		Name:         r.Name,
-		Handle:       r.Handle,
-		Parent:       r.Parent,
-		Type:         r.Type,
-		Range:        r.Range,
-		Cidr:         r.Cidr,
-		Status:       r.Status,
-		Registration: r.Registration,
-		Updated:      r.Updated,
-	}
 }
 
 type OrganizationInfo struct {
@@ -457,235 +293,76 @@ type ContactInfo struct {
 	Email        string `json:"email,omitempty"`
 }
 
-func ParseEntities(entities []rdap.Entity) (*OrganizationInfo, *ContactInfo, *ContactInfo) {
-	var org *OrganizationInfo
-	var contact *ContactInfo
-	var abuse *ContactInfo
+func ParseEntities(network *rdap.IPNetwork) (OrganizationInfo, ContactInfo, ContactInfo) {
+	org := OrganizationInfo{}
+	contact := ContactInfo{}
+	abuse := ContactInfo{}
 
-	for _, ent := range entities {
+	for _, ent := range network.Entities {
 		if ent.VCard == nil {
 			continue
 		}
 
 		switch {
 		case HasRole(ent.Roles, "registrant"):
-			org = GetOrganization(ent)
-			_, c, a := ParseEntities(ent.Entities)
-			if contact == nil {
-				contact = c
+			org.Country = ent.VCard.Country()
+			org.City = ent.VCard.ExtendedAddress()
+			org.Handle = ent.Handle
+			org.Name = ent.VCard.Name()
+			org.Postal = ent.VCard.PostalCode()
+			org.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
+				switch v.Action {
+				case "registration":
+					org.Registration = v.Date
+				case "last changed":
+					org.Updated = v.Date
+				}
 			}
-			if abuse == nil {
-				abuse = a
-			}
-			MergeContacts(contact, c)
-			MergeContacts(abuse, a)
+			org.Street = ent.VCard.StreetAddress()
+		// abuse information
 		case HasRole(ent.Roles, "abuse"):
-			abuse = GetContact(ent)
-			o, c, _ := ParseEntities(ent.Entities)
-			if org == nil {
-				org = o
+			abuse.Country = ent.VCard.Country()
+			abuse.City = ent.VCard.ExtendedAddress()
+			abuse.Email = ent.VCard.Email()
+			abuse.Handle = ent.Handle
+			abuse.Name = ent.VCard.Name()
+			abuse.Phone = ent.VCard.Tel()
+			abuse.Postal = ent.VCard.PostalCode()
+			abuse.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
+				switch v.Action {
+				case "registration":
+					abuse.Registration = v.Date
+				case "last changed":
+					abuse.Updated = v.Date
+				}
 			}
-			if contact == nil {
-				contact = c
-			}
-			MergeOrganization(org, o)
-			MergeContacts(contact, c)
+			abuse.Street = ent.VCard.StreetAddress()
+			fallthrough
+
 		case HasRole(ent.Roles, "administrative"):
-			contact = GetContact(ent)
-			o, _, a := ParseEntities(ent.Entities)
-			if org == nil {
-				org = o
+			contact.City = ent.VCard.ExtendedAddress()
+			contact.Country = ent.VCard.Country()
+			contact.Email = ent.VCard.Email()
+			contact.Handle = ent.Handle
+			contact.Name = ent.VCard.Name()
+			contact.Phone = ent.VCard.Tel()
+			contact.Postal = ent.VCard.PostalCode()
+			contact.Province = ent.VCard.Region()
+			for _, v := range ent.Events {
+				switch v.Action {
+				case "registration":
+					contact.Registration = v.Date
+				case "last changed":
+					contact.Updated = v.Date
+				}
 			}
-			if abuse == nil {
-				abuse = a
-			}
-			MergeOrganization(org, o)
-			MergeContacts(abuse, a)
+			contact.Street = ent.VCard.StreetAddress()
 		}
 	}
 
 	return org, contact, abuse
-}
-
-func MergeOrganization(o1, o2 *OrganizationInfo) {
-	if o2 == nil {
-		return
-	}
-
-	if o1.Name == "" {
-		o1.Name = o2.Name
-	}
-
-	if o1.Handle == "" {
-		o1.Handle = o2.Handle
-	}
-
-	if o1.Street == "" {
-		o1.Street = o2.Street
-	}
-
-	if o1.City == "" {
-		o1.City = o2.City
-	}
-
-	if o1.Province == "" {
-		o1.Province = o2.Province
-	}
-
-	if o1.Postal == "" {
-		o1.Postal = o2.Postal
-	}
-
-	if o1.Country == "" {
-		o1.Country = o2.Country
-	}
-
-	if o1.Registration == "" {
-		o1.Registration = o2.Registration
-	}
-
-	if o1.Updated == "" {
-		o1.Updated = o2.Updated
-	}
-}
-
-func MergeContacts(c1, c2 *ContactInfo) {
-	if c2 == nil {
-		return
-	}
-
-	if c1.Name == "" {
-		c1.Name = c2.Name
-	}
-
-	if c1.Handle == "" {
-		c1.Handle = c2.Handle
-	}
-
-	if c1.Company == "" {
-		c1.Company = c2.Company
-	}
-
-	if c1.Street == "" {
-		c1.Street = c2.Street
-	}
-
-	if c1.City == "" {
-		c1.City = c2.City
-	}
-
-	if c1.Province == "" {
-		c1.Province = c2.Province
-	}
-
-	if c1.Postal == "" {
-		c1.Postal = c2.Postal
-	}
-
-	if c1.Country == "" {
-		c1.Country = c2.Country
-	}
-
-	if c1.Registration == "" {
-		c1.Registration = c2.Registration
-	}
-
-	if c1.Updated == "" {
-		c1.Updated = c2.Updated
-	}
-
-	if c1.Phone == "" {
-		c1.Phone = c2.Phone
-	}
-
-	if c1.Email == "" {
-		c1.Email = c2.Email
-	}
-}
-
-func GetOrganization(ent rdap.Entity) *OrganizationInfo {
-	org := OrganizationInfo{}
-
-	org.Country = ent.VCard.Country()
-	org.City = ent.VCard.ExtendedAddress()
-	org.Handle = ent.Handle
-	org.Name = ent.VCard.Name()
-	org.Postal = ent.VCard.PostalCode()
-	org.Province = ent.VCard.Region()
-	for _, v := range ent.Events {
-		switch v.Action {
-		case "registration":
-			org.Registration = v.Date
-		case "last changed":
-			org.Updated = v.Date
-		}
-	}
-	org.Street = ent.VCard.StreetAddress()
-
-	return &org
-}
-
-func GetContact(ent rdap.Entity) *ContactInfo {
-	contact := ContactInfo{}
-
-	contact.City = ent.VCard.ExtendedAddress()
-	contact.Country = ent.VCard.Country()
-	contact.Email = ent.VCard.Email()
-	contact.Handle = ent.Handle
-	contact.Name = ent.VCard.Name()
-	contact.Phone = ent.VCard.Tel()
-	contact.Postal = ent.VCard.PostalCode()
-	contact.Province = ent.VCard.Region()
-	for _, v := range ent.Events {
-		switch v.Action {
-		case "registration":
-			contact.Registration = v.Date
-		case "last changed":
-			contact.Updated = v.Date
-		}
-	}
-	contact.Street = ent.VCard.StreetAddress()
-
-	return &contact
-}
-
-func (r *OrganizationInfo) Proto() *api.OrganizationInfo {
-	if r == nil {
-		return nil
-	}
-
-	return &api.OrganizationInfo{
-		Name:         r.Name,
-		Handle:       r.Handle,
-		Street:       r.Street,
-		City:         r.City,
-		Province:     r.Province,
-		Postal:       r.Postal,
-		Country:      r.Country,
-		Registration: r.Registration,
-		Updated:      r.Updated,
-	}
-}
-
-func (r *ContactInfo) Proto() *api.ContactInfo {
-	if r == nil {
-		return nil
-	}
-
-	return &api.ContactInfo{
-		Name:         r.Name,
-		Handle:       r.Handle,
-		Company:      r.Company,
-		Street:       r.Street,
-		City:         r.City,
-		Province:     r.Province,
-		Postal:       r.Postal,
-		Country:      r.Country,
-		Registration: r.Registration,
-		Updated:      r.Updated,
-		Phone:        r.Phone,
-		Email:        r.Email,
-	}
 }
 
 func HasRole(src []string, item string) bool {
@@ -706,6 +383,7 @@ func LoadBlockIPs(fileName string) BlockIP {
 
 	file, err := os.Open(fileName)
 	if err != nil {
+		log.Println(err)
 		return blockIps
 	}
 
@@ -715,6 +393,7 @@ func LoadBlockIPs(fileName string) BlockIP {
 
 func (bip *BlockIP) Load(file io.Reader) {
 	if err := json.NewDecoder(file).Decode(bip); err != nil {
+		log.Println(err)
 		return
 	}
 }
@@ -738,8 +417,14 @@ func (bip BlockIP) Analyse(ip string) AnalysisResult {
 				va = va[:len(va)-3]
 			}
 
-			ipi, _ := IPString2Long(ip)
-			ipv, _ := IPString2Long(va)
+			ipi, err := IPString2Long(ip)
+			if err != nil {
+				log.Println(ip, err)
+			}
+			ipv, err := IPString2Long(va)
+			if err != nil {
+				log.Println(va, err)
+			}
 
 			if ipv > ipi {
 				break
@@ -748,10 +433,6 @@ func (bip BlockIP) Analyse(ip string) AnalysisResult {
 	}
 
 	return rs
-}
-
-func (r AnalysisResult) Proto() map[string]bool {
-	return r
 }
 
 func IPInet(ip string, cidr string) (r bool) {
