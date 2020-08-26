@@ -15,13 +15,6 @@ import (
 	"github.com/oschwald/geoip2-golang"
 )
 
-/*
-- Fix all the rdap issues
-- Add a newtwork scanner
-- Alive check (ping)
-- Traceroute
-*/
-
 const (
 	Port      = ":8080"
 	IPSetFile = "blockips.json"
