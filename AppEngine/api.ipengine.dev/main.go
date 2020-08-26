@@ -260,6 +260,7 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	arin.Parent = network.ParentHandle
 	arin.Range = network.StartAddress + "-" + network.EndAddress
 	arin.Type = network.Type
+	arin.Status = network.Status
 
 	for _, v := range network.Events {
 		switch v.Action {
@@ -308,6 +309,51 @@ func ParseEntities(network *rdap.IPNetwork) (OrganizationInfo, ContactInfo, Cont
 	for _, ent := range network.Entities {
 		if ent.VCard == nil {
 			continue
+		}
+		if ent.Entities != nil {
+			for _, entEnt := range ent.Entities {
+				switch {
+				// abuse information
+				case HasRole(entEnt.Roles, "abuse"):
+					abuse.Country = entEnt.VCard.Country()
+					abuse.City = entEnt.VCard.ExtendedAddress()
+					abuse.Email = entEnt.VCard.Email()
+					abuse.Handle = entEnt.Handle
+					abuse.Name = entEnt.VCard.Name()
+					abuse.Phone = entEnt.VCard.Tel()
+					abuse.Postal = entEnt.VCard.PostalCode()
+					abuse.Province = entEnt.VCard.Region()
+					for _, v := range ent.Events {
+						switch v.Action {
+						case "registration":
+							abuse.Registration = v.Date
+						case "last changed":
+							abuse.Updated = v.Date
+						}
+					}
+					abuse.Street = ent.VCard.StreetAddress()
+					fallthrough
+
+				case HasRole(entEnt.Roles, "administrative"):
+					contact.City = entEnt.VCard.ExtendedAddress()
+					contact.Country = entEnt.VCard.Country()
+					contact.Email = entEnt.VCard.Email()
+					contact.Handle = entEnt.Handle
+					contact.Name = entEnt.VCard.Name()
+					contact.Phone = entEnt.VCard.Tel()
+					contact.Postal = entEnt.VCard.PostalCode()
+					contact.Province = entEnt.VCard.Region()
+					for _, v := range ent.Events {
+						switch v.Action {
+						case "registration":
+							contact.Registration = v.Date
+						case "last changed":
+							contact.Updated = v.Date
+						}
+					}
+					contact.Street = ent.VCard.StreetAddress()
+				}
+			}
 		}
 
 		switch {
