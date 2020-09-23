@@ -15,11 +15,13 @@ import (
 	"github.com/oschwald/geoip2-golang"
 )
 
+// setting the cost for the entire app.
 const (
 	Port      = ":8080"
 	IPSetFile = "blockips.json"
 )
 
+// setting the var for the entire app.
 var (
 	asnDB     *geoip2.Reader
 	cityDB    *geoip2.Reader
@@ -27,19 +29,21 @@ var (
 	blockIPs  BlockIP
 )
 
+// starting the app here.
 func main() {
+	// opening the asn file.
 	asn, err := geoip2.Open("GeoLite2-ASN.mmdb")
 	if err != nil {
 		log.Println(err)
 	}
 	defer func() { _ = asn.Close() }()
-
+	// opening the city data file
 	city, err := geoip2.Open("GeoLite2-City.mmdb")
 	if err != nil {
 		log.Println(err)
 	}
 	defer func() { _ = city.Close() }()
-
+	// opening the country file.
 	country, err := geoip2.Open("GeoLite2-Country.mmdb")
 	if err != nil {
 		log.Println(err)
@@ -67,6 +71,7 @@ func NewServer() *Server {
 	}
 }
 
+// decing where the users go after they go to a certain url.
 func (s Server) Run(port string) error {
 	s.router.HandleFunc("/", s.ReverseIPHandler())
 	s.router.HandleFunc("/ip/", s.IPHandler())
@@ -143,6 +148,7 @@ func GetIPFromParameter(r *http.Request) (net.IP, error) {
 	return net.ParseIP(ip), nil
 }
 
+// the response type
 type Response struct {
 	Network      NetworkInfo      `json:"network,omitempty"`
 	Location     Location         `json:"location,omitempty"`
@@ -176,6 +182,7 @@ func NewResponse(ip net.IP) *Response {
 	return response
 }
 
+// the network info types
 type NetworkInfo struct {
 	Ip       string `json:"ip"`
 	Hostname string `json:"hostname"`
@@ -232,6 +239,7 @@ func ParseLocation(ip net.IP) Location {
 	return loc
 }
 
+// the arin info types=
 type ArinInfo struct {
 	Name         string   `json:"name,omitempty"`
 	Handle       string   `json:"handle,omitempty"`
@@ -267,6 +275,7 @@ func ParseArin(network *rdap.IPNetwork) ArinInfo {
 	return arin
 }
 
+// the org info types.
 type OrganizationInfo struct {
 	Name         string `json:"name,omitempty"`
 	Handle       string `json:"handle,omitempty"`
@@ -279,6 +288,7 @@ type OrganizationInfo struct {
 	Updated      string `json:"updated,omitempty"`
 }
 
+// the contact info types.
 type ContactInfo struct {
 	Name         string `json:"name,omitempty"`
 	Handle       string `json:"handle,omitempty"`
