@@ -30,19 +30,19 @@ var (
 func main() {
 	asn, err := geoip2.Open("GeoLite2-ASN.mmdb")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer func() { _ = asn.Close() }()
 
 	city, err := geoip2.Open("GeoLite2-City.mmdb")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer func() { _ = city.Close() }()
 
 	country, err := geoip2.Open("GeoLite2-Country.mmdb")
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer func() { _ = country.Close() }()
 
