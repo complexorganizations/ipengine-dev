@@ -13,29 +13,61 @@ class HomePageWeb extends StatefulWidget {
 }
 
 class _HomePageWebState extends State<HomePageWeb> {
-  String _text = """
-  {
-        network: {
-                ip: "8.8.8.8",
-                hostname: "dns.google.",
-                reverse: "2001:4860:4860::8844",
-                asn: "15169"
-        },
-        location: {
-                country: "United States"
-        },
-        arin: {
-                name: "LVLT-GOGL-8-8-8",
-                handle: "NET-8-8-8-0-1",
-                parent: "NET-8-0-0-0-1",
-                type: "ALLOCATION",
-                range: "8.8.8.0-8.8.8.255",
-                cidr: "NET-8-8-8-0-1",
-                status: [
-                        "active"
-                        }
-                      
-  """;
+  String _text = """{
+  "network": {
+    "ip": "8.8.8.8",
+    "hostname": "dns.google.",
+    "reverse": "2001:4860:4860::8844",
+    "asn": "15169"
+  },
+  "location": {
+    "country": "United States"
+  },
+  "arin": {
+    "name": "LVLT-GOGL-8-8-8",
+    "handle": "NET-8-8-8-0-1",
+    "parent": "NET-8-0-0-0-1",
+    "type": "ALLOCATION",
+    "range": "8.8.8.0-8.8.8.255",
+    "cidr": "NET-8-8-8-0-1",
+    "status": [
+      "active"
+    ],
+    "registration": "2014-03-14T16:52:05-04:00",
+    "updated": "2014-03-14T16:52:05-04:00"
+  },
+  "organization": {
+    "name": "Google LLC",
+    "handle": "GOGL",
+    "registration": "2000-03-30T00:00:00-05:00",
+    "updated": "2019-10-31T15:45:45-04:00"
+  },
+  "contact": {
+    "name": "Google LLC",
+    "handle": "ZG39-ARIN",
+    "registration": "2000-03-30T00:00:00-05:00",
+    "updated": "2019-10-31T15:45:45-04:00",
+    "phone": "+1-650-253-0000",
+    "email": "arin-contact@google.com"
+  },
+  "abuse": {
+    "name": "Abuse",
+    "handle": "ABUSE5250-ARIN",
+    "registration": "2000-03-30T00:00:00-05:00",
+    "updated": "2019-10-31T15:45:45-04:00",
+    "phone": "+1-650-253-0000",
+    "email": "network-abuse@google.com"
+  },
+  "analysis": {
+    "abuse": false,
+    "anonymizers": false,
+    "attacks": false,
+    "malware": false,
+    "organizations": false,
+    "reputation": false,
+    "spam": false
+  }
+}""";
 
   ScrollController _scrollController;
   int _pageIndex = 0;
