@@ -53,8 +53,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
             Radius.circular(8),
           ),
           boxShadow: [
-            BoxShadow(
-                color: colorBBBBBB, blurRadius: 4, spreadRadius:3),
+            BoxShadow(color: colorBBBBBB, blurRadius: 4, spreadRadius: 3),
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +82,10 @@ class _LoginPageWebState extends State<LoginPageWeb> {
                 Positioned(
                     left: 0.0,
                     right: 0.0,
-                    child: Image.asset('assets/inside_nodes.png',fit: BoxFit.scaleDown,)),
+                    child: Image.asset(
+                      'assets/inside_nodes.png',
+                      fit: BoxFit.scaleDown,
+                    )),
               ],
             ),
           ),
@@ -102,8 +104,8 @@ class _LoginPageWebState extends State<LoginPageWeb> {
 
   Widget _googleButtonWidget() {
     return InkWell(
-      onTap: (){
-        push(context: context,child: HomeScreen());
+      onTap: () {
+        push(context: context, child: HomeScreen());
       },
       child: Center(
         child: Container(
@@ -136,32 +138,29 @@ class _LoginPageWebState extends State<LoginPageWeb> {
             style: TextStyle(fontSize: 10, color: colorBBBBBB),
           ),
           RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = (){},
-                  text:"Terms of Service",
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: colorBBBBBB,
-                      decoration: TextDecoration.underline),
-                ),
-                TextSpan(
-                  text:" & ",
-                  style: TextStyle(fontSize: 10, color: colorBBBBBB),
-                ),
-                TextSpan(
-                  recognizer: TapGestureRecognizer()..onTap = (){},
-                  text:"Privacy Policy",
-                  style: TextStyle(
-                      fontSize: 10,
-                      color: colorBBBBBB,
-                      decoration: TextDecoration.underline),
-                ),
-              ]
-            ),
+            text: TextSpan(children: [
+              TextSpan(
+                recognizer: TapGestureRecognizer()..onTap = () {},
+                text: "Terms of Service",
+                style: TextStyle(
+                    fontSize: 10,
+                    color: colorBBBBBB,
+                    decoration: TextDecoration.underline),
+              ),
+              TextSpan(
+                text: " & ",
+                style: TextStyle(fontSize: 10, color: colorBBBBBB),
+              ),
+              TextSpan(
+                recognizer: TapGestureRecognizer()..onTap = () {},
+                text: "Privacy Policy",
+                style: TextStyle(
+                    fontSize: 10,
+                    color: colorBBBBBB,
+                    decoration: TextDecoration.underline),
+              ),
+            ]),
           ),
-
         ],
       ),
     );

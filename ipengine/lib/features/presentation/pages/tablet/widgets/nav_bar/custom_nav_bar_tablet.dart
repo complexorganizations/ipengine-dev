@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
 
-typedef OnPageIndexCallBack=Function(int index);
+typedef OnPageIndexCallBack = Function(int index);
+
 class CustomNavBarTablet extends StatefulWidget {
   final OnPageIndexCallBack onPageIndexCallBack;
   const CustomNavBarTablet({this.onPageIndexCallBack});
@@ -42,7 +43,7 @@ class _CustomNavBarTabletState extends State<CustomNavBarTablet> {
                   Row(
                     children: [
                       InkWell(
-                        highlightColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           hoverColor: Colors.transparent,
                           onHover: (value) {
                             setState(() {
@@ -52,14 +53,17 @@ class _CustomNavBarTabletState extends State<CustomNavBarTablet> {
                           onTap: () {
                             setState(() {
                               _selectedText = 0;
-                              _selectedHoverUnderLine[0]=true;
-                              _selectedHoverUnderLine[1]=false;
-                              _selectedHoverUnderLine[2]=false;
+                              _selectedHoverUnderLine[0] = true;
+                              _selectedHoverUnderLine[1] = false;
+                              _selectedHoverUnderLine[2] = false;
                             });
                             widget.onPageIndexCallBack(0);
                           },
                           child: _tab(
-                            borderColor: _selectedHoverUnderLine[0]==true||_selectedText==0?Colors.blue:Colors.transparent,
+                              borderColor: _selectedHoverUnderLine[0] == true ||
+                                      _selectedText == 0
+                                  ? Colors.blue
+                                  : Colors.transparent,
                               text: "Home",
                               image: _selectedText == 0
                                   ? _selectedIndicatorImg
@@ -77,15 +81,17 @@ class _CustomNavBarTabletState extends State<CustomNavBarTablet> {
                           onTap: () {
                             setState(() {
                               _selectedText = 1;
-                              _selectedHoverUnderLine[0]=false;
-                              _selectedHoverUnderLine[1]=true;
-                              _selectedHoverUnderLine[2]=false;
+                              _selectedHoverUnderLine[0] = false;
+                              _selectedHoverUnderLine[1] = true;
+                              _selectedHoverUnderLine[2] = false;
                             });
                             widget.onPageIndexCallBack(1);
                           },
                           child: _tab(
-                              borderColor: _selectedHoverUnderLine[1]==true||_selectedText==1?Colors.blue:Colors.transparent,
-
+                              borderColor: _selectedHoverUnderLine[1] == true ||
+                                      _selectedText == 1
+                                  ? Colors.blue
+                                  : Colors.transparent,
                               text: "Pricing",
                               image: _selectedText == 1
                                   ? _selectedIndicatorImg
@@ -103,14 +109,17 @@ class _CustomNavBarTabletState extends State<CustomNavBarTablet> {
                           onTap: () {
                             setState(() {
                               _selectedText = 2;
-                              _selectedHoverUnderLine[0]=false;
-                              _selectedHoverUnderLine[1]=false;
-                              _selectedHoverUnderLine[2]=true;
+                              _selectedHoverUnderLine[0] = false;
+                              _selectedHoverUnderLine[1] = false;
+                              _selectedHoverUnderLine[2] = true;
                             });
                             widget.onPageIndexCallBack(2);
                           },
                           child: _tab(
-                              borderColor: _selectedHoverUnderLine[2]==true||_selectedText==2?Colors.blue:Colors.transparent,
+                              borderColor: _selectedHoverUnderLine[2] == true ||
+                                      _selectedText == 2
+                                  ? Colors.blue
+                                  : Colors.transparent,
                               text: "Documentation",
                               image: _selectedText == 2
                                   ? _selectedIndicatorImg
@@ -120,12 +129,12 @@ class _CustomNavBarTabletState extends State<CustomNavBarTablet> {
                       ),
                       InkWell(
                         hoverColor: Colors.transparent,
-                        onTap: (){
+                        onTap: () {
                           widget.onPageIndexCallBack(3);
                           _selectedText = 4;
-                          _selectedHoverUnderLine[0]=false;
-                          _selectedHoverUnderLine[1]=false;
-                          _selectedHoverUnderLine[2]=false;
+                          _selectedHoverUnderLine[0] = false;
+                          _selectedHoverUnderLine[1] = false;
+                          _selectedHoverUnderLine[2] = false;
                         },
                         child: Column(
                           children: [

@@ -5,9 +5,7 @@ class SettingPageMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
-          Text("setting page mobile")
-        ],
+        children: [Text("setting page mobile")],
       ),
     );
   }

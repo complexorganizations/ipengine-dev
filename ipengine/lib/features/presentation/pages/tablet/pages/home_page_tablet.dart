@@ -11,7 +11,7 @@ class HomePageTablet extends StatefulWidget {
 }
 
 class _HomePageTabletState extends State<HomePageTablet> {
-  String _text="""
+  String _text = """
   {
         network: {
                 ip: "8.8.8.8",
@@ -37,13 +37,12 @@ class _HomePageTabletState extends State<HomePageTablet> {
 
   ScrollController _scrollController;
 
-  int _pageIndex=0;
+  int _pageIndex = 0;
 
   @override
   void initState() {
-    _scrollController=ScrollController(initialScrollOffset: 0.0);
-    WidgetsBinding.instance.addPostFrameCallback((_){
-    });
+    _scrollController = ScrollController(initialScrollOffset: 0.0);
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
 
     super.initState();
   }
@@ -55,9 +54,9 @@ class _HomePageTabletState extends State<HomePageTablet> {
       body: Column(
         children: [
           CustomNavBarTablet(
-            onPageIndexCallBack: (int pageIndex){
+            onPageIndexCallBack: (int pageIndex) {
               setState(() {
-                _pageIndex=pageIndex;
+                _pageIndex = pageIndex;
               });
             },
           ),
@@ -67,16 +66,16 @@ class _HomePageTabletState extends State<HomePageTablet> {
     );
   }
 
-  Widget _bodyContent(){
-    if (_pageIndex==0){
+  Widget _bodyContent() {
+    if (_pageIndex == 0) {
       return Expanded(child: _bodyRowWidget());
-    }else if (_pageIndex==1){
+    } else if (_pageIndex == 1) {
       return Expanded(child: PricingPageTablet());
-    }else if (_pageIndex==2){
+    } else if (_pageIndex == 2) {
       return Expanded(child: DocumentationPageTablet());
-    }else if (_pageIndex==3){
+    } else if (_pageIndex == 3) {
       return Expanded(child: SettingPagetablet());
-    }else
+    } else
       return Container();
   }
 
@@ -94,33 +93,51 @@ class _HomePageTabletState extends State<HomePageTablet> {
                   "The Trusted Source for IP Address Data",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                 ),
-                SizedBox(height: 13,),
+                SizedBox(
+                  height: 13,
+                ),
                 Text(
                   "With IPengine, you can pinpoint your users’ locations, customize their experiences, prevent fraud, ensure compliance, and so much more.",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                SizedBox(height: 15,),
-                Text("\$0.00 per month, We know it’s expensive!",style: TextStyle(color: textOrgColor,fontSize: 18,fontWeight: FontWeight.w600),),
-                SizedBox(height: 26,),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "\$0.00 per month, We know it’s expensive!",
+                  style: TextStyle(
+                      color: textOrgColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 26,
+                ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 26,vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 26, vertical: 12),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(color: color555555,width: 1.5)
+                      border: Border.all(color: color555555, width: 1.5)),
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  child: Text("Get Started",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                 )
               ],
             ),
           ),
-          SizedBox(width: 100,),
+          SizedBox(
+            width: 100,
+          ),
           Expanded(
             child: Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    SizedBox(height: 40,),
+                    SizedBox(
+                      height: 40,
+                    ),
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       padding: EdgeInsets.all(8),
@@ -129,19 +146,18 @@ class _HomePageTabletState extends State<HomePageTablet> {
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           boxShadow: [
                             BoxShadow(
-                              color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
+                              color: colorBBBBBB,
+                              blurRadius: 4,
+                              spreadRadius: 3,
                             )
-                          ]
-                      ),
+                          ]),
                       child: Container(
                         decoration: BoxDecoration(
                           color: bgColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                              maxHeight: 350
-                          ),
+                          constraints: BoxConstraints(maxHeight: 350),
                           child: Scrollbar(
                             controller: _scrollController,
                             isAlwaysShown: true,
@@ -165,14 +181,16 @@ class _HomePageTabletState extends State<HomePageTablet> {
                   decoration: BoxDecoration(
                       color: btnBgColor,
                       borderRadius: BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(color: color555555,width: 1.5)
+                      border: Border.all(color: color555555, width: 1.5)),
+                  child: Text(
+                    "IP 8.8.8.8",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  child: Text("IP 8.8.8.8",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                 ),
                 Positioned(
                   right: 0,
                   bottom: 15,
-                  child:  Container(
+                  child: Container(
                     width: 264,
                     height: 51,
                     decoration: BoxDecoration(
@@ -180,10 +198,11 @@ class _HomePageTabletState extends State<HomePageTablet> {
                         borderRadius: BorderRadius.all(Radius.circular(10)),
                         boxShadow: [
                           BoxShadow(
-                            color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
+                            color: colorBBBBBB,
+                            blurRadius: 4,
+                            spreadRadius: 3,
                           )
-                        ]
-                    ),
+                        ]),
                     child: Row(
                       children: [
                         Expanded(

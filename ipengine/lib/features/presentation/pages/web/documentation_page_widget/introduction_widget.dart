@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 
@@ -11,16 +9,14 @@ class IntroductionWidget extends StatelessWidget {
       children: [
         Text(
           "Introduction to IPengine",
-          style:
-          TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
         ),
         SizedBox(
           height: 5,
         ),
         Text(
           "Easy Peasy Lemon Squeezy",
-          style:
-          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         SizedBox(
           height: 10,
@@ -30,8 +26,10 @@ class IntroductionWidget extends StatelessWidget {
             height: 390,
             width: 660,
             alignment: Alignment.center,
-            child: Image.asset('assets/docImg.png', fit: BoxFit
-                .contain,),
+            child: Image.asset(
+              'assets/docImg.png',
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         SizedBox(

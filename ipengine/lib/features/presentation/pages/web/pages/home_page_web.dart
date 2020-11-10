@@ -8,13 +8,12 @@ import 'package:ipengine/features/presentation/pages/web/widgets/nav_bar/custom_
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 
 class HomePageWeb extends StatefulWidget {
-
   @override
   _HomePageWebState createState() => _HomePageWebState();
 }
 
 class _HomePageWebState extends State<HomePageWeb> {
-  String _text="""
+  String _text = """
   {
         network: {
                 ip: "8.8.8.8",
@@ -39,16 +38,13 @@ class _HomePageWebState extends State<HomePageWeb> {
   """;
 
   ScrollController _scrollController;
-  int _pageIndex=0;
-
+  int _pageIndex = 0;
 
   @override
   void initState() {
     _scrollController = ScrollController(initialScrollOffset: 0);
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +62,9 @@ class _HomePageWebState extends State<HomePageWeb> {
               child: Column(
                 children: [
                   CustomNavBarWeb(
-                    onPageIndexCallBack: (int pageIndex){
+                    onPageIndexCallBack: (int pageIndex) {
                       setState(() {
-                        _pageIndex=pageIndex;
+                        _pageIndex = pageIndex;
                       });
                     },
                   ),
@@ -77,60 +73,65 @@ class _HomePageWebState extends State<HomePageWeb> {
               ),
             ),
           ),
-          _pageIndex==-1?Positioned(
-            right: 50,
-            bottom: 15,
-            child:  Container(
-              width: 264,
-              height: 51,
-              decoration: BoxDecoration(
-                  color: colorF9F9F9,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
-                    )
-                  ]
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Chat with us",
-                          border: InputBorder.none,
+          _pageIndex == -1
+              ? Positioned(
+                  right: 50,
+                  bottom: 15,
+                  child: Container(
+                    width: 264,
+                    height: 51,
+                    decoration: BoxDecoration(
+                        color: colorF9F9F9,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: colorBBBBBB,
+                            blurRadius: 4,
+                            spreadRadius: 3,
+                          )
+                        ]),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: TextField(
+                              decoration: InputDecoration(
+                                hintText: "Chat with us",
+                                border: InputBorder.none,
+                              ),
+                              controller: TextEditingController(),
+                            ),
+                          ),
                         ),
-                        controller: TextEditingController(),
-                      ),
+                        Container(
+                          height: 51,
+                          width: 51,
+                          child: Image.asset('assets/message.png'),
+                        )
+                      ],
                     ),
                   ),
-                  Container(
-                    height: 51,
-                    width: 51,
-                    child: Image.asset('assets/message.png'),
-                  )
-                ],
-              ),
-            ),
-          ):Text(""),
+                )
+              : Text(""),
         ],
       ),
     );
   }
-  Widget _bodyContent(){
-    if (_pageIndex==0){
-     return Expanded(child: _bodyRowWidget());
-    }else if (_pageIndex==1){
+
+  Widget _bodyContent() {
+    if (_pageIndex == 0) {
+      return Expanded(child: _bodyRowWidget());
+    } else if (_pageIndex == 1) {
       return Expanded(child: SingleChildScrollView(child: PricingPageWeb()));
-    }else if (_pageIndex==2){
+    } else if (_pageIndex == 2) {
       return Expanded(child: DocumentationPageWeb());
-    }else if (_pageIndex==3){
+    } else if (_pageIndex == 3) {
       return Expanded(child: SettingPageWeb());
-    }else
+    } else
       return Container();
   }
+
   Widget _bodyRowWidget() {
     return SingleChildScrollView(
       child: Container(
@@ -147,35 +148,51 @@ class _HomePageWebState extends State<HomePageWeb> {
                     "The Trusted Source for IP Address Data",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(height: 13,),
+                  SizedBox(
+                    height: 13,
+                  ),
                   Text(
                     "With IPengine, you can pinpoint your users’ locations, customize their experiences, prevent fraud, ensure compliance, and so much more.",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
-                  SizedBox(height: 15,),
-                  Text("\$0.00 per month, We know it’s expensive!",style: TextStyle(color: textOrgColor,fontSize: 18,fontWeight: FontWeight.w600),),
-                  SizedBox(height: 26,),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "\$0.00 per month, We know it’s expensive!",
+                    style: TextStyle(
+                        color: textOrgColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 26,
+                  ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 26,vertical: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 26, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      border: Border.all(color: color555555,width: 1.5),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(.2),
-                          blurRadius: 1,
-                          spreadRadius: 1,
-                          offset: Offset(0.2,0.2)
-                        )
-                      ]
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        border: Border.all(color: color555555, width: 1.5),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(.2),
+                              blurRadius: 1,
+                              spreadRadius: 1,
+                              offset: Offset(0.2, 0.2))
+                        ]),
+                    child: Text(
+                      "Get Started",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    child: Text("Get Started",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   )
                 ],
               ),
             ),
-            SizedBox(width: 100,),
+            SizedBox(
+              width: 100,
+            ),
             Expanded(
               flex: 4,
               child: Stack(
@@ -185,28 +202,31 @@ class _HomePageWebState extends State<HomePageWeb> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        SizedBox(height: 40,),
+                        SizedBox(
+                          height: 40,
+                        ),
                         Container(
-                          margin: EdgeInsets.only(left: 20,right: 20),
+                          margin: EdgeInsets.only(left: 20, right: 20),
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
                               color: colorF9F9F9,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                               boxShadow: [
                                 BoxShadow(
-                                  color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
+                                  color: colorBBBBBB,
+                                  blurRadius: 4,
+                                  spreadRadius: 3,
                                 )
-                              ]
-                          ),
+                              ]),
                           child: Container(
                             decoration: BoxDecoration(
                               color: bgColor,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: ConstrainedBox(
-                              constraints: BoxConstraints(
-                                maxHeight: 400
-                              ),
+                              constraints: BoxConstraints(maxHeight: 400),
                               child: Theme(
                                 data: ThemeData(
                                   highlightColor: colorFFDE8A,
@@ -215,12 +235,14 @@ class _HomePageWebState extends State<HomePageWeb> {
                                   controller: _scrollController,
                                   isAlwaysShown: true,
                                   child: TextField(
-                                    style: TextStyle(wordSpacing: 1.0,height: 2),
+                                    style:
+                                        TextStyle(wordSpacing: 1.0, height: 2),
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
                                     ),
                                     maxLines: null,
-                                    controller: TextEditingController(text: _text),
+                                    controller:
+                                        TextEditingController(text: _text),
                                   ),
                                 ),
                               ),
@@ -236,10 +258,16 @@ class _HomePageWebState extends State<HomePageWeb> {
                     height: 51,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: btnBgColor,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: btnBgColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Text("IP 8.8.8.8",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
+                    child: Text(
+                      "IP 8.8.8.8",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                 ],
               ),

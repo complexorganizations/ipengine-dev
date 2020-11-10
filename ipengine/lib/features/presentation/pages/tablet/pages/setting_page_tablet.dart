@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 
 class SettingPagetablet extends StatefulWidget {
-
   @override
   _SettingPagetabletState createState() => _SettingPagetabletState();
 }
 
 class _SettingPagetabletState extends State<SettingPagetablet> {
-  bool _switch=true;
+  bool _switch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                             width: 184,
                             child: ClipRRect(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(20)),
+                                    BorderRadius.all(Radius.circular(20)),
                                 child: Image.asset(
                                   'assets/prof_img_lg.png',
                                   fit: BoxFit.contain,
@@ -94,8 +93,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12),
+                            padding: EdgeInsets.symmetric(horizontal: 12),
                             width: 174,
                             height: 45,
                             decoration: BoxDecoration(
@@ -107,11 +105,13 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                                       blurRadius: 2)
                                 ],
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                                    BorderRadius.all(Radius.circular(10))),
                             child: Row(
                               children: [
                                 Image.asset('assets/feebback.png'),
-                                SizedBox(width: 10,),
+                                SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                   "Feedback",
                                   style: TextStyle(fontSize: 16),
@@ -123,8 +123,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                             height: 10,
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12),
+                            padding: EdgeInsets.symmetric(horizontal: 12),
                             height: 45,
                             width: 134,
                             decoration: BoxDecoration(
@@ -136,11 +135,13 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                                       blurRadius: 2)
                                 ],
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
+                                    BorderRadius.all(Radius.circular(10))),
                             child: Row(
                               children: [
                                 Image.asset('assets/logout.png'),
-                                SizedBox(width: 8,),
+                                SizedBox(
+                                  width: 8,
+                                ),
                                 Text(
                                   "Log Out",
                                   style: TextStyle(
@@ -171,12 +172,14 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                       "API key",
                       style: TextStyle(color: color999999, fontSize: 12),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       height: 41,
                       width: 365,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+                          EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: colorF5F5F5,
@@ -201,7 +204,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                       height: 41,
                       width: 365,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+                          EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: colorF5F5F5,
@@ -219,7 +222,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                       height: 41,
                       width: 365,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+                          EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: colorF5F5F5,
@@ -237,7 +240,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                             activeColor: colorFBBC05,
                             onChanged: (value) {
                               setState(() {
-                                _switch=value;
+                                _switch = value;
                               });
                             },
                           ),
@@ -251,7 +254,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                       height: 41,
                       width: 365,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+                          EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: colorF5F5F5,
@@ -269,7 +272,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
                       height: 41,
                       width: 365,
                       padding:
-                      EdgeInsets.symmetric(horizontal: 17, vertical: 11),
+                          EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           color: colorF5F5F5,
@@ -340,7 +343,7 @@ class _SettingPagetabletState extends State<SettingPagetablet> {
       height: 21,
       width: MediaQuery.of(context).size.width,
       decoration:
-      BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+          BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Text(
         text,
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),

@@ -9,7 +9,11 @@ class WorkFlowWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(right: 10, top: 10, bottom: 10,),
+          padding: EdgeInsets.only(
+            right: 10,
+            top: 10,
+            bottom: 10,
+          ),
           decoration: BoxDecoration(
             color: btnBgColor.withOpacity(.4),
           ),
@@ -31,7 +35,8 @@ class WorkFlowWidget extends StatelessWidget {
                       color: Colors.red),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: Icon(FontAwesome.exclamation,size: 14, color: Colors.white),
+                    child: Icon(FontAwesome.exclamation,
+                        size: 14, color: Colors.white),
                   ),
                 )),
             endChild: Container(

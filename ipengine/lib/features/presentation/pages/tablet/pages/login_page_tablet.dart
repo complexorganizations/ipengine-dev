@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ipengine/features/presentation/pages/tablet/pages/home_page_tablet.dart';
 import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
@@ -51,8 +50,7 @@ class _LoginPageTabletState extends State<LoginPageTablet> {
             Radius.circular(8),
           ),
           boxShadow: [
-            BoxShadow(
-                color: colorBBBBBB, blurRadius: 4, spreadRadius:3),
+            BoxShadow(color: colorBBBBBB, blurRadius: 4, spreadRadius: 3),
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,8 +101,8 @@ class _LoginPageTabletState extends State<LoginPageTablet> {
 
   Widget _googleButtonWidget() {
     return InkWell(
-      onTap: (){
-        push(context: context,child: HomePageTablet());
+      onTap: () {
+        push(context: context, child: HomePageTablet());
       },
       child: Center(
         child: Container(

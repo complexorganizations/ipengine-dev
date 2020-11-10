@@ -88,9 +88,7 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                         maxHeight: 550,
                       ),
                       child: Theme(
-                        data: ThemeData(
-                          highlightColor: colorFFDE8A
-                        ),
+                        data: ThemeData(highlightColor: colorFFDE8A),
                         child: Scrollbar(
                           controller: ScrollController(initialScrollOffset: 0),
                           isAlwaysShown: true,
@@ -100,7 +98,8 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                             decoration: BoxDecoration(
                               color: colorF9F9F9,
                               // border: Border.all(width: 1, color: strokeColorEEEEEE),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
                             ),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
@@ -112,24 +111,24 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                   ),
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    margin: EdgeInsets.symmetric(horizontal: 40),
-                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 40),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
                                     height: 21,
                                     child: RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: "Getting started with",
-                                            style: TextStyle(
-                                                color: color999999, fontSize: 14),
-                                          ),
-                                          TextSpan(
-                                            text: " IPengine,",
-                                            style: TextStyle(
-                                                color: colorF8733A, fontSize: 14),
-                                          ),
-                                        ]
-                                      ),
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                          text: "Getting started with",
+                                          style: TextStyle(
+                                              color: color999999, fontSize: 14),
+                                        ),
+                                        TextSpan(
+                                          text: " IPengine,",
+                                          style: TextStyle(
+                                              color: colorF8733A, fontSize: 14),
+                                        ),
+                                      ]),
                                     ),
                                   ),
                                   InkWell(
@@ -197,8 +196,10 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                   ),
                                   Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.symmetric(horizontal: 40),
-                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
                                       height: 21,
                                       child: Text(
                                         "Customer Dashboard",
@@ -225,8 +226,10 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                   ),
                                   Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.symmetric(horizontal: 40),
-                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
                                       height: 21,
                                       child: Text(
                                         "Data Hosting",
@@ -241,8 +244,10 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                   ),
                                   Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.symmetric(horizontal: 40),
-                                      padding: EdgeInsets.symmetric(horizontal: 20),
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 20),
                                       height: 21,
                                       child: Text(
                                         "Get Support",
@@ -251,8 +256,10 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                       )),
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    margin: EdgeInsets.symmetric(horizontal: 40),
-                                    padding: EdgeInsets.symmetric(horizontal: 20),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 40),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20),
                                     height: 21,
                                     child: Text(
                                       "Communities",

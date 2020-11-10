@@ -9,8 +9,7 @@ class SettingPageWeb extends StatefulWidget {
 }
 
 class _SettingPageWebState extends State<SettingPageWeb> {
-
-  bool _switch=false;
+  bool _switch = false;
   @override
   Widget build(BuildContext context) {
     return _bodyRowWidget();
@@ -48,11 +47,13 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               width: 184,
                               decoration: BoxDecoration(
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                      BorderRadius.all(Radius.circular(20)),
                                   boxShadow: [
-                                    BoxShadow(color: Colors.black.withOpacity(.2),spreadRadius: 1.5,blurRadius: 3)
-                                  ]
-                              ),
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(.2),
+                                        spreadRadius: 1.5,
+                                        blurRadius: 3)
+                                  ]),
                               child: ClipRRect(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
@@ -98,14 +99,15 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 80,),
+                        SizedBox(
+                          height: 80,
+                        ),
                         Flexible(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12),
+                                padding: EdgeInsets.symmetric(horizontal: 12),
                                 width: 174,
                                 height: 45,
                                 decoration: BoxDecoration(
@@ -121,7 +123,9 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                                 child: Row(
                                   children: [
                                     Image.asset('assets/feebback.png'),
-                                    SizedBox(width: 10,),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
                                     Text(
                                       "Feedback",
                                       style: TextStyle(fontSize: 16),
@@ -133,8 +137,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                                 height: 13,
                               ),
                               Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 12),
+                                padding: EdgeInsets.symmetric(horizontal: 12),
                                 height: 45,
                                 width: 134,
                                 decoration: BoxDecoration(
@@ -150,11 +153,14 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                                 child: Row(
                                   children: [
                                     Image.asset('assets/logout.png'),
-                                    SizedBox(width: 8,),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
                                     Text(
                                       "Log Out",
                                       style: TextStyle(
-                                          fontSize: 16, color: exitBtnTextColor),
+                                          fontSize: 16,
+                                          color: exitBtnTextColor),
                                     )
                                   ],
                                 ),
@@ -184,7 +190,9 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         "API key",
                         style: TextStyle(color: color999999, fontSize: 12),
                       ),
-                      SizedBox(height: 10,),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 41,
                         width: 365,
@@ -197,8 +205,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               BoxShadow(
                                   blurRadius: 1.5,
                                   spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1)
-                              )
+                                  color: Colors.black.withOpacity(.1))
                             ],
                             border: Border.all(color: colorDDDDDD)),
                         child: Text(
@@ -229,8 +236,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               BoxShadow(
                                   blurRadius: 1.5,
                                   spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1)
-                              )
+                                  color: Colors.black.withOpacity(.1))
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Text(
@@ -254,8 +260,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               BoxShadow(
                                   blurRadius: 1.5,
                                   spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1)
-                              )
+                                  color: Colors.black.withOpacity(.1))
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Row(
@@ -272,7 +277,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               activeColor: colorFBBC05,
                               onChanged: (value) {
                                 setState(() {
-                                  _switch=value;
+                                  _switch = value;
                                 });
                               },
                             ),
@@ -286,7 +291,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         height: 41,
                         width: 365,
                         padding:
-                        EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                            EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: colorFAFAFA,
@@ -294,8 +299,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               BoxShadow(
                                   blurRadius: 1.5,
                                   spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1)
-                              )
+                                  color: Colors.black.withOpacity(.1))
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Text(
@@ -311,16 +315,15 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         height: 41,
                         width: 365,
                         padding:
-                        EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                            EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                             color: colorFAFAFA,
                             boxShadow: [
                               BoxShadow(
-                                blurRadius: 1.5,
-                                spreadRadius: 1.5,
-                                color: Colors.black.withOpacity(.1)
-                              )
+                                  blurRadius: 1.5,
+                                  spreadRadius: 1.5,
+                                  color: Colors.black.withOpacity(.1))
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Text(

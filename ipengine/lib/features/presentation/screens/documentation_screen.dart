@@ -9,7 +9,7 @@ class DocumentationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
-      builder: (context,sizingInformation){
+      builder: (context, sizingInformation) {
         // if (sizingInformation.isDesktop){
         //   return DocumentationPageWeb();
         // }
