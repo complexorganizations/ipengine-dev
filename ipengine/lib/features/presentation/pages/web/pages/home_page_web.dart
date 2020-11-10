@@ -41,14 +41,14 @@ class _HomePageWebState extends State<HomePageWeb> {
   ScrollController _scrollController;
   int _pageIndex=0;
 
+
   @override
   void initState() {
-    _scrollController=ScrollController(initialScrollOffset: 0.0);
-    WidgetsBinding.instance.addPostFrameCallback((_){
-    });
-
+    _scrollController = ScrollController(initialScrollOffset: 0);
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +58,26 @@ class _HomePageWebState extends State<HomePageWeb> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          Column(
-            children: [
-              CustomNavBarWeb(
-                onPageIndexCallBack: (int pageIndex){
-                  setState(() {
-                    _pageIndex=pageIndex;
-                  });
-                },
+          SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height,
               ),
-              _bodyContent(),
-            ],
+              child: Column(
+                children: [
+                  CustomNavBarWeb(
+                    onPageIndexCallBack: (int pageIndex){
+                      setState(() {
+                        _pageIndex=pageIndex;
+                      });
+                    },
+                  ),
+                  _bodyContent(),
+                ],
+              ),
+            ),
           ),
-          Positioned(
+          _pageIndex==-1?Positioned(
             right: 50,
             bottom: 15,
             child:  Container(
@@ -107,7 +114,7 @@ class _HomePageWebState extends State<HomePageWeb> {
                 ],
               ),
             ),
-          ),
+          ):Text(""),
         ],
       ),
     );
@@ -131,6 +138,7 @@ class _HomePageWebState extends State<HomePageWeb> {
         child: Row(
           children: [
             Expanded(
+              flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -150,8 +158,17 @@ class _HomePageWebState extends State<HomePageWeb> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 26,vertical: 12),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      border: Border.all(color: color555555,width: 1.5)
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      border: Border.all(color: color555555,width: 1.5),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(.2),
+                          blurRadius: 1,
+                          spreadRadius: 1,
+                          offset: Offset(0.2,0.2)
+                        )
+                      ]
                     ),
                     child: Text("Get Started",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   )
@@ -160,59 +177,69 @@ class _HomePageWebState extends State<HomePageWeb> {
             ),
             SizedBox(width: 100,),
             Expanded(
+              flex: 4,
               child: Stack(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(height: 40,),
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: colorF9F9F9,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
-                              )
-                            ]
-                        ),
-                        child: Container(
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(height: 40,),
+                        Container(
+                          margin: EdgeInsets.only(left: 20,right: 20),
+                          padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: bgColor,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                              color: colorF9F9F9,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: colorBBBBBB, blurRadius: 4, spreadRadius:3,
+                                )
+                              ]
                           ),
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxHeight: 350
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: bgColor,
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
                             ),
-                            child: Scrollbar(
-                              controller: _scrollController,
-                              isAlwaysShown: true,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight: 400
+                              ),
+                              child: Theme(
+                                data: ThemeData(
+                                  highlightColor: colorFFDE8A,
                                 ),
-                                maxLines: null,
-                                controller: TextEditingController(text: _text),
+                                child: Scrollbar(
+                                  controller: _scrollController,
+                                  isAlwaysShown: true,
+                                  child: TextField(
+                                    style: TextStyle(wordSpacing: 1.0,height: 2),
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                    ),
+                                    maxLines: null,
+                                    controller: TextEditingController(text: _text),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(left: 30),
                     width: 221,
                     height: 51,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         color: btnBgColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                        border: Border.all(color: color555555,width: 1.5)
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
-                    child: Text("IP 8.8.8.8",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                    child: Text("IP 8.8.8.8",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white),),
                   ),
                 ],
               ),

@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ipengine/features/presentation/pages/web/pages/home_page_web.dart';
 import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
+import 'package:ipengine/features/presentation/screens/home_screen.dart';
 import 'package:ipengine/features/presentation/widgets/common.dart';
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 
@@ -14,7 +16,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: colorFAFAFA,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -101,7 +103,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
   Widget _googleButtonWidget() {
     return InkWell(
       onTap: (){
-        push(context: context,child: HomePageWeb());
+        push(context: context,child: HomeScreen());
       },
       child: Center(
         child: Container(
@@ -133,29 +135,33 @@ class _LoginPageWebState extends State<LoginPageWeb> {
             "By signing in you accept our,",
             style: TextStyle(fontSize: 10, color: colorBBBBBB),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Terms of Service",
-                style: TextStyle(
-                    fontSize: 10,
-                    color: colorBBBBBB,
-                    decoration: TextDecoration.underline),
-              ),
-              Text(
-                " & ",
-                style: TextStyle(fontSize: 10, color: colorBBBBBB),
-              ),
-              Text(
-                "Privacy Policy",
-                style: TextStyle(
-                    fontSize: 10,
-                    color: colorBBBBBB,
-                    decoration: TextDecoration.underline),
-              ),
-            ],
-          )
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  recognizer: TapGestureRecognizer()..onTap = (){},
+                  text:"Terms of Service",
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: colorBBBBBB,
+                      decoration: TextDecoration.underline),
+                ),
+                TextSpan(
+                  text:" & ",
+                  style: TextStyle(fontSize: 10, color: colorBBBBBB),
+                ),
+                TextSpan(
+                  recognizer: TapGestureRecognizer()..onTap = (){},
+                  text:"Privacy Policy",
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: colorBBBBBB,
+                      decoration: TextDecoration.underline),
+                ),
+              ]
+            ),
+          ),
+
         ],
       ),
     );

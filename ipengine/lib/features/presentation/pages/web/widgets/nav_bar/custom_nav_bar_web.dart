@@ -18,7 +18,7 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50, vertical: 35),
+      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 35),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -65,7 +65,7 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
                                   ? _selectedIndicatorImg
                                   : null)),
                       SizedBox(
-                        width: 24,
+                        width: 28,
                       ),
                       InkWell(
                           onHover: (value) {
@@ -91,7 +91,7 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
                                   ? _selectedIndicatorImg
                                   : null)),
                       SizedBox(
-                        width: 24,
+                        width: 28,
                       ),
                       InkWell(
                           hoverColor: Colors.transparent,
@@ -116,10 +116,11 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
                                   ? _selectedIndicatorImg
                                   : null)),
                       SizedBox(
-                        width: 24,
+                        width: 28,
                       ),
                       InkWell(
                         hoverColor: Colors.transparent,
+                        splashColor: Colors.transparent,
                         onTap: (){
                           widget.onPageIndexCallBack(3);
                           _selectedText = 4;
@@ -136,6 +137,13 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
                             Container(
                               width: 45,
                               height: 45,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                                boxShadow: [
+                                  BoxShadow(color: Colors.black.withOpacity(.2),spreadRadius: 1,blurRadius: 3)
+                                ]
+                              ),
                               child: ClipRRect(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -160,11 +168,11 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
       children: [
         Container(
           height: 21,
-          width: 15,
+          width: 49,
           child: image == null ? null : Image.asset(image),
         ),
         Container(
-          child: Text(text),
+          child: Text(text,style: TextStyle(fontWeight: image==null?FontWeight.normal:FontWeight.w600),),
           decoration: BoxDecoration(
               border:
                   Border(bottom: BorderSide(width: 1.2, color: borderColor))),

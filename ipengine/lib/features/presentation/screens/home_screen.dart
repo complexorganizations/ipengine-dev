@@ -11,9 +11,11 @@ class HomeScreen extends StatelessWidget {
     return ResponsiveBuilder(
       builder: (context,sizingInformation){
         // if (sizingInformation.isDesktop){
+        //   print("desktop device");
         //   return HomePageWeb();
         // }
         // if (sizingInformation.isTablet){
+        //   print("tablet device");
         //   return HomePageTablet();
         // }
         // return HomePageMobile();

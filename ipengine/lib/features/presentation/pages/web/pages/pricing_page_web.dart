@@ -27,7 +27,7 @@ class _PricingPageWebState extends State<PricingPageWeb> {
                   padding: EdgeInsets.only(left: 8,right: 8,top: 25,bottom: 8),
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      border: Border.all(width: 1,color: colorEEEEEE),
+                      border: Border.all(width: 2,color: colorEEEEEE),
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       // boxShadow: [
                       //   BoxShadow(
@@ -55,7 +55,7 @@ class _PricingPageWebState extends State<PricingPageWeb> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                       boxShadow: [
                         BoxShadow(
-                            color: colorBBBBBB, blurRadius: 2, spreadRadius:3),
+                            color: Colors.black.withOpacity(.1), blurRadius: 4, spreadRadius:3),
                       ],
                   ),
                   child: Container(
@@ -63,7 +63,7 @@ class _PricingPageWebState extends State<PricingPageWeb> {
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(horizontal: 50,vertical: 30),
                     decoration: BoxDecoration(
-                        color: btnBgColor,
+                        color: colorE8F1FF,
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     child: Column(
