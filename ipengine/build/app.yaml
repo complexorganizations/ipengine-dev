@@ -1,0 +1,9 @@
+service: default
+runtime: go114
+env: standard
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: automatic
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+network: {}
