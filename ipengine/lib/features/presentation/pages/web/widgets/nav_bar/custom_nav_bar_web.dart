@@ -31,7 +31,7 @@ class _CustomNavBarWebState extends State<CustomNavBarWeb> {
                 style: textStyle24,
               ),
               Text(
-                "Innovative Source for IP Address Data",
+                "The Network Platform",
                 style: textStyle12,
               ),
             ],
