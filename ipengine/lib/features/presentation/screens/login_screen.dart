@@ -7,13 +7,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
-        // if (sizingInformation.isDesktop){
-        //   return LoginPageWeb();
-        // }
-        // if (sizingInformation.isTablet){
-        //   return LoginPageTablet();
-        // }
-        // return LoginPageMobile();
         return LoginPageWeb();
       },
     );
