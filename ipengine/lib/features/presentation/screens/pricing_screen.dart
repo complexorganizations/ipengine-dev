@@ -7,13 +7,6 @@ class PricingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
-        // if (sizingInformation.isDesktop){
-        //   return PricingPageWeb();
-        // }
-        // if (sizingInformation.isTablet){
-        //   return PricingPageTablet();
-        // }
-        // return PricingPageMobile();
         return PricingPageWeb();
       },
     );
