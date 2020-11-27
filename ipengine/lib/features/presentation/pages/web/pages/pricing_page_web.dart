@@ -98,7 +98,7 @@ class _PricingPageWebState extends State<PricingPageWeb> {
                           height: 20,
                         ),
                         Text(
-                          "Can you imagine all these expensive services been served for free!?",
+                          "Get more with IPengine",
                           maxLines: 2,
                           overflow: TextOverflow.fade,
                           style: TextStyle(fontSize: 14, color: color555555),
