@@ -7,13 +7,6 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInformation) {
-        // if (sizingInformation.isDesktop){
-        //   return SettingPageWeb();
-        // }
-        // if (sizingInformation.isTablet){
-        //   return SettingPagetablet();
-        // }
-        // return SettingPageMobile();
         return SettingPageWeb();
       },
     );
