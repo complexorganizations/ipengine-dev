@@ -4,15 +4,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/openrdap/rdap"
+	"github.com/oschwald/geoip2-golang"
 	"io"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"strings"
-
-	"github.com/openrdap/rdap"
-	"github.com/oschwald/geoip2-golang"
 )
 
 // setting the cost for the entire app.
