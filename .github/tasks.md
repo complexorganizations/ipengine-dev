@@ -5,8 +5,10 @@
 - [ ] Make the pricing page better, make the design better and change a couple of things.
 - [ ] On the Profile page, if the users click on the API key than it should copy the key.
 - [ ] Cleanup unused code and optimize the code
-
+- [ ] Can u make it so all the docs are in a single page, so its easier to change.
+---
 - [ ] Design a page that will list all proxies, `IP:Port:Protocol:Region:Speed:Uptime`
+- [ ] Design a page that be just full of text data (blog, privacy policy, terms of service)
 
 ### Engineering
 - [ ] Add Geopoint

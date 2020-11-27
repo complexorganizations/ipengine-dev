@@ -8,7 +8,7 @@ class TaskTypeWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "JSONP/ CORS Requests",
+          "Authentication",
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
         ),
         SizedBox(
@@ -20,15 +20,7 @@ class TaskTypeWidget extends StatelessWidget {
               children: [
                 TextSpan(
                     text:
-                        "JSONP and CORS are supported, allowing you to use ipinfo.io entirely in client-side code. For JSONP you just need to specify the callback parameter, e.g.  "),
-                TextSpan(
-                    text: "http://ipinfo.io/?callback=callback&token=\$TOKEN",
-                    style: TextStyle(
-                        backgroundColor: Colors.blue[100],
-                        decoration: TextDecoration.underline,
-                        color: Colors.red[300])),
-                TextSpan(
-                    text: " to the request URLs to make the requests secure.")
+                        "It is necessary to authenticate all requests."),
               ]),
         ),
         SizedBox(
@@ -48,27 +40,11 @@ class TaskTypeWidget extends StatelessWidget {
                   style: TextStyle(fontSize: 14, color: Colors.black),
                   children: [
                     TextSpan(
-                      text: "\$.",
+                      text: "\$ ",
                     ),
-                    TextSpan(
-                        text: "get",
-                        style: TextStyle(fontSize: 14, color: Colors.red)),
                     TextSpan(
                         text:
-                            '("https://ipinfo.io?token=\$TOKEN", function(response) {'),
-                    TextSpan(
-                        text: "console",
-                        style: TextStyle(
-                            fontSize: 14, color: Colors.yellowAccent)),
-                    TextSpan(
-                      text: ".log(response.ip, response.country);}, ",
-                    ),
-                    TextSpan(
-                        text: '"jsonp"',
-                        style: TextStyle(fontSize: 14, color: Colors.green)),
-                    TextSpan(
-                      text: ")",
-                    ),
+                            'curl --location --request GET "https://api.ipengine.dev/ip/8.8.8.8" --header "key: value"'),
                   ]),
             )),
       ],

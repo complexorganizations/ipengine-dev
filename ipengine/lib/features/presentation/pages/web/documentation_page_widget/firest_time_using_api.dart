@@ -7,39 +7,18 @@ class FirstTimeUsingApiWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "IP Address Parameter",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
-        ),
-        RichText(
-          text: TextSpan(
-              style: TextStyle(fontSize: 14, color: color555555),
-              children: [
-                TextSpan(
-                    text:
-                        "The quickest and easiest way to get started with IPinfo is to use one of our "),
-                TextSpan(
-                    text: "official libraries",
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.blue)),
-                TextSpan(
-                    text:
-                        "which are available for many popular programming languages and frameworks. If you'd like to write your own library or interact directly with our API then the documentation below can help you.")
-              ]),
-        ),
         SizedBox(
           height: 10,
         ),
         Text(
-          "Authentication",
+          "Changing IP's",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
         ),
         SizedBox(
           height: 10,
         ),
         Text(
-            'Your API token is used to authenticate you with our API, and can be provided either as an HTTP Basic Auth username, a bearer token, or alternatively as a token URL parameter.'),
+            'How do u change what ip to request the info for'),
         SizedBox(
           height: 10,
         ),
@@ -52,25 +31,10 @@ class FirstTimeUsingApiWidget extends StatelessWidget {
               Radius.circular(8),
             ),
           ),
-          child: Text(
-            """
-              # With Basic Auth
-              \$ curl -u \$TOKEN: ipinfo.io
-              
-              # With Bearer token
-              \$ curl -H "Authorization: Bearer \$TOKEN" ipinfo.io
-              
-              # With token query parameter
-              \$ curl ipinfo.io?token=\$TOKEN
-          """,
+          child: Text('\$ curl --location --request GET "https://api.ipengine.dev/ip/x.x.x.x" --header "key: value"',
             style: TextStyle(color: Colors.black),
           ),
         ),
-        SizedBox(
-          height: 10,
-        ),
-        Text(
-            "It's also possible to use the API without authentication in a more limited capacity.")
       ],
     );
   }
