@@ -74,7 +74,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                               height: 10,
                             ),
                             Text(
-                              "dragons.sin@gmail.com",
+                              "meliodas.ackerman@gmail.com",
                               style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -91,7 +91,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                                   color: colorBBBBBB),
                             ),
                             Text(
-                              "192.24.84.123",
+                              "127.0.0.1",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
@@ -106,33 +106,6 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 12),
-                                width: 174,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black.withOpacity(.2),
-                                          spreadRadius: 1.5,
-                                          blurRadius: 4)
-                                    ],
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10))),
-                                child: Row(
-                                  children: [
-                                    Image.asset('assets/feebback.png'),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      "Feedback",
-                                      style: TextStyle(fontSize: 16),
-                                    )
-                                  ],
-                                ),
-                              ),
                               SizedBox(
                                 height: 13,
                               ),
@@ -194,8 +167,8 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         height: 10,
                       ),
                       Container(
-                        height: 41,
-                        width: 365,
+                        height: 45,
+                        width: 500,
                         padding:
                             EdgeInsets.symmetric(horizontal: 17, vertical: 11),
                         decoration: BoxDecoration(
@@ -209,7 +182,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                             ],
                             border: Border.all(color: colorDDDDDD)),
                         child: Text(
-                          "ifadp-f9uef-89nuq-wgerh-ic41n-123e4-1423n",
+                          "XH8cTdbCSapFPxtCMk7AmSHpDDctkfHFhnejWb5QfUAEmRZeDMTb8ujQLuaYuvVW",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500),
                         ),
@@ -225,7 +198,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         height: 10,
                       ),
                       Container(
-                        height: 41,
+                        height: 45,
                         width: 365,
                         padding:
                             EdgeInsets.symmetric(horizontal: 17, vertical: 12),
@@ -240,7 +213,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Text(
-                          "Edit Profile",
+                          "Generate Credentials",
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -249,46 +222,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                         height: 20,
                       ),
                       Container(
-                        height: 41,
-                        width: 365,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 17, vertical: 12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: colorFAFAFA,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 1.5,
-                                  spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1))
-                            ],
-                            border: Border.all(color: colorEEEEEE)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "App Theme",
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
-                            ),
-                            Switch(
-                              value: _switch,
-                              inactiveTrackColor: colorFBBC05,
-                              activeColor: colorFBBC05,
-                              onChanged: (value) {
-                                setState(() {
-                                  _switch = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: 41,
+                        height: 45,
                         width: 365,
                         padding:
                             EdgeInsets.symmetric(horizontal: 17, vertical: 12),
@@ -303,31 +237,7 @@ class _SettingPageWebState extends State<SettingPageWeb> {
                             ],
                             border: Border.all(color: colorEEEEEE)),
                         child: Text(
-                          "Change Owner",
-                          style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: 41,
-                        width: 365,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 17, vertical: 12),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: colorFAFAFA,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 1.5,
-                                  spreadRadius: 1.5,
-                                  color: Colors.black.withOpacity(.1))
-                            ],
-                            border: Border.all(color: colorEEEEEE)),
-                        child: Text(
-                          "Temporarily Deactive Account",
+                          "Delete Account",
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
