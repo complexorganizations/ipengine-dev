@@ -18,17 +18,7 @@ class KeyConceptWidget extends StatelessWidget {
           text: TextSpan(
               style: TextStyle(fontSize: 14, color: color555555),
               children: [
-                TextSpan(
-                    text:
-                        "Our API is available over a secure HTTPS connection for all users, even on the free plan. Simply add "),
-                TextSpan(
-                    text: "https://",
-                    style: TextStyle(
-                        backgroundColor: Colors.blue[100],
-                        decoration: TextDecoration.underline,
-                        color: Colors.red[300])),
-                TextSpan(
-                    text: " to the request URLs to make the requests secure.")
+                TextSpan(text: "Our API is available to all our customers."),
               ]),
         ),
         SizedBox(
@@ -43,10 +33,7 @@ class KeyConceptWidget extends StatelessWidget {
               Radius.circular(8),
             ),
           ),
-          child: Text("""
-             # Get details for your own IP address over HTTPS
-              \$ curl https://ipinfo.io?token=\$TOKEN
-          """),
+          child: Text("""\$ curl https://api.ipengine.dev"""),
         ),
       ],
     );

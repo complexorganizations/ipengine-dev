@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ipengine/features/presentation/pages/mobile/pages/home_page_mobile.dart';
-import 'package:ipengine/features/presentation/pages/mobile/pages/login_page_mobile.dart';
-import 'package:ipengine/features/presentation/pages/tablet/pages/home_page_tablet.dart';
 import 'package:ipengine/features/presentation/pages/web/pages/home_page_web.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 

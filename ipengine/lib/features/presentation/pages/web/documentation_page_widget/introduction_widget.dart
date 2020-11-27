@@ -8,14 +8,14 @@ class IntroductionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Introduction to IPengine",
+          "IPengine Documentation",
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
         ),
         SizedBox(
           height: 5,
         ),
         Text(
-          "Easy Peasy Lemon Squeezy",
+          "As easy as pie",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
         ),
         SizedBox(
@@ -36,7 +36,7 @@ class IntroductionWidget extends StatelessWidget {
           height: 10,
         ),
         Text(
-          "The quickest and easiest way to get started with IPinfo is to use one of our official libraries, which are available for many popular programming languages and frameworks. If you'd like to write your own library or interact directly with our API then the documentation below can help you.",
+          "The easiest way to get started with IPengine is with our offical API.",
           style: TextStyle(
             fontSize: 14,
             color: color555555,
