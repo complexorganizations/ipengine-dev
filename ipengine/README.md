@@ -1,6 +1,6 @@
 # IPengine
 
-A new Flutter application.
+The network platform
 
 ## Getting Started
 
