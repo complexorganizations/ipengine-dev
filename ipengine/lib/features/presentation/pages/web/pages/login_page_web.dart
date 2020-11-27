@@ -68,7 +68,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 20),
             child: Text(
-              "Innovative Source for IP Address Data",
+              "The Network Platform.",
               style: textStyle12,
             ),
           ),

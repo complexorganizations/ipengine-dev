@@ -122,27 +122,6 @@ class _HomePageWebState extends State<HomePageWeb> {
                             spreadRadius: 3,
                           )
                         ]),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Chat with us",
-                                border: InputBorder.none,
-                              ),
-                              controller: TextEditingController(),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 51,
-                          width: 51,
-                          child: Image.asset('assets/message.png'),
-                        )
-                      ],
-                    ),
                   ),
                 )
               : Text(""),
@@ -177,21 +156,21 @@ class _HomePageWebState extends State<HomePageWeb> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "The Trusted Source for IP Address Data",
+                    "The Network Platform.",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                   ),
                   SizedBox(
                     height: 13,
                   ),
                   Text(
-                    "With IPengine, you can pinpoint your users’ locations, customize their experiences, prevent fraud, ensure compliance, and so much more.",
+                    "With IPengine, you can categorize the clients roles, customize their relationships, deter fraud, maintain enforcement, and so many much.",
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                   SizedBox(
                     height: 15,
                   ),
                   Text(
-                    "\$0.00 per month, We know it’s expensive!",
+                    "\$0.00 Yeah we know it's pricey!",
                     style: TextStyle(
                         color: textOrgColor,
                         fontSize: 18,
