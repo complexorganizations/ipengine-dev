@@ -17,8 +17,7 @@ class FirstTimeUsingApiWidget extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Text(
-            'How do u change what ip to request the info for'),
+        Text('How do u change what ip to request the info for'),
         SizedBox(
           height: 10,
         ),
@@ -31,7 +30,8 @@ class FirstTimeUsingApiWidget extends StatelessWidget {
               Radius.circular(8),
             ),
           ),
-          child: Text('\$ curl --location --request GET "https://api.ipengine.dev/ip/x.x.x.x" --header "key: value"',
+          child: Text(
+            '\$ curl --location --request GET "https://api.ipengine.dev/ip/x.x.x.x" --header "key: value"',
             style: TextStyle(color: Colors.black),
           ),
         ),

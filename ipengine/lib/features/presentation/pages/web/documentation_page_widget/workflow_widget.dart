@@ -42,8 +42,7 @@ class WorkFlowWidget extends StatelessWidget {
             endChild: Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    "Regenerate your API key periodically."),
+                child: Text("Regenerate your API key periodically."),
               ),
             ),
           ),

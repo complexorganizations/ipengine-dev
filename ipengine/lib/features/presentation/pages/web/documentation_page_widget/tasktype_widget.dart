@@ -18,9 +18,7 @@ class TaskTypeWidget extends StatelessWidget {
           text: TextSpan(
               style: TextStyle(fontSize: 14, color: color555555),
               children: [
-                TextSpan(
-                    text:
-                        "It is necessary to authenticate all requests."),
+                TextSpan(text: "It is necessary to authenticate all requests."),
               ]),
         ),
         SizedBox(
