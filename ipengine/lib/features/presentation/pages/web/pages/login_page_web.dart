@@ -9,14 +9,12 @@ import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-
 class LoginPageWeb extends StatefulWidget {
   @override
   _LoginPageWebState createState() => _LoginPageWebState();
 }
 
 class _LoginPageWebState extends State<LoginPageWeb> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -117,14 +115,13 @@ class _LoginPageWebState extends State<LoginPageWeb> {
   Widget _googleButtonWidget() {
     return InkWell(
       onTap: () {
-
-       // signOutGoogle();
+        // signOutGoogle();
 
         signInWithGoogle().whenComplete(() {
           push(context: context, child: HomeScreen());
         });
 
-       //
+        //
       },
       child: Center(
         child: Container(
@@ -184,7 +181,4 @@ class _LoginPageWebState extends State<LoginPageWeb> {
       ),
     );
   }
-
-
-
 }
