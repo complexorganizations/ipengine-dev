@@ -212,7 +212,6 @@ class _LoginPageWebState extends State<LoginPageWeb> {
 
   void signOutGoogle() async{
     await googleSignIn.signOut();
-
     print("User Sign Out");
   }
 
