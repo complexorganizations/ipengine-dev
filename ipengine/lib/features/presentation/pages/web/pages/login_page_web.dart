@@ -1,11 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:ipengine_web/features/presentation/pages/web/pages/home_page_web.dart';
-import 'package:ipengine_web/features/presentation/pages/web/widgets/common.dart';
-import 'package:ipengine_web/features/presentation/screens/home_screen.dart';
-import 'package:ipengine_web/features/presentation/widgets/common.dart';
-import 'package:ipengine_web/features/presentation/widgets/theme/style.dart';
+import 'package:ipengine/features/presentation/pages/web/pages/home_page_web.dart';
+import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
+import 'package:ipengine/features/presentation/screens/home_screen.dart';
+import 'package:ipengine/features/presentation/widgets/common.dart';
+import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
