@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:ipengine/features/presentation/pages/web/pages/home_page_web.dart';
-import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
-import 'package:ipengine/features/presentation/screens/home_screen.dart';
-import 'package:ipengine/features/presentation/widgets/common.dart';
-import 'package:ipengine/features/presentation/widgets/theme/style.dart';
+import 'package:ipengine_web/features/presentation/pages/web/pages/home_page_web.dart';
+import 'package:ipengine_web/features/presentation/pages/web/widgets/common.dart';
+import 'package:ipengine_web/features/presentation/screens/home_screen.dart';
+import 'package:ipengine_web/features/presentation/widgets/common.dart';
+import 'package:ipengine_web/features/presentation/widgets/theme/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginPageWeb extends StatefulWidget {
   @override
@@ -13,6 +16,15 @@ class LoginPageWeb extends StatefulWidget {
 }
 
 class _LoginPageWebState extends State<LoginPageWeb> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +117,14 @@ class _LoginPageWebState extends State<LoginPageWeb> {
   Widget _googleButtonWidget() {
     return InkWell(
       onTap: () {
-        push(context: context, child: HomeScreen());
+
+       // signOutGoogle();
+
+        signInWithGoogle().whenComplete(() {
+          push(context: context, child: HomeScreen());
+        });
+
+       //
       },
       child: Center(
         child: Container(
@@ -165,4 +184,36 @@ class _LoginPageWebState extends State<LoginPageWeb> {
       ),
     );
   }
+
+  Future<String> signInWithGoogle() async {
+    print('GMAIL+++ 1');
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+    await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final AuthResult authResult = await _auth.signInWithCredential(credential);
+    final FirebaseUser user = authResult.user;
+
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert(user.uid == currentUser.uid);
+
+    print('GMAIL+++');
+    print(currentUser.uid);
+    return 'signInWithGoogle succeeded: $user';
+  }
+
+  void signOutGoogle() async{
+    await googleSignIn.signOut();
+
+    print("User Sign Out");
+  }
+
 }
