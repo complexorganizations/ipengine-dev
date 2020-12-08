@@ -29,9 +29,11 @@ dependencies:
   responsive_builder: ^0.3.0
   scrollable_positioned_list: ^0.1.8
   timeline_tile: ^1.0.0
-  firebase_auth: ^0.16.1
-  google_sign_in: ^4.5.3
   cupertino_icons: ^1.0.1
+  firebase_auth: ^0.18.4+1
+  google_sign_in: ^4.5.6
+  firebase_core: ^0.5.3
+  fluttertoast: ^7.1.5
 
 dev_dependencies:
   flutter_test:

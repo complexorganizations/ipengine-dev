@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ipengine/features/presentation/screens/home_screen.dart';
 import 'package:ipengine/features/presentation/screens/login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
