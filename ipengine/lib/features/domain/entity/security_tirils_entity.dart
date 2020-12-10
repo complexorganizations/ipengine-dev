@@ -3,7 +3,7 @@ class IpDataSet {
   final String leftValue;
   final String value;
 
-  IpDataSet({this.title, this.leftValue,this.value});
+  IpDataSet({this.title, this.leftValue, this.value});
 }
 
 class SecurityTrailsEntity {
@@ -28,7 +28,7 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "GOOGLE LLC",
       ipData: [
-        IpDataSet(title: "172.21713.238", value: "11,643",leftValue: ""),
+        IpDataSet(title: "172.21713.238", value: "11,643", leftValue: ""),
       ],
     ),
     SecurityTrailsEntity(
@@ -37,7 +37,8 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "GOOGLE LLC",
       ipData: [
-        IpDataSet(title: "2608.f8b0.4004:809::200e",leftValue: "", value: "11,021"),
+        IpDataSet(
+            title: "2608.f8b0.4004:809::200e", leftValue: "", value: "11,021"),
       ],
     ),
     SecurityTrailsEntity(
@@ -46,7 +47,8 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "GOOGLE LLC",
       ipData: [
-        IpDataSet(title: "2608.f8b0.4004:809::200e",leftValue: "", value: "11,021"),
+        IpDataSet(
+            title: "2608.f8b0.4004:809::200e", leftValue: "", value: "11,021"),
       ],
     ),
     SecurityTrailsEntity(
@@ -55,11 +57,26 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "GOOGLE LLC",
       ipData: [
-        IpDataSet(title: "alt4.aspmx.i.google.com",leftValue: "50 ", value: " 7,018,505"),
-        IpDataSet(title: "alt4.aspmx.i.google.com",leftValue: "40 ", value: " 7,018,681"),
-        IpDataSet(title: "alt4.aspmx.i.google.com",leftValue: "30 ", value: " 12,369,077"),
-        IpDataSet(title: "alt4.aspmx.i.google.com",leftValue: "20 ", value: " 12,469,577"),
-        IpDataSet(title: "alt4.aspmx.i.google.com",leftValue: "10 ", value: " 12,732,770"),
+        IpDataSet(
+            title: "alt4.aspmx.i.google.com",
+            leftValue: "50 ",
+            value: " 7,018,505"),
+        IpDataSet(
+            title: "alt4.aspmx.i.google.com",
+            leftValue: "40 ",
+            value: " 7,018,681"),
+        IpDataSet(
+            title: "alt4.aspmx.i.google.com",
+            leftValue: "30 ",
+            value: " 12,369,077"),
+        IpDataSet(
+            title: "alt4.aspmx.i.google.com",
+            leftValue: "20 ",
+            value: " 12,469,577"),
+        IpDataSet(
+            title: "alt4.aspmx.i.google.com",
+            leftValue: "10 ",
+            value: " 12,732,770"),
       ],
     ),
     SecurityTrailsEntity(
@@ -68,8 +85,10 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "ttl: 900",
       ipData: [
-        IpDataSet(title: "dns-admin.google.com",leftValue: "email: ", value: "150,523"),
-
+        IpDataSet(
+            title: "dns-admin.google.com",
+            leftValue: "email: ",
+            value: "150,523"),
       ],
     ),
     SecurityTrailsEntity(
@@ -78,11 +97,19 @@ class SecurityTrailsEntity {
       headingValue: "",
       title: "",
       ipData: [
-        IpDataSet(title: "",leftValue: "v=spf1 include_spf.google.com ~ all", value: ""),
-        IpDataSet(title: "",leftValue: "v=spf1 include_spf.google.com ~ all", value: ""),
-        IpDataSet(title: "",leftValue: "v=spf1 include_spf.google.com ~ all", value: ""),
-        IpDataSet(title: "",leftValue: "show more", value: ""),
-
+        IpDataSet(
+            title: "",
+            leftValue: "v=spf1 include_spf.google.com ~ all",
+            value: ""),
+        IpDataSet(
+            title: "",
+            leftValue: "v=spf1 include_spf.google.com ~ all",
+            value: ""),
+        IpDataSet(
+            title: "",
+            leftValue: "v=spf1 include_spf.google.com ~ all",
+            value: ""),
+        IpDataSet(title: "", leftValue: "show more", value: ""),
       ],
     ),
     SecurityTrailsEntity(
@@ -91,11 +118,11 @@ class SecurityTrailsEntity {
       headingValue: "7,825",
       title: "",
       ipData: [
-        IpDataSet(title: "img01.olx.co.za",leftValue: "", value: ""),
-        IpDataSet(title: "img01.olx.co.ke",leftValue: "", value: ""),
-        IpDataSet(title: "googleadaff61b2c8b834.cbmre.ca",leftValue: "", value: ""),
-        IpDataSet(title: "View more",leftValue: "", value: ""),
-
+        IpDataSet(title: "img01.olx.co.za", leftValue: "", value: ""),
+        IpDataSet(title: "img01.olx.co.ke", leftValue: "", value: ""),
+        IpDataSet(
+            title: "googleadaff61b2c8b834.cbmre.ca", leftValue: "", value: ""),
+        IpDataSet(title: "View more", leftValue: "", value: ""),
       ],
     ),
     SecurityTrailsEntity(
@@ -104,11 +131,13 @@ class SecurityTrailsEntity {
       headingValue: "490",
       title: "",
       ipData: [
-        IpDataSet(title: "phillip-moreeu.tapissier.com",leftValue: "", value: ""),
-        IpDataSet(title: "phillip-moreeu.tapissier.com",leftValue: "", value: ""),
-        IpDataSet(title: "phillip-moreeu.tapissier.com",leftValue: "", value: ""),
-        IpDataSet(title: "View more",leftValue: "", value: ""),
-
+        IpDataSet(
+            title: "phillip-moreeu.tapissier.com", leftValue: "", value: ""),
+        IpDataSet(
+            title: "phillip-moreeu.tapissier.com", leftValue: "", value: ""),
+        IpDataSet(
+            title: "phillip-moreeu.tapissier.com", leftValue: "", value: ""),
+        IpDataSet(title: "View more", leftValue: "", value: ""),
       ],
     ),
     SecurityTrailsEntity(
@@ -117,11 +146,10 @@ class SecurityTrailsEntity {
       headingValue: "25",
       title: "",
       ipData: [
-        IpDataSet(title: "artrake.com",leftValue: " ", value: ""),
-        IpDataSet(title: "rding-china.com",leftValue: " ", value: ""),
-        IpDataSet(title: "kuzentps.com",leftValue: " ", value: ""),
-        IpDataSet(title: "View more",leftValue: " ", value: ""),
-
+        IpDataSet(title: "artrake.com", leftValue: " ", value: ""),
+        IpDataSet(title: "rding-china.com", leftValue: " ", value: ""),
+        IpDataSet(title: "kuzentps.com", leftValue: " ", value: ""),
+        IpDataSet(title: "View more", leftValue: " ", value: ""),
       ],
     ),
   ];

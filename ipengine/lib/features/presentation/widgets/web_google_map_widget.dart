@@ -15,7 +15,7 @@ Widget getMap() {
 
     final mapOptions = MapOptions()
       ..zoom = 10
-      ..disableDefaultUI =false
+      ..disableDefaultUI = false
       ..draggable
       ..center = LatLng(1.3521, 103.8198);
 
@@ -30,8 +30,7 @@ Widget getMap() {
     Marker(MarkerOptions()
       ..position = myLatlng
       ..map = map
-      ..title = ''
-    );
+      ..title = '');
 
     return elem;
   });

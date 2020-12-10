@@ -224,23 +224,23 @@ class _SecurityTrailsPageState extends State<SecurityTrailsPage> {
                                   style: TextStyle(fontSize: 0),
                                 )
                               : Container(
-              padding: EdgeInsets.only(left: 8),
-                                child: Text(
+                                  padding: EdgeInsets.only(left: 8),
+                                  child: Text(
                                     _listData[index].heading,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black),
                                   ),
-                              ),
+                                ),
                           _listData[index].subHeading == ""
                               ? Text(
                                   "",
                                   style: TextStyle(fontSize: 0),
                                 )
                               : Container(
-                            padding: EdgeInsets.only(left: 8),
-                                child: Text(
+                                  padding: EdgeInsets.only(left: 8),
+                                  child: Text(
                                     _listData[index].subHeading,
                                     style: TextStyle(
                                       fontSize: 14,
@@ -248,11 +248,11 @@ class _SecurityTrailsPageState extends State<SecurityTrailsPage> {
                                       color: Colors.black.withOpacity(.7),
                                     ),
                                   ),
-                              ),
+                                ),
                           _listData[index].headingValue == ""
                               ? Text("")
                               : Container(
-                            padding: EdgeInsets.only(left: 8),
+                                  padding: EdgeInsets.only(left: 8),
                                   decoration: BoxDecoration(
                                       color: Colors.black.withOpacity(.5),
                                       borderRadius: BorderRadius.all(
@@ -269,20 +269,24 @@ class _SecurityTrailsPageState extends State<SecurityTrailsPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
                       padding: EdgeInsets.only(left: 8),
                       child: Text(
                         _listData[index].title,
                         style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black.withOpacity(.6)
-                        ),
+                            fontSize: 15, color: Colors.black.withOpacity(.6)),
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Divider(),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     ListView.builder(
                       shrinkWrap: true,
                       physics: ScrollPhysics(),
@@ -307,7 +311,9 @@ class _SecurityTrailsPageState extends State<SecurityTrailsPage> {
                                           : Text(_listData[index]
                                               .ipData[innerIndex]
                                               .leftValue),
-                                      _listData[index].ipData[innerIndex].title ==
+                                      _listData[index]
+                                                  .ipData[innerIndex]
+                                                  .title ==
                                               ""
                                           ? Text(
                                               "",
@@ -322,7 +328,8 @@ class _SecurityTrailsPageState extends State<SecurityTrailsPage> {
                                             ),
                                     ],
                                   ),
-                                  _listData[index].ipData[innerIndex].value == ""
+                                  _listData[index].ipData[innerIndex].value ==
+                                          ""
                                       ? Text(
                                           "",
                                           style: TextStyle(fontSize: 0),

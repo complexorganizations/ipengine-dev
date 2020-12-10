@@ -86,7 +86,9 @@ class _ReversIpPageState extends State<ReversIpPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               ListView.builder(
                 itemCount: _data.length,
                 physics: ScrollPhysics(),

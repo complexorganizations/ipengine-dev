@@ -209,7 +209,7 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                             color: color999999, fontSize: 14),
                                       )),
                                   InkWell(
-                                    onTap: (){
+                                    onTap: () {
                                       push(
                                         context: context,
                                         child: SecurityTrailsPage(),

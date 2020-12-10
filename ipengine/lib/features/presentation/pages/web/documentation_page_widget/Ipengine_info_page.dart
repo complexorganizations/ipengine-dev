@@ -393,7 +393,9 @@ class _IpEngineInfoPageState extends State<IpEngineInfoPage> {
             )
           ],
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -429,43 +431,47 @@ class _IpEngineInfoPageState extends State<IpEngineInfoPage> {
             Text("Ping")
           ],
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           Row(
-             children: [
-               Container(
-                   height: 40,
-                   alignment: Alignment.center,
-                   width: 40,
-                   decoration: BoxDecoration(
-                     color: Colors.white,
-                     border: Border.all(color: Colors.green),
-                     borderRadius: BorderRadius.all(Radius.circular(40)),
-                   ),
-                   padding: EdgeInsets.all(10),
-                   child: Icon(
-                     FontAwesome.download,
-                     color: Colors.green,
-                     size: 18,
-                   )),
-               SizedBox(
-                 width: 20,
-               ),
-               Text(
-                 "154.71 Mbps",
-                 style: TextStyle(
-                   fontSize: 16,
-                   fontWeight: FontWeight.w400,
-                 ),
-               )
-             ],
-           ),
+            Row(
+              children: [
+                Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.green),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      FontAwesome.download,
+                      color: Colors.green,
+                      size: 18,
+                    )),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "154.71 Mbps",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                )
+              ],
+            ),
             Text("Download")
           ],
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -501,8 +507,11 @@ class _IpEngineInfoPageState extends State<IpEngineInfoPage> {
             Text("Upload")
           ],
         ),
-        SizedBox(height: 20,),
-        Text("The average network speed for Google LLC in is shown above. See how your own network speed compares at speedsmart.net.")
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+            "The average network speed for Google LLC in is shown above. See how your own network speed compares at speedsmart.net.")
       ],
     );
   }

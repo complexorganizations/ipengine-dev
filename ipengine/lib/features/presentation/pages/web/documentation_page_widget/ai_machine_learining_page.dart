@@ -28,7 +28,9 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
           children: [
             _headerWidget(),
             _bodyWidget(),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -38,10 +40,12 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
   Widget _headerWidget() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 35),
-      child:Text("AI and Machine Learning",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 28),),
+      child: Text(
+        "AI and Machine Learning",
+        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 28),
+      ),
     );
   }
-
 
   Widget _bodyWidget() {
     return Container(
@@ -62,7 +66,9 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
       height: MediaQuery.of(context).size.height,
       child: Column(
         children: [
-          _menuItemHeaderWidget(color: Colors.black.withOpacity(.1), text: "Google Cloud Product"),
+          _menuItemHeaderWidget(
+              color: Colors.black.withOpacity(.1),
+              text: "Google Cloud Product"),
           SizedBox(
             height: 8,
           ),
@@ -73,14 +79,14 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
               });
             },
             child: _menuItemWidget(
-                color: Colors.black.withOpacity(.1),
-                text: "Overview",
-                selectedTextColor: _selectedMenuItem == 0
-                    ? Colors.black.withOpacity(.9)
-                    : Colors.black.withOpacity(.7),
-                selectItemColor: _selectedMenuItem == 0
-                    ? Colors.black.withOpacity(.8)
-                    : Colors.black.withOpacity(.1),
+              color: Colors.black.withOpacity(.1),
+              text: "Overview",
+              selectedTextColor: _selectedMenuItem == 0
+                  ? Colors.black.withOpacity(.9)
+                  : Colors.black.withOpacity(.7),
+              selectItemColor: _selectedMenuItem == 0
+                  ? Colors.black.withOpacity(.8)
+                  : Colors.black.withOpacity(.1),
             ),
           ),
           InkWell(
@@ -270,31 +276,43 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
           ),
           GridView.builder(
             itemCount: _buildingBlocksData.length,
-            gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 2.4),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, childAspectRatio: 2.4),
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                margin: EdgeInsets.all(8.0),
-                padding: EdgeInsets.all(10),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  border: Border.all(color: Colors.black,width: 1)
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(_buildingBlocksData[index].title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,color: Colors.black),),
-                    SizedBox(height: 10,),
-                    Text(_buildingBlocksData[index].description,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14),)
-                  ],
-                )
-              );
+                  margin: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      border: Border.all(color: Colors.black, width: 1)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _buildingBlocksData[index].title,
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _buildingBlocksData[index].description,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 14),
+                      )
+                    ],
+                  ));
             },
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
@@ -310,8 +328,8 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
           ),
           GridView.builder(
             itemCount: _infrastructureData.length,
-            gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 2.4),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, childAspectRatio: 2.4),
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
@@ -321,20 +339,32 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
-                      border: Border.all(color: Colors.black,width: 1)
-                  ),
+                      border: Border.all(color: Colors.black, width: 1)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(_infrastructureData[index].title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,color: Colors.black),),
-                      SizedBox(height: 10,),
-                      Text(_infrastructureData[index].description,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14),)
+                      Text(
+                        _infrastructureData[index].title,
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _infrastructureData[index].description,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 14),
+                      )
                     ],
-                  )
-              );
+                  ));
             },
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
@@ -350,27 +380,38 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
           ),
           GridView.builder(
             itemCount: _platformData.length,
-            gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,childAspectRatio: 2.4),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, childAspectRatio: 2.4),
             shrinkWrap: true,
             physics: ScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               return Container(
-                  margin: EdgeInsets.all(8.0),
-                  padding: EdgeInsets.all(10),
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      border: Border.all(color: Colors.black,width: 1)
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(_platformData[index].title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w500,color: Colors.black),),
-                      SizedBox(height: 10,),
-                      Text(_platformData[index].description,style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14),)
-                    ],
-                  ),
+                margin: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    border: Border.all(color: Colors.black, width: 1)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _platformData[index].title,
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      _platformData[index].description,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                    )
+                  ],
+                ),
               );
             },
           ),
@@ -379,17 +420,25 @@ class _AiMachineLearningPageState extends State<AiMachineLearningPage> {
     );
   }
 
-  Widget _menuItemWidget({Color color, String text, Color selectItemColor,Color selectedTextColor}) {
+  Widget _menuItemWidget(
+      {Color color,
+      String text,
+      Color selectItemColor,
+      Color selectedTextColor}) {
     return Container(
       height: 55,
       padding: EdgeInsets.only(left: 10),
       alignment: Alignment.centerLeft,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          border: Border(left: BorderSide(width: 2, color: selectItemColor)),),
+        border: Border(left: BorderSide(width: 2, color: selectItemColor)),
+      ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400,color: selectedTextColor),
+        style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: selectedTextColor),
       ),
     );
   }

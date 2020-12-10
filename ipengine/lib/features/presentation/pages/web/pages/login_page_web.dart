@@ -12,7 +12,6 @@ class LoginPageWeb extends StatefulWidget {
 }
 
 class _LoginPageWebState extends State<LoginPageWeb> {
-
   @override
   void initState() {
     super.initState();
@@ -64,8 +63,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
-            onTap: (){
-            },
+            onTap: () {},
             child: Padding(
               padding: const EdgeInsets.only(top: 29, left: 20),
               child: Text(

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:ipengine/features/domain/entity/hide_myname_entity.dart';
 import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
@@ -10,14 +8,13 @@ class HideMyNamePage extends StatefulWidget {
 }
 
 class _HideMyNamePageState extends State<HideMyNamePage> {
-
-  final _data=HideMyNameEntity.hideMyName;
+  final _data = HideMyNameEntity.hideMyName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 40,vertical: 30),
+          margin: EdgeInsets.symmetric(horizontal: 40, vertical: 30),
           child: Column(
             children: [
               _headerWidget(),
@@ -86,16 +83,18 @@ class _HideMyNamePageState extends State<HideMyNamePage> {
                 physics: ScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
-                  return  Container(
+                  return Container(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     margin: EdgeInsets.symmetric(horizontal: 30),
                     decoration: BoxDecoration(
-                      border: Border(
-                        left: BorderSide(color: Colors.black.withOpacity(.2),width: 1),
-                        right: BorderSide(color: Colors.black.withOpacity(.2),width: 1),
-                        bottom: BorderSide(color: Colors.black.withOpacity(.2),width: 1),
-                      )
-                    ),
+                        border: Border(
+                      left: BorderSide(
+                          color: Colors.black.withOpacity(.2), width: 1),
+                      right: BorderSide(
+                          color: Colors.black.withOpacity(.2), width: 1),
+                      bottom: BorderSide(
+                          color: Colors.black.withOpacity(.2), width: 1),
+                    )),
                     height: 45,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,13 +168,19 @@ class _HideMyNamePageState extends State<HideMyNamePage> {
         Row(
           children: [
             _itemWidget(text: "What is VPN?"),
-            SizedBox(width: 14,),
+            SizedBox(
+              width: 14,
+            ),
             _itemWidget(text: "Pricing"),
-            SizedBox(width: 14,),
+            SizedBox(
+              width: 14,
+            ),
             _itemWidget(text: "Help"),
-            SizedBox(width: 14,),
+            SizedBox(
+              width: 14,
+            ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -189,7 +194,10 @@ class _HideMyNamePageState extends State<HideMyNamePage> {
 
   Widget _itemWidget({String text}) {
     return Container(
-      child: Text(text,style: TextStyle(fontSize: 16),),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }
