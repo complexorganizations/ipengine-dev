@@ -1,12 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:ipengine/features/presentation/helper/models/user.dart';
-import 'package:ipengine/features/presentation/helper/services/firebase_helper.dart';
 import 'package:ipengine/features/presentation/pages/web/widgets/common.dart';
 import 'package:ipengine/features/presentation/screens/home_screen.dart';
+import 'package:ipengine/features/presentation/widgets/common.dart';
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 
 class LoginPageWeb extends StatefulWidget {
@@ -15,8 +12,6 @@ class LoginPageWeb extends StatefulWidget {
 }
 
 class _LoginPageWebState extends State<LoginPageWeb> {
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -68,11 +63,15 @@ class _LoginPageWebState extends State<LoginPageWeb> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 29, left: 20),
-            child: Text(
-              "IPengine.dev",
-              style: textStyle24,
+          InkWell(
+            onTap: (){
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(top: 29, left: 20),
+              child: Text(
+                "IPengine.dev",
+                style: textStyle24,
+              ),
             ),
           ),
           Padding(
@@ -90,13 +89,12 @@ class _LoginPageWebState extends State<LoginPageWeb> {
             child: Stack(
               children: [
                 Positioned(
-                  left: 0.0,
-                  right: 0.0,
-                  child: Image.asset(
-                    'assets/inside_nodes.png',
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
+                    left: 0.0,
+                    right: 0.0,
+                    child: Image.asset(
+                      'assets/inside_nodes.png',
+                      fit: BoxFit.scaleDown,
+                    )),
               ],
             ),
           ),
@@ -117,11 +115,7 @@ class _LoginPageWebState extends State<LoginPageWeb> {
     return InkWell(
       onTap: () {
         // signOutGoogle();
-
-        signInWithGoogle().whenComplete(() {
-          print("signInWithGoogle finished ");
-          // push(context: context, child: HomeScreen());
-        });
+        push(context: context, child: HomeScreen());
 
         //
       },
@@ -182,41 +176,5 @@ class _LoginPageWebState extends State<LoginPageWeb> {
         ],
       ),
     );
-  }
-
-  signInWithGoogle() async {
-    print("signInWithGoogle started");
-    LocalUser myUser = await FirebaseAuthService(googleSignin: googleSignIn)
-        .signInWithGoogle();
-    if (myUser == null) {
-      // Toastify({
-      //   text: "there is no user ",
-      //   backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-      //   className: "info",
-      // }).showToast();
-      Fluttertoast.showToast(
-          msg: "there is no user ",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 5,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    } else {
-      Fluttertoast.showToast(
-          msg: "you logged in !!! ",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 5,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => HomeScreen(),
-        ),
-      );
-    }
   }
 }

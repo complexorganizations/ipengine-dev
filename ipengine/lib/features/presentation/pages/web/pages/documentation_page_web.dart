@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ipengine/features/presentation/pages/web/documentation_page_widget/model.dart';
+import 'package:ipengine/features/presentation/pages/web/documentation_page_widget/security_trails_page.dart';
+import 'package:ipengine/features/presentation/widgets/common.dart';
 import 'package:ipengine/features/presentation/widgets/theme/style.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -206,8 +208,16 @@ class _DocumentationPageWebState extends State<DocumentationPageWeb> {
                                         style: TextStyle(
                                             color: color999999, fontSize: 14),
                                       )),
-                                  _textWidget(
-                                    text: "Manage your Account",
+                                  InkWell(
+                                    onTap: (){
+                                      push(
+                                        context: context,
+                                        child: SecurityTrailsPage(),
+                                      );
+                                    },
+                                    child: _textWidget(
+                                      text: "Manage your Account",
+                                    ),
                                   ),
                                   _textWidget(
                                     text: "Manage your projects",
