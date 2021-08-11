@@ -17,7 +17,7 @@ func init() {
 
 func main() {
 	// The traffic should be directed to the appropriate function.
-	http.HandleFunc("/", clientPersonalIP)
+	http.HandleFunc("/", personalRequestWriter)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
 	// If something goes wrong, throw an error.
@@ -27,7 +27,7 @@ func main() {
 }
 
 // The substance of the response to write
-func clientPersonalIP(writer http.ResponseWriter, req *http.Request) {
+func personalRequestWriter(writer http.ResponseWriter, req *http.Request) {
 	writer.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(writer, "%s", jsonResponse(req))
 }
@@ -44,12 +44,31 @@ func jsonResponse(httpRequest *http.Request) []byte {
 		ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
 		Hostname:  getHostname(getUserIP(httpRequest).String()),
 	}
+	// To add the device json object answer.
+	type deviceResponse struct {
+		UserAgent  string `json:"user_agent"`
+		Accept     string `json:"accept"`
+		Connection string `json:"connection"`
+		Host       string `json:"host"`
+		Cache      string `json:"cache"`
+		AcceptEnc  string `json:"accept_encoding"`
+	}
+	device := deviceResponse{
+		UserAgent:  getUserAgent(httpRequest),
+		Accept:     getUserAccept(httpRequest),
+		Connection: getConnectionType(httpRequest),
+		Host:       getUserHost(httpRequest),
+		Cache:      getCacheControl(httpRequest),
+		AcceptEnc:  getAcceptEncoding(httpRequest),
+	}
 	// Wrap up the entire response in a new response.
 	type dataTypes struct {
 		Network networkResponse `json:"network"`
+		Device  deviceResponse  `json:"device"`
 	}
 	responseData := dataTypes{
 		Network: data,
+		Device:  device,
 	}
 	// Convert the data to json and return it.
 	payloadBytes, err := json.Marshal(responseData)
@@ -93,4 +112,34 @@ func getHostname(host string) []string {
 		log.Println(err)
 	}
 	return hostname
+}
+
+// Get the user's device info.
+func getUserAgent(httpServer *http.Request) string {
+	return httpServer.Header.Get("User-Agent")
+}
+
+// Get the user's device info.
+func getUserAccept(httpServer *http.Request) string {
+	return httpServer.Header.Get("Accept")
+}
+
+// Get the device connection type.
+func getConnectionType(httpServer *http.Request) string {
+	return httpServer.Header.Get("Connection")
+}
+
+// Get the user connected host info.
+func getUserHost(httpServer *http.Request) string {
+	return httpServer.Header.Get("Host")
+}
+
+// Get the user connected Cache-Control header.
+func getCacheControl(httpServer *http.Request) string {
+	return httpServer.Header.Get("Cache-Control")
+}
+
+// Get the user accept encodings header.
+func getAcceptEncoding(httpServer *http.Request) string {
+	return httpServer.Header.Get("Accept-Encoding")
 }
