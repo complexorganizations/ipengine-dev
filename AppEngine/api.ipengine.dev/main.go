@@ -28,6 +28,12 @@ func main() {
 
 // The content to write to the response
 func clientPersonalIP(writer http.ResponseWriter, req *http.Request) {
+	// Write the response
+	jsonValues := jsonResponse(req)
+	fmt.Fprintf(writer, "%s", jsonValues)
+}
+
+func jsonResponse(httpRequest *http.Request) []byte {
 	// Type of the response
 	type response struct {
 		IP        net.IP   `json:"ip"`
@@ -35,16 +41,23 @@ func clientPersonalIP(writer http.ResponseWriter, req *http.Request) {
 		Hostname  []string `json:"hostname"`
 	}
 	data := response{
-		IP:        getUserIP(req),
-		ReverseIP: getReverseIP(getUserIP(req).String()),
-		Hostname:  getHostname(getUserIP(req).String()),
+		IP:        getUserIP(httpRequest),
+		ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
+		Hostname:  getHostname(getUserIP(httpRequest).String()),
+	}
+	// Response
+	type dataTypes struct {
+		Network response `json:"network"`
+	}
+	responseData := dataTypes{
+		Network: data,
 	}
 	// Convert the data into json format.
-	payloadBytes, err := json.Marshal(data)
+	payloadBytes, err := json.Marshal(responseData)
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Fprintf(writer, "%s", payloadBytes)
+	return payloadBytes
 }
 
 // Get the ip of the user thats connected to the server
