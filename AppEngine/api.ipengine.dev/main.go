@@ -28,6 +28,7 @@ func main() {
 
 // The substance of the response to write
 func clientPersonalIP(writer http.ResponseWriter, req *http.Request) {
+	writer.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(writer, "%s", jsonResponse(req))
 }
 
