@@ -11,10 +11,21 @@ import (
 )
 
 var (
-	blackList    []string
 	err          error
+	analysisList analysis
 	analysisFile = "analysis.json"
 )
+
+// The blacklist of the user's IP address.
+type analysis struct {
+	Abuse         []string `json:"abuse"`
+	Anonymizers   []string `json:"anonymizers"`
+	Attacks       []string `json:"attacks"`
+	Malware       []string `json:"malware"`
+	Organizations []string `json:"organizations"`
+	Reputation    []string `json:"reputation"`
+	Spam          []string `json:"spam"`
+}
 
 func init() {
 	// Load the json files
@@ -23,7 +34,7 @@ func init() {
 		log.Println(err)
 	}
 	// Parse the json file
-	err = json.Unmarshal(content, &blackList)
+	err = json.Unmarshal(content, &analysisList)
 	if err != nil {
 		log.Println(err)
 	}
@@ -86,13 +97,13 @@ func jsonResponse(httpRequest *http.Request) []byte {
 		Spam          bool `json:"spam"`
 	}
 	analysis := analysisResponse{
-		Abuse:         isInBlackList(data.IP.String()),
-		Anonymizers:   isInBlackList(data.IP.String()),
-		Attacks:       isInBlackList(data.IP.String()),
-		Malware:       isInBlackList(data.IP.String()),
-		Organizations: isInBlackList(data.IP.String()),
-		Reputation:    isInBlackList(data.IP.String()),
-		Spam:          isInBlackList(data.IP.String()),
+		Abuse:         isInBlackList(data.IP.String(), "abuse"),
+		Anonymizers:   isInBlackList(data.IP.String(), "anonymizers"),
+		Attacks:       isInBlackList(data.IP.String(), "attacks"),
+		Malware:       isInBlackList(data.IP.String(), "malware"),
+		Organizations: isInBlackList(data.IP.String(), "organizations"),
+		Reputation:    isInBlackList(data.IP.String(), "reputation"),
+		Spam:          isInBlackList(data.IP.String(), "spam"),
 	}
 	// Wrap up the entire response in a new response.
 	type dataTypes struct {
@@ -180,10 +191,49 @@ func getAcceptEncoding(httpServer *http.Request) string {
 }
 
 // Check if the IP address is in the blacklist.
-func isInBlackList(ip string) bool {
-	for _, blackIP := range blackList {
-		if blackIP == ip {
-			return true
+func isInBlackList(ip string, blacklistType string) bool {
+	switch blacklistType {
+	case "abuse":
+		for _, ips := range analysisList.Abuse {
+			if ips == ip {
+				return true
+			}
+		}
+	case "anonymizers":
+		for _, ips := range analysisList.Anonymizers {
+			if ips == ip {
+				return true
+			}
+		}
+	case "attacks":
+		for _, ips := range analysisList.Attacks {
+			if ips == ip {
+				return true
+			}
+		}
+	case "malware":
+		for _, ips := range analysisList.Malware {
+			if ips == ip {
+				return true
+			}
+		}
+	case "organizations":
+		for _, ips := range analysisList.Organizations {
+			if ips == ip {
+				return true
+			}
+		}
+	case "reputation":
+		for _, ips := range analysisList.Reputation {
+			if ips == ip {
+				return true
+			}
+		}
+	case "spam":
+		for _, ips := range analysisList.Spam {
+			if ips == ip {
+				return true
+			}
 		}
 	}
 	return false
