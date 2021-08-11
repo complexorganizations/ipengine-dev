@@ -16,43 +16,41 @@ func init() {
 }
 
 func main() {
-	// Route to the clientPersonalIP function
+	// The traffic should be directed to the appropriate function.
 	http.HandleFunc("/", clientPersonalIP)
-	// Listen and serve on port 8080.
+	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
-	// Return an error if something went wrong
+	// If something goes wrong, throw an error.
 	if err != nil {
 		log.Println(err)
 	}
 }
 
-// The content to write to the response
+// The substance of the response to write
 func clientPersonalIP(writer http.ResponseWriter, req *http.Request) {
-	// Write the response
-	jsonValues := jsonResponse(req)
-	fmt.Fprintf(writer, "%s", jsonValues)
+	fmt.Fprintf(writer, "%s", jsonResponse(req))
 }
 
 func jsonResponse(httpRequest *http.Request) []byte {
-	// Type of the response
-	type response struct {
+	// To add the network json object answer.
+	type networkResponse struct {
 		IP        net.IP   `json:"ip"`
 		ReverseIP []net.IP `json:"reverse"`
 		Hostname  []string `json:"hostname"`
 	}
-	data := response{
+	data := networkResponse{
 		IP:        getUserIP(httpRequest),
 		ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
 		Hostname:  getHostname(getUserIP(httpRequest).String()),
 	}
-	// Response
+	// Wrap up the entire response in a new response.
 	type dataTypes struct {
-		Network response `json:"network"`
+		Network networkResponse `json:"network"`
 	}
 	responseData := dataTypes{
 		Network: data,
 	}
-	// Convert the data into json format.
+	// Convert the data to json and return it.
 	payloadBytes, err := json.Marshal(responseData)
 	if err != nil {
 		log.Println(err)
@@ -60,7 +58,7 @@ func jsonResponse(httpRequest *http.Request) []byte {
 	return payloadBytes
 }
 
-// Get the ip of the user thats connected to the server
+// Get the IP address of the server's connected user.
 func getUserIP(httpServer *http.Request) net.IP {
 	var userIP string
 	if len(httpServer.Header.Get("CF-Connecting-IP")) > 1 {
@@ -78,7 +76,7 @@ func getUserIP(httpServer *http.Request) net.IP {
 	}
 }
 
-// Get the reverse ip of the user
+// Get the user's reverse IP address.
 func getReverseIP(host string) []net.IP {
 	reverseIP, err := net.LookupIP(host)
 	if err != nil {
@@ -87,7 +85,7 @@ func getReverseIP(host string) []net.IP {
 	return reverseIP
 }
 
-// Get the hostname of the user
+// Get the user's hostname.
 func getHostname(host string) []string {
 	hostname, err := net.LookupAddr(host)
 	if err != nil {
