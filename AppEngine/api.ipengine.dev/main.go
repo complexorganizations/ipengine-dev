@@ -6,13 +6,27 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 )
 
-var err error
+var (
+	blackList    []string
+	err          error
+	analysisFile = "analysis.json"
+)
 
 func init() {
 	// Load the json files
+	content, err := os.ReadFile(analysisFile)
+	if err != nil {
+		log.Println(err)
+	}
+	// Parse the json file
+	err = json.Unmarshal(content, &blackList)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func main() {
@@ -61,14 +75,35 @@ func jsonResponse(httpRequest *http.Request) []byte {
 		Cache:      getCacheControl(httpRequest),
 		AcceptEnc:  getAcceptEncoding(httpRequest),
 	}
+	// The analysis json object.
+	type analysisResponse struct {
+		Abuse         bool `json:"abuse"`
+		Anonymizers   bool `json:"anonymizers"`
+		Attacks       bool `json:"attacks"`
+		Malware       bool `json:"malware"`
+		Organizations bool `json:"organizations"`
+		Reputation    bool `json:"reputation"`
+		Spam          bool `json:"spam"`
+	}
+	analysis := analysisResponse{
+		Abuse:         isInBlackList(data.IP.String()),
+		Anonymizers:   isInBlackList(data.IP.String()),
+		Attacks:       isInBlackList(data.IP.String()),
+		Malware:       isInBlackList(data.IP.String()),
+		Organizations: isInBlackList(data.IP.String()),
+		Reputation:    isInBlackList(data.IP.String()),
+		Spam:          isInBlackList(data.IP.String()),
+	}
 	// Wrap up the entire response in a new response.
 	type dataTypes struct {
-		Network networkResponse `json:"network"`
-		Device  deviceResponse  `json:"device"`
+		Network  networkResponse  `json:"network"`
+		Device   deviceResponse   `json:"device"`
+		Analysis analysisResponse `json:"analysis"`
 	}
 	responseData := dataTypes{
-		Network: data,
-		Device:  device,
+		Network:  data,
+		Device:   device,
+		Analysis: analysis,
 	}
 	// Convert the data to json and return it.
 	payloadBytes, err := json.Marshal(responseData)
@@ -142,4 +177,14 @@ func getCacheControl(httpServer *http.Request) string {
 // Get the user accept encodings header.
 func getAcceptEncoding(httpServer *http.Request) string {
 	return httpServer.Header.Get("Accept-Encoding")
+}
+
+// Check if the IP address is in the blacklist.
+func isInBlackList(ip string) bool {
+	for _, blackIP := range blackList {
+		if blackIP == ip {
+			return true
+		}
+	}
+	return false
 }
