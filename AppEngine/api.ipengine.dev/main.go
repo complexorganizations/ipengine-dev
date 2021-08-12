@@ -153,9 +153,14 @@ func getReverseIP(host string) []net.IP {
 
 // Get the user's hostname.
 func getHostname(host string) []string {
-	hostname, err := net.LookupAddr(host)
+	tempHostNames, err := net.LookupAddr(host)
 	if err != nil {
 		log.Println(err)
+	}
+	var hostname []string
+	for _, host := range tempHostNames {
+		hostnameRemovedSuffix := strings.TrimSuffix(host, ".")
+		hostname = append(hostname, hostnameRemovedSuffix)
 	}
 	return hostname
 }
