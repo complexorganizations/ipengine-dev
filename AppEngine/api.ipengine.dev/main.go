@@ -1,8 +1,9 @@
 package main
 
 import (
-	"encoding/json"
+	"bytes"
 	"compress/gzip"
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net"
@@ -120,7 +121,13 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		httpWriter.Write(payloadBytes)
+		// Compress the data.
+		var byteBuffer bytes.Buffer
+		gzipWriter := gzip.NewWriter(&byteBuffer)
+		gzipWriter.Write(payloadBytes)
+		gzipWriter.Close()
+		// Write the compressed data to the httpWriter.
+		httpWriter.Write(byteBuffer.Bytes())
 	} else {
 		http.HandleFunc(httpRequest.URL.Path, handleAllErrors)
 	}
