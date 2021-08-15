@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net"
 	"net/http"
@@ -54,14 +53,13 @@ func main() {
 // The substance of the response to write
 func personalRequestWriter(writer http.ResponseWriter, req *http.Request) {
 	if req.URL.Path == "/" {
-		writer.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(writer, "%s", jsonResponse(req))
+		http.HandleFunc(req.URL.Path, jsonResponse)
 	} else {
 		http.HandleFunc(req.URL.Path, handleAllErrors)
 	}
 }
 
-func jsonResponse(httpRequest *http.Request) []byte {
+func jsonResponse(writer http.ResponseWriter, httpRequest *http.Request) {
 	// To add the network json object answer.
 	type networkResponse struct {
 		IP        net.IP   `json:"ip"`
@@ -125,7 +123,8 @@ func jsonResponse(httpRequest *http.Request) []byte {
 	if err != nil {
 		log.Println(err)
 	}
-	return payloadBytes
+	writer.Header().Set("Content-Type", "application/json")
+	httpWriter.Write(payloadBytes)
 }
 
 // Get the IP address of the server's connected user.
