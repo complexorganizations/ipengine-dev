@@ -54,6 +54,7 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	if httpRequest.URL.Path == "/" {
 		// Set the proper headers.
 		httpWriter.Header().Set("Content-Type", "application/json")
+		httpWriter.Header().Set("Content-Encoding", "gzip")
 		httpWriter.WriteHeader(http.StatusOK)
 		// To add the network json object answer.
 		type networkResponse struct {
@@ -251,6 +252,7 @@ func isInBlackList(ip string, blacklistType string) bool {
 func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	// Set the content type to application/json.
 	httpWriter.Header().Set("Content-Type", "application/json")
+	httpWriter.Header().Set("Content-Encoding", "gzip")
 	// Set the header to status not found.
 	httpWriter.WriteHeader(http.StatusNotFound)
 	// Set the body to an error message.
