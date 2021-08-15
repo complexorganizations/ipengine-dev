@@ -245,10 +245,6 @@ func isInBlackList(ip string, blacklistType string) bool {
 }
 
 func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
-	// Set the header to status not found.
-	httpWriter.WriteHeader(http.StatusNotFound)
-	// Set the content type to application/json.
-	httpWriter.Header().Set("Content-Type", "application/json")
 	// Set the body to an error message.
 	type errorMessage struct {
 		Code    int    `json:"code"`
@@ -272,6 +268,10 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
+	// Set the content type to application/json.
+	httpWriter.Header().Set("Content-Type", "application/json")
+	// Set the header to status not found.
+	httpWriter.WriteHeader(http.StatusNotFound)
 	// Write the JSON error message.
 	httpWriter.Write(errorJsonMessage)
 }
