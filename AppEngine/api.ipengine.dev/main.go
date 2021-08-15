@@ -124,7 +124,7 @@ func jsonResponse(writer http.ResponseWriter, httpRequest *http.Request) {
 		log.Println(err)
 	}
 	writer.Header().Set("Content-Type", "application/json")
-	httpWriter.Write(payloadBytes)
+	httpRequest.Write(payloadBytes)
 }
 
 // Get the IP address of the server's connected user.
