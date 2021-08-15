@@ -41,7 +41,7 @@ func init() {
 
 func main() {
 	// The traffic should be directed to the appropriate function.
-	http.HandleFunc("/", personalRequestWriter)
+	http.HandleFunc("/", jsonResponse)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
 	// If something goes wrong, throw an error.
@@ -50,81 +50,78 @@ func main() {
 	}
 }
 
-// The substance of the response to write
-func personalRequestWriter(writer http.ResponseWriter, req *http.Request) {
-	if req.URL.Path == "/" {
-		http.HandleFunc(req.URL.Path, jsonResponse)
+func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
+	if httpRequest.URL.Path == "/" {
+		// Set the proper headers.
+		httpWriter.Header().Set("Content-Type", "application/json")
+		httpWriter.WriteHeader(http.StatusOK)
+		// To add the network json object answer.
+		type networkResponse struct {
+			IP        net.IP   `json:"ip"`
+			ReverseIP []net.IP `json:"reverse"`
+			Hostname  []string `json:"hostname"`
+		}
+		data := networkResponse{
+			IP:        getUserIP(httpRequest),
+			ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
+			Hostname:  getHostname(getUserIP(httpRequest).String()),
+		}
+		// To add the device json object answer.
+		type deviceResponse struct {
+			UserAgent  string `json:"user_agent"`
+			Accept     string `json:"accept"`
+			Connection string `json:"connection"`
+			Host       string `json:"host"`
+			Cache      string `json:"cache"`
+			AcceptEnc  string `json:"accept_encoding"`
+		}
+		device := deviceResponse{
+			UserAgent:  getUserAgent(httpRequest),
+			Accept:     getUserAccept(httpRequest),
+			Connection: getConnectionType(httpRequest),
+			Host:       getUserHost(httpRequest),
+			Cache:      getCacheControl(httpRequest),
+			AcceptEnc:  getAcceptEncoding(httpRequest),
+		}
+		// The analysis json object.
+		type analysisResponse struct {
+			Abuse         bool `json:"abuse"`
+			Anonymizers   bool `json:"anonymizers"`
+			Attacks       bool `json:"attacks"`
+			Malware       bool `json:"malware"`
+			Organizations bool `json:"organizations"`
+			Reputation    bool `json:"reputation"`
+			Spam          bool `json:"spam"`
+		}
+		analysis := analysisResponse{
+			Abuse:         isInBlackList(data.IP.String(), "abuse"),
+			Anonymizers:   isInBlackList(data.IP.String(), "anonymizers"),
+			Attacks:       isInBlackList(data.IP.String(), "attacks"),
+			Malware:       isInBlackList(data.IP.String(), "malware"),
+			Organizations: isInBlackList(data.IP.String(), "organizations"),
+			Reputation:    isInBlackList(data.IP.String(), "reputation"),
+			Spam:          isInBlackList(data.IP.String(), "spam"),
+		}
+		// Wrap up the entire response in a new response.
+		type dataTypes struct {
+			Network  networkResponse  `json:"network"`
+			Device   deviceResponse   `json:"device"`
+			Analysis analysisResponse `json:"analysis"`
+		}
+		responseData := dataTypes{
+			Network:  data,
+			Device:   device,
+			Analysis: analysis,
+		}
+		// Convert the data to json and return it.
+		payloadBytes, err := json.Marshal(responseData)
+		if err != nil {
+			log.Println(err)
+		}
+		httpWriter.Write(payloadBytes)
 	} else {
-		http.HandleFunc(req.URL.Path, handleAllErrors)
+		http.HandleFunc(httpRequest.URL.Path, handleAllErrors)
 	}
-}
-
-func jsonResponse(writer http.ResponseWriter, httpRequest *http.Request) {
-	// To add the network json object answer.
-	type networkResponse struct {
-		IP        net.IP   `json:"ip"`
-		ReverseIP []net.IP `json:"reverse"`
-		Hostname  []string `json:"hostname"`
-	}
-	data := networkResponse{
-		IP:        getUserIP(httpRequest),
-		ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
-		Hostname:  getHostname(getUserIP(httpRequest).String()),
-	}
-	// To add the device json object answer.
-	type deviceResponse struct {
-		UserAgent  string `json:"user_agent"`
-		Accept     string `json:"accept"`
-		Connection string `json:"connection"`
-		Host       string `json:"host"`
-		Cache      string `json:"cache"`
-		AcceptEnc  string `json:"accept_encoding"`
-	}
-	device := deviceResponse{
-		UserAgent:  getUserAgent(httpRequest),
-		Accept:     getUserAccept(httpRequest),
-		Connection: getConnectionType(httpRequest),
-		Host:       getUserHost(httpRequest),
-		Cache:      getCacheControl(httpRequest),
-		AcceptEnc:  getAcceptEncoding(httpRequest),
-	}
-	// The analysis json object.
-	type analysisResponse struct {
-		Abuse         bool `json:"abuse"`
-		Anonymizers   bool `json:"anonymizers"`
-		Attacks       bool `json:"attacks"`
-		Malware       bool `json:"malware"`
-		Organizations bool `json:"organizations"`
-		Reputation    bool `json:"reputation"`
-		Spam          bool `json:"spam"`
-	}
-	analysis := analysisResponse{
-		Abuse:         isInBlackList(data.IP.String(), "abuse"),
-		Anonymizers:   isInBlackList(data.IP.String(), "anonymizers"),
-		Attacks:       isInBlackList(data.IP.String(), "attacks"),
-		Malware:       isInBlackList(data.IP.String(), "malware"),
-		Organizations: isInBlackList(data.IP.String(), "organizations"),
-		Reputation:    isInBlackList(data.IP.String(), "reputation"),
-		Spam:          isInBlackList(data.IP.String(), "spam"),
-	}
-	// Wrap up the entire response in a new response.
-	type dataTypes struct {
-		Network  networkResponse  `json:"network"`
-		Device   deviceResponse   `json:"device"`
-		Analysis analysisResponse `json:"analysis"`
-	}
-	responseData := dataTypes{
-		Network:  data,
-		Device:   device,
-		Analysis: analysis,
-	}
-	// Convert the data to json and return it.
-	payloadBytes, err := json.Marshal(responseData)
-	if err != nil {
-		log.Println(err)
-	}
-	writer.Header().Set("Content-Type", "application/json")
-	writer.Write(payloadBytes)
 }
 
 // Get the IP address of the server's connected user.
