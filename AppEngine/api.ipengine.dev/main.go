@@ -286,6 +286,11 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	// Write the JSON error message.
-	httpWriter.Write(errorJsonMessage)
+	// Compress the data.
+	var byteBuffer bytes.Buffer
+	gzipWriter := gzip.NewWriter(&byteBuffer)
+	gzipWriter.Write(errorJsonMessage)
+	gzipWriter.Close()
+	// Write the compressed data to the httpWriter.
+	httpWriter.Write(byteBuffer.Bytes())
 }
