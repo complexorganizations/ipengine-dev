@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -28,7 +28,7 @@ type analysis struct {
 
 func init() {
 	// Load the json files
-	content, err := os.ReadFile(analysisFile)
+	content, err := ioutil.ReadFile(analysisFile)
 	if err != nil {
 		log.Println(err)
 	}
