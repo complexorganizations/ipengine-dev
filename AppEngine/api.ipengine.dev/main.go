@@ -255,8 +255,8 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	httpWriter.Header().Set("Content-Type", "application/json")
 	// Set the body to an error message.
 	type errorMessage struct {
-		Code    int
-		Message string
+		Code    int    `json:"code"`
+		Message string `json:"message"`
 	}
 	errorMsg := errorMessage{
 		Code:    http.StatusNotFound,
@@ -264,7 +264,7 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	}
 	// Wrap the error in a error object.
 	type jsonError struct {
-		Error errorMessage
+		Error errorMessage `json:"error"`
 	}
 	// The content of the error object.
 	jsonReturn := jsonError{
