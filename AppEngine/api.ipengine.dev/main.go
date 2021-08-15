@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"compress/gzip"
 	"io/ioutil"
 	"log"
 	"net"
