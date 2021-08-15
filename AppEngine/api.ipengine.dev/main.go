@@ -129,16 +129,20 @@ func getUserIP(httpServer *http.Request) net.IP {
 	var userIP string
 	if len(httpServer.Header.Get("CF-Connecting-IP")) > 1 {
 		userIP = httpServer.Header.Get("CF-Connecting-IP")
-		return net.ParseIP(strings.Split(userIP, ":")[0])
+		return net.ParseIP(userIP)
 	} else if len(httpServer.Header.Get("X-Forwarded-For")) > 1 {
 		userIP = httpServer.Header.Get("X-Forwarded-For")
-		return net.ParseIP(strings.Split(userIP, ":")[0])
+		return net.ParseIP(userIP)
 	} else if len(httpServer.Header.Get("X-Real-IP")) > 1 {
 		userIP = httpServer.Header.Get("X-Real-IP")
-		return net.ParseIP(strings.Split(userIP, ":")[0])
+		return net.ParseIP(userIP)
 	} else {
 		userIP = httpServer.RemoteAddr
-		return net.ParseIP(strings.Split(userIP, ":")[0])
+		if strings.Contains(userIP, ":") {
+			return net.ParseIP(strings.Split(userIP, ":")[0])
+		} else {
+			return net.ParseIP(userIP)
+		}
 	}
 }
 
