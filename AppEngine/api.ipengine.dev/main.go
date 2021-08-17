@@ -213,6 +213,11 @@ func getAcceptEncoding(httpServer *http.Request) string {
 	return httpServer.Header.Get("Accept-Encoding")
 }
 
+// Get the api key if the user has provided any.
+func getAuthorizationHeader(httpServer *http.Request) string {
+	return httpServer.Header.Get("Authorization")
+}
+
 // Check if the IP address is in the blacklist.
 func isInBlackList(ip string, blacklistType string) bool {
 	switch blacklistType {
