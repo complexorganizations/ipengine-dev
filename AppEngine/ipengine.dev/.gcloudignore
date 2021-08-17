@@ -15,4 +15,9 @@
 vendor/
 
 # The application's binary.
-ipengine.dev
+api.ipengine.dev
+
+# Ignore .git stuff
+.git
+.gitignore
+.gcloudignore

@@ -7,7 +7,7 @@ import (
 
 var (
 	err        error
-	filePath   = "www"
+	filePath   = "web"
 	serverPort = ":8080"
 )
 
