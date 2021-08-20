@@ -22,10 +22,12 @@ type analysis struct {
 	Abuse         []string `json:"abuse"`
 	Anonymizers   []string `json:"anonymizers"`
 	Attacks       []string `json:"attacks"`
+	Geolocation   []string `json:"geolocation"`
 	Malware       []string `json:"malware"`
 	Organizations []string `json:"organizations"`
 	Reputation    []string `json:"reputation"`
 	Spam          []string `json:"spam"`
+	Unroutable    []string `json:"unroutable"`
 }
 
 func init() {
@@ -93,22 +95,26 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		}
 		// The analysis json object.
 		type analysisResponse struct {
-			Abuse         bool `json:"abuse"`
-			Anonymizers   bool `json:"anonymizers"`
-			Attacks       bool `json:"attacks"`
-			Malware       bool `json:"malware"`
-			Organizations bool `json:"organizations"`
-			Reputation    bool `json:"reputation"`
-			Spam          bool `json:"spam"`
+			Abuse         []string `json:"abuse"`
+			Anonymizers   []string `json:"anonymizers"`
+			Attacks       []string `json:"attacks"`
+			Geolocation   []string `json:"geolocation"`
+			Malware       []string `json:"malware"`
+			Organizations []string `json:"organizations"`
+			Reputation    []string `json:"reputation"`
+			Spam          []string `json:"spam"`
+			Unroutable    []string `json:"unroutable"`
 		}
 		analysis := analysisResponse{
 			Abuse:         isInBlackList(data.IP.String(), "abuse"),
 			Anonymizers:   isInBlackList(data.IP.String(), "anonymizers"),
 			Attacks:       isInBlackList(data.IP.String(), "attacks"),
+			Geolocation:   isInBlackList(data.IP.String(), "geolocation"),
 			Malware:       isInBlackList(data.IP.String(), "malware"),
 			Organizations: isInBlackList(data.IP.String(), "organizations"),
 			Reputation:    isInBlackList(data.IP.String(), "reputation"),
 			Spam:          isInBlackList(data.IP.String(), "spam"),
+			Unroutable:    privateIPCheck(data.IP.String()),
 		}
 		// Wrap up the entire response in a new response.
 		type dataTypes struct {
@@ -320,4 +326,10 @@ func getIPType(ip net.IP) string {
 // Check if the ip is valid
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
+}
+
+// Check if a ip is private.
+func privateIPCheck(ip string) bool {
+	ipAddress := net.ParseIP(ip)
+	return ipAddress.IsPrivate()
 }
