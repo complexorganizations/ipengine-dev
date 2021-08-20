@@ -114,7 +114,7 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 			Organizations: isInBlackList(data.IP.String(), "organizations"),
 			Reputation:    isInBlackList(data.IP.String(), "reputation"),
 			Spam:          isInBlackList(data.IP.String(), "spam"),
-			Unroutable:    privateIPCheck(data.IP.String()),
+			Unroutable:    isInBlackList(data.IP.String(), "unroutable"),
 		}
 		// Wrap up the entire response in a new response.
 		type dataTypes struct {
@@ -326,10 +326,4 @@ func getIPType(ip net.IP) string {
 // Check if the ip is valid
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
-}
-
-// Check if a ip is private.
-func privateIPCheck(ip string) bool {
-	ipAddress := net.ParseIP(ip)
-	return ipAddress.IsPrivate()
 }
