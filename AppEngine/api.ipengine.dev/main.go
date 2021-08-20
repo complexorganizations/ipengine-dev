@@ -172,6 +172,9 @@ func getReverseIP(host string) []net.IP {
 	if err != nil {
 		log.Println(err)
 	}
+	if len(reverseIP) == 0 {
+		return nil
+	}
 	return reverseIP
 }
 
