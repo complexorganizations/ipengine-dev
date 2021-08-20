@@ -231,45 +231,73 @@ func getAuthorizationHeader(httpServer *http.Request) string {
 func isInBlackList(ip string, blacklistType string) bool {
 	switch blacklistType {
 	case "abuse":
-		for _, ips := range analysisList.Abuse {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Abuse) {
+			return true
+		} else {
+			for _, ips := range analysisList.Abuse {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "anonymizers":
-		for _, ips := range analysisList.Anonymizers {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Anonymizers) {
+			return true
+		} else {
+			for _, ips := range analysisList.Anonymizers {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "attacks":
-		for _, ips := range analysisList.Attacks {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Attacks) {
+			return true
+		} else {
+			for _, ips := range analysisList.Attacks {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "malware":
-		for _, ips := range analysisList.Malware {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Malware) {
+			return true
+		} else {
+			for _, ips := range analysisList.Malware {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "organizations":
-		for _, ips := range analysisList.Organizations {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Organizations) {
+			return true
+		} else {
+			for _, ips := range analysisList.Organizations {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "reputation":
-		for _, ips := range analysisList.Reputation {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Spam) {
+			return true
+		} else {
+			for _, ips := range analysisList.Reputation {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	case "spam":
-		for _, ips := range analysisList.Spam {
-			if ips == ip {
-				return true
+		if checkIfIPInRange(ip, analysisList.Spam) {
+			return true
+		} else {
+			for _, ips := range analysisList.Spam {
+				if ips == ip {
+					return true
+				}
 			}
 		}
 	}
@@ -326,14 +354,15 @@ func getIPType(ip net.IP) string {
 	}
 }
 
-// Check if the ip is valid
-func checkIP(ip string) bool {
-	return net.ParseIP(ip) != nil
-}
-
-// Check if certain cidr contains some certain ip.
-func cidrRangeContains(cidrRange string, checkIP string) bool {
-	_, ipnet, _ := net.ParseCIDR(cidrRange)
-	secondIP := net.ParseIP(checkIP)
-	return ipnet.Contains(secondIP)
+// Check if a certain range of cdir contains certain ip.
+func checkIfIPInRange(ip string, blacklist []string) bool {
+	for _, cidr := range blacklist {
+		if strings.Contains(cidr, "/") {
+			_, ipnet, _ := net.ParseCIDR(cidr)
+			if ipnet.Contains(net.ParseIP(ip)) {
+				return true
+			}
+		}
+	}
+	return false
 }
