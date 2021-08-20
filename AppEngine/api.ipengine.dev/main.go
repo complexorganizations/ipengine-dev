@@ -95,15 +95,15 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		}
 		// The analysis json object.
 		type analysisResponse struct {
-			Abuse         []string `json:"abuse"`
-			Anonymizers   []string `json:"anonymizers"`
-			Attacks       []string `json:"attacks"`
-			Geolocation   []string `json:"geolocation"`
-			Malware       []string `json:"malware"`
-			Organizations []string `json:"organizations"`
-			Reputation    []string `json:"reputation"`
-			Spam          []string `json:"spam"`
-			Unroutable    []string `json:"unroutable"`
+			Abuse         bool `json:"abuse"`
+			Anonymizers   bool `json:"anonymizers"`
+			Attacks       bool `json:"attacks"`
+			Geolocation   bool `json:"geolocation"`
+			Malware       bool `json:"malware"`
+			Organizations bool `json:"organizations"`
+			Reputation    bool `json:"reputation"`
+			Spam          bool `json:"spam"`
+			Unroutable    bool `json:"unroutable"`
 		}
 		analysis := analysisResponse{
 			Abuse:         isInBlackList(data.IP.String(), "abuse"),
