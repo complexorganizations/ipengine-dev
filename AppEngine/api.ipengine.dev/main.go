@@ -186,6 +186,9 @@ func getHostname(host string) []string {
 		hostnameRemovedSuffix := strings.TrimSuffix(host, ".")
 		hostname = append(hostname, hostnameRemovedSuffix)
 	}
+	if len(hostname) == 0 {
+		return nil
+	}
 	return hostname
 }
 
