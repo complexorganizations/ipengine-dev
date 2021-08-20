@@ -327,3 +327,10 @@ func getIPType(ip net.IP) string {
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
+
+// Check if certain cidr contains some certain ip.
+func cidrRangeContains(cidrRange string, checkIP string) bool {
+	_, ipnet, _ := net.ParseCIDR(cidrRange)
+	secondIP := net.ParseIP(checkIP)
+	return ipnet.Contains(secondIP)
+}
