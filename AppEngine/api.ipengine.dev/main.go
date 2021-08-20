@@ -234,71 +234,43 @@ func isInBlackList(ip string, blacklistType string) bool {
 		if checkIfIPInRange(ip, analysisList.Abuse) {
 			return true
 		} else {
-			for _, ips := range analysisList.Abuse {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Abuse)
 		}
 	case "anonymizers":
 		if checkIfIPInRange(ip, analysisList.Anonymizers) {
 			return true
 		} else {
-			for _, ips := range analysisList.Anonymizers {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Anonymizers)
 		}
 	case "attacks":
 		if checkIfIPInRange(ip, analysisList.Attacks) {
 			return true
 		} else {
-			for _, ips := range analysisList.Attacks {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Attacks)
 		}
 	case "malware":
 		if checkIfIPInRange(ip, analysisList.Malware) {
 			return true
 		} else {
-			for _, ips := range analysisList.Malware {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Malware)
 		}
 	case "organizations":
 		if checkIfIPInRange(ip, analysisList.Organizations) {
 			return true
 		} else {
-			for _, ips := range analysisList.Organizations {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Organizations)
 		}
 	case "reputation":
-		if checkIfIPInRange(ip, analysisList.Spam) {
+		if checkIfIPInRange(ip, analysisList.Reputation) {
 			return true
 		} else {
-			for _, ips := range analysisList.Reputation {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Reputation)
 		}
 	case "spam":
 		if checkIfIPInRange(ip, analysisList.Spam) {
 			return true
 		} else {
-			for _, ips := range analysisList.Spam {
-				if ips == ip {
-					return true
-				}
-			}
+			return checkIPInRange(ip, analysisList.Spam)
 		}
 	}
 	return false
@@ -362,6 +334,16 @@ func checkIfIPInRange(ip string, blacklist []string) bool {
 			if ipnet.Contains(net.ParseIP(ip)) {
 				return true
 			}
+		}
+	}
+	return false
+}
+
+// Check ip in a range
+func checkIPInRange(ip string, completeList []string) bool {
+	for _, ips := range completeList {
+		if ips == ip {
+			return true
 		}
 	}
 	return false
