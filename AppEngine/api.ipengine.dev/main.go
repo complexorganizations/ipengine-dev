@@ -80,16 +80,12 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		type deviceResponse struct {
 			UserAgent  string `json:"user_agent"`
 			Accept     string `json:"accept"`
-			Connection string `json:"connection"`
-			Host       string `json:"host"`
 			Cache      string `json:"cache"`
 			AcceptEnc  string `json:"accept_encoding"`
 		}
 		device := deviceResponse{
 			UserAgent:  getUserAgent(httpRequest),
 			Accept:     getUserAccept(httpRequest),
-			Connection: getConnectionType(httpRequest),
-			Host:       getUserHost(httpRequest),
 			Cache:      getCacheControl(httpRequest),
 			AcceptEnc:  getAcceptEncoding(httpRequest),
 		}
@@ -203,16 +199,6 @@ func getUserAgent(httpServer *http.Request) string {
 // Get the user's device info.
 func getUserAccept(httpServer *http.Request) string {
 	return httpServer.Header.Get("Accept")
-}
-
-// Get the device connection type.
-func getConnectionType(httpServer *http.Request) string {
-	return httpServer.Header.Get("Connection")
-}
-
-// Get the user connected host info.
-func getUserHost(httpServer *http.Request) string {
-	return httpServer.Header.Get("Host")
 }
 
 // Get the user connected Cache-Control header.
