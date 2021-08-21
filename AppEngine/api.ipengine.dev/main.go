@@ -324,9 +324,8 @@ func getIPType(ip net.IP) string {
 		return "IPv4"
 	} else if strings.Contains(ip.String(), ":") {
 		return "IPv6"
-	} else {
-		return ""
 	}
+	return "Unknown"
 }
 
 // Check if a certain range of cdir contains certain ip.
