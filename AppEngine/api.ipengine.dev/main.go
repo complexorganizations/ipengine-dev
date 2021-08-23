@@ -18,7 +18,7 @@ var (
 	analysisFile = "analysis.json"
 )
 
-// The blacklist of the user's IP address.
+// The examination of a user's IP address.
 type analysis struct {
 	Abuse         []string `json:"abuse"`
 	Anonymizers   []string `json:"anonymizers"`
@@ -32,12 +32,12 @@ type analysis struct {
 }
 
 func init() {
-	// Load the json files
+	// Open the file and read it.
 	content, err := ioutil.ReadFile(analysisFile)
 	if err != nil {
 		log.Println(err)
 	}
-	// Parse the json file
+	// Take the json file and parse it.
 	err = json.Unmarshal(content, &analysisList)
 	if err != nil {
 		log.Println(err)
@@ -281,13 +281,12 @@ func isInBlackList(ip net.IP, blacklistType string) bool {
 }
 
 func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
-	// Set the content type to application/json.
+	// Make sure you've got the right headers in place.
 	httpWriter.Header().Set("Content-Type", "application/json")
 	httpWriter.Header().Set("Content-Encoding", "gzip")
 	httpWriter.Header().Set("Access-Control-Max-Age", "7776000")
-	// Set the header to status not found.
 	httpWriter.WriteHeader(http.StatusNotFound)
-	// Set the body to an error message.
+	// Set the body of the message to an error message.
 	type errorMessage struct {
 		Code    int    `json:"code"`
 		Message string `json:"message"`
@@ -296,30 +295,30 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 		Code:    http.StatusNotFound,
 		Message: "Resource not found",
 	}
-	// Wrap the error in a error object.
+	// Make an error object out of the error.
 	type jsonError struct {
 		Error errorMessage `json:"error"`
 	}
-	// The content of the error object.
+	// The error object's contents.
 	jsonReturn := jsonError{
 		Error: errorMsg,
 	}
-	// Marshal the error message to JSON.
+	// JSON should be used to send the error message.
 	errorJsonMessage, err := json.Marshal(jsonReturn)
 	// Log the error if there is one.
 	if err != nil {
 		log.Println(err)
 	}
-	// Compress the data.
+	// Compress the information.
 	var byteBuffer bytes.Buffer
 	gzipWriter := gzip.NewWriter(&byteBuffer)
 	gzipWriter.Write(errorJsonMessage)
 	gzipWriter.Close()
-	// Write the compressed data to the httpWriter.
+	// Write the compressed data.
 	httpWriter.Write(byteBuffer.Bytes())
 }
 
-// Determine the type of the IP.
+// Determine the IP address's type.
 func getIPType(ip net.IP) string {
 	if strings.Contains(ip.String(), ".") {
 		return "IPv4"
@@ -329,7 +328,7 @@ func getIPType(ip net.IP) string {
 	return "Unknown"
 }
 
-// Check if a certain range of cdir contains certain ip.
+// Check if a specific cdir range contains a specific ip.
 func checkIfIPInRange(ip net.IP, blacklist []string) bool {
 	for _, cidr := range blacklist {
 		if strings.Contains(cidr, "/") {
@@ -342,7 +341,7 @@ func checkIfIPInRange(ip net.IP, blacklist []string) bool {
 	return false
 }
 
-// Check ip in a range
+// Look up an IP address in a array.
 func checkIPInRange(ip net.IP, completeList []string) bool {
 	for _, ips := range completeList {
 		if ips == ip.String() {
@@ -352,7 +351,7 @@ func checkIPInRange(ip net.IP, completeList []string) bool {
 	return false
 }
 
-// Turn the ip into a decimal value.
+// Convert the IP address to a decimal number.
 func ipToDecimal(ip net.IP) *big.Int {
 	ipToIntValue := big.NewInt(0)
 	if strings.Contains(ip.String(), ".") {
@@ -363,7 +362,7 @@ func ipToDecimal(ip net.IP) *big.Int {
 	return ipToIntValue
 }
 
-// Check if the ip is valid
+// Verify that the IP address is correct.
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
