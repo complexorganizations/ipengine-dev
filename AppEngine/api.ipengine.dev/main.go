@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"math/big"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -33,7 +33,7 @@ type analysis struct {
 
 func init() {
 	// Open the file and read it.
-	content, err := ioutil.ReadFile(analysisFile)
+	content, err := os.ReadFile(analysisFile)
 	if err != nil {
 		log.Println(err)
 	}
