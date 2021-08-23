@@ -105,15 +105,15 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 			Unroutable    bool `json:"unroutable"`
 		}
 		analysis := analysisResponse{
-			Abuse:         isInBlackList(data.IP.String(), "abuse"),
-			Anonymizers:   isInBlackList(data.IP.String(), "anonymizers"),
-			Attacks:       isInBlackList(data.IP.String(), "attacks"),
-			Geolocation:   isInBlackList(data.IP.String(), "geolocation"),
-			Malware:       isInBlackList(data.IP.String(), "malware"),
-			Organizations: isInBlackList(data.IP.String(), "organizations"),
-			Reputation:    isInBlackList(data.IP.String(), "reputation"),
-			Spam:          isInBlackList(data.IP.String(), "spam"),
-			Unroutable:    isInBlackList(data.IP.String(), "unroutable"),
+			Abuse:         isInBlackList(data.IP, "abuse"),
+			Anonymizers:   isInBlackList(data.IP, "anonymizers"),
+			Attacks:       isInBlackList(data.IP, "attacks"),
+			Geolocation:   isInBlackList(data.IP, "geolocation"),
+			Malware:       isInBlackList(data.IP, "malware"),
+			Organizations: isInBlackList(data.IP, "organizations"),
+			Reputation:    isInBlackList(data.IP, "reputation"),
+			Spam:          isInBlackList(data.IP, "spam"),
+			Unroutable:    isInBlackList(data.IP, "unroutable"),
 		}
 		// Wrap up the entire response in a new response.
 		type dataTypes struct {
@@ -220,7 +220,7 @@ func getAuthorizationHeader(httpServer *http.Request) string {
 }
 
 // Check if the IP address is in the blacklist.
-func isInBlackList(ip string, blacklistType string) bool {
+func isInBlackList(ip net.IP, blacklistType string) bool {
 	switch blacklistType {
 	case "abuse":
 		if checkIfIPInRange(ip, analysisList.Abuse) {
@@ -330,11 +330,11 @@ func getIPType(ip net.IP) string {
 }
 
 // Check if a certain range of cdir contains certain ip.
-func checkIfIPInRange(ip string, blacklist []string) bool {
+func checkIfIPInRange(ip net.IP, blacklist []string) bool {
 	for _, cidr := range blacklist {
 		if strings.Contains(cidr, "/") {
 			_, ipnet, _ := net.ParseCIDR(cidr)
-			if ipnet.Contains(net.ParseIP(ip)) {
+			if ipnet.Contains(ip) {
 				return true
 			}
 		}
@@ -343,9 +343,9 @@ func checkIfIPInRange(ip string, blacklist []string) bool {
 }
 
 // Check ip in a range
-func checkIPInRange(ip string, completeList []string) bool {
+func checkIPInRange(ip net.IP, completeList []string) bool {
 	for _, ips := range completeList {
-		if ips == ip {
+		if ips == ip.String() {
 			return true
 		}
 	}
