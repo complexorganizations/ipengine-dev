@@ -57,7 +57,7 @@ func main() {
 }
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
-	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" {
+	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" && checkIP(getUserIP(httpRequest).String()) {
 		// Set the proper headers.
 		httpWriter.Header().Set("Content-Type", "application/json")
 		httpWriter.Header().Set("Content-Encoding", "gzip")
@@ -361,4 +361,9 @@ func ipToDecimal(ip net.IP) *big.Int {
 		ipToIntValue.SetBytes(ip.To16())
 	}
 	return ipToIntValue
+}
+
+// Check if the ip is valid
+func checkIP(ip string) bool {
+	return net.ParseIP(ip) != nil
 }
