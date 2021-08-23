@@ -68,7 +68,7 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		type networkResponse struct {
 			IP        net.IP   `json:"ip"`
 			Type      string   `json:"type"`
-			Decimal   int64    `json:"decimal"`
+			Decimal   *big.Int `json:"decimal"`
 			ReverseIP []net.IP `json:"reverse"`
 			Hostname  []string `json:"hostname"`
 		}
@@ -353,12 +353,12 @@ func checkIPInRange(ip net.IP, completeList []string) bool {
 }
 
 // Turn the ip into a decimal value.
-func ipToDecimal(ip net.IP) int64 {
+func ipToDecimal(ip net.IP) *big.Int {
 	ipToIntValue := big.NewInt(0)
 	if strings.Contains(ip.String(), ".") {
 		ipToIntValue.SetBytes(ip.To4())
 	} else if strings.Contains(ip.String(), ":") {
 		ipToIntValue.SetBytes(ip.To16())
 	}
-	return ipToIntValue.Int64()
+	return ipToIntValue
 }
