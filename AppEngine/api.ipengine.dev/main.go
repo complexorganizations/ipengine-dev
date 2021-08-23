@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
+	"math/big"
 	"net"
 	"net/http"
 	"strings"
@@ -67,27 +68,29 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		type networkResponse struct {
 			IP        net.IP   `json:"ip"`
 			Type      string   `json:"type"`
+			Decimal   string   `json:"decimal"`
 			ReverseIP []net.IP `json:"reverse"`
 			Hostname  []string `json:"hostname"`
 		}
 		data := networkResponse{
 			IP:        getUserIP(httpRequest),
 			Type:      getIPType(getUserIP(httpRequest)),
+			Decimal:   ipToDecimal(getUserIP(httpRequest)),
 			ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
 			Hostname:  getHostname(getUserIP(httpRequest).String()),
 		}
 		// To add the device json object answer.
 		type deviceResponse struct {
-			UserAgent  string `json:"user_agent"`
-			Accept     string `json:"accept"`
-			Cache      string `json:"cache"`
-			AcceptEnc  string `json:"accept_encoding"`
+			UserAgent string `json:"user_agent"`
+			Accept    string `json:"accept"`
+			Cache     string `json:"cache"`
+			AcceptEnc string `json:"accept_encoding"`
 		}
 		device := deviceResponse{
-			UserAgent:  getUserAgent(httpRequest),
-			Accept:     getUserAccept(httpRequest),
-			Cache:      getCacheControl(httpRequest),
-			AcceptEnc:  getAcceptEncoding(httpRequest),
+			UserAgent: getUserAgent(httpRequest),
+			Accept:    getUserAccept(httpRequest),
+			Cache:     getCacheControl(httpRequest),
+			AcceptEnc: getAcceptEncoding(httpRequest),
 		}
 		// The analysis json object.
 		type analysisResponse struct {
@@ -335,4 +338,15 @@ func checkIPInRange(ip string, completeList []string) bool {
 		}
 	}
 	return false
+}
+
+// Turn the ip into a decimal value.
+func ipToDecimal(ip net.IP) string {
+	ipToIntValue := big.NewInt(0)
+	if strings.Contains(ip.String(), ".") {
+		ipToIntValue.SetBytes(ip.To4())
+	} else if strings.Contains(ip.String(), ":") {
+		ipToIntValue.SetBytes(ip.To16())
+	}
+	return ipToIntValue.String()
 }
