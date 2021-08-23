@@ -240,6 +240,12 @@ func isInBlackList(ip string, blacklistType string) bool {
 		} else {
 			return checkIPInRange(ip, analysisList.Attacks)
 		}
+	case "geolocation":
+		if checkIfIPInRange(ip, analysisList.Geolocation) {
+			return true
+		} else {
+			return checkIPInRange(ip, analysisList.Geolocation)
+		}
 	case "malware":
 		if checkIfIPInRange(ip, analysisList.Malware) {
 			return true
@@ -263,6 +269,12 @@ func isInBlackList(ip string, blacklistType string) bool {
 			return true
 		} else {
 			return checkIPInRange(ip, analysisList.Spam)
+		}
+	case "unroutable":
+		if checkIfIPInRange(ip, analysisList.Unroutable) {
+			return true
+		} else {
+			return checkIPInRange(ip, analysisList.Unroutable)
 		}
 	}
 	return false
