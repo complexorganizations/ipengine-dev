@@ -14,6 +14,7 @@ import (
 
 var (
 	err          error
+	requestedIP  net.IP
 	analysisList analysis
 	analysisFile = "analysis.json"
 )
@@ -57,7 +58,13 @@ func main() {
 }
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
-	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" && checkIP(getUserIP(httpRequest).String()) {
+	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
+	if len(getRequestedIP(httpRequest)) >= 1 {
+		requestedIP = net.ParseIP(getRequestedIP(httpRequest))
+	} else {
+		requestedIP = getUserIP(httpRequest)
+	}
+	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" && checkIP(requestedIP.String()) {
 		// Set the proper headers.
 		httpWriter.Header().Set("Content-Type", "application/json")
 		httpWriter.Header().Set("Content-Encoding", "gzip")
@@ -73,11 +80,11 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 			Hostname  []string `json:"hostname"`
 		}
 		data := networkResponse{
-			IP:        getUserIP(httpRequest),
-			Type:      getIPType(getUserIP(httpRequest)),
-			Decimal:   ipToDecimal(getUserIP(httpRequest)),
-			ReverseIP: getReverseIP(getUserIP(httpRequest).String()),
-			Hostname:  getHostname(getUserIP(httpRequest).String()),
+			IP:        requestedIP,
+			Type:      getIPType(requestedIP),
+			Decimal:   ipToDecimal(requestedIP),
+			ReverseIP: getReverseIP(requestedIP.String()),
+			Hostname:  getHostname(requestedIP.String()),
 		}
 		// To add the device json object answer.
 		type deviceResponse struct {
@@ -105,26 +112,38 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 			Unroutable    bool `json:"unroutable"`
 		}
 		analysis := analysisResponse{
-			Abuse:         isInBlackList(data.IP, "abuse"),
-			Anonymizers:   isInBlackList(data.IP, "anonymizers"),
-			Attacks:       isInBlackList(data.IP, "attacks"),
-			Geolocation:   isInBlackList(data.IP, "geolocation"),
-			Malware:       isInBlackList(data.IP, "malware"),
-			Organizations: isInBlackList(data.IP, "organizations"),
-			Reputation:    isInBlackList(data.IP, "reputation"),
-			Spam:          isInBlackList(data.IP, "spam"),
-			Unroutable:    isInBlackList(data.IP, "unroutable"),
+			Abuse:         isInBlackList(requestedIP, "abuse"),
+			Anonymizers:   isInBlackList(requestedIP, "anonymizers"),
+			Attacks:       isInBlackList(requestedIP, "attacks"),
+			Geolocation:   isInBlackList(requestedIP, "geolocation"),
+			Malware:       isInBlackList(requestedIP, "malware"),
+			Organizations: isInBlackList(requestedIP, "organizations"),
+			Reputation:    isInBlackList(requestedIP, "reputation"),
+			Spam:          isInBlackList(requestedIP, "spam"),
+			Unroutable:    isInBlackList(requestedIP, "unroutable"),
 		}
-		// Wrap up the entire response in a new response.
-		type dataTypes struct {
-			Network  networkResponse  `json:"network"`
-			Device   deviceResponse   `json:"device"`
-			Analysis analysisResponse `json:"analysis"`
-		}
-		responseData := dataTypes{
-			Network:  data,
-			Device:   device,
-			Analysis: analysis,
+		var responseData interface{}
+		if len(getRequestedIP(httpRequest)) > 1 {
+			// Wrap up the entire response in a new response.
+			type dataTypes struct {
+				Network  networkResponse  `json:"network"`
+				Analysis analysisResponse `json:"analysis"`
+			}
+			responseData = dataTypes{
+				Network:  data,
+				Analysis: analysis,
+			}
+		} else {
+			type dataTypes struct {
+				Network  networkResponse  `json:"network"`
+				Device   deviceResponse   `json:"device"`
+				Analysis analysisResponse `json:"analysis"`
+			}
+			responseData = dataTypes{
+				Network:  data,
+				Device:   device,
+				Analysis: analysis,
+			}
 		}
 		// Convert the data to json and return it.
 		payloadBytes, err := json.Marshal(responseData)
@@ -217,6 +236,11 @@ func getAcceptEncoding(httpServer *http.Request) string {
 // Get the api key if the user has provided any.
 func getAuthorizationHeader(httpServer *http.Request) string {
 	return httpServer.Header.Get("Authorization")
+}
+
+// Get the requested IP address.
+func getRequestedIP(httpServer *http.Request) string {
+	return httpServer.Header.Get("Requested-Ip")
 }
 
 // Check if the IP address is in the blacklist.
