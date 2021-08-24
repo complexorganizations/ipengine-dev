@@ -197,8 +197,7 @@ func getHostname(host string) []string {
 	}
 	var hostname []string
 	for _, host := range tempHostNames {
-		hostnameRemovedSuffix := strings.TrimSuffix(host, ".")
-		hostname = append(hostname, hostnameRemovedSuffix)
+		hostname = append(hostname, strings.TrimSuffix(host, "."))
 	}
 	if len(hostname) == 0 {
 		return nil
