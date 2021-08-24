@@ -61,7 +61,7 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
 	requestedIPValue := len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
 	if requestedIPValue {
-		requestedIP = net.ParseIP(getRequestedIP(httpRequest))
+		requestedIP = getRequestedIP(httpRequest)
 	} else {
 		requestedIP = getUserIP(httpRequest)
 	}
@@ -165,23 +165,15 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 
 // Get the IP address of the server's connected user.
 func getUserIP(httpServer *http.Request) net.IP {
-	var userIP string
 	if len(httpServer.Header.Get("CF-Connecting-IP")) > 1 {
-		userIP = httpServer.Header.Get("CF-Connecting-IP")
-		return net.ParseIP(userIP)
+		return net.ParseIP(httpServer.Header.Get("CF-Connecting-IP"))
 	} else if len(httpServer.Header.Get("X-Forwarded-For")) > 1 {
-		userIP = httpServer.Header.Get("X-Forwarded-For")
-		return net.ParseIP(userIP)
+		return net.ParseIP(httpServer.Header.Get("X-Forwarded-For"))
 	} else if len(httpServer.Header.Get("X-Real-IP")) > 1 {
-		userIP = httpServer.Header.Get("X-Real-IP")
-		return net.ParseIP(userIP)
+		return net.ParseIP(httpServer.Header.Get("X-Real-IP"))
 	} else {
-		userIP = httpServer.RemoteAddr
-		if strings.Contains(userIP, ":") {
-			return net.ParseIP(strings.Split(userIP, ":")[0])
-		} else {
-			return net.ParseIP(userIP)
-		}
+		returnIP, _, _ := net.SplitHostPort(httpServer.RemoteAddr)
+		return net.ParseIP(returnIP)
 	}
 }
 
@@ -240,8 +232,8 @@ func getAuthorizationHeader(httpServer *http.Request) string {
 }
 
 // Get the requested IP address.
-func getRequestedIP(httpServer *http.Request) string {
-	return httpServer.Header.Get("Requested-Ip")
+func getRequestedIP(httpServer *http.Request) net.IP {
+	return net.ParseIP(httpServer.Header.Get("Requested-Ip"))
 }
 
 // Check if the IP address is in the blacklist.
