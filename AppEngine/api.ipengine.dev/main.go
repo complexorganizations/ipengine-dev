@@ -59,7 +59,7 @@ func main() {
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
-	requestedIPValue := len(getRequestedIP(httpRequest)) >= 1
+	requestedIPValue := len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
 	if requestedIPValue {
 		requestedIP = net.ParseIP(getRequestedIP(httpRequest))
 	} else {
