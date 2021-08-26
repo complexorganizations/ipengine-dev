@@ -340,15 +340,6 @@ func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
 
-// Check if a certain file exists in the local system
-func fileExists(filename string) bool {
-	info, err := os.Stat(filename)
-	if err != nil {
-		return false
-	}
-	return !info.IsDir()
-}
-
 // Check if a certain folder exists in your local system
 func folderExists(foldername string) bool {
 	info, err := os.Stat(foldername)
@@ -449,16 +440,6 @@ func readAndAppend(fileLocation string, arrayName []string) []string {
 	return arrayName
 }
 
-// Remove any files.
-func removeAFile(filePath string) {
-	if fileExists(filePath) {
-		err = os.Remove(filePath)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-}
-
 func removeAFolder(filePath string) {
 	if folderExists(filePath) {
 		err = os.RemoveAll(filePath)
@@ -479,6 +460,5 @@ func makeAFolder(folderPath string) {
 
 func updateList(writer http.ResponseWriter, request *http.Request) {
 	updateLocalLists()
-	writer.WriteHeader(http.StatusOK)
-	io.WriteString(writer, abuseIPRange)
+	writer.WriteHeader(http.StatusNotFound)
 }
