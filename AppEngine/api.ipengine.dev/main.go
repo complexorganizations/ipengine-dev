@@ -5,18 +5,18 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"io"
 	"log"
 	"math/big"
 	"net"
 	"net/http"
-	"os"
 	"strings"
 )
 
 var (
 	err         error
 	requestedIP net.IP
+	// Instead of using the users IP address, we can use the requested IP address.
+	requestedIPValue bool
 	// The examination of a user's IP address.
 	abuseIPRange         []string
 	anonymizersIPRange   []string
@@ -48,7 +48,7 @@ func main() {
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
-	requestedIPValue := len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
+	requestedIPValue = len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
 	if requestedIPValue {
 		requestedIP = getRequestedIP(httpRequest)
 	} else {
@@ -340,121 +340,30 @@ func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
 
-// Check if a certain folder exists in your local system
-func folderExists(foldername string) bool {
-	info, err := os.Stat(foldername)
-	if err != nil {
-		return false
-	}
-	return info.IsDir()
-}
-
 func updateLocalLists() {
-	// Remove all the old files.
-	removeAFolder("assets/")
-	// Make the folder
-	makeAFolder("assets/")
-	// The path to the files.
-	abuseFile := "assets/abuse"
-	anonymizersFile := "assets/anonymizers"
-	attacksFile := "assets/attacks"
-	malwareFile := "assets/malware"
-	organizationsFile := "assets/organizations"
-	reputationFile := "assets/reputation"
-	spamFile := "assets/spam"
-	unroutableFile := "assets/unroutable"
-	// Download the files if they don't exist.
-	urlMap := map[string]string{
-		abuseFile:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
-		anonymizersFile:   "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
-		attacksFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
-		malwareFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
-		organizationsFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
-		reputationFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
-		spamFile:          "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
-		unroutableFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	// Remove all the current value from the local memory.
+	abuseIPRange, anonymizersIPRange, attacksIPRange, malwareIPRange, organizationsIPRange, reputationIPRange, spamIPRange, unroutableIPRange = nil, nil, nil, nil, nil, nil, nil, nil
+	urlWithPath := map[string][]string{
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":         abuseIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":   anonymizersIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":       attacksIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":       malwareIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations": organizationsIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":    reputationIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":          spamIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":    unroutableIPRange,
 	}
-	for saveLocation, content := range urlMap {
-		response, err := http.Get(content)
+	for urlPath, appendThisSlice := range urlWithPath {
+		response, err := http.Get(urlPath)
 		if err != nil {
 			log.Println(err)
 		}
-		// the body of the resonse
-		body, err := io.ReadAll(response.Body)
-		if err != nil {
-			log.Println(err)
+		scanner := bufio.NewScanner(response.Body)
+		scanner.Split(bufio.ScanLines)
+		for scanner.Scan() {
+			appendThisSlice = append(appendThisSlice, scanner.Text())
 		}
-		writeToFile(saveLocation, string(body))
 		response.Body.Close()
-	}
-	// Append the content of the files to the respective lists.
-	abuseIPRange = readAndAppend(abuseFile, abuseIPRange)
-	anonymizersIPRange = readAndAppend(anonymizersFile, anonymizersIPRange)
-	attacksIPRange = readAndAppend(attacksFile, attacksIPRange)
-	malwareIPRange = readAndAppend(malwareFile, malwareIPRange)
-	organizationsIPRange = readAndAppend(organizationsFile, organizationsIPRange)
-	reputationIPRange = readAndAppend(reputationFile, reputationIPRange)
-	spamIPRange = readAndAppend(spamFile, spamIPRange)
-	unroutableIPRange = readAndAppend(unroutableFile, unroutableIPRange)
-}
-
-// Write certain content to a file.
-func writeToFile(pathInSystem string, content string) {
-	filePath, err := os.OpenFile(pathInSystem, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Println(err)
-	}
-	_, err = filePath.WriteString(content + "\n")
-	if err != nil {
-		log.Println(err)
-		err = filePath.Close()
-		if err != nil {
-			log.Println(err)
-		}
-	}
-	err = filePath.Close()
-	if err != nil {
-		log.Println(err)
-	}
-}
-
-// Read the file and append the content to the end of the file.
-func readAndAppend(fileLocation string, arrayName []string) []string {
-	file, err := os.Open(fileLocation)
-	if err != nil {
-		log.Println(err)
-	}
-	// scan the file, and read the file
-	scanner := bufio.NewScanner(file)
-	// split each line
-	scanner.Split(bufio.ScanLines)
-	// append each line to array
-	for scanner.Scan() {
-		arrayName = append(arrayName, scanner.Text())
-	}
-	// close the file
-	err = file.Close()
-	if err != nil {
-		log.Println(err)
-	}
-	return arrayName
-}
-
-func removeAFolder(filePath string) {
-	if folderExists(filePath) {
-		err = os.RemoveAll(filePath)
-		if err != nil {
-			log.Println(err)
-		}
-	}
-}
-
-func makeAFolder(folderPath string) {
-	if !folderExists(folderPath) {
-		err = os.Mkdir(folderPath, 0755)
-		if err != nil {
-			log.Println(err)
-		}
 	}
 }
 
