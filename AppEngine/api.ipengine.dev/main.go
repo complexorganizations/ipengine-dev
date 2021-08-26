@@ -10,7 +10,6 @@ import (
 	"net"
 	"net/http"
 	"strings"
-	"time"
 )
 
 var (
@@ -31,14 +30,65 @@ var (
 
 func init() {
 	// Get all the updates.
-	updateLocalLists()
+	urlPath := []string{
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	}
+	for _, url := range urlPath {
+		response, err := http.Get(url)
+		if err != nil {
+			log.Println(err)
+		}
+		scanner := bufio.NewScanner(response.Body)
+		scanner.Split(bufio.ScanLines)
+		switch url {
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":
+			for scanner.Scan() {
+				abuseIPRange = append(abuseIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":
+			for scanner.Scan() {
+				anonymizersIPRange = append(anonymizersIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":
+			for scanner.Scan() {
+				attacksIPRange = append(attacksIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":
+			for scanner.Scan() {
+				malwareIPRange = append(malwareIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations":
+			for scanner.Scan() {
+				organizationsIPRange = append(organizationsIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":
+			for scanner.Scan() {
+				reputationIPRange = append(reputationIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":
+			for scanner.Scan() {
+				spamIPRange = append(spamIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":
+			for scanner.Scan() {
+				unroutableIPRange = append(unroutableIPRange, scanner.Text())
+			}
+		}
+		response.Body.Close()
+	}
 }
 
 func main() {
 	// The traffic should be directed to the appropriate function.
 	http.HandleFunc("/", jsonResponse)
 	http.HandleFunc("/error", handleAllErrors)
-	http.HandleFunc("/update", updateList)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
 	// If something goes wrong, throw an error.
@@ -339,43 +389,4 @@ func ipToDecimal(ip net.IP) *big.Int {
 // Verify that the IP address is correct.
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
-}
-
-// Update the database with the new information.
-func updateLocalLists() {
-	// Remove all the current value from the local memory.
-	abuseIPRange, anonymizersIPRange, attacksIPRange, malwareIPRange, organizationsIPRange, reputationIPRange, spamIPRange, unroutableIPRange = nil, nil, nil, nil, nil, nil, nil, nil
-	urlWithPath := map[string][]string{
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":         abuseIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":   anonymizersIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":       attacksIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":       malwareIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations": organizationsIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":    reputationIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":          spamIPRange,
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":    unroutableIPRange,
-	}
-	for urlPath, appendThisSlice := range urlWithPath {
-		response, err := http.Get(urlPath)
-		if err != nil {
-			log.Println(err)
-		}
-		scanner := bufio.NewScanner(response.Body)
-		scanner.Split(bufio.ScanLines)
-		for scanner.Scan() {
-			appendThisSlice = append(appendThisSlice, scanner.Text())
-		}
-		response.Body.Close()
-	}
-}
-
-// Manually update the lists from certain sources.
-func updateList(writer http.ResponseWriter, request *http.Request) {
-	if requestedIP.String() == "69.201.129.133" && authentication {
-		updateLocalLists()
-		writer.WriteHeader(http.StatusOK)
-		writer.Write([]byte(time.Now().String()))
-	} else {
-		http.Redirect(writer, request, "/error", http.StatusMovedPermanently)
-	}
 }
