@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
@@ -29,6 +30,7 @@ var (
 
 func init() {
 	// Get all the updates.
+	downloadRequiredFiles()
 }
 
 func main() {
@@ -356,16 +358,25 @@ func downloadRequiredFiles() {
 	reputationFile := "assets/reputation"
 	spamFile := "assets/spam"
 	unroutableFile := "assets/unroutable"
+	// Remove all the old files.
+	removeAFile(abuseFile)
+	removeAFile(anonymizersFile)
+	removeAFile(attacksFile)
+	removeAFile(malwareFile)
+	removeAFile(organizationsFile)
+	removeAFile(reputationFile)
+	removeAFile(spamFile)
+	removeAFile(unroutableFile)
 	// Download the files if they don't exist.
 	urlMap := map[string]string{
-		abuseFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
-		anonymizersFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
-		attacksFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
-		malwareFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
+		abuseFile:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
+		anonymizersFile:   "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
+		attacksFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
+		malwareFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
 		organizationsFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
-		reputationFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
-		spamFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
-		unroutableFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+		reputationFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
+		spamFile:          "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
+		unroutableFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
 	}
 	for saveLocation, content := range urlMap {
 		response, err := http.Get(content)
@@ -380,6 +391,15 @@ func downloadRequiredFiles() {
 		writeToFile(saveLocation, string(body))
 		response.Body.Close()
 	}
+	// Append the content of the files to the respective lists.
+	abuseIPRange = readAndAppend(abuseFile, abuseIPRange)
+	anonymizersIPRange = readAndAppend(anonymizersFile, anonymizersIPRange)
+	attacksIPRange = readAndAppend(attacksFile, attacksIPRange)
+	malwareIPRange = readAndAppend(malwareFile, malwareIPRange)
+	organizationsIPRange = readAndAppend(organizationsFile, organizationsIPRange)
+	reputationIPRange = readAndAppend(reputationFile, reputationIPRange)
+	spamIPRange = readAndAppend(spamFile, spamIPRange)
+	unroutableIPRange = readAndAppend(unroutableFile, unroutableIPRange)
 }
 
 // Write certain content to a file.
@@ -399,5 +419,37 @@ func writeToFile(pathInSystem string, content string) {
 	err = filePath.Close()
 	if err != nil {
 		log.Println(err)
+	}
+}
+
+// Read the file and append the content to the end of the file.
+func readAndAppend(fileLocation string, arrayName []string) []string {
+	file, err := os.Open(fileLocation)
+	if err != nil {
+		log.Println(err)
+	}
+	// scan the file, and read the file
+	scanner := bufio.NewScanner(file)
+	// split each line
+	scanner.Split(bufio.ScanLines)
+	// append each line to array
+	for scanner.Scan() {
+		arrayName = append(arrayName, scanner.Text())
+	}
+	// close the file
+	err = file.Close()
+	if err != nil {
+		log.Println(err)
+	}
+	return arrayName
+}
+
+// Remove any files.
+func removeAFile(filePath string) {
+	if fileExists(filePath) {
+		err = os.Remove(filePath)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
