@@ -341,6 +341,7 @@ func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
 
+// Update the database with the new information.
 func updateLocalLists() {
 	// Remove all the current value from the local memory.
 	abuseIPRange, anonymizersIPRange, attacksIPRange, malwareIPRange, organizationsIPRange, reputationIPRange, spamIPRange, unroutableIPRange = nil, nil, nil, nil, nil, nil, nil, nil
@@ -368,8 +369,8 @@ func updateLocalLists() {
 	}
 }
 
+// Manually update the lists from certain sources.
 func updateList(writer http.ResponseWriter, request *http.Request) {
-	// Only allow the function from a certian places.
 	if requestedIP.String() == "69.201.129.133" && authentication {
 		updateLocalLists()
 		writer.WriteHeader(http.StatusOK)
