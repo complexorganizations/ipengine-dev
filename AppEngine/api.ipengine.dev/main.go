@@ -10,6 +10,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"io"
 )
 
 var (
@@ -371,6 +372,8 @@ func updateList(writer http.ResponseWriter, request *http.Request) {
 	// Only allow the function from a certian places.
 	if string(requestedIP) == "69.201.129.133" {
 		updateLocalLists()
+		writer.WriteHeader(http.StatusOK)
+		io.WriteString(writer, "Updated the local lists.")
 	} else {
 		http.Redirect(writer, request, "/error", http.StatusMovedPermanently)
 	}
