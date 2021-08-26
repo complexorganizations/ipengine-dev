@@ -460,5 +460,5 @@ func makeAFolder(folderPath string) {
 
 func updateList(writer http.ResponseWriter, request *http.Request) {
 	updateLocalLists()
-	writer.WriteHeader(http.StatusNotFound)
+	http.Redirect(httpWriter, httpRequest, "/error", http.StatusMovedPermanently)
 }
