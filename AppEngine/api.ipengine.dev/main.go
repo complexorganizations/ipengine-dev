@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
+	"io"
 	"log"
 	"math/big"
 	"net"
@@ -13,42 +15,29 @@ import (
 )
 
 var (
-	err          error
-	requestedIP  net.IP
-	analysisList analysis
-	analysisFile = "analysis.json"
+	err         error
+	requestedIP net.IP
+	// The examination of a user's IP address.
+	abuseIPRange         []string
+	anonymizersIPRange   []string
+	attacksIPRange       []string
+	malwareIPRange       []string
+	organizationsIPRange []string
+	reputationIPRange    []string
+	spamIPRange          []string
+	unroutableIPRange    []string
 )
 
-// The examination of a user's IP address.
-type analysis struct {
-	Abuse         []string `json:"abuse"`
-	Anonymizers   []string `json:"anonymizers"`
-	Attacks       []string `json:"attacks"`
-	Geolocation   []string `json:"geolocation"`
-	Malware       []string `json:"malware"`
-	Organizations []string `json:"organizations"`
-	Reputation    []string `json:"reputation"`
-	Spam          []string `json:"spam"`
-	Unroutable    []string `json:"unroutable"`
-}
-
 func init() {
-	// Open the file and read it.
-	content, err := os.ReadFile(analysisFile)
-	if err != nil {
-		log.Println(err)
-	}
-	// Take the json file and parse it.
-	err = json.Unmarshal(content, &analysisList)
-	if err != nil {
-		log.Println(err)
-	}
+	// Get all the updates.
+	updateLocalLists()
 }
 
 func main() {
 	// The traffic should be directed to the appropriate function.
 	http.HandleFunc("/", jsonResponse)
 	http.HandleFunc("/error", handleAllErrors)
+	http.HandleFunc("/c98XPGxAmzf97DAHDVrFyGGeCDTosTnjz8PULSyTfl45RE85b5A31C3nhkHjEg7Q38GfbPAJYjQwgd5xequ6RcAJDFPt9JVr1yjCnMuulyxnwqGA8cCaTSG9xxXiiKZBtPNa7oCOnPz7YlGsL5V5Pn6zRvpzWgCsFJnyqYBVWytwlblZYeD98vuIZYbWwj05GLPayCNtP9Nc6OhwchhG9nO2UIwfvNjIlALWFbIQbABlrzhujQV3RSOXCs3f6GkR", updateList)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
 	// If something goes wrong, throw an error.
@@ -239,58 +228,36 @@ func getRequestedIP(httpServer *http.Request) net.IP {
 func isInBlackList(ip net.IP, blacklistType string) bool {
 	switch blacklistType {
 	case "abuse":
-		if checkIfIPInRange(ip, analysisList.Abuse) {
+		if checkIfIPInRange(ip, abuseIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Abuse)
 		}
 	case "anonymizers":
-		if checkIfIPInRange(ip, analysisList.Anonymizers) {
+		if checkIfIPInRange(ip, anonymizersIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Anonymizers)
 		}
 	case "attacks":
-		if checkIfIPInRange(ip, analysisList.Attacks) {
+		if checkIfIPInRange(ip, attacksIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Attacks)
-		}
-	case "geolocation":
-		if checkIfIPInRange(ip, analysisList.Geolocation) {
-			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Geolocation)
 		}
 	case "malware":
-		if checkIfIPInRange(ip, analysisList.Malware) {
+		if checkIfIPInRange(ip, malwareIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Malware)
 		}
 	case "organizations":
-		if checkIfIPInRange(ip, analysisList.Organizations) {
+		if checkIfIPInRange(ip, organizationsIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Organizations)
 		}
 	case "reputation":
-		if checkIfIPInRange(ip, analysisList.Reputation) {
+		if checkIfIPInRange(ip, reputationIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Reputation)
 		}
 	case "spam":
-		if checkIfIPInRange(ip, analysisList.Spam) {
+		if checkIfIPInRange(ip, spamIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Spam)
 		}
 	case "unroutable":
-		if checkIfIPInRange(ip, analysisList.Unroutable) {
+		if checkIfIPInRange(ip, unroutableIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Unroutable)
 		}
 	}
 	return false
@@ -357,16 +324,6 @@ func checkIfIPInRange(ip net.IP, blacklist []string) bool {
 	return false
 }
 
-// Look up an IP address in a array.
-func checkIPInRange(ip net.IP, completeList []string) bool {
-	for _, ips := range completeList {
-		if ips == ip.String() {
-			return true
-		}
-	}
-	return false
-}
-
 // Convert the IP address to a decimal number.
 func ipToDecimal(ip net.IP) *big.Int {
 	ipToIntValue := big.NewInt(0)
@@ -381,4 +338,127 @@ func ipToDecimal(ip net.IP) *big.Int {
 // Verify that the IP address is correct.
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
+}
+
+// Check if a certain folder exists in your local system
+func folderExists(foldername string) bool {
+	info, err := os.Stat(foldername)
+	if err != nil {
+		return false
+	}
+	return info.IsDir()
+}
+
+func updateLocalLists() {
+	// Remove all the old files.
+	removeAFolder("assets/")
+	// Make the folder
+	makeAFolder("assets/")
+	// The path to the files.
+	abuseFile := "assets/abuse"
+	anonymizersFile := "assets/anonymizers"
+	attacksFile := "assets/attacks"
+	malwareFile := "assets/malware"
+	organizationsFile := "assets/organizations"
+	reputationFile := "assets/reputation"
+	spamFile := "assets/spam"
+	unroutableFile := "assets/unroutable"
+	// Download the files if they don't exist.
+	urlMap := map[string]string{
+		abuseFile:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
+		anonymizersFile:   "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
+		attacksFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
+		malwareFile:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
+		organizationsFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
+		reputationFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
+		spamFile:          "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
+		unroutableFile:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	}
+	for saveLocation, content := range urlMap {
+		response, err := http.Get(content)
+		if err != nil {
+			log.Println(err)
+		}
+		// the body of the resonse
+		body, err := io.ReadAll(response.Body)
+		if err != nil {
+			log.Println(err)
+		}
+		writeToFile(saveLocation, string(body))
+		response.Body.Close()
+	}
+	// Append the content of the files to the respective lists.
+	abuseIPRange = readAndAppend(abuseFile, abuseIPRange)
+	anonymizersIPRange = readAndAppend(anonymizersFile, anonymizersIPRange)
+	attacksIPRange = readAndAppend(attacksFile, attacksIPRange)
+	malwareIPRange = readAndAppend(malwareFile, malwareIPRange)
+	organizationsIPRange = readAndAppend(organizationsFile, organizationsIPRange)
+	reputationIPRange = readAndAppend(reputationFile, reputationIPRange)
+	spamIPRange = readAndAppend(spamFile, spamIPRange)
+	unroutableIPRange = readAndAppend(unroutableFile, unroutableIPRange)
+}
+
+// Write certain content to a file.
+func writeToFile(pathInSystem string, content string) {
+	filePath, err := os.OpenFile(pathInSystem, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	_, err = filePath.WriteString(content + "\n")
+	if err != nil {
+		log.Println(err)
+		err = filePath.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}
+	err = filePath.Close()
+	if err != nil {
+		log.Println(err)
+	}
+}
+
+// Read the file and append the content to the end of the file.
+func readAndAppend(fileLocation string, arrayName []string) []string {
+	file, err := os.Open(fileLocation)
+	if err != nil {
+		log.Println(err)
+	}
+	// scan the file, and read the file
+	scanner := bufio.NewScanner(file)
+	// split each line
+	scanner.Split(bufio.ScanLines)
+	// append each line to array
+	for scanner.Scan() {
+		arrayName = append(arrayName, scanner.Text())
+	}
+	// close the file
+	err = file.Close()
+	if err != nil {
+		log.Println(err)
+	}
+	return arrayName
+}
+
+func removeAFolder(filePath string) {
+	if folderExists(filePath) {
+		err = os.RemoveAll(filePath)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func makeAFolder(folderPath string) {
+	if !folderExists(folderPath) {
+		err = os.Mkdir(folderPath, 0755)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func updateList(writer http.ResponseWriter, request *http.Request) {
+	updateLocalLists()
+	writer.WriteHeader(http.StatusNotFound)
 }
