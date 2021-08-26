@@ -10,14 +10,14 @@ import (
 	"net"
 	"net/http"
 	"strings"
-	"io"
+	"time"
 )
 
 var (
 	err         error
 	requestedIP net.IP
 	// Instead of using the users IP address, we can use the requested IP address.
-	requestedIPValue bool
+	authentication bool
 	// The examination of a user's IP address.
 	abuseIPRange         []string
 	anonymizersIPRange   []string
@@ -49,8 +49,8 @@ func main() {
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
-	requestedIPValue = len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
-	if requestedIPValue {
+	authentication = len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
+	if authentication {
 		requestedIP = getRequestedIP(httpRequest)
 	} else {
 		requestedIP = getUserIP(httpRequest)
@@ -114,7 +114,7 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 			Unroutable:    isInBlackList(requestedIP, "unroutable"),
 		}
 		var responseData interface{}
-		if requestedIPValue {
+		if authentication {
 			// Wrap up the entire response in a new response.
 			type dataTypes struct {
 				Network  networkResponse  `json:"network"`
@@ -370,10 +370,10 @@ func updateLocalLists() {
 
 func updateList(writer http.ResponseWriter, request *http.Request) {
 	// Only allow the function from a certian places.
-	if string(requestedIP) == "69.201.129.133" {
+	if requestedIP.String() == "69.201.129.133" && authentication {
 		updateLocalLists()
 		writer.WriteHeader(http.StatusOK)
-		io.WriteString(writer, "Updated the local lists.")
+		writer.Write([]byte(time.Now().String()))
 	} else {
 		http.Redirect(writer, request, "/error", http.StatusMovedPermanently)
 	}
