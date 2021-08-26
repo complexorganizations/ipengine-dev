@@ -8,41 +8,26 @@ import (
 	"math/big"
 	"net"
 	"net/http"
-	"os"
+	//"os"
 	"strings"
 )
 
 var (
-	err          error
-	requestedIP  net.IP
-	analysisList analysis
-	analysisFile = "analysis.json"
+	err         error
+	requestedIP net.IP
+	// The examination of a user's IP address.
+	abuseIPRange         []string
+	anonymizersIPRange   []string
+	attacksIPRange       []string
+	malwareIPRange       []string
+	organizationsIPRange []string
+	reputationIPRange    []string
+	spamIPRange          []string
+	unroutableIPRange    []string
 )
 
-// The examination of a user's IP address.
-type analysis struct {
-	Abuse         []string `json:"abuse"`
-	Anonymizers   []string `json:"anonymizers"`
-	Attacks       []string `json:"attacks"`
-	Geolocation   []string `json:"geolocation"`
-	Malware       []string `json:"malware"`
-	Organizations []string `json:"organizations"`
-	Reputation    []string `json:"reputation"`
-	Spam          []string `json:"spam"`
-	Unroutable    []string `json:"unroutable"`
-}
-
 func init() {
-	// Open the file and read it.
-	content, err := os.ReadFile(analysisFile)
-	if err != nil {
-		log.Println(err)
-	}
-	// Take the json file and parse it.
-	err = json.Unmarshal(content, &analysisList)
-	if err != nil {
-		log.Println(err)
-	}
+	//
 }
 
 func main() {
@@ -239,58 +224,52 @@ func getRequestedIP(httpServer *http.Request) net.IP {
 func isInBlackList(ip net.IP, blacklistType string) bool {
 	switch blacklistType {
 	case "abuse":
-		if checkIfIPInRange(ip, analysisList.Abuse) {
+		if checkIfIPInRange(ip, abuseIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Abuse)
+			return checkIPInRange(ip, abuseIPRange)
 		}
 	case "anonymizers":
-		if checkIfIPInRange(ip, analysisList.Anonymizers) {
+		if checkIfIPInRange(ip, anonymizersIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Anonymizers)
+			return checkIPInRange(ip, anonymizersIPRange)
 		}
 	case "attacks":
-		if checkIfIPInRange(ip, analysisList.Attacks) {
+		if checkIfIPInRange(ip, attacksIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Attacks)
-		}
-	case "geolocation":
-		if checkIfIPInRange(ip, analysisList.Geolocation) {
-			return true
-		} else {
-			return checkIPInRange(ip, analysisList.Geolocation)
+			return checkIPInRange(ip, attacksIPRange)
 		}
 	case "malware":
-		if checkIfIPInRange(ip, analysisList.Malware) {
+		if checkIfIPInRange(ip, malwareIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Malware)
+			return checkIPInRange(ip, malwareIPRange)
 		}
 	case "organizations":
-		if checkIfIPInRange(ip, analysisList.Organizations) {
+		if checkIfIPInRange(ip, organizationsIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Organizations)
+			return checkIPInRange(ip, organizationsIPRange)
 		}
 	case "reputation":
-		if checkIfIPInRange(ip, analysisList.Reputation) {
+		if checkIfIPInRange(ip, reputationIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Reputation)
+			return checkIPInRange(ip, reputationIPRange)
 		}
 	case "spam":
-		if checkIfIPInRange(ip, analysisList.Spam) {
+		if checkIfIPInRange(ip, spamIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Spam)
+			return checkIPInRange(ip, spamIPRange)
 		}
 	case "unroutable":
-		if checkIfIPInRange(ip, analysisList.Unroutable) {
+		if checkIfIPInRange(ip, unroutableIPRange) {
 			return true
 		} else {
-			return checkIPInRange(ip, analysisList.Unroutable)
+			return checkIPInRange(ip, unroutableIPRange)
 		}
 	}
 	return false
