@@ -361,6 +361,8 @@ func folderExists(foldername string) bool {
 func updateLocalLists() {
 	// Remove all the old files.
 	removeAFolder("assets/")
+	// Make the folder
+	makeAFolder("assets/")
 	// The path to the files.
 	abuseFile := "assets/abuse"
 	anonymizersFile := "assets/anonymizers"
@@ -460,6 +462,15 @@ func removeAFile(filePath string) {
 func removeAFolder(filePath string) {
 	if folderExists(filePath) {
 		err = os.RemoveAll(filePath)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func makeAFolder(folderPath string) {
+	if !folderExists(folderPath) {
+		err = os.Mkdir(folderPath, 0755)
 		if err != nil {
 			log.Println(err)
 		}
