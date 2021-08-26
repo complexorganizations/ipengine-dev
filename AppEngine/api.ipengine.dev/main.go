@@ -30,13 +30,14 @@ var (
 
 func init() {
 	// Get all the updates.
-	downloadRequiredFiles()
+	updateLocalLists()
 }
 
 func main() {
 	// The traffic should be directed to the appropriate function.
 	http.HandleFunc("/", jsonResponse)
 	http.HandleFunc("/error", handleAllErrors)
+	http.HandleFunc("/c98XPGxAmzf97DAHDVrFyGGeCDTosTnjz8PULSyTfl45RE85b5A31C3nhkHjEg7Q38GfbPAJYjQwgd5xequ6RcAJDFPt9JVr1yjCnMuulyxnwqGA8cCaTSG9xxXiiKZBtPNa7oCOnPz7YlGsL5V5Pn6zRvpzWgCsFJnyqYBVWytwlblZYeD98vuIZYbWwj05GLPayCNtP9Nc6OhwchhG9nO2UIwfvNjIlALWFbIQbABlrzhujQV3RSOXCs3f6GkR", updateList)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
 	// If something goes wrong, throw an error.
@@ -348,7 +349,7 @@ func fileExists(filename string) bool {
 	return !info.IsDir()
 }
 
-func downloadRequiredFiles() {
+func updateLocalLists() {
 	// The path to the files.
 	abuseFile := "assets/abuse"
 	anonymizersFile := "assets/anonymizers"
@@ -452,4 +453,10 @@ func removeAFile(filePath string) {
 			log.Println(err)
 		}
 	}
+}
+
+func updateList(writer http.ResponseWriter, request *http.Request) {
+	updateLocalLists()
+	writer.WriteHeader(http.StatusOK)
+	io.WriteString(writer, abuseIPRange)
 }
