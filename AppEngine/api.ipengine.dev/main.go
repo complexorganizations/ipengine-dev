@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
+	"io"
 	"log"
 	"math/big"
 	"net"
 	"net/http"
-	//"os"
+	"os"
 	"strings"
 )
 
@@ -27,7 +28,7 @@ var (
 )
 
 func init() {
-	//
+	// Get all the updates.
 }
 
 func main() {
@@ -226,50 +227,34 @@ func isInBlackList(ip net.IP, blacklistType string) bool {
 	case "abuse":
 		if checkIfIPInRange(ip, abuseIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, abuseIPRange)
 		}
 	case "anonymizers":
 		if checkIfIPInRange(ip, anonymizersIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, anonymizersIPRange)
 		}
 	case "attacks":
 		if checkIfIPInRange(ip, attacksIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, attacksIPRange)
 		}
 	case "malware":
 		if checkIfIPInRange(ip, malwareIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, malwareIPRange)
 		}
 	case "organizations":
 		if checkIfIPInRange(ip, organizationsIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, organizationsIPRange)
 		}
 	case "reputation":
 		if checkIfIPInRange(ip, reputationIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, reputationIPRange)
 		}
 	case "spam":
 		if checkIfIPInRange(ip, spamIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, spamIPRange)
 		}
 	case "unroutable":
 		if checkIfIPInRange(ip, unroutableIPRange) {
 			return true
-		} else {
-			return checkIPInRange(ip, unroutableIPRange)
 		}
 	}
 	return false
@@ -336,16 +321,6 @@ func checkIfIPInRange(ip net.IP, blacklist []string) bool {
 	return false
 }
 
-// Look up an IP address in a array.
-func checkIPInRange(ip net.IP, completeList []string) bool {
-	for _, ips := range completeList {
-		if ips == ip.String() {
-			return true
-		}
-	}
-	return false
-}
-
 // Convert the IP address to a decimal number.
 func ipToDecimal(ip net.IP) *big.Int {
 	ipToIntValue := big.NewInt(0)
@@ -360,4 +335,69 @@ func ipToDecimal(ip net.IP) *big.Int {
 // Verify that the IP address is correct.
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
+}
+
+// Check if a certain file exists in the local system
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if err != nil {
+		return false
+	}
+	return !info.IsDir()
+}
+
+func downloadRequiredFiles() {
+	// The path to the files.
+	abuseFile := "assets/abuse"
+	anonymizersFile := "assets/anonymizers"
+	attacksFile := "assets/attacks"
+	malwareFile := "assets/malware"
+	organizationsFile := "assets/organizations"
+	reputationFile := "assets/reputation"
+	spamFile := "assets/spam"
+	unroutableFile := "assets/unroutable"
+	// Download the files if they don't exist.
+	urlMap := map[string]string{
+		abuseFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
+		anonymizersFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
+		attacksFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
+		malwareFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
+		organizationsFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
+		reputationFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
+		spamFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
+		unroutableFile: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	}
+	for saveLocation, content := range urlMap {
+		response, err := http.Get(content)
+		if err != nil {
+			log.Println(err)
+		}
+		// the body of the resonse
+		body, err := io.ReadAll(response.Body)
+		if err != nil {
+			log.Println(err)
+		}
+		writeToFile(saveLocation, string(body))
+		response.Body.Close()
+	}
+}
+
+// Write certain content to a file.
+func writeToFile(pathInSystem string, content string) {
+	filePath, err := os.OpenFile(pathInSystem, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Println(err)
+	}
+	_, err = filePath.WriteString(content + "\n")
+	if err != nil {
+		log.Println(err)
+		err = filePath.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}
+	err = filePath.Close()
+	if err != nil {
+		log.Println(err)
+	}
 }
