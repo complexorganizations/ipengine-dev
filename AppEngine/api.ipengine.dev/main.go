@@ -368,6 +368,10 @@ func updateLocalLists() {
 }
 
 func updateList(writer http.ResponseWriter, request *http.Request) {
-	updateLocalLists()
-	http.Redirect(writer, request, "/error", http.StatusMovedPermanently)
+	// Only allow the function from a certian places.
+	if string(requestedIP) == "69.201.129.133" {
+		updateLocalLists()
+	} else {
+		http.Redirect(writer, request, "/error", http.StatusMovedPermanently)
+	}
 }
