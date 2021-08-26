@@ -342,6 +342,8 @@ func checkIP(ip string) bool {
 }
 
 func updateLocalLists() {
+	// Remove all the current value from the local memory.
+	abuseIPRange, anonymizersIPRange, attacksIPRange, malwareIPRange, organizationsIPRange, reputationIPRange, spamIPRange, unroutableIPRange = nil, nil, nil, nil, nil, nil, nil, nil
 	urlWithPath := map[interface{}]string{
 		abuseIPRange:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
 		anonymizersIPRange:   "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
@@ -362,7 +364,7 @@ func updateLocalLists() {
 		if err != nil {
 			log.Println(err)
 		}
-		print(body, saveLocation)
+		log.Println(body, saveLocation)
 		response.Body.Close()
 	}
 }
