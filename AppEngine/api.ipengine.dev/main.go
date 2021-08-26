@@ -349,7 +349,18 @@ func fileExists(filename string) bool {
 	return !info.IsDir()
 }
 
+// Check if a certain folder exists in your local system
+func folderExists(foldername string) bool {
+	info, err := os.Stat(foldername)
+	if err != nil {
+		return false
+	}
+	return info.IsDir()
+}
+
 func updateLocalLists() {
+	// Remove all the old files.
+	removeAFolder("assets/")
 	// The path to the files.
 	abuseFile := "assets/abuse"
 	anonymizersFile := "assets/anonymizers"
@@ -359,15 +370,6 @@ func updateLocalLists() {
 	reputationFile := "assets/reputation"
 	spamFile := "assets/spam"
 	unroutableFile := "assets/unroutable"
-	// Remove all the old files.
-	removeAFile(abuseFile)
-	removeAFile(anonymizersFile)
-	removeAFile(attacksFile)
-	removeAFile(malwareFile)
-	removeAFile(organizationsFile)
-	removeAFile(reputationFile)
-	removeAFile(spamFile)
-	removeAFile(unroutableFile)
 	// Download the files if they don't exist.
 	urlMap := map[string]string{
 		abuseFile:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
@@ -449,6 +451,15 @@ func readAndAppend(fileLocation string, arrayName []string) []string {
 func removeAFile(filePath string) {
 	if fileExists(filePath) {
 		err = os.Remove(filePath)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+}
+
+func removeAFolder(filePath string) {
+	if folderExists(filePath) {
+		err = os.RemoveAll(filePath)
 		if err != nil {
 			log.Println(err)
 		}
