@@ -1,11 +1,10 @@
 package main
 
 import (
-	//"bufio"
+	"bufio"
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
-	"io"
 	"log"
 	"math/big"
 	"net"
@@ -344,27 +343,26 @@ func checkIP(ip string) bool {
 func updateLocalLists() {
 	// Remove all the current value from the local memory.
 	abuseIPRange, anonymizersIPRange, attacksIPRange, malwareIPRange, organizationsIPRange, reputationIPRange, spamIPRange, unroutableIPRange = nil, nil, nil, nil, nil, nil, nil, nil
-	urlWithPath := map[interface{}]string{
-		abuseIPRange:         "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
-		anonymizersIPRange:   "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
-		attacksIPRange:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
-		malwareIPRange:       "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
-		organizationsIPRange: "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
-		reputationIPRange:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
-		spamIPRange:          "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
-		unroutableIPRange:    "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	urlWithPath := map[string][]string{
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":         abuseIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":   anonymizersIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":       attacksIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":       malwareIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations": organizationsIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":    reputationIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":          spamIPRange,
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":    unroutableIPRange,
 	}
-	for saveLocation, content := range urlWithPath {
-		response, err := http.Get(content)
+	for urlPath, appendThisSlice := range urlWithPath {
+		response, err := http.Get(urlPath)
 		if err != nil {
 			log.Println(err)
 		}
-		// the body of the resonse
-		body, err := io.ReadAll(response.Body)
-		if err != nil {
-			log.Println(err)
+		scanner := bufio.NewScanner(response.Body)
+		scanner.Split(bufio.ScanLines)
+		for scanner.Scan() {
+			appendThisSlice = append(appendThisSlice, scanner.Text())
 		}
-		log.Println(body, saveLocation)
 		response.Body.Close()
 	}
 }
