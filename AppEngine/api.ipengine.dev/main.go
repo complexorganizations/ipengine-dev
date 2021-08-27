@@ -422,22 +422,27 @@ func isMulticastIP(ipAddress net.IP) bool {
 	return ipAddress.IsMulticast()
 }
 
+// Check if the ip is a loopback ip.
 func isLoopbackIP(ipAddress net.IP) bool {
 	return ipAddress.IsLoopback()
 }
 
+// Checks if the ip is a local unicast ip
 func isLocalUnicastIP(ipAddress net.IP) bool {
 	return ipAddress.IsLinkLocalUnicast()
 }
 
+// Check if the ip is a local multicast ip
 func isLocalMulticastIP(ipAddress net.IP) bool {
 	return ipAddress.IsLinkLocalMulticast()
 }
 
+// Check if the ip is a interface local multicast ip
 func isInterfaceLocalMulticastIP(ipAddress net.IP) bool {
 	return ipAddress.IsInterfaceLocalMulticast()
 }
 
+// Check if the IP address is a global unicast IP
 func isGlobalUnicastIP(ipAddress net.IP) bool {
 	return ipAddress.IsGlobalUnicast()
 }
