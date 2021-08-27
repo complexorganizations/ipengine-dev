@@ -29,60 +29,8 @@ var (
 )
 
 func init() {
-	// Get all the updates.
-	urlPath := []string{
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
-	}
-	for _, url := range urlPath {
-		response, err := http.Get(url)
-		if err != nil {
-			log.Println(err)
-		}
-		scanner := bufio.NewScanner(response.Body)
-		scanner.Split(bufio.ScanLines)
-		switch url {
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":
-			for scanner.Scan() {
-				abuseIPRange = append(abuseIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":
-			for scanner.Scan() {
-				anonymizersIPRange = append(anonymizersIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":
-			for scanner.Scan() {
-				attacksIPRange = append(attacksIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":
-			for scanner.Scan() {
-				malwareIPRange = append(malwareIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations":
-			for scanner.Scan() {
-				organizationsIPRange = append(organizationsIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":
-			for scanner.Scan() {
-				reputationIPRange = append(reputationIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":
-			for scanner.Scan() {
-				spamIPRange = append(spamIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":
-			for scanner.Scan() {
-				unroutableIPRange = append(unroutableIPRange, scanner.Text())
-			}
-		}
-		response.Body.Close()
-	}
+	// Update all the local IP address ranges.
+	updateLocalIPRanges()
 }
 
 func main() {
@@ -445,4 +393,61 @@ func isInterfaceLocalMulticastIP(ipAddress net.IP) bool {
 // Check if the IP address is a global unicast IP
 func isGlobalUnicastIP(ipAddress net.IP) bool {
 	return ipAddress.IsGlobalUnicast()
+}
+
+func updateLocalIPRanges() {
+	// Get all the updates.
+	urlPath := []string{
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	}
+	for _, url := range urlPath {
+		response, err := http.Get(url)
+		if err != nil {
+			log.Println(err)
+		}
+		scanner := bufio.NewScanner(response.Body)
+		scanner.Split(bufio.ScanLines)
+		switch url {
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":
+			for scanner.Scan() {
+				abuseIPRange = append(abuseIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":
+			for scanner.Scan() {
+				anonymizersIPRange = append(anonymizersIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":
+			for scanner.Scan() {
+				attacksIPRange = append(attacksIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":
+			for scanner.Scan() {
+				malwareIPRange = append(malwareIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations":
+			for scanner.Scan() {
+				organizationsIPRange = append(organizationsIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":
+			for scanner.Scan() {
+				reputationIPRange = append(reputationIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":
+			for scanner.Scan() {
+				spamIPRange = append(spamIPRange, scanner.Text())
+			}
+		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":
+			for scanner.Scan() {
+				unroutableIPRange = append(unroutableIPRange, scanner.Text())
+			}
+		}
+		response.Body.Close()
+	}
 }
