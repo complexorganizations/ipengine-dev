@@ -142,26 +142,42 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		}
 		// The analysis json object.
 		type analysisResponse struct {
-			Abuse         bool `json:"abuse"`
-			Anonymizers   bool `json:"anonymizers"`
-			Attacks       bool `json:"attacks"`
-			Geolocation   bool `json:"geolocation"`
-			Malware       bool `json:"malware"`
-			Organizations bool `json:"organizations"`
-			Reputation    bool `json:"reputation"`
-			Spam          bool `json:"spam"`
-			Unroutable    bool `json:"unroutable"`
+			Abuse          bool `json:"abuse"`
+			Anonymizers    bool `json:"anonymizers"`
+			Attacks        bool `json:"attacks"`
+			Geolocation    bool `json:"geolocation"`
+			Malware        bool `json:"malware"`
+			Organizations  bool `json:"organizations"`
+			Reputation     bool `json:"reputation"`
+			Spam           bool `json:"spam"`
+			Unroutable     bool `json:"unroutable"`
+			Unspecified    bool `json:"unspecified"`
+			Private        bool `json:"private"`
+			Multicast      bool `json:"multicast"`
+			Loopback       bool `json:"loopback"`
+			LocalUnicast   bool `json:"local_unicast"`
+			LocalMulticast bool `json:"local_multicast"`
+			InterfaceLocalMulticast bool `json:"interface_local_multicast"`
+			GlobalUnicast bool `json:"global_unicast"`
 		}
 		analysis := analysisResponse{
-			Abuse:         isInBlackList(requestedIP, "abuse"),
-			Anonymizers:   isInBlackList(requestedIP, "anonymizers"),
-			Attacks:       isInBlackList(requestedIP, "attacks"),
-			Geolocation:   isInBlackList(requestedIP, "geolocation"),
-			Malware:       isInBlackList(requestedIP, "malware"),
-			Organizations: isInBlackList(requestedIP, "organizations"),
-			Reputation:    isInBlackList(requestedIP, "reputation"),
-			Spam:          isInBlackList(requestedIP, "spam"),
-			Unroutable:    isInBlackList(requestedIP, "unroutable"),
+			Abuse:          isInBlackList(requestedIP, "abuse"),
+			Anonymizers:    isInBlackList(requestedIP, "anonymizers"),
+			Attacks:        isInBlackList(requestedIP, "attacks"),
+			Geolocation:    isInBlackList(requestedIP, "geolocation"),
+			Malware:        isInBlackList(requestedIP, "malware"),
+			Organizations:  isInBlackList(requestedIP, "organizations"),
+			Reputation:     isInBlackList(requestedIP, "reputation"),
+			Spam:           isInBlackList(requestedIP, "spam"),
+			Unroutable:     isInBlackList(requestedIP, "unroutable"),
+			Unspecified:    unspecifiedIPCheck(requestedIP),
+			Private:        isPrivateIP(requestedIP),
+			Multicast:      isMulticastIP(requestedIP),
+			Loopback:       isLoopbackIP(requestedIP),
+			LocalUnicast:   isLocalUnicastIP(requestedIP),
+			LocalMulticast: isLocalMulticastIP(requestedIP),
+			InterfaceLocalMulticast: isInterfaceLocalMulticastIP(requestedIP),
+			GlobalUnicast: isGlobalUnicastIP(requestedIP),
 		}
 		var responseData interface{}
 		if authentication {
@@ -389,4 +405,39 @@ func ipToDecimal(ip net.IP) *big.Int {
 // Verify that the IP address is correct.
 func checkIP(ip string) bool {
 	return net.ParseIP(ip) != nil
+}
+
+// Check if the IP address is unspecified
+func unspecifiedIPCheck(ipAddress net.IP) bool {
+	return ipAddress.IsUnspecified()
+}
+
+// Check if the IP is a private IP
+func isPrivateIP(ipAddress net.IP) bool {
+	return ipAddress.IsPrivate()
+}
+
+// Check if the ip is a multicast IP
+func isMulticastIP(ipAddress net.IP) bool {
+	return ipAddress.IsMulticast()
+}
+
+func isLoopbackIP(ipAddress net.IP) bool {
+	return ipAddress.IsLoopback()
+}
+
+func isLocalUnicastIP(ipAddress net.IP) bool {
+	return ipAddress.IsLinkLocalUnicast()
+}
+
+func isLocalMulticastIP(ipAddress net.IP) bool {
+	return ipAddress.IsLinkLocalMulticast()
+}
+
+func isInterfaceLocalMulticastIP(ipAddress net.IP) bool {
+	return ipAddress.IsInterfaceLocalMulticast()
+}
+
+func isGlobalUnicastIP(ipAddress net.IP) bool {
+	return ipAddress.IsGlobalUnicast()
 }
