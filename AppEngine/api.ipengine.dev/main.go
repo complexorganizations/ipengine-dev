@@ -2,8 +2,6 @@ package main
 
 import (
 	"bufio"
-	"bytes"
-	"compress/gzip"
 	"encoding/json"
 	"log"
 	"math/big"
@@ -56,7 +54,6 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" && checkIP(requestedIP.String()) {
 		// Set the proper headers.
 		httpWriter.Header().Set("Content-Type", "application/json")
-		httpWriter.Header().Set("Content-Encoding", "gzip")
 		httpWriter.Header().Set("Access-Control-Allow-Methods", "GET")
 		httpWriter.Header().Set("Access-Control-Max-Age", "7776000")
 		httpWriter.WriteHeader(http.StatusOK)
@@ -155,13 +152,8 @@ func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		// Compress the data.
-		var byteBuffer bytes.Buffer
-		gzipWriter := gzip.NewWriter(&byteBuffer)
-		gzipWriter.Write(payloadBytes)
-		gzipWriter.Close()
 		// Write the compressed data to the httpWriter.
-		httpWriter.Write(byteBuffer.Bytes())
+		httpWriter.Write(payloadBytes)
 	} else {
 		http.Redirect(httpWriter, httpRequest, "/error", http.StatusMovedPermanently)
 	}
@@ -281,7 +273,6 @@ func isInBlackList(ip net.IP, blacklistType string) bool {
 func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	// Make sure you've got the right headers in place.
 	httpWriter.Header().Set("Content-Type", "application/json")
-	httpWriter.Header().Set("Content-Encoding", "gzip")
 	httpWriter.Header().Set("Access-Control-Max-Age", "7776000")
 	httpWriter.WriteHeader(http.StatusNotFound)
 	// Set the body of the message to an error message.
@@ -307,13 +298,8 @@ func handleAllErrors(httpWriter http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println(err)
 	}
-	// Compress the information.
-	var byteBuffer bytes.Buffer
-	gzipWriter := gzip.NewWriter(&byteBuffer)
-	gzipWriter.Write(errorJsonMessage)
-	gzipWriter.Close()
-	// Write the compressed data.
-	httpWriter.Write(byteBuffer.Bytes())
+	// Write the data.
+	httpWriter.Write(errorJsonMessage)
 }
 
 // Determine the IP address's type.
