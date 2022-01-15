@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
+	"io"
 	"log"
 	"math/big"
 	"net"
@@ -383,57 +385,56 @@ func isGlobalUnicastIP(ipAddress net.IP) bool {
 
 func updateLocalIPRanges() {
 	// Get all the updates.
-	urlPath := []string{
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable",
+	var urlPath = map[string]string{
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":         "abuse",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":   "anonymizers",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":       "attacks",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":       "malware",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations": "organizations",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":    "reputation",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":          "spam",
+		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":    "unroutable",
 	}
-	for _, url := range urlPath {
-		response, err := http.Get(url)
-		if err != nil {
-			log.Println(err)
+	for key, value := range urlPath {
+		switch value {
+		case "abuse":
+			abuseIPRange = getDataFromURL(key, abuseIPRange)
+		case "anonymizers":
+			anonymizersIPRange = getDataFromURL(key, anonymizersIPRange)
+		case "attacks":
+			attacksIPRange = getDataFromURL(key, attacksIPRange)
+		case "malware":
+			malwareIPRange = getDataFromURL(key, malwareIPRange)
+		case "organizations":
+			organizationsIPRange = getDataFromURL(key, organizationsIPRange)
+		case "reputation":
+			reputationIPRange = getDataFromURL(key, reputationIPRange)
+		case "spam":
+			spamIPRange = getDataFromURL(key, spamIPRange)
+		case "unroutable":
+			unroutableIPRange = getDataFromURL(key, unroutableIPRange)
 		}
-		scanner := bufio.NewScanner(response.Body)
-		scanner.Split(bufio.ScanLines)
-		switch url {
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":
-			for scanner.Scan() {
-				abuseIPRange = append(abuseIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":
-			for scanner.Scan() {
-				anonymizersIPRange = append(anonymizersIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":
-			for scanner.Scan() {
-				attacksIPRange = append(attacksIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":
-			for scanner.Scan() {
-				malwareIPRange = append(malwareIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations":
-			for scanner.Scan() {
-				organizationsIPRange = append(organizationsIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":
-			for scanner.Scan() {
-				reputationIPRange = append(reputationIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":
-			for scanner.Scan() {
-				spamIPRange = append(spamIPRange, scanner.Text())
-			}
-		case "https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":
-			for scanner.Scan() {
-				unroutableIPRange = append(unroutableIPRange, scanner.Text())
-			}
-		}
-		response.Body.Close()
 	}
+}
+
+// Send a http get request to a given url and return the data from that url.
+func getDataFromURL(uri string, sliceValue []string) []string {
+	response, err := http.Get(uri)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	scanner := bufio.NewScanner(bytes.NewReader(body))
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		sliceValue = append(sliceValue, scanner.Text())
+	}
+	err = response.Body.Close()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return sliceValue
 }
