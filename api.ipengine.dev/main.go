@@ -36,6 +36,7 @@ func init() {
 func main() {
 	// The traffic should be directed to the appropriate function.
 	http.HandleFunc("/", jsonResponse)
+	// If the user tries to access a non-existent page, they should be redirected to the error page.
 	http.HandleFunc("/error", handleAllErrors)
 	// On port 8080, listen and serve.
 	err = http.ListenAndServe(":8080", nil)
@@ -46,12 +47,15 @@ func main() {
 }
 
 func jsonResponse(httpWriter http.ResponseWriter, httpRequest *http.Request) {
-	// Check to see whether they requested a different IP address than theirs, and if so, use that address.
+	// Check if the user has provided an API key.
+	// Check if the user has provided an IP address.
 	authentication = len(getRequestedIP(httpRequest)) >= 1 && len(getAuthorizationHeader(httpRequest)) >= 1
 	if authentication {
 		requestedIP = getRequestedIP(httpRequest)
+		log.Println("Requested IP: " + requestedIP.String())
 	} else {
 		requestedIP = getUserIP(httpRequest)
+		log.Println("User IP: " + requestedIP.String())
 	}
 	if httpRequest.URL.Path == "/" && httpRequest.Method == "GET" && checkIP(requestedIP.String()) {
 		// Set the proper headers.
