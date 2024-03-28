@@ -27,15 +27,36 @@ curl --location "https://api.ipengine.xyz" --header "Requested-Ip: 1.1.1.1" --he
 
 ```json
 {
-  "ip": "8.8.8.8",
-  "city": "Mountain View",
-  "region": "California",
-  "country": "US",
-  "loc": "37.4219,-122.0816",
-  "org": "Google LLC",
-  "asn": "AS15169",
-  "postal": "94043",
-  "timezone": "America/Los_Angeles"
+    "network": {
+        "ip": "1.1.1.1",
+        "type": "IPv4",
+        "decimal": 16843009,
+        "reverse": [
+            "1.1.1.1"
+        ],
+        "hostname": [
+            "one.one.one.one"
+        ]
+    },
+    "analysis": {
+        "abuse": false,
+        "anonymizers": false,
+        "attacks": false,
+        "geolocation": false,
+        "malware": false,
+        "organizations": false,
+        "reputation": false,
+        "spam": false,
+        "unroutable": false,
+        "unspecified": false,
+        "private": false,
+        "multicast": false,
+        "loopback": false,
+        "local_unicast": false,
+        "local_multicast": false,
+        "interface_local_multicast": false,
+        "global_unicast": true
+    }
 }
 ```
 
