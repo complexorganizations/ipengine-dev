@@ -57,6 +57,10 @@ Before contributing, please review our contribution guidelines (coming soon).
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
+### Social
+https://discord.gg/KaB5jBexgm
+https://join.slack.com/t/complexorgani-w5b4873/shared_invite/zt-2e9gz2wh2-dWuylZLgaEgFywNKF_iQRQ
+
 ### Team
 
 ipengine.xyz is an ongoing project developed by a team of passionate developers. We are committed to providing a valuable and free resource for the developer community.
