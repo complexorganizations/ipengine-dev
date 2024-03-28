@@ -14,7 +14,7 @@
 
 **Using the API:**
 
-1. **Make a request:** Send a GET request to the ipengine.dev API endpoint with the target IP address as a query parameter. (e.g., `https://api.ipengine.dev/ip/8.8.8.8`)
+1. **Make a request:** Send a GET request to the ipengine.dev API endpoint with the target IP address as a query parameter.
 2. **Parse the response:** The response will be a JSON object containing detailed information about the IP address.
 
 **Example Usage (using cURL):**
