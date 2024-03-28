@@ -20,10 +20,58 @@
 **Example Usage (using cURL):**
 
 ```bash
+curl --location "https://api.ipengine.xyz"
+```
+
+```bash
 curl --location "https://api.ipengine.xyz" --header "Requested-Ip: 1.1.1.1" --header "Authorization: 111"
 ```
 
 **Example Response:**
+
+```json
+{
+    "network": {
+        "ip": "::1",
+        "type": "IPv6",
+        "decimal": 1,
+        "reverse": [
+            "::1"
+        ],
+        "hostname": [
+            "localhost",
+            "ip6-localhost",
+            "ip6-loopback"
+        ]
+    },
+    "device": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+        "cache": "max-age=0",
+        "accept_encoding": "gzip, deflate, br, zstd"
+    },
+    "analysis": {
+        "abuse": false,
+        "anonymizers": false,
+        "attacks": false,
+        "geolocation": false,
+        "malware": false,
+        "organizations": false,
+        "reputation": false,
+        "spam": false,
+        "unroutable": false,
+        "unspecified": false,
+        "private": false,
+        "multicast": false,
+        "loopback": true,
+        "local_unicast": false,
+        "local_multicast": false,
+        "interface_local_multicast": false,
+        "global_unicast": false
+    }
+}
+```
+
 
 ```json
 {
