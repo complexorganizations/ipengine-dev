@@ -58,8 +58,9 @@ Before contributing, please review our contribution guidelines (coming soon).
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
 ### Social
-https://discord.gg/KaB5jBexgm
-https://join.slack.com/t/complexorgani-w5b4873/shared_invite/zt-2e9gz2wh2-dWuylZLgaEgFywNKF_iQRQ
+
+[![Slack](https://raw.githubusercontent.com/complexorganizations/ipengine-xyz/main/assets/images/icons/slack.svg)](https://join.slack.com/t/complexorgani-w5b4873/shared_invite/zt-2e9gz2wh2-dWuylZLgaEgFywNKF_iQRQ)
+[![Discord](https://raw.githubusercontent.com/complexorganizations/ipengine-xyz/main/assets/images/icons/discord.svg)](https://discord.gg/KaB5jBexgm)
 
 ### Team
 
