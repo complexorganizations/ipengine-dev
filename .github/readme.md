@@ -24,7 +24,7 @@ curl --location "https://api.ipengine.xyz"
 ```
 
 ```bash
-curl --location "https://api.ipengine.xyz" --header "Requested-Ip: 1.1.1.1" --header "Authorization: 111"
+curl --location "https://api.ipengine.xyz" --header "Requested-Ip: 1.1.1.1" --header "Authorization: <auth-token>"
 ```
 
 **Example Response:**
