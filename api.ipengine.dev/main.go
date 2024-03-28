@@ -386,14 +386,14 @@ func isGlobalUnicastIP(ipAddress net.IP) bool {
 func updateLocalIPRanges() {
 	// Get all the updates.
 	var urlPath = map[string]string{
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/abuse":         "abuse",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/anonymizers":   "anonymizers",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/attacks":       "attacks",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/malware":       "malware",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/organizations": "organizations",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/reputation":    "reputation",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/spam":          "spam",
-		"https://raw.githubusercontent.com/complexorganizations/ip-blocklists/main/assets/unroutable":    "unroutable",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/abuse":         "abuse",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/anonymizers":   "anonymizers",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/attacks":       "attacks",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/malware":       "malware",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/organizations": "organizations",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/reputation":    "reputation",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/spam":          "spam",
+		"https://raw.githubusercontent.com/complexorganizations/network-database/main/assets/unroutable":    "unroutable",
 	}
 	for key, value := range urlPath {
 		switch value {
@@ -421,11 +421,11 @@ func updateLocalIPRanges() {
 func getDataFromURL(uri string, sliceValue []string) []string {
 	response, err := http.Get(uri)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	body, err := io.ReadAll(response.Body)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	scanner := bufio.NewScanner(bytes.NewReader(body))
 	scanner.Split(bufio.ScanLines)
@@ -434,7 +434,7 @@ func getDataFromURL(uri string, sliceValue []string) []string {
 	}
 	err = response.Body.Close()
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 	return sliceValue
 }
