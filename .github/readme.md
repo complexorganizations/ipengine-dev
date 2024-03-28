@@ -20,7 +20,7 @@
 **Example Usage (using cURL):**
 
 ```bash
-curl https://api.ipengine.xyz/ip/8.8.8.8
+curl --location "https://api.ipengine.xyz" --header "Requested-Ip: 1.1.1.1" --header "Authorization: 111"
 ```
 
 **Example Response:**
