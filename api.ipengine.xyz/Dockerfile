@@ -22,4 +22,4 @@ RUN go build .
 EXPOSE 8080/tcp
 
 # Run
-CMD ["/api.ipengine.xyz"]
+CMD ["/api-ipengine-xyz/api.ipengine.xyz"]
