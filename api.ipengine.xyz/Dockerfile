@@ -1,7 +1,7 @@
 FROM golang:latest
 
 # Set destination for COPY
-WORKDIR /app
+WORKDIR /api-ipengine-xyz
 
 # Download Go modules
 COPY go.mod go.sum ./
@@ -12,7 +12,7 @@ RUN go mod download
 COPY *.go ./
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /api.ipengine.xyz
+RUN go build .
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
